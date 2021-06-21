@@ -10,6 +10,6 @@
   	</settings>
   	
   	<typeAliases>
-  		<typeAlias type="com.myapp.user.User" alias="User"/>
+  		<typeAlias type="erp.Employee" alias="Employee"/>
   	</typeAliases>
   </configuration>

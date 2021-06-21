@@ -6,11 +6,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 
 @Controller
-@RequestMapping("/cont")
 public class ERPController {
 
-	@GetMapping("/login")
-	public String goLogin() {
-		return "login1";
+		
+	@GetMapping("/join")
+	public String join() {
+		
+		
+		return "EmpForm";
 	}
 }
