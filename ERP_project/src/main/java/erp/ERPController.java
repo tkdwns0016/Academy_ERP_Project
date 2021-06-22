@@ -1,6 +1,7 @@
 package erp;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,7 +23,7 @@ EmployeeService es;
 		return "join";
 	}
 	@PostMapping("/join")
-	public String postJoin(Employee employee) {
+	public String postJoin(Employee employee,String address2, String birthDate1,String birthDate2) {
 		LocalDate now = LocalDate.now();
 		String str=now.getYear()+"";
 		String classId=str.substring(2,4)+employee.getDepartmentId();
@@ -32,8 +33,11 @@ EmployeeService es;
 		}else {
 			userId=classId+"0001";
 		}
+		employee.setAddress(employee.getAddress()+address2);
+		employee.setBirthDate(birthDate1+birthDate2);
 		employee.setUserId(userId);
 		employee.setPassword(userId);
+		employee.setHireDate(now);
 		System.out.println(employee);
 		return "/list";
 	}

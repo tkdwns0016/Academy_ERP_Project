@@ -12,7 +12,7 @@ public class Employee {
 	private String phone;
 	private String email;
 	private LocalDate hireDate;
-	private LocalDate birthDate;
+	private String birthDate;
 	private String sex;
 	private int departmentId;
 	private String imgName;
@@ -20,7 +20,7 @@ public class Employee {
 	private long salary;
 	
 	public Employee(int id, String name, String userId, String password, String addressId,
-			String address, String phone, String email, LocalDate hireDate, LocalDate birthDate, String sex,
+			String address, String phone, String email, LocalDate hireDate, String birthDate, String sex,
 			int departmentId, String imgName, int positionId, long salary) {
 		super();
 		this.id = id;
@@ -120,11 +120,11 @@ public class Employee {
 		this.hireDate = hireDate;
 	}
 
-	public LocalDate getBirthDate() {
+	public String getBirthDate() {
 		return birthDate;
 	}
 
-	public void setBirthDate(LocalDate birthDate) {
+	public void setBirthDate(String birthDate) {
 		this.birthDate = birthDate;
 	}
 

@@ -13,7 +13,7 @@
 			<input id="women" name="sex" value="여" type="radio" ><label for="women">여</label><br>
 		
 		연락처: <input style="width: 200px" type="text" name="phone" pattern="[01]{3}-[0-9]{4}-[0-9]{4}" placeholder="전화번호(01X-XXXX-XXXXX)"><br>
-		email: <input type="text" name="email" placeholder="이메일 아이디 ">@<input class="em" type="text" name="email" placeholder="직접입력" pattern="[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}"/>
+		email: <input type="text" name="email" placeholder="이메일 아이디 ">@<input class="em" type="text" placeholder="직접입력" pattern="[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}"/>
 		<select name="email">
 		 	<option value="">직접입력
 		 	<option class="e1" value="naver.com">naver.com
