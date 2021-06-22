@@ -5,8 +5,6 @@ import java.time.LocalDate;
 public class Employee {
 	private int id;
 	private String name;
-	private int age;
-	private String classId;
 	private String userId;
 	private String password;
 	private String addressId;
@@ -21,14 +19,12 @@ public class Employee {
 	private int positionId;
 	private long salary;
 	
-	public Employee(int id, String name, int age, String classId, String userId, String password, String addressId,
+	public Employee(int id, String name, String userId, String password, String addressId,
 			String address, String phone, String email, LocalDate hireDate, LocalDate birthDate, String sex,
 			int departmentId, String imgName, int positionId, long salary) {
 		super();
 		this.id = id;
 		this.name = name;
-		this.age = age;
-		this.classId = classId;
 		this.userId = userId;
 		this.password = password;
 		this.addressId = addressId;
@@ -65,21 +61,8 @@ public class Employee {
 		this.name = name;
 	}
 
-	public int getAge() {
-		return age;
-	}
 
-	public void setAge(int age) {
-		this.age = age;
-	}
 
-	public String getClassId() {
-		return classId;
-	}
-
-	public void setClassId(String classId) {
-		this.classId = classId;
-	}
 
 	public String getUserId() {
 		return userId;
@@ -187,7 +170,7 @@ public class Employee {
 
 	@Override
 	public String toString() {
-		return "Employee [id=" + id + ", name=" + name + ", age=" + age + ", classId=" + classId + ", userId=" + userId
+		return "Employee [id=" + id + ", name=" + name + ", userId=" + userId
 				+ ", password=" + password + ", addressId=" + addressId + ", address=" + address + ", phone=" + phone
 				+ ", email=" + email + ", hireDate=" + hireDate + ", birthDate=" + birthDate + ", sex=" + sex
 				+ ", departmentId=" + departmentId + ", imgName=" + imgName + ", positionId=" + positionId + ", salary="
