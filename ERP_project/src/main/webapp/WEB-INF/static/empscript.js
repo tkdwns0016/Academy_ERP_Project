@@ -2,7 +2,8 @@
       const forms = document.getElementsByClassName('validation-form');
 
       var input=document.querySelectorAll(".file_input")[0];
-      var img=document.querySelectorAll("img")[0];
+      var img=document.querySelectorAll(".img-circle")[0];
+      console.log(img);
       input.onchange=function(){
     	  var fileList=input.files;
     	  var reader = new FileReader();

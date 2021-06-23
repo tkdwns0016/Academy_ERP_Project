@@ -4,6 +4,7 @@
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:p="http://www.springframework.org/schema/p"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
@@ -12,13 +13,32 @@
 	<context:component-scan base-package="erp">
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
 	</context:component-scan>
+	
 	<mvc:resources mapping="/static/**" location="/WEB-INF/static/"/>
 	<mvc:resources mapping="/image/**" location="/WEB-INF/image/"/>
 
-	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix" value="/WEB-INF/view/" />
-		<property name="suffix" value=".jsp" />
-	</bean>
-	
+    <!-- Tiles -->
+    <mvc:resources mapping="/resources/**" location="/resources/" />
+
+  	<bean id="tilesViewResolver" class="org.springframework.web.servlet.view.tiles3.TilesViewResolver">
+        <property name="order" value="1" />
+    </bean>  
+
+    <bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+        <property name="definitions">
+            <list>
+                <value>/WEB-INF/context/appServlet/tiles.xml</value>
+            </list>
+        </property>
+    </bean>        
+    
+  
+    
+    <!-- viewResolver 설정 (사용자 view의 위치, 확장명 설정) -->	
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+      <property name="prefix" value="/WEB-INF/view/" />
+      <property name="suffix" value=".jsp" />
+      <property name="order" value="2" />
+    </bean> 
 	<mvc:annotation-driven/>
 </beans>
