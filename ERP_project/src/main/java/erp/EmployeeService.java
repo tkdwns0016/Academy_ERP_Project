@@ -1,5 +1,7 @@
 package erp;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -8,7 +10,26 @@ public class EmployeeService {
 	@Autowired
 	EmployeeMapper em;
 	
-	public String selectUserId(int departmentId) {
+	public ServiceClass employeeService(int page) {
+		ServiceClass serviceClass=new ServiceClass(page, em.selectList(), 20, em.EmpleCount());
+		return serviceClass;
+	}
+	public Employee select(int userId,String name,String birthDate) {
+		return em.changePassword(userId,name,birthDate);
+	}
+	
+	public void update(Employee employee) {
+		em.update(employee);
+	}
+	
+	public Employee login(int id, String password) {
+		return em.select(id, password);
+	}
+	public List<Employee> selectList(){
+		return em.selectList();
+	}
+	
+	public int selectUserId(int departmentId) {
 		return em.getUserId(departmentId);
 	}
 	

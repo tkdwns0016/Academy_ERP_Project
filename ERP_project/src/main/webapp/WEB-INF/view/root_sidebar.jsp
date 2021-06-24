@@ -73,10 +73,10 @@
   <main>
 
     <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="position: absolute; top: 100px; height: 80%;">
-      <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+      <a href="/main" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
         <svg class="bi me-2" width="40" height="32">
           <use xlink:href="#bootstrap" /></svg>
-        <span class="fs-4">Sidebar</span>
+        <span class="fs-4">주원상사</span>
       </a>
       <hr>
       <div class="dropdown">
@@ -92,13 +92,13 @@
           <li>
             <hr class="dropdown-divider">
           </li>
-          <li><a class="dropdown-item" href="#">Sign out</a></li>
+          <li><a class="dropdown-item" href="/logout">Sign out</a></li>
         </ul>
       </div>
       <hr>
       <ul class="nav nav-pills flex-column mb-auto">
         <li class="nav-item">
-          <a href="/join" class="nav-link active" aria-current="page">
+          <a href="/myInfo" class="nav-link active" aria-current="page">
             <svg class="bi me-2" width="16" height="16">
               <use xlink:href="#home" /></svg>
             직원정보
@@ -112,12 +112,12 @@
           </a>
           <ul>
             <li class="list_none menu0" style="display: none;">
-              <a href="">입사등록</a>
+              <a href="/join">입사등록</a>
             </li>
           </ul>
         </li>
         <li>
-          <a href="#" class="nav-link link-dark topper">
+          <a href="/education" class="nav-link link-dark topper">
             <svg class="bi me-2" width="16" height="16">
               <use xlink:href="#table" /></svg>
             교육관리
@@ -131,22 +131,22 @@
           </a>
           <ul>
             <li class="list_none menu2" style="display: none;">
-              <a href="">출/퇴근 체크</a>
+              <a href="/attendance">출/퇴근 체크</a>
             </li>
             <li class="list_none menu2" style="display: none;">
-              <a href="">근태 리스트</a>
+              <a href="/attendanceList">근태 리스트</a>
             </li>
           </ul>
         </li>
         <li>
-          <a href="#" class="nav-link link-dark topper">
+          <a href="/welfare" class="nav-link link-dark topper">
             <svg class="bi me-2" width="16" height="16">
               <use xlink:href="#people-circle" /></svg>
             복리후생
           </a>
         </li>
         <li>
-          <a href="#" class="nav-link link-dark topper">
+          <a href="/payment" class="nav-link link-dark topper">
             <svg class="bi me-2" width="16" height="16">
               <use xlink:href="#people-circle" /></svg>
             결재
@@ -160,13 +160,13 @@
           </a>
           <ul>
             <li class="list_none menu5" style="display: none;">
-              <a href="">공지사항</a>
+              <a href="/notice">공지사항</a>
             </li>
             <li class="list_none menu5" style="display: none;">
-              <a href="">건의게시판</a>
+              <a href="/suggestion">건의게시판</a>
             </li>
             <li class="list_none menu5" style="display: none;">
-              <a href="">익명게시판</a>
+              <a href="/anonymous">익명게시판</a>
             </li>
           </ul>
         </li>

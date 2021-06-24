@@ -5,7 +5,7 @@ import java.time.LocalDate;
 public class Employee {
 	private int id;
 	private String name;
-	private String userId;
+	private int userId;
 	private String password;
 	private String addressId;
 	private String address;
@@ -19,7 +19,7 @@ public class Employee {
 	private int positionId;
 	private long salary;
 	
-	public Employee(int id, String name, String userId, String password, String addressId,
+	public Employee(int id, String name, int userId, String password, String addressId,
 			String address, String phone, String email, LocalDate hireDate, String birthDate, String sex,
 			int departmentId, String imgName, int positionId, long salary) {
 		super();
@@ -64,11 +64,11 @@ public class Employee {
 
 
 
-	public String getUserId() {
+	public int getUserId() {
 		return userId;
 	}
 
-	public void setUserId(String userId) {
+	public void setUserId(int userId) {
 		this.userId = userId;
 	}
 

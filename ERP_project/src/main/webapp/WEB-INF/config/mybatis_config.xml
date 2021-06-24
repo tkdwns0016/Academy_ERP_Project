@@ -11,5 +11,13 @@
   	
   	<typeAliases>
   		<typeAlias type="erp.Employee" alias="Employee"/>
+  	<!-- 	<typeAlias type="erp.anonymouseBoard.AnonymouseBoard" alias="AnonymouseBoard"/>
+  		<typeAlias type="erp.attendance.Attendance" alias="Attendance"/>
+  		<typeAlias type="erp.department.Department" alias="Department"/>
+  		<typeAlias type="erp.educationBoard.EducationBoard" alias="EducationBoard"/>
+  		<typeAlias type="erp.noticeBoard.NoticeBoard" alias="NoticeBoard"/>
+  		<typeAlias type="erp.position.Position" alias="Position"/>
+  		<typeAlias type="erp.suggetionBoard.SuggetionBoard" alias="SuggetionBoard"/>
+  		<typeAlias type="erp.welfare.Welfare" alias="Welfare"/> -->
   	</typeAliases>
   </configuration>

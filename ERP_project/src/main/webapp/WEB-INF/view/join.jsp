@@ -40,7 +40,7 @@
 
 <body>
 <tiles:insertAttribute name="side"/>
-	<div class="container" style="top:100px; position:relative;">
+	<div class="container" style="top:100px; width: 80%; float: right;">
 		<div class="input-form-backgroud row">
 			<div class="input-form col-md-5 mx-auto">
 				<h4 class="mb-3">인사 등록</h4>

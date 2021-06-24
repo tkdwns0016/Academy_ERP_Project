@@ -1,51 +1,54 @@
 package erp;
 
-import java.text.DateFormat;
 import java.time.LocalDate;
-import java.util.Date;
-import java.util.Locale;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-
-
-
 
 
 
 
 @Controller
 public class ERPController {
-	private static final Logger logger = LoggerFactory.getLogger(ERPController.class);
 	@Autowired
 EmployeeService es;
 	
-	
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
-		logger.info("Welcome home! The client locale is {}.", locale);
+	@GetMapping("/myInfo")
+	public String myInfo(Model model) {
 		
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		
-		String formattedDate = dateFormat.format(date);
-		
-		model.addAttribute("serverTime", formattedDate );
-		
-		return "home";
+		return "myInfo";
 	}
+	@GetMapping("/logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "main";
+	}
+	@GetMapping("/login")
+	public String loginCheck() {
+		return "login"; 
+	}
+	@PostMapping("/login")
+	public String login(Model model ,HttpSession session, int id, String password) {
+		if(es.login(id, password)!=null) {
+			session.setAttribute("empl",es.login(id, password));
+			return "main";
+			
+		}else {
+			model.addAttribute("result", false);
+			return "login";
+		}
+		
+	
+	}
+	 
+
 	@GetMapping("/join")
-	public String join(Model model) {
-		
-		
+	public String join() {
 		return "join";
 	}
 	@PostMapping("/join")
@@ -53,22 +56,25 @@ EmployeeService es;
 		LocalDate now = LocalDate.now();
 		String str=now.getYear()+"";
 		String classId=str.substring(2,4)+employee.getDepartmentId();
-		String userId=es.selectUserId(employee.getDepartmentId());
-		if(userId!=null) {
-			userId=classId+(Integer.parseInt(userId)+1);
+		int userId=es.selectUserId(employee.getDepartmentId());
+		if(userId>0) {
+			userId=userId+1;
 		}else {
-			userId=classId+"0001";
+			userId=Integer.parseInt(classId+"0001");
 		}
 		employee.setAddress(employee.getAddress()+address2);
 		employee.setBirthDate(birthDate1+birthDate2);
 		employee.setUserId(userId);
-		employee.setPassword(userId);
+		employee.setPassword(userId+"");
 		employee.setHireDate(now);
 		System.out.println(employee);
 		return "list";
 	}
-	
-	@GetMapping("/test")
+	@GetMapping("/popup")
+	public String popup() {
+		return "popup";
+	}
+	@GetMapping("/main")
 	public String main() {
 		
 		
