@@ -35,15 +35,22 @@
  <!-- Custom styles for this template --> 
  <link href="/static/bootstrap/sign-in/signin.css" rel="stylesheet"> </head> 
  <body class="text-center"> 
+ <c:if test="${result }">
+ 	<script type="text/javascript">
+ 		
+ 			alert("정보가 일치하지 않습니다. 다시 입력해주세요")
+ 		
+ 	</script>
+ </c:if>
      <main class="form-signin"> 
          
          <form action="/login" method="post">
             <div style=" border: 1px solid darkgray;  border-top: 2px; border-left: 2px; border-radius: 3%; box-shadow: 2px 2px 2px 2px slategrey; padding: 50px; width: 500px; margin-left: -100px;">
                  <img class="mb-4" src="/image/logo.png" alt="" width="150" height="150"> 
                  <h1 class="h3 mb-3 fw-normal">오주원상사 ERP</h1> <label for="inputEmail" class="visually-hidden">Email address</label> 
-                 <input type="email" id="email_id" class="form-control" placeholder="pressure of business" required autofocus style="margin-bottom: 5px;"> 
+                 <input type="text" id="email_id" name="userId" class="form-control" placeholder="pressure of business" required autofocus style="margin-bottom: 5px;"> 
                  <label for="inputPassword" class="visually-hidden">Password</label> 
-                 <input type="password" id="inputPassword" class="form-control" placeholder="Password" required> 
+                 <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required> 
                  <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button> 
                  <p class="mt-5 mb-3 text-muted">&copy; 2021-06-18 ~ 2021-07-21</p> 
                  <hr>

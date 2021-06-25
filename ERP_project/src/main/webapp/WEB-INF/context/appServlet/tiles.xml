@@ -6,16 +6,21 @@
 <tiles-definitions>
  
 
-    <definition name="base-definition" template="/WEB-INF/view/main.jsp">
-        <put-attribute name="side" value="/WEB-INF/view/root_sidebar.jsp" />
+    <definition name="main" template="/WEB-INF/view/main.jsp">
+        <put-attribute name="root_side" value="/WEB-INF/view/root_sidebar.jsp" />
+        <put-attribute name="empl_side" value="/WEB-INF/view/empl_sidebar.jsp" />
     </definition>
+    
+    <definition name="anonymous" template="/WEB-INF/view/anonymous.jsp">
+        <put-attribute name="root_side" value="/WEB-INF/view/root_sidebar.jsp" />
+        <put-attribute name="empl_side" value="/WEB-INF/view/empl_sidebar.jsp" />
+    </definition>
+    
     <definition name="join" template="/WEB-INF/view/join.jsp">
-        <put-attribute name="side" value="/WEB-INF/view/root_sidebar.jsp" />
+        <put-attribute name="root_side" value="/WEB-INF/view/root_sidebar.jsp" />
+        <put-attribute name="empl_side" value="/WEB-INF/view/empl_sidebar.jsp" />
     </definition>
 
-   <definition name="main" extends="base-definition">      
-      <put-attribute name="title" value="Welcome" />
-      <put-attribute name="body" value="/WEB-INF/view/main.jsp" />
-    </definition>
+ 
 </tiles-definitions>
 
