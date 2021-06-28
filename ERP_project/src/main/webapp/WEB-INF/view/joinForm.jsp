@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>	
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,7 +15,7 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 	crossorigin="anonymous">
-<link rel="stylesheet" type="text/css" href="/static/empcss.css">
+ <link rel="stylesheet" type="text/css" href="/static/empcss.css">
 <script type="text/javascript" src="/static/empscript.js"></script>
  <link href="/static/bootstrap/assets/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -23,7 +24,7 @@
   <!-- Custom styles for this template --> 
   <link href="/static/bootstrap/sidebars/sidebars.css" rel="stylesheet">
   <style>
-    .list_none {
+     .list_none {
       text-decoration: none;
       list-style: none;
     }
@@ -31,113 +32,158 @@
     text-decoration: none;
     color : black;
     }
-    html{
-    background-color: skyblue;
-    }
+
+
+
+
+
+    
   </style>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 
 <body>
-	<div class="container" style="top:100px; width: 80%; float: right;">
-		<div class="input-form-backgroud row">
-			<div class="input-form col-md-5 mx-auto">
-				<h4 class="mb-3">인사 등록</h4>
-				<form action="/join" method="post" class="validation-form"
-					novalidate>
-					<div class="row">
+	<c:if test="${empl.manager=='권한' }">
+
+		<tiles:insertAttribute name="root_side" />
+	</c:if>
+	<c:if test="${empl.manager=='비권한' }">
+		<tiles:insertAttribute name="empl_side" />
+
+	</c:if>
+    <div id="divContainer" >
+    
+  <div class="input-form-backgroud row"></div>
+		<div class="input-form row-nw d-flex flex-wrap">
+    <form action="register.php" method="post" name="twin">
+      <table id="table1">
+          <h4><strong>인사 등록</strong></h4><br>
+      </table>    
+      <table id="table2">
+          <tr class="register" height="30">
+              <td width="5%" align="center">*</td>
+              <td width="15%">사원 ID</td>
+              <td ><input type="text" name="userId" id="userId"  /></td>
+            <td></td><td></td>
+              <td rowspan="5" style="text-align: center; width: 200px;" class="filebox">
+                <img src="" width="150px" class="img-circle" height="150px">
+                    
+                    <label for="ex_filename" class="filebox" style="margin-top: 5px;">업로드</label> <input type="file"
+                        id="ex_filename"  name="imgName"
+                        class="upload-hidden file_input" multiple="multiple">
+                </td>
+          </tr>
+          <tr height="7">
+              <td colspan="3" style="height: 5px;"><hr /></td>
+          </tr>
+          <tr class="register" height="10">
+              <td width="5%" align="center">*</td>
+              <td width="15%">비밀번호</td>
+              <td><input type="password"  name="password" id="password"  id="pw" onchange="isSame()" /></td>
+          </tr>
+          <tr height="7">
+              <td colspan="3"><hr /></td>
+          </tr>
+          <tr class="register" height="30">
+              <td width="5%" align="center">*</td>
+              <td width="15%">비밀번호 확인</td>
+              <td><input type="password" name="password2" id="password2"  id="pwCheck" onchange="isSame()" />&nbsp;&nbsp;<span id="same"></span></td>
+          </tr>
+          <tr height="7">
+              <td colspan="7"><hr/></td>
+          </tr>
+          <tr class="register" height="30">
+              <td width="5%" align="center">*</td>
+              <td width="15%">이 름</td>
+              <td><input type="text" name="name" id="name" /></td>
+          </tr>
+          <tr height="7">
+              <td colspan="7"><hr /></td>
+          </tr>
+          <tr class="register" height="30">
+              <td width="5%" align="center">*</td>
+              <td width="15%">성 별</td>
+              <td>
+                  남 성<input type="radio" name="UserGender"  id="UserGender"  value="1" checked />&nbsp;&nbsp;&nbsp;여 성<input type="radio" name="UserGender" id="UserGender"   value="2"/>
+              </td>
+          </tr>
+          <tr height="7">
+              <td colspan="7"><hr /></td>
+          </tr>
+            <tr class="register" height="30">
+                <td width="5%" align="center">*</td>
+                <td width="15%">주민등록번호</td>
+                <td width="10%"> <input type="text" pattern="[0-9]{6}" name="birthDate1"
+                 size=6 maxlength=6 
+                id="exampleInputEmail3" placeholder="앞자리 6자리"
+                style="width: 150px;">
+			
+			     ㅡ
+			
+                 <input type="password" 
+                 name="birthDate2" pattern="[0-9]{7}"  size=7
+                 id="exampleInputPassword3" maxlength=7 placeholder="뒷자리 7자리"
+                 style="width: 150px;">
+            </td>
+            </tr>
+
+         
+          <tr height="7">
+            <td colspan="7"><hr /></td>
+          </tr>
 
 
-						<div class="" style="text-align: center; margin-left: 20px;">
-							사원정보 <br> <img src="/image/mung.png" width="150px"
-								height="170px" class="img-circle"
-								style="margin-bottom: 5px; border-radius: 15%;"><br>
-							<div class="filebox">
-								<label for="ex_filename">업로드</label> <input type="file"
-									id="ex_filename" required="required" name="imgName"
-									class="upload-hidden file_input" multiple="multiple">
-							</div>
+          <tr class="register" height="30">
+              <td width="5%" align="center">*</td>
+              <td width="15%">휴대전화</td>
+              <td><input type="tel"  name="phone" id="phone"  pattern="[01]{3}-[0-9]{4}-[0-9]{4}" >
+              </td>
+          </tr>
+          <tr height="7">
+            <td colspan="7"><hr /></td>
+          </tr>
+          <tr class="register" height="30">
+              <td width="5%" align="center">*</td>
+              <td width="15%">이메일</td>
+              <td> 
+       
+                <input 
+                type="text"   id="email"
+                name="email"
+                placeholder="abcd1234@example.com" 
+                >
+        
+            </td>
+          </tr>
+
+          <tr height="7">
+            <td colspan="7"><hr /></td>
+          </tr>
 
 
-						</div>
+          <tr class="register" height="30">
+            <td width="5%" align="center">*</td>
+            <td width="15%">부 서</td>
+            <td>
+                <select  name="departmentId" id="root">
+					<option value="">부서선택</option>
+					<option value="10">경영팀</option>
+					<option value="20">개발팀</option>
+					<option value="30">인사팀</option>
+					<option value="40">영업팀</option>
+				</select>
+            </td>
+            
+          <tr height="7">
+            <td colspan="7"><hr /></td>
+          </tr>
 
-
-
-						<div class="col-xs-12 col-md-6 mb-3" style="margin-left: 30px;">
-							<label for="name">이름</label> <input type="text" name="name"
-								required="required" class="form-control" id="name"
-								placeholder="이름을 입력하세요" style="width: 200px;"> <label
-								for="name" style="margin-top: 5px;">성별</label> <br> <select
-								name="sex" required="required" class="form-control"
-								style="width: 200px;">
-								<option selected="selected" value="">선택
-								<option value="남자">남자</option>
-								<option value="여자">여자</option>
-								<!-- <option>기타</option> -->
-							</select> <label for="phone" style="margin-top: 5px;">연락처</label> <input
-								type="text" required="required" class="form-control" id="phone"
-								name="phone" pattern="[01]{3}-[0-9]{4}-[0-9]{4}"
-								placeholder="01X-XXXX-XXXX" style="width: 200px;"> <br>
-
-						</div>
-
-					</div>
-					<br>
-					<div class="mb-3">
-						<label for="email">이메일</label> <input type="email"
-							required="required" class="form-control" name="email" id="email"
-							placeholder="you@example.com">
-						<div class="invalid-feedback">이메일을 입력해주세요.</div>
-					</div>
-					<table style="position: relative;">
-						<tr>
-							<td align="center">주민번호 입력</td>
-						<tr>
-							<td><input type="text" pattern="[0-9]{6}" name="birthDate1"
-								class="form-control" size=6 maxlength=6 required="required"
-								id="exampleInputEmail3" placeholder="앞자리 6자리"
-								style="width: 150px; position: relative; top: 0px; left: 0px;">
-							</td>
-							<td style="position: relative; top: 0px; left: 10px;">-</td>
-							<td><input type="password" required="required"
-								name="birthDate2" pattern="[0-9]{7}" class="form-control" size=7
-								id="exampleInputPassword3" maxlength=7 placeholder="뒷자리 7자리"
-								style="width: 150px; position: relative; top: 0px; left: 20px;">
-							</td>
-						</tr>
-					</table>
-
-					<div class="mb-3">
-						<label for="address2">주소<span class="text-muted">&nbsp;</span></label><br>
-						<input type="text" class="form-control" required="required"
-							name="addressId" id="sample6_postcode" placeholder="우편번호"
-							style="width: 200px; position: absolute"> <input
-							type="button" class="btn btn-primary"
-							onclick="sample6_execDaumPostcode()" value="우편번호 찾기"
-							style="margin-left: 220px;"> <input type="text"
-							name="address" required="required" style="margin-top: 10px"
-							class="form-control" id="sample6_address" placeholder="주소">
-						<input type="text" name="address2" class="form-control"
-							id="sample6_detailAddress" placeholder="상세주소"><br> <input
-							type="text" class="form-control" id="sample6_extraAddress"
-							readonly="readonly" placeholder="구 주소(자동입력)">
-					</div>
-
-					<div class="row">
-						<div class="col-md-8 mb-3">
-							<label for="root">부서</label> <select required="required"
-								name="departmentId" class="custom-select d-block w-100"
-								id="root">
-								<option value="">부서선택</option>
-								<option value="10">경영팀</option>
-								<option value="20">개발팀</option>
-								<option value="30">인사팀</option>
-								<option value="40">영업팀</option>
-							</select>
-						</div>
-						<div class="col-md-8 mb-3">
-							<label for="root">직급</label> <select required="required"
-								name="positionId" class="custom-select d-block w-100" id="root">
+          <tr class="register" height="30">
+            <td width="5%" align="center">*</td>
+            <td width="15%">직 급</td>
+            <td>
+                <select 
+								name="positionId" id="root">
 								<option value="">직급선택</option>
 								<option value="1">사원</option>
 								<option value="2">대리</option>
@@ -149,25 +195,62 @@
 								<option value="8">회장</option>
 								<option value="9">비정규직</option>
 							</select>
-						</div>
-						<div class="col-md-8 mb-3">
-							<label for="salary">연봉</label> <input required="required"
-								id=salary type="text" class="form-control" name="salary"
-								placeholder="연봉을 입력하세요">
-						</div>
+            </td>
+          </tr>
 
-					</div>
-					<hr class="mb-4">
+          <tr height="7">
+              <td colspan="7"><hr /></td>
+          </tr>
 
-					<div class="mb-4"></div>
-					<button class="btn btn-primary btn-lg btn-block" type="submit">가입
-						완료</button>
-				</form>
-			</div>
-		</div>
-		<footer class="my-3 text-center text-small">
-			<p class="mb-1">&copy; 2021 YD</p>
-		</footer>
-	</div>
+          <tr class="register" height="30">
+            <td width="5%" align="center">*</td>
+            <td width="15%">연 봉</td>
+            <td>
+                <input 
+                id=salary type="text"  name="salary"
+                placeholder="연봉을 입력하세요">
+            </td>
+          </tr>
+
+          <tr height="7">
+              <td colspan="7"><hr /></td>
+          </tr>
+
+          <tr>
+              <td width="5%" align="center">*</td>
+              <td width="15%">주 소</td>
+              <td>
+
+                <!-- 우편번호-->
+                <input type="text"   name="addressId" id="sample6_postcode" placeholder="우편번호"  > 
+                
+                <!-- 우편번호 찾기 버튼-->
+                <input type="button" id="sample6_execDaumPostcode" onclick="sample4_execDaumPostcode()" value="우편번호 찾기">
+                
+                <!-- 주소-->
+                <input type="text" name="address"  style="margin-top: 10px"  id="sample6_address" placeholder="주소">
+                <!-- 상세주소입력-->
+                <input type="text" name="address2" style="margin-top: 5px;"  id="sample6_detailAddress" placeholder="상세주소">
+                <!-- 구주소-->
+                <input type="text"  id="sample6_extraAddress" readonly="readonly" placeholder="구 주소(자동입력)">
+
+              </td>
+          </tr>
+          <tr height="7">
+            <td colspan="7"><hr /></td>
+        </tr>
+      </table>
+      <br />
+      <table>
+          <tr height="40">
+              <td><input class="button" type="submit" value="전송"/>&nbsp;<a href="index.php"></a></td>
+          </tr>
+      </table>
+  </form>
+</div>
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+
+
 </body>
 </html>

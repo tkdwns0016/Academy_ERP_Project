@@ -8,14 +8,18 @@ public class SuggestionBoard {
 	private int writer;
 	private String content;
 	private LocalDate writeDate;
+	private int count;
 	
-	public SuggestionBoard(int id, String title, int writer, String content, LocalDate writeDate) {
+	
+
+	public SuggestionBoard(int id, String title, int writer, String content, LocalDate writeDate, int count) {
 		super();
 		this.id = id;
 		this.title = title;
 		this.writer = writer;
 		this.content = content;
 		this.writeDate = writeDate;
+		this.count = count;
 	}
 
 	public SuggestionBoard() {
@@ -59,16 +63,24 @@ public class SuggestionBoard {
 		return writeDate;
 	}
 
+	public int getCount() {
+		return count;
+	}
+
+	public void setCount(int count) {
+		this.count = count;
+	}
+
 	public void setWriteDate(LocalDate writeDate) {
 		this.writeDate = writeDate;
 	}
 
 	@Override
 	public String toString() {
-		return "SuggestionBoard [id=" + id + ", title=" + title + ", writer=" + writer 
-				+ ", content=" + content + ", writeDate=" + writeDate + "]";
+		return "SuggestionBoard [id=" + id + ", title=" + title + ", writer=" + writer + ", content=" + content
+				+ ", writeDate=" + writeDate + ", count=" + count + "]";
 	}
-	
-	
+
+
 
 }

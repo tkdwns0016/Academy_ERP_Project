@@ -11,6 +11,9 @@ section {
 	width: 100%;
 	float: right;
 }
+li {
+	list-style: none;
+}
 </style>
 <head>
 <meta charset="UTF-8">
@@ -26,13 +29,12 @@ section {
 		<tiles:insertAttribute name="empl_side" />
 
 	</c:if>
-
-	<section>
-	 	<div>
-	 		<img style="width: 100%; height: 500px"  alt="" src="/image/mung.png">
-	 	</div>
-	</section>
-
-
+  <section>
+    <div class="img_div">
+      <img class="img" id="show" src="/image/1.jpg">
+    </div>
+    <div>
+</div>
+</section>
 </body>
 </html>

@@ -9,8 +9,9 @@ public class AnonymousBoard {
 	private int writer;
 	private String nickName;
 	private LocalDate writeDate;
+	private int count;
 	
-	public AnonymousBoard(int id, String title, String content, int writer,String nickName, LocalDate writeDate) {
+	public AnonymousBoard(int id, String title, String content, int writer,String nickName, LocalDate writeDate,int count) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -18,6 +19,7 @@ public class AnonymousBoard {
 		this.writer = writer;
 		this.nickName=nickName;
 		this.writeDate = writeDate;
+		this.count = count;
 	}
 
 	public String getNickName() {
@@ -49,6 +51,14 @@ public class AnonymousBoard {
 		this.title = title;
 	}
 
+	public int getCount() {
+		return count;
+	}
+
+	public void setCount(int count) {
+		this.count = count;
+	}
+
 	public String getContent() {
 		return content;
 	}
@@ -75,10 +85,11 @@ public class AnonymousBoard {
 
 	@Override
 	public String toString() {
-		return "AnonymouseBoard [id=" + id + ", title=" + title + ", content=" + content + ", writer=" + writer
-				+ ", nickName=" + nickName + ", writeDate=" + writeDate + "]";
+		return "AnonymousBoard [id=" + id + ", title=" + title + ", content=" + content + ", writer=" + writer
+				+ ", nickName=" + nickName + ", writeDate=" + writeDate + ", count=" + count + "]";
 	}
 
+	
 
 
 

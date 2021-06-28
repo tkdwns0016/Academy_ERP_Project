@@ -11,11 +11,11 @@ public class ServiceClass {
 	private int firstRow;//column 첫번째 로우
 	private int firstPage;//첫번째 페이지
 	private int lastPage;//마지막 페이지
-	private List<?> tablelist;//리스트 전체
+	private List tablelist;//리스트 전체
 	private int pagePerCount;//몇개로 짜를건지
 	private int totCount;//테이블 개수
 	
-	public ServiceClass(int currentPage, List<?> tablelist,
+	public ServiceClass(int currentPage, List tablelist,
 			int pagePerCount, int totCount) {
 		this.currentPage = currentPage;
 		this.tablelist = tablelist;
@@ -62,7 +62,7 @@ public class ServiceClass {
 	}
 
 
-	public void setTablelist(List<?> tablelist) {
+	public void setTablelist(List tablelist) {
 		this.tablelist = tablelist;
 	}
 

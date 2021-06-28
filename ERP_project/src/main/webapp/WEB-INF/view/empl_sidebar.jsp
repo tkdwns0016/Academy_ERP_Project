@@ -343,8 +343,8 @@ footer {
 							aria-expanded="false">커뮤니티</button>
 						<div class="collapse" id="community-collapse">
 							<ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-								<li><a href="#" class="link-dark rounded">공지사항</a></li>
-								<li><a href="#" class="link-dark rounded">건의 게시판</a></li>
+								<li><a href="/notice" class="link-dark rounded">공지사항</a></li>
+								<li><a href="/suggestion" class="link-dark rounded">건의 게시판</a></li>
 								<li><a href="/anonymous" class="link-dark rounded">익명 게시판</a></li>
 							</ul>
 						</div>

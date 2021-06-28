@@ -8,14 +8,16 @@ public class NoticeBoard {
 	private String title;
 	private String content;
 	private LocalDate date;
+	private int count;
 	
-	public NoticeBoard(int id, int writer, String title, String content, LocalDate date) {
+	public NoticeBoard(int id, int writer, String title, String content, LocalDate date,int count) {
 		super();
 		this.id = id;
 		this.writer = writer;
 		this.title = title;
 		this.content = content;
 		this.date = date;
+		this.count = count;
 	}
 
 	public NoticeBoard() {
@@ -63,11 +65,21 @@ public class NoticeBoard {
 		this.date = date;
 	}
 
+	public int getCount() {
+		return count;
+	}
+	
+	public void setCount(int count) {
+		this.count = count;
+	}
+	
+	
 	@Override
 	public String toString() {
-		return "NoticeBoard [id=" + id + ", writer=" + writer + ", title=" + title + ", content=" + content
-				 + ", date=" + date + "]";
+		return "NoticeBoard [id=" + id + ", writer=" + writer + ", title=" + title + ", content=" + content + ", date="
+				+ date + ", count=" + count + "]";
 	}
+
 	
 	
 }

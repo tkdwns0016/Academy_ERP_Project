@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import anonymousBoard.AnonymousBoard;
 import anonymousBoard.AnonymousBoardService;
+import noticeBoard.NoticeService;
+import suggestionBoard.SuggestionBoard;
+import suggestionBoard.SuggestionBoardService;
 
 
 
@@ -19,9 +22,11 @@ import anonymousBoard.AnonymousBoardService;
 @Controller
 public class ERPController {
 	@Autowired
-EmployeeService es;
+	EmployeeService es;
 	@Autowired
-	AnonymousBoardService as;
+	NoticeService ns;
+	@Autowired
+	SuggestionBoardService ss;
 	
 	
 	@GetMapping("/myInfo")
@@ -53,16 +58,10 @@ EmployeeService es;
 		
 	
 	}
-	 @GetMapping("/anonymous")
-	 public String anonymous(Model model) {
-		 model.addAttribute("list",as.getList() );
-		 return "anonymous";
-	 }
 
 	@GetMapping("/join")
 	public String join(Model model) {
-		 model.addAttribute("list",as.getList() );
-		return "join";
+		return "joinForm";
 	}
 	@PostMapping("/join")
 	public String postJoin(Employee employee,String address2, String birthDate1,String birthDate2) {
@@ -88,12 +87,11 @@ EmployeeService es;
 		return "popup";
 	}
 	@GetMapping("/main")
-	public String main() {
-		
-		
+	public String main(Model model) {
+		model.addAttribute("suggestion",ss.mainList());
+		model.addAttribute("notice", ns.mainList());
 		return "main";
 	}
 	
 
-	
 }

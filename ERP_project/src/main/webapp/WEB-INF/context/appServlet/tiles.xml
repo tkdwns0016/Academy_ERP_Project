@@ -16,11 +16,30 @@
         <put-attribute name="empl_side" value="/WEB-INF/view/empl_sidebar.jsp" />
     </definition>
     
-    <definition name="join" template="/WEB-INF/view/join.jsp">
+    <definition name="joinForm" template="/WEB-INF/view/joinForm.jsp">
         <put-attribute name="root_side" value="/WEB-INF/view/root_sidebar.jsp" />
         <put-attribute name="empl_side" value="/WEB-INF/view/empl_sidebar.jsp" />
     </definition>
-
+	  <definition name="suggestion" template="/WEB-INF/view/suggestion.jsp">
+        <put-attribute name="root_side" value="/WEB-INF/view/root_sidebar.jsp" />
+        <put-attribute name="empl_side" value="/WEB-INF/view/empl_sidebar.jsp" />
+    </definition>
+	 <definition name="suggestionContent" template="/WEB-INF/view/suggestionContent.jsp">
+        <put-attribute name="root_side" value="/WEB-INF/view/root_sidebar.jsp" />
+        <put-attribute name="empl_side" value="/WEB-INF/view/empl_sidebar.jsp" />
+    </definition>
+	 <definition name="anonymousContent" template="/WEB-INF/view/anonymousContent.jsp">
+        <put-attribute name="root_side" value="/WEB-INF/view/root_sidebar.jsp" />
+        <put-attribute name="empl_side" value="/WEB-INF/view/empl_sidebar.jsp" />
+    </definition>
+	 <definition name="notice" template="/WEB-INF/view/notice.jsp">
+        <put-attribute name="root_side" value="/WEB-INF/view/root_sidebar.jsp" />
+        <put-attribute name="empl_side" value="/WEB-INF/view/empl_sidebar.jsp" />
+    </definition>
+	 <definition name="noticeContet" template="/WEB-INF/view/noticeContet.jsp">
+        <put-attribute name="root_side" value="/WEB-INF/view/root_sidebar.jsp" />
+        <put-attribute name="empl_side" value="/WEB-INF/view/empl_sidebar.jsp" />
+    </definition>
  
 </tiles-definitions>
 

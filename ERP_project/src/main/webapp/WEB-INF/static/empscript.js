@@ -1,9 +1,42 @@
     window.addEventListener('load', () => {
       const forms = document.getElementsByClassName('validation-form');
+	var button = $(".button");
+ 	console.dir(button);
+	button[0].onclick=function(){
 
+        var frontValue=$("#exampleInputEmail3").val();
+		var iden1=frontValue.substring(0,1)*2;
+        var iden2=frontValue.substring(1,2)*3;
+        var iden3=frontValue.substring(2,3)*4;
+        var iden4=frontValue.substring(3,4)*5;
+        var iden5=frontValue.substring(4,5)*6;
+        var iden6=frontValue.substring(5,6)*7;
+
+		var afteridenvalue= $("#exampleInputPassword3").val();
+        var iden7=afteridenvalue.substring(0,1)*8;
+        var iden8=afteridenvalue.substring(1,2)*9;
+        var iden9=afteridenvalue.substring(2,3)*2;
+        var iden10=afteridenvalue.substring(3,4)*3;
+        var iden11=afteridenvalue.substring(4,5)*4;
+        var iden12=afteridenvalue.substring(5,6)*5;
+        var iden13=afteridenvalue.substring(6,7);
+
+        var iden14=(11-((iden1+iden2+iden3+iden4+iden5+iden6+iden7+iden8+iden9+iden10+iden11
+        +iden12)%11))%10;
+	
+        if(iden14!=iden13){
+            alert("주민등록번호가 올바르지 않습니다.");
+            $("#exampleInputEmail3").focus();
+            return false;
+        }
+          return true;
+	}
+        
+        
+          
       var input=document.querySelectorAll(".file_input")[0];
       var img=document.querySelectorAll(".img-circle")[0];
-      console.log(img);
+     
       input.onchange=function(){
     	  var fileList=input.files;
     	  var reader = new FileReader();
@@ -23,7 +56,7 @@
         }, false);
       });
     }, false);
- function sample6_execDaumPostcode() {
+ function sample4_execDaumPostcode() {
         new daum.Postcode({
             oncomplete: function(data) {
                 // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
@@ -70,3 +103,4 @@
             }
         }).open();
     }
+    

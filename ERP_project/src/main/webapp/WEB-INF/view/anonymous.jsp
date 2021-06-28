@@ -39,16 +39,16 @@
 		<tiles:insertAttribute name="empl_side" />
 
 	</c:if>
-	<section style="float: right; width: 100%">
-<div class="main-container" style="width: 80%;">
-<div style="text-align: center;">
+	<	<section style="float: right; width: 100%; height: 100%; top:100px">
+	<div style="width: 80%; margin:40px auto;">
+	<div style="text-align: center;">
     <H2>익명게시판</H2>
 </div>
 <table class="table table-sm table-hover"  >
     <thead class="table-light">
         <tr>
             <th scope="col">번호</th>
-            <th scope="col">내용</th>
+            <th scope="col">제목</th>
             <th scope="col">작성자</th>
             <th scope="col">날짜</th>
             <th scope="col">조회수</th>
@@ -56,27 +56,44 @@
     </thead>
     <tbody>
    
-   <c:forEach var="l" items="${list }" varStatus="s">
-    <tr>
-        <td>${l.id }</td>
-        <td>${l.title }</td>
-        <td>${l.nickName }</td>
-        <td>${l.writeDate }</td>
-        <td>0</td>
-    </tr>
+  	 <c:forEach var="l" items="${list.tablelist }">
+    	<tr onclick="window.open('/anonymousContent?id=${l.id }')">
+       	 	<td>${l.id }</td>
+      		<td>${l.title }</td>
+        	<td>${l.nickName }</td>
+        	<td>${l.writeDate }</td>
+        	<td>${l.count }</td>
+   		</tr>
    
-   </c:forEach>
+  	 </c:forEach>
    
    
-</tbody>
+	</tbody>
 </table>
 
 <div class="border-dee3eb" style="text-align: center;">
-<a href="">[1]</a>
-<a href="">[2]</a>    
-<a href="">[3]</a>
-<a href="">[4]</a>
-<a href="">[5]</a>
+<c:if test="${list.totPage<list.lastPage }">
+	<c:forEach var="link" begin="${list.firstPage }" end="${list.lastPage }">
+		<a href="/anonymous?page=${link }">[${link }]</a>
+	</c:forEach>
+</c:if>
+	<c:forEach var="link" begin="${list.firstPage }" end="${list.lastPage }">
+		<a href="/anonymous?page=${link }">[${link }]</a>
+	</c:forEach>
+<c:if test="${list.firstPage>1 && list.lastPage<totPage }">
+	<a href="/anonymous?page=${list.firstPage-1 }">[이전]</a>
+		<c:forEach var="link" begin="${list.firstPage }" end="${list.lastPage }">
+			<a href="/anonymous?page=${link }">[${link}]</a>
+		</c:forEach>
+	<a href="/anonymous?page=${list.lastPage+1 }">[다음]</a>
+</c:if>
+<c:if test="${ list.firstPage>1 && list.lastPage>=list.totPage }">
+	<a href="/anonymous?page=${list.firstPage-1 }">[이전]</a>
+		<c:forEach var="link" begin="${list.firstPage }" end="${list.totPage}">
+			<a href="/anonymous?page=${link }">[${link}]</a>
+		</c:forEach>
+
+</c:if>	
 
 </div>
 <div class="temp-box" box-three></div>
