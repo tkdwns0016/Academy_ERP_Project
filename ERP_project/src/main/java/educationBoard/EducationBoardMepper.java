@@ -21,11 +21,11 @@ public interface EducationBoardMepper {
 	public EducationBoard select(int id);
 	
 	@Insert("insert into education_board(title,start_date,end_date,memo,department_id) "
-			+ "values(#{title},#{startDate},#{endDate},#{momo},#{departmentId})")
+			+ "values(#{title},#{startDate},#{endDate},#{memo},#{departmentId})")
 	public EducationBoard insert(EducationBoard educationBoard);
 	
 	@Update("update education_board set title=#{title},"
-			+ "startDate=#{startDate},endDate=#{endDate},memo=#{momo},"
+			+ "startDate=#{startDate},endDate=#{endDate},memo=#{memo},"
 			+ "departmentId=#{departmentId} where id=#{id}")
 	public int update(EducationBoard educationBoard);
 	

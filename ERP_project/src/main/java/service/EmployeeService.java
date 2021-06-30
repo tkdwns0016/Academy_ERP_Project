@@ -33,7 +33,8 @@ public class EmployeeService {
 		return em.getUserId(departmentId);
 	}
 	
-	public int inserEmployee(Employee employee) {
+	public int insertEmployee(Employee employee) {
 		return em.insert(employee);
 	}
 }
+

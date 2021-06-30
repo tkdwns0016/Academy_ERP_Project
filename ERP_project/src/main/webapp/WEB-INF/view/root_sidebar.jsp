@@ -15,8 +15,7 @@
 <!-- Custom styles for this template -->
 <link href="/static/bootstrap/sidebars/sidebars.css" rel="stylesheet">
 
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <style>
 * {
 	margin: 0;
@@ -136,6 +135,40 @@ footer {
 	float: right;
 	background-color: chocolate;
 }
+    @media screen and (max-width:1470px){
+    	
+    .mb-1{width: 20px; height: 20px;
+    	} 
+    }
+      @media screen and (max-width:860px){
+    	
+    .mb-1{width: 0px; height: 0px;
+
+    	} 
+  	 #font{
+    		font-size: 0px;
+   		 }    	
+ 
+    }
+           
+    @media screen and (max-height:1024px){
+    	.nav-link{
+    		font-size: 15px;
+   		 }
+    }
+       @media screen and (max-height:600px){
+    	.nav-link{
+    		font-size: 0px;
+   		 }
+    }
+       @media screen and (max-height:400px){
+    	.mb-1{width: 0; height: 0;
+    	}
+    	.nav-link{
+    		font-size: 0px;
+   		 }
+    }
+
 </style>
 </head>
 
@@ -190,24 +223,24 @@ footer {
 
 					<ul
 						class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small set">
-						<li><a href="/main"
+						<li><a id="font" href="/main"
 							class="nav-link text-white bi-house-door hover"> <svg
 									class="bi d-block mx-auto mb-1" width="24" height="24">
                     <use xlink:href="#home" /></svg> Home
 						</a></li>
-						<li><a href="/main" class="nav-link text-white hover"> <svg
+						<li><a id="font" href="/main" class="nav-link text-white hover"> <svg
 									class="bi d-block mx-auto mb-1" width="24" height="24">
                     <use xlink:href="#speedometer2" /></svg> Dashboard
 						</a></li>
-						<li><a href="/main" class="nav-link text-white hover"> <svg
+						<li><a id="font" href="/main" class="nav-link text-white hover"> <svg
 									class="bi d-block mx-auto mb-1" width="24" height="24">
                     <use xlink:href="#table" /></svg> Orders
 						</a></li>
-						<li><a href="/main" class="nav-link text-white hover"> <svg
+						<li><a id="font" href="/main" class="nav-link text-white hover"> <svg
 									class="bi d-block mx-auto mb-1" width="24" height="24">
                     <use xlink:href="#grid" /></svg> Products
 						</a></li>
-						<li><a href="/main" class="nav-link text-white hover"> <svg
+						<li><a id="font" href="/main" class="nav-link text-white hover"> <svg
 									class="bi d-block mx-auto mb-1" width="24" height="24">
                     <use xlink:href="#people-circle" /></svg> Customers
 						</a></li>

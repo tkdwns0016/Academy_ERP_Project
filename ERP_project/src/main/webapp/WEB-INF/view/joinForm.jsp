@@ -15,14 +15,12 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 	crossorigin="anonymous">
- <link rel="stylesheet" type="text/css" href="/static/empcss.css">
-<script type="text/javascript" src="/static/empscript.js"></script>
+ <link rel="stylesheet" type="text/css" href="/static/join/join.css">
+<script type="text/javascript" src="/static/join/joinscript.js"></script>
  <link href="/static/bootstrap/assets/dist/css/bootstrap.min.css" rel="stylesheet">
 
 
 
-  <!-- Custom styles for this template --> 
-  <link href="/static/bootstrap/sidebars/sidebars.css" rel="stylesheet">
   <style>
      .list_none {
       text-decoration: none;
@@ -55,7 +53,7 @@
     
   <div class="input-form-backgroud row"></div>
 		<div class="input-form row-nw d-flex flex-wrap">
-    <form action="register.php" method="post" name="twin">
+    <form action="/join" method="post">
       <table id="table1">
           <h4><strong>인사 등록</strong></h4><br>
       </table>    
@@ -104,7 +102,7 @@
               <td width="5%" align="center">*</td>
               <td width="15%">성 별</td>
               <td>
-                  남 성<input type="radio" name="UserGender"  id="UserGender"  value="1" checked />&nbsp;&nbsp;&nbsp;여 성<input type="radio" name="UserGender" id="UserGender"   value="2"/>
+                  남 성<input type="radio" name="sex"  id="sex"  value="남성" checked />&nbsp;&nbsp;&nbsp;여 성<input type="radio" name="sex" id="sex" value="여성"/>
               </td>
           </tr>
           <tr height="7">
@@ -165,7 +163,7 @@
             <td width="5%" align="center">*</td>
             <td width="15%">부 서</td>
             <td>
-                <select  name="departmentId" id="root">
+                <select name="departmentId" id="root">
 					<option value="">부서선택</option>
 					<option value="10">경영팀</option>
 					<option value="20">개발팀</option>
@@ -228,7 +226,7 @@
                 <input type="button" id="sample6_execDaumPostcode" onclick="sample4_execDaumPostcode()" value="우편번호 찾기">
                 
                 <!-- 주소-->
-                <input type="text" name="address"  style="margin-top: 10px"  id="sample6_address" placeholder="주소">
+                <input type="text" name="address1"  style="margin-top: 10px"  id="sample6_address" placeholder="주소">
                 <!-- 상세주소입력-->
                 <input type="text" name="address2" style="margin-top: 5px;"  id="sample6_detailAddress" placeholder="상세주소">
                 <!-- 구주소-->

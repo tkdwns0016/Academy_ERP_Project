@@ -134,10 +134,43 @@ footer {
 	float: right;
 	background-color: chocolate;
 }
+  @media screen and (max-width:1470px){
+    	
+    .mb-1{width: 20px; height: 20px;
+    	} 
+    }
+      @media screen and (max-width:860px){
+    	
+    .mb-1{width: 0px; height: 0px;
+
+    	} 
+  	 #font{
+    		font-size: 0px;
+   		 }    	
+ 
+    }
+           
+    @media screen and (max-height:1024px){
+    	.nav-link{
+    		font-size: 15px;
+   		 }
+    }
+       @media screen and (max-height:600px){
+    	.nav-link{
+    		font-size: 0px;
+   		 }
+    }
+       @media screen and (max-height:400px){
+    	.mb-1{width: 0; height: 0;
+    	}
+    	.nav-link{
+    		font-size: 0px;
+   		 }
+    } 
 </style>
 </head>
 
-<body class="body">
+<body>
 
 	<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
    

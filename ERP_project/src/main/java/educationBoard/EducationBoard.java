@@ -2,22 +2,30 @@ package educationBoard;
 
 import java.time.LocalDateTime;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class EducationBoard {
 	private int id;
 	private String title;
+	@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm")
 	private LocalDateTime startDate;
+	@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm")
 	private LocalDateTime endDate;
-	private String momo;
+	private String memo;
 	private int departmentId;
 	
-	public EducationBoard(int id, String title, LocalDateTime startDate, LocalDateTime endDate, String momo,
+	public EducationBoard(int id, String title, LocalDateTime startDate, LocalDateTime endDate, String memo,
 			int departmentId) {
 		super();
 		this.id = id;
 		this.title = title;
 		this.startDate = startDate;
 		this.endDate = endDate;
-		this.momo = momo;
+		this.memo = memo;
 		this.departmentId = departmentId;
 	}
 	public EducationBoard() {
@@ -48,11 +56,11 @@ public class EducationBoard {
 	public void setEndDate(LocalDateTime endDate) {
 		this.endDate = endDate;
 	}
-	public String getMomo() {
-		return momo;
+	public String getMemo() {
+		return memo;
 	}
-	public void setMomo(String momo) {
-		this.momo = momo;
+	public void setMemo(String memo) {
+		this.memo = memo;
 	}
 	public int getDepartmentId() {
 		return departmentId;
@@ -63,7 +71,7 @@ public class EducationBoard {
 	@Override
 	public String toString() {
 		return "EducationBoard [id=" + id + ", title=" + title + ", startDate=" + startDate + ", endDate=" + endDate
-				+ ", momo=" + momo + ", departmentId=" + departmentId + "]";
+				+ ", memo=" + memo + ", departmentId=" + departmentId + "]";
 	}
 	
 	
