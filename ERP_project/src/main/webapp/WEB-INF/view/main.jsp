@@ -4,13 +4,7 @@
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 <!DOCTYPE html>
 <html>
- <link href="/static/bootstrap/assets/dist/css/bootstrap.min.css" rel="stylesheet">
 
-
-  <!-- Custom styles for this template -->
-  <link href="/static/bootstrap/sidebars/sidebars.css" rel="stylesheet">
-
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <style>
     * {
       margin: 0;
@@ -39,18 +33,6 @@
     .headerdiv {
       height: 100%;
     }
-
-    nav {
-      background-color: darkmagenta;
-      width: 15%;
-      height: 90%;
-      position: absolute;
-      float: left;
-      top: 10%;
-      z-index: 3;
-      left: -20%;
-    }
-
     section {
       width: 100%;
       height: 100%;
@@ -66,7 +48,7 @@
       margin: 0 auto;
     }
 
-    img {
+    .img {
       width: 100%;
       float: left;
       opacity: 1;
@@ -182,13 +164,6 @@
 
 	</c:if>
 
-  
- 
- 
-  <!-- 사람클릭 시 나오는 것 -->
-  <script src="/static/bootstrap/assets/dist/js/bootstrap.bundle.min.js"></script>
-
-  <script src="/static/bootstrap/sidebars/sidebars.js"></script>
 
   <section>
     <div class="img_div" style="height: 40%;">

@@ -40,6 +40,10 @@
         <put-attribute name="root_side" value="/WEB-INF/view/root_sidebar.jsp" />
         <put-attribute name="empl_side" value="/WEB-INF/view/empl_sidebar.jsp" />
     </definition>
+	 <definition name="educationBoard" template="/WEB-INF/view/educationBoard.jsp">
+        <put-attribute name="root_side" value="/WEB-INF/view/root_sidebar.jsp" />
+        <put-attribute name="empl_side" value="/WEB-INF/view/empl_sidebar.jsp" />
+    </definition>
  
 </tiles-definitions>
 

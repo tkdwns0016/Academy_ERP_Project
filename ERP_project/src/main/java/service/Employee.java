@@ -4,9 +4,8 @@ import java.time.LocalDate;
 
 public class Employee {
 	private int id;
-	private int age;
 	private String name;
-	private String userId;
+	private int userId;
 	private String password;
 	private String addressId;
 	private String address1;
@@ -35,18 +34,13 @@ public class Employee {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getUserId() {
+	public int getUserId() {
 		return userId;
 	}
-	public void setUserId(String userId) {
+	public void setUserId(int userId) {
 		this.userId = userId;
 	}
-	public int getAge() {
-		return age;
-	}
-	public void setAge(int age) {
-		this.age = age;
-	}
+	
 	public String getPassword() {
 		return password;
 	}
@@ -144,12 +138,11 @@ public class Employee {
 		super();
 	}
 	
-	public Employee(int id, int age, String name, String userId, String password, String addressId, String address1,
+	public Employee(int id, String name, int userId, String password, String addressId, String address1,
 			String address2, String phone, String email, LocalDate hireDate, String birthDate, String sex,
 			int departmentId, String imgName, int positionId, long salary, String manager, String status) {
 		super();
 		this.id = id;
-		this.age = age;
 		this.name = name;
 		this.userId = userId;
 		this.password = password;
@@ -171,7 +164,7 @@ public class Employee {
 	
 	@Override
 	public String toString() {
-		return "Employee [id=" + id + ", age=" + age + ", name=" + name + ", userId=" + userId + ", password="
+		return "Employee [id=" + id + ", name=" + name + ", userId=" + userId + ", password="
 				+ password + ", addressId=" + addressId + ", address1=" + address1 + ", address2=" + address2
 				+ ", phone=" + phone + ", email=" + email + ", hireDate=" + hireDate + ", birthDate=" + birthDate
 				+ ", sex=" + sex + ", departmentId=" + departmentId + ", imgName=" + imgName + ", positionId="

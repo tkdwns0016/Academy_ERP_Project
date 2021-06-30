@@ -28,7 +28,7 @@ public interface EmployeeMapper {
 	@Select("select user_id from employee where department_id=#{departmentId} order by user_id desc limit 1")
 	public int getUserId(int departmentId);
 	
-	@Insert("insert into employee values(0,#{name},#{age},#{userId},"
+	@Insert("insert into employee values(0,#{name},#{userId},"
 			+ "#{password},#{addressId},#{address1},#{address2},#{phone},"
 			+ "#{email},#{hireDate},#{birthDate},#{sex},#{departmentId},#{imgName},"
 			+ "#{positionId},#{salary},#{manager},#{status})")

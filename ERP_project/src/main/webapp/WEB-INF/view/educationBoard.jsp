@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,8 +17,8 @@
     var calendarEl = document.getElementById('calendar');
     var today=new Date();
     var modal = document.getElementById('myModal');
-   
     var arr;
+    var events;
     function list(){
     	$.ajax({
     		url:"/list",
@@ -25,11 +27,17 @@
     		dataType:"json",
     		success:function(result){
     			arr=result;	
+    			events = arr.map(function(item){
+    				return{
+    					title: item.title+' <'+item.departmentId+'>',
+    					start: item.startDate,
+    					end: item.endDate
+    				}
+    			});
     		}
     	});
     };
     list()
-console.log(arr);
     
     var calendar = new FullCalendar.Calendar(calendarEl, {
      
@@ -53,65 +61,7 @@ console.log(arr);
       },
       editable: true,
       dayMaxEvents: true, // allow "more" link when too many events
-      events: [
-        { id:1,
-          title: arr[0].title,
-          start: arr[0].startDate,
-          end: arr[0].endDate,
-          context:arr[0].content
-        },
-        {
-          title: 'Long Event',
-          start: '2020-09-07',
-          end: '2020-09-10'
-        },
-        {
-          groupId: 999,
-          title: 'Repeating Event',
-          start: '2020-09-09T16:00:00'
-        },
-        {
-          groupId: 999,
-          title: 'Repeating Event',
-          start: '2020-09-16T16:00:00'
-        },
-        {
-          title: 'Conference',
-          start: '2020-09-11',
-          end: '2020-09-13'
-        },
-        {
-          title: 'Meeting',
-          start: '2020-09-12T10:30:00',
-          end: '2020-09-12T12:30:00'
-        },
-        {
-          title: 'Lunch',
-          start: '2020-09-12T12:00:00'
-        },
-        {
-          title: 'Meeting',
-          start: '2020-09-12T14:30:00'
-        },
-        {
-          title: 'Happy Hour',
-          start: '2020-09-12T17:30:00'
-        },
-        {
-          title: 'Dinner',
-          start: '2020-09-12T20:00:00'
-        },
-        {
-          title: 'Birthday Party',
-          start: '2020-09-13T07:00:00'
-        },
-        {
-          title: 'Click for Google',
-          url: 'http://google.com/',
-          start: '2020-09-28'
-        }
-      ]
-    });
+      events: events });
 
     calendar.render();
 	for(let i=0;i<arr.length;i++){
@@ -127,6 +77,9 @@ console.log(arr);
 .hidden{
 
 display: none;
+}
+a{
+	text-decoration: none;
 }
 .modal{
             position: fixed; /* Stay in place */
@@ -159,7 +112,7 @@ display: none;
 
   #calendar {
     max-width: 1100px;
-    margin: 0 auto;
+    margin: 100px auto;
   }
   table{
     border-collapse: collapse;
@@ -187,6 +140,15 @@ tr td{
 </style>
 </head>
 <body>
+	<c:if test="${empl.manager=='권한' }">
+
+		<tiles:insertAttribute name="root_side" />
+	</c:if>
+	<c:if test="${empl.manager=='비권한' }">
+		<tiles:insertAttribute name="empl_side" />
+
+	</c:if>
+
  <div class='teduri'>
     <div id='calendar'></div>
    

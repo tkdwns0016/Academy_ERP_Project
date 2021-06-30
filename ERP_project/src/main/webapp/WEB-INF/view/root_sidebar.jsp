@@ -40,25 +40,20 @@ header {
 	height: 100%;
 }
 
-nav {
-	background-color: darkmagenta
-}
-
-section {
-	
-}
 
 #home:hover {
 	color: blue;
 }
-
-nav {
-	width: 20%;
-	height: 90%;
-	position: absolute;
-	float: left;
-	top: 10%;
-}
+    nav {
+      background-color: darkmagenta;
+      width: 15%;
+      height: 90%;
+      position: absolute;
+      float: left;
+      top: 10%;
+      z-index: 3;
+      left: -20%;
+    }
 
 .hover:hover {
 	opacity: 50%
@@ -128,13 +123,7 @@ nav::after {
 	margin-top: -15px;
 }
 
-footer {
-	width: 100%;
-	height: 10%;
-	position: relative;
-	float: right;
-	background-color: chocolate;
-}
+
     @media screen and (max-width:1470px){
     	
     .mb-1{width: 20px; height: 20px;
@@ -314,8 +303,8 @@ footer {
 					<a href="#"
 						class="d-flex align-items-center text-black text-decoration-none dropdown-toggle"
 						id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-						<img src="/image/${empl.imgName }.jpg" alt="" width="70"
-						height="100" class="me-2"> <strong>${empl.name }
+						<img src="/image/${empl.imgName }.jpg" alt="" width="70px"
+						height="100px" class="me-2"> <strong>${empl.name }
 							님</strong>
 					</a>
 					<ul class="dropdown-menu dropdown-menu-dark text-small shadow"
@@ -354,6 +343,14 @@ footer {
 							class="btn btn-toggle align-items-center rounded collapsed"
 							data-bs-toggle="collapse" data-bs-target="#dashboard-collapse"
 							aria-expanded="false">교육관리</button>
+									<div class="collapse" id="dashboard-collapse">
+							<ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+								<li><a href="/educationBoard?departmentId=10" class="link-dark rounded">경영팀 교육 일정</a></li>
+								<li><a href="/educationBoard?departmentId=20" class="link-dark rounded">개발팀 교육 일정</a></li>
+								<li><a href="/educationBoard?departmentId=30" class="link-dark rounded">인사팀 교육 일정</a></li>
+								<li><a href="/educationBoard?departmentId=40" class="link-dark rounded">영업팀 교육 일정 </a></li>
+							</ul>
+						</div>
 					</li>
 
 					<li class="mb-1">
