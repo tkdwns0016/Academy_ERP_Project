@@ -44,6 +44,10 @@
         <put-attribute name="root_side" value="/WEB-INF/view/root_sidebar.jsp" />
         <put-attribute name="empl_side" value="/WEB-INF/view/empl_sidebar.jsp" />
     </definition>
+	 <definition name="myInfo" template="/WEB-INF/view/myInfo.jsp">
+        <put-attribute name="root_side" value="/WEB-INF/view/root_sidebar.jsp" />
+        <put-attribute name="empl_side" value="/WEB-INF/view/empl_sidebar.jsp" />
+    </definition>
  
 </tiles-definitions>
 

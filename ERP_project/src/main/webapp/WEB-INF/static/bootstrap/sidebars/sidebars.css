@@ -6,7 +6,6 @@ body {
 html {
   height: -webkit-fill-available;
 }
-
 main {
   display: flex;
   flex-wrap: nowrap;

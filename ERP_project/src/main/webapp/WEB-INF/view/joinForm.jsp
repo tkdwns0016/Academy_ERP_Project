@@ -53,7 +53,7 @@
     
   <div class="input-form-backgroud row"></div>
 		<div class="input-form row-nw d-flex flex-wrap">
-    <form action="/join" method="post">
+    <form action="/join" method="post" enctype="multipart/form-data">
       <table id="table1">
           <h4><strong>인사 등록</strong></h4><br>
       </table>    
@@ -61,13 +61,13 @@
           <tr class="register" height="30">
               <td width="5%" align="center">*</td>
               <td width="15%">사원 ID</td>
-              <td ><input type="text" name="userId" id="userId"  /></td>
+              <td ><input type="text" disabled="disabled" name="userId" id="userId"  /></td>
             <td></td><td></td>
               <td rowspan="5" style="text-align: center; width: 200px;" class="filebox">
-                <img src="" width="150px" class="img-circle" height="150px">
+                <img src="/image/normalImg.jpg" width="150px" class="img-circle" height="150px">
                     
                     <label for="ex_filename" class="filebox" style="margin-top: 5px;">업로드</label> <input type="file"
-                        id="ex_filename"  name="imgName"
+                        id="ex_filename"  value="normalImg.jpg" name="imgName"
                         class="upload-hidden file_input" multiple="multiple">
                 </td>
           </tr>
@@ -77,7 +77,7 @@
           <tr class="register" height="10">
               <td width="5%" align="center">*</td>
               <td width="15%">비밀번호</td>
-              <td><input type="password"  name="password" id="password"  id="pw" onchange="isSame()" /></td>
+              <td><input type="password" disabled="disabled" name="password" id="password"  id="pw" onchange="isSame()" /></td>
           </tr>
           <tr height="7">
               <td colspan="3"><hr /></td>
@@ -85,7 +85,7 @@
           <tr class="register" height="30">
               <td width="5%" align="center">*</td>
               <td width="15%">비밀번호 확인</td>
-              <td><input type="password" name="password2" id="password2"  id="pwCheck" onchange="isSame()" />&nbsp;&nbsp;<span id="same"></span></td>
+              <td><input type="password" disabled="disabled" name="password2" id="password2"  id="pwCheck" onchange="isSame()" />&nbsp;&nbsp;<span id="same"></span></td>
           </tr>
           <tr height="7">
               <td colspan="7"><hr/></td>

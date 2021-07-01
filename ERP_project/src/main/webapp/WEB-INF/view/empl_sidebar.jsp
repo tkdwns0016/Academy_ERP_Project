@@ -17,7 +17,8 @@
 
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<style>
+<style type="text/css">
+
 * {
 	margin: 0;
 }
@@ -41,32 +42,29 @@ header {
 	height: 100%;
 }
 
-nav {
-	background-color: darkmagenta
-}
-
-section {
-	
-}
 
 #home:hover {
 	color: blue;
 }
+    nav {
+      background-color: darkmagenta;
+      width: 15%;
+      height: 90%;
+      position: absolute;
+      float: left;
+      top: 10%;
+      z-index: 3;
+      left: -20%;
+    }
+
+.hover:hover {
+	opacity: 50%
+}
+
 .set{
 position: absolute;
 top: 20%;
 left: 5%;
-}
-nav {
-	width: 20%;
-	height: 90%;
-	position: absolute;
-	float: left;
-	top: 10%;
-}
-
-.hover:hover {
-	opacity: 50%
 }
 
 nav::after {
@@ -127,14 +125,8 @@ nav::after {
 	margin-top: -15px;
 }
 
-footer {
-	width: 100%;
-	height: 10%;
-	position: relative;
-	float: right;
-	background-color: chocolate;
-}
-  @media screen and (max-width:1470px){
+
+    @media screen and (max-width:1470px){
     	
     .mb-1{width: 20px; height: 20px;
     	} 
@@ -166,11 +158,11 @@ footer {
     	.nav-link{
     		font-size: 0px;
    		 }
-    } 
+    }
+	li{list-style: none;}
 </style>
 </head>
-
-<body>
+<body class="body">
 
 	<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
    
@@ -221,24 +213,24 @@ footer {
 
 					<ul
 						class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small set">
-						<li><a href="/main"
+						<li><a id="font" href="/main"
 							class="nav-link text-white bi-house-door hover"> <svg
 									class="bi d-block mx-auto mb-1" width="24" height="24">
                     <use xlink:href="#home" /></svg> Home
 						</a></li>
-						<li><a href="/main" class="nav-link text-white hover"> <svg
+						<li><a id="font" href="/main" class="nav-link text-white hover"> <svg
 									class="bi d-block mx-auto mb-1" width="24" height="24">
                     <use xlink:href="#speedometer2" /></svg> Dashboard
 						</a></li>
-						<li><a href="/main" class="nav-link text-white hover"> <svg
+						<li><a id="font" href="/main" class="nav-link text-white hover"> <svg
 									class="bi d-block mx-auto mb-1" width="24" height="24">
                     <use xlink:href="#table" /></svg> Orders
 						</a></li>
-						<li><a href="/main" class="nav-link text-white hover"> <svg
+						<li><a id="font" href="/main" class="nav-link text-white hover"> <svg
 									class="bi d-block mx-auto mb-1" width="24" height="24">
                     <use xlink:href="#grid" /></svg> Products
 						</a></li>
-						<li><a href="/main" class="nav-link text-white hover"> <svg
+						<li><a id="font" href="/main" class="nav-link text-white hover"> <svg
 									class="bi d-block mx-auto mb-1" width="24" height="24">
                     <use xlink:href="#people-circle" /></svg> Customers
 						</a></li>
@@ -312,15 +304,13 @@ footer {
 					<a href="#"
 						class="d-flex align-items-center text-black text-decoration-none dropdown-toggle"
 						id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-						<img src="/image/${empl.imgName }.jpg" alt="" width="70"
-						height="100" class="me-2"> <strong>${empl.name }
+						<img src="/image/${empl.imgName }" alt="" width="70px"
+						height="100px" class="me-2"> <strong>${empl.name }
 							님</strong>
 					</a>
 					<ul class="dropdown-menu dropdown-menu-dark text-small shadow"
 						aria-labelledby="dropdownUser1">
-						<li><a class="dropdown-item" href="#">New project...</a></li>
-						<li><a class="dropdown-item" href="#">Settings</a></li>
-						<li><a class="dropdown-item" href="#">Profile</a></li>
+						<li><a class="dropdown-item" href="/myInfo">Profile</a></li>
 						<li>
 							<hr class="dropdown-divider">
 						</li>
@@ -331,17 +321,23 @@ footer {
 				<a href="/"
 					class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
 					<svg class="bi me-2" width="30" height="24">
-            <use xlink:href="#bootstrap" /></svg> <span
-					class="fs-5 fw-semibold">인사관리프로젝트</span>
+            <use xlink:href="#bootstrap" /></svg> 
+            <span class="fs-5 fw-semibold">인사관리프로젝트</span>
 				</a>
-				<ul class="list-unstyled ps-0">
-					
-
+				
 					<li class="mb-1">
 						<button
 							class="btn btn-toggle align-items-center rounded collapsed"
 							data-bs-toggle="collapse" data-bs-target="#dashboard-collapse"
-							aria-expanded="false">교육공지</button>
+							aria-expanded="false">교육관리</button>
+									<div class="collapse" id="dashboard-collapse">
+							<ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+								<li><a href="/educationBoard?departmentId=10" class="link-dark rounded">경영팀 교육 일정</a></li>
+								<li><a href="/educationBoard?departmentId=20" class="link-dark rounded">개발팀 교육 일정</a></li>
+								<li><a href="/educationBoard?departmentId=30" class="link-dark rounded">인사팀 교육 일정</a></li>
+								<li><a href="/educationBoard?departmentId=40" class="link-dark rounded">영업팀 교육 일정 </a></li>
+							</ul>
+						</div>
 					</li>
 
 					<li class="mb-1">
@@ -392,7 +388,7 @@ footer {
 
 	<script src="/static/bootstrap/sidebars/sidebars.js"></script>
 
-	<section></section>
+
 
 
 
@@ -400,6 +396,8 @@ footer {
 </body>
 <!-- 스크립트 -->
 <script>
+$(function(){
+	
 	var i = true;
 
 	function side_slide() {
@@ -407,23 +405,17 @@ footer {
 			$("section").animate({
 				width : '80%'
 			}, 500)
-			$("footer").animate({
-				width : '80%'
-			}, 500)
 			$("nav").animate({
 				left : '0%'
 			}, 500);
 			i = false;
 		} else {
-			$("nav").animate({
-				left : '-20%'
-			}, 500);
 			$("section").animate({
 				width : '100%'
 			}, 500)
-			$("footer").animate({
-				width : '100%'
-			}, 500)
+			$("nav").animate({
+				left : '-20%'
+			}, 500);
 			i = true;
 		}
 	}
@@ -431,6 +423,7 @@ footer {
 	function search() {
 		document.querySelector(".search_form").submit();
 	}
+})
 </script>
 
 </html>

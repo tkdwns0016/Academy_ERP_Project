@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import anonymousBoard.AnonymousBoard;
 import anonymousBoard.AnonymousBoardService;
@@ -31,12 +32,13 @@ public class ERPController {
 	NoticeService ns;
 	@Autowired
 	SuggestionBoardService ss;
-	
+	@Autowired
+	ImageService is;
 	
 	
 	@GetMapping("/myInfo")
-	public String myInfo(Model model) {
-		
+	public String myInfo(Model model, HttpSession session) {
+		model.addAttribute("empl", session.getAttribute("empl")); 
 		return "myInfo";
 	}
 	@GetMapping("/logout")
@@ -69,8 +71,8 @@ public class ERPController {
 		return "joinForm";
 	}
 	@PostMapping("/join")
-	public String postJoin(Employee employee,String birthDate1,String birthDate2) {
-		String userId3 = "";
+	public String postJoin(Employee employee,String birthDate1,String birthDate2,MultipartFile imgName) {
+		String userId = "";
 		LocalDate now = LocalDate.now();
 		String str=now.getYear()+"";
 		String classId=str.substring(2,4)+employee.getDepartmentId();
@@ -78,20 +80,33 @@ public class ERPController {
 //		System.out.println("유저아이디:"+userId);
 		
 		/* 유저 아이디 */
-		userId3=classId+"0000";
+		userId=classId+"0000";
+		int IdCount=es.userIdCount(employee.getDepartmentId());
+		IdCount+=1;
+		int userId2= Integer.parseInt(userId)+IdCount;
+		employee.setUserId(userId2);
 		
-		employee.setUserId(Integer.parseInt(userId3));
-		
-		System.out.println(employee.getUserId());
 		employee.setBirthDate(birthDate1+birthDate2);
 		
-		
-		employee.setPassword(userId3+"");
+		employee.setPassword(userId2+"");
 		employee.setHireDate(now);
 		
-		employee.setManager("권한");
-		employee.setStatus("1");
-		
+		employee.setManager("비권한");
+		employee.setStatus("근무");
+		System.out.println("민현씨 상준씨 주원씨 진출씨 정길씨 민현인 바보 동의!대단하시다.");
+		if(imgName.getOriginalFilename().equals("")) {
+			employee.setImgName("normalImg.jpg");
+		}else {
+			
+			boolean result=is.saveUploadedFile(imgName, userId2);
+			if(result) {
+				String extension = imgName.getOriginalFilename().substring(imgName.getOriginalFilename().lastIndexOf("."));
+				employee.setImgName(userId2+extension);
+			}else {
+				employee.setImgName("normalImg.jpg");
+			}
+		}
+	
 		es.insertEmployee(employee);
 		return "list";
 	}

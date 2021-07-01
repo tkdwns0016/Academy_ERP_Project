@@ -30,6 +30,11 @@
 			<param-value>/WEB-INF/context/appServlet/servlet_context.xml</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
+		<multipart-config>
+			<location>D:\java\project\Project_ERP\ERP_project\src\main\webapp</location>
+			<max-file-size>10000000</max-file-size>
+			<max-request-size>4000000</max-request-size>
+		</multipart-config>
 	</servlet>
 
 	<!-- Map all requests to the DispatcherServlet for handling -->

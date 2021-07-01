@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+ <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
@@ -184,7 +184,7 @@
         <tr style="background: #f6f6f6; border-bottom: 1px solid black;">
           <th></th>
           <th style="text-align: center; font-size: 24px;">공지사항</th>
-          <th style="text-align: right;"><a href="">+더보기</a>&nbsp;&nbsp;</th>
+          <th style="text-align: right;"><a href="#">+더보기</a>&nbsp;&nbsp;</th>
         </tr>
       </table>
       <table class="">
@@ -226,7 +226,7 @@
         <tr style="background: #f6f6f6; border-bottom: 1px solid black;">
           <th></th>
           <th style="text-align: center; font-size: 24px;">건의 게시판</th>
-          <th style="text-align: right;"><a href="">+더보기</a>&nbsp;&nbsp;</th>
+          <th style="text-align: right;"><a href="#">+더보기</a>&nbsp;&nbsp;</th>
         </tr>
       </table>
       <table class="">

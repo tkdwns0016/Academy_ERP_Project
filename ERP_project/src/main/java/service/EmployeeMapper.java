@@ -43,7 +43,7 @@ public interface EmployeeMapper {
 	public int update(Employee employee);
 	
 	@Select("select count(user_id) from employee where department_id=#{departmentId}")
-	public int idCount(int departmentId);
+	public int userIdCount(int departmentId);
 	
 }
 

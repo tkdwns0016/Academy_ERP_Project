@@ -36,5 +36,9 @@ public class EmployeeService {
 	public int insertEmployee(Employee employee) {
 		return em.insert(employee);
 	}
+	
+	public int userIdCount(int departmentId) {
+		return em.userIdCount(departmentId);
+	}
 }
 

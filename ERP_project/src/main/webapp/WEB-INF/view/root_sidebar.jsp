@@ -16,7 +16,8 @@
 <link href="/static/bootstrap/sidebars/sidebars.css" rel="stylesheet">
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<style>
+<style type="text/css">
+
 * {
 	margin: 0;
 }
@@ -203,7 +204,7 @@ nav::after {
 			<div class="container">
 				<div
 					class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-					<svg class="three_line" onclick="side_slide()"
+					<svg class="three_line" onclick="side_slide"
 						xmlns="http://www.w3.org/2000/svg" fill="currentColor"
 						viewBox="0 0 16 16">
               <path fill-rule="evenodd"
@@ -303,15 +304,13 @@ nav::after {
 					<a href="#"
 						class="d-flex align-items-center text-black text-decoration-none dropdown-toggle"
 						id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-						<img src="/image/${empl.imgName }.jpg" alt="" width="70px"
+						<img src="/image/${empl.imgName }" alt="" width="70px"
 						height="100px" class="me-2"> <strong>${empl.name }
 							님</strong>
 					</a>
 					<ul class="dropdown-menu dropdown-menu-dark text-small shadow"
 						aria-labelledby="dropdownUser1">
-						<li><a class="dropdown-item" href="#">New project...</a></li>
-						<li><a class="dropdown-item" href="#">Settings</a></li>
-						<li><a class="dropdown-item" href="#">Profile</a></li>
+						<li><a class="dropdown-item" href="/myInfo">Profile</a></li>
 						<li>
 							<hr class="dropdown-divider">
 						</li>
@@ -409,32 +408,6 @@ nav::after {
 
 </body>
 <!-- 스크립트 -->
-<script>
-	var i = true;
 
-	function side_slide() {
-		if (i) {
-			$("section").animate({
-				width : '80%'
-			}, 500)
-			$("nav").animate({
-				left : '0%'
-			}, 500);
-			i = false;
-		} else {
-			$("section").animate({
-				width : '100%'
-			}, 500)
-			$("nav").animate({
-				left : '-20%'
-			}, 500);
-			i = true;
-		}
-	}
-
-	function search() {
-		document.querySelector(".search_form").submit();
-	}
-</script>
 
 </html>
