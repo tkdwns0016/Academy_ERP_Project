@@ -147,8 +147,75 @@
       width: 100%;
       height: 100%;
     }
+    .no-line{
+    	text-decoration: none;
+    	color: black;
+    }
 @media screen (min-width:1500px);
   </style>
+  <link href='/static/main.css' rel='stylesheet' />
+<script src='/static/main.js'></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+ <script>
+
+  document.addEventListener('DOMContentLoaded', function() {
+    var calendarEl = document.getElementById('calendar');
+    var today=new Date();
+    var modal = document.getElementById('myModal');
+    var arr;
+    var events;
+    function list(){
+    	$.ajax({
+    		url:"/list",
+    		async:false,
+    		type:"get",
+    		dataType:"json",
+    		success:function(result){
+    			arr=result;	
+    			events = arr.map(function(item){
+    				return{
+    					title: item.title+' <'+item.departmentId+'>',
+    					start: item.startDate,
+    					end: item.endDate
+    				}
+    			});
+    		}
+    	});
+    };
+    list()
+    
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+     
+      headerToolbar: {
+        left: 'prev,next today',
+        center: 'title',
+        right: 'dayGridMonth,timeGridWeek,timeGridDay'
+      },
+      initialDate: today,
+      navLinks: true, // can click day/week names to navigate views
+      selectable: true,
+      selectMirror: true,
+      
+      select: function(arg) {
+        $(".modal")[0].classList.remove('hidden');  
+      },
+      eventClick: function(arg) {
+        if (confirm('Are you sure you want to delete this event?')) {
+          arg.event.remove()
+        }
+      },
+      editable: true,
+      dayMaxEvents: true, // allow "more" link when too many events
+      events: events });
+
+    calendar.render();
+	for(let i=0;i<arr.length;i++){
+		calendar.addEvent(arr[i]);
+	}
+	
+  });
+
+</script>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -178,88 +245,60 @@
           <th></th>
         </tr>
       </table>
+    	<div id='calendar'></div>
+   
     </div>
+    
+    
     <div class="main_box mb2">
       <table style=" margin-bottom: 5%;">
         <tr style="background: #f6f6f6; border-bottom: 1px solid black;">
           <th></th>
           <th style="text-align: center; font-size: 24px;">공지사항</th>
-          <th style="text-align: right;"><a href="#">+더보기</a>&nbsp;&nbsp;</th>
+          <th style="text-align: right;"><a class="no-line" href="/notice">+더보기</a>&nbsp;&nbsp;</th>
         </tr>
       </table>
+
       <table class="">
-        <tr>
-          <th>글번호</th>
-          <th>제목</th>
-          <th>작성자</th>
+        <tr class="noticeList">
+          <th style="width:15%;">No.</th>
+          <th style="width: 75%;">제목</th>
+          <th style="width:10%;">작성자</th>
         </tr>
+        <tr style="height:20px"><td></td><td></td><td></td></tr>
+        <c:forEach var="i" begin="0" end="5">
         <tr>
-          <td>${list.id}</td>
-          <td>${list.title}</td>
-          <td>${list.writer}</td>
+        <td><a class="no-line" href="/noticeContext?id=${notice[i].id }">${notice[i].id }</a></td>
+        <td><a class="no-line" href="/noticeContext?id=${notice[i].id }">${notice[i].title }</a></td>
+        <td><a class="no-line" href="/noticeContext?id=${notice[i].id }">${notice[i].writer }</a></td>
         </tr>
-        <tr></tr>
-        <tr>
-          <td>${list.id}</td>
-          <td>${list.title}</td>
-          <td>${list.writer}</td>
-        </tr>
-        <tr>
-          <td>${list.id}</td>
-          <td>${list.title}</td>
-          <td>${list.writer}</td>
-        </tr>
-        <tr>
-          <td>${list.id}</td>
-          <td>${list.title}</td>
-          <td>${list.writer}</td>
-        </tr>
-        <tr>
-          <td>${list.id}</td>
-          <td>${list.title}</td>
-          <td>${list.writer}</td>
-        </tr>
-      </table>
+        </c:forEach>
+    </table>
     </div>
+    
+    
     <div class="main_box mb3">
       <table style=" margin-bottom: 5%;">
         <tr style="background: #f6f6f6; border-bottom: 1px solid black;">
           <th></th>
           <th style="text-align: center; font-size: 24px;">건의 게시판</th>
-          <th style="text-align: right;"><a href="#">+더보기</a>&nbsp;&nbsp;</th>
+          <th style="text-align: right;"><a class="no-line" href="/suggestion">+더보기</a>&nbsp;&nbsp;</th>
         </tr>
       </table>
       <table class="">
         <tr>
-          <th>글번호</th>
-          <th>제목</th>
-          <th>작성자</th>
+          <th style="width:15%;">No.</th>
+          <th style="width: 75%;">제목</th>
+          <th style="width:10%;">작성자</th>
         </tr>
-        <tr>
-          <td>${list.id}</td>
-          <td>${list.title}</td>
-          <td>${list.writer}</td>
+		<tr style="height:20px"><td></td><td></td><td></td></tr>
+        <c:forEach var="i" begin="0" end="5">
+       <tr>
+        <td style="width:20px;"><a class="no-line" href="/suggestionContent?id=${suggestion[i].id }">${suggestion[i].id }</a></td>
+        <td style="width:auto;"><a class="no-line" href="/suggestionContent?id=${suggestion[i].id }">${suggestion[i].title }</a></td>
+        <td style="width:20px;"><a class="no-line" href="/suggestionContent?id=${suggestion[i].id }">${suggestion[i].writer }</a></td>
         </tr>
-        <tr>
-          <td>${list.id}</td>
-          <td>${list.title}</td>
-          <td>${list.writer}</td>
-        </tr>
-        <tr>
-          <td>${list.id}</td>
-          <td>${list.title}</td>
-          <td>${list.writer}</td>
-        </tr>
-        <tr>
-          <td>${list.id}</td>
-          <td>${list.title}</td>
-          <td>${list.writer}</td>
-        </tr>
-        <tr>
-          <td>${list.id}</td>
-          <td>${list.title}</td>
-          <td>${list.writer}</td>
-        </tr>
+        </c:forEach>
       </table>
     </div>
   </div>

@@ -2,21 +2,25 @@ package noticeBoard;
 
 import java.time.LocalDate;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+
 public class NoticeBoard {
 	private int id;
 	private int writer;
 	private String title;
 	private String content;
-	private LocalDate date;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private LocalDate writeDate;
 	private int count;
 	
-	public NoticeBoard(int id, int writer, String title, String content, LocalDate date,int count) {
+	public NoticeBoard(int id, int writer, String title, String content, LocalDate writeDate,int count) {
 		super();
 		this.id = id;
 		this.writer = writer;
 		this.title = title;
 		this.content = content;
-		this.date = date;
+		this.writeDate = writeDate;
 		this.count = count;
 	}
 
@@ -57,12 +61,12 @@ public class NoticeBoard {
 		this.content = content;
 	}
 
-	public LocalDate getDate() {
-		return date;
+	public LocalDate getWriteDate() {
+		return writeDate;
 	}
 
-	public void setDate(LocalDate date) {
-		this.date = date;
+	public void setWriteDate(LocalDate writeDate) {
+		this.writeDate = writeDate;
 	}
 
 	public int getCount() {
@@ -76,8 +80,8 @@ public class NoticeBoard {
 	
 	@Override
 	public String toString() {
-		return "NoticeBoard [id=" + id + ", writer=" + writer + ", title=" + title + ", content=" + content + ", date="
-				+ date + ", count=" + count + "]";
+		return "NoticeBoard [id=" + id + ", writer=" + writer + ", title=" + title + ", content=" + content + ", writeDate="
+				+ writeDate + ", count=" + count + "]";
 	}
 
 	

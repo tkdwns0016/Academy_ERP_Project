@@ -123,16 +123,26 @@ nav::after {
 	left: 3%;
 	margin-top: -15px;
 }
-
+.font1{
+	font-size: 15px;
+	text-align: center;	
+	border: 1px solid white;
+}
+.font2{
+border:1px solid white;
+font-size: 15px;
+	text-align: center;
+	width: 40px;
+}
 
     @media screen and (max-width:1470px){
     	
-    .mb-1{width: 20px; height: 20px;
+    .top-bar{width: 20px; height: 20px;
     	} 
     }
       @media screen and (max-width:860px){
     	
-    .mb-1{width: 0px; height: 0px;
+    .top-bar{width: 0px; height: 0px;
 
     	} 
   	 #font{
@@ -152,7 +162,7 @@ nav::after {
    		 }
     }
        @media screen and (max-height:400px){
-    	.mb-1{width: 0; height: 0;
+    	.top-bar{width: 0; height: 0;
     	}
     	.nav-link{
     		font-size: 0px;
@@ -204,7 +214,7 @@ nav::after {
 			<div class="container">
 				<div
 					class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-					<svg class="three_line" onclick="side_slide"
+					<svg class="three_line slide" 
 						xmlns="http://www.w3.org/2000/svg" fill="currentColor"
 						viewBox="0 0 16 16">
               <path fill-rule="evenodd"
@@ -215,23 +225,23 @@ nav::after {
 						class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small set">
 						<li><a id="font" href="/main"
 							class="nav-link text-white bi-house-door hover"> <svg
-									class="bi d-block mx-auto mb-1" width="24" height="24">
+									class="bi d-block mx-auto mb-1 top-bar" width="24" height="24">
                     <use xlink:href="#home" /></svg> Home
 						</a></li>
 						<li><a id="font" href="/main" class="nav-link text-white hover"> <svg
-									class="bi d-block mx-auto mb-1" width="24" height="24">
+									class="bi d-block mx-auto mb-1 top-bar" width="24" height="24">
                     <use xlink:href="#speedometer2" /></svg> Dashboard
 						</a></li>
 						<li><a id="font" href="/main" class="nav-link text-white hover"> <svg
-									class="bi d-block mx-auto mb-1" width="24" height="24">
+									class="bi d-block mx-auto mb-1 top-bar" width="24" height="24">
                     <use xlink:href="#table" /></svg> Orders
 						</a></li>
 						<li><a id="font" href="/main" class="nav-link text-white hover"> <svg
-									class="bi d-block mx-auto mb-1" width="24" height="24">
+									class="bi d-block mx-auto mb-1 top-bar" width="24" height="24">
                     <use xlink:href="#grid" /></svg> Products
 						</a></li>
 						<li><a id="font" href="/main" class="nav-link text-white hover"> <svg
-									class="bi d-block mx-auto mb-1" width="24" height="24">
+									class="bi d-block mx-auto mb-1 top-bar" width="24" height="24">
                     <use xlink:href="#people-circle" /></svg> Customers
 						</a></li>
 					</ul>
@@ -301,12 +311,17 @@ nav::after {
 			<div class="d-flex flex-column flex-shrink-0 p-3 bg-light"
 				style="position: absolute; width: 100%; height: 100%;">
 				<div class="dropdown" style="top:;">
+					<img src="/image/${empl.imgName }" alt="" width="100px"
+						height="120px" class="me-2">
 					<a href="#"
 						class="d-flex align-items-center text-black text-decoration-none dropdown-toggle"
 						id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-						<img src="/image/${empl.imgName }" alt="" width="70px"
-						height="100px" class="me-2"> <strong>${empl.name }
-							님</strong>
+						 <table style="border-collapse: collapse;">
+						 	<tr><td class="font1">&nbsp;직급</td><td class="font2">&nbsp; ${department }</td></tr>
+						 	<tr><td class="font1">&nbsp;부서</td><td class="font2">${position }</td></tr>
+						 	<tr><td class="font1" colspan="2">${empl.name }님</td></tr>
+						 </table>
+						  
 					</a>
 					<ul class="dropdown-menu dropdown-menu-dark text-small shadow"
 						aria-labelledby="dropdownUser1">
@@ -322,7 +337,7 @@ nav::after {
 					class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
 					<svg class="bi me-2" width="30" height="24">
             <use xlink:href="#bootstrap" /></svg> 
-            <span class="fs-5 fw-semibold">인사관리프로젝트</span>
+            <span class="fs-7 fw-semibold">인사관리프로젝트</span>
 				</a>
 				<ul class="list-unstyled ps-0">
 					<li class="mb-1">
@@ -399,8 +414,7 @@ nav::after {
 	<!-- 사람클릭 시 나오는 것 -->
 	<script src="/static/bootstrap/assets/dist/js/bootstrap.bundle.min.js"></script>
 
-	<script src="/static/bootstrap/sidebars/sidebars.js"></script>
-
+	<script src="/static/bootstrap/sidebars/sidebars.js?var=3"></script> 
 
 
 

@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Select;
 
 @Mapper
 public interface PositionMapper {
-	@Select("select position_name from position where id=#{id}")
-	public Position selectName(int id);
+ 
+	@Select("select position from position where position_id=#{positionId}")
+	public String getName(int positionId);
 }

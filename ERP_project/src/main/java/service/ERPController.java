@@ -15,9 +15,12 @@ import org.springframework.web.multipart.MultipartFile;
 
 import anonymousBoard.AnonymousBoard;
 import anonymousBoard.AnonymousBoardService;
+import department.DepartmentService;
 import educationBoard.EducationBoard;
 import educationBoard.EducationBoardService;
+import noticeBoard.NoticeBoard;
 import noticeBoard.NoticeService;
+import position.PositionService;
 import suggestionBoard.SuggestionBoard;
 import suggestionBoard.SuggestionBoardService;
 
@@ -34,7 +37,10 @@ public class ERPController {
 	SuggestionBoardService ss;
 	@Autowired
 	ImageService is;
-	
+	@Autowired
+	DepartmentService ds;
+	@Autowired
+	PositionService ps;
 	
 	@GetMapping("/myInfo")
 	public String myInfo(Model model, HttpSession session) {
@@ -53,18 +59,29 @@ public class ERPController {
 	@PostMapping("/login")
 	public String login(Model model ,HttpSession session, int userId, String password) {
 		if(es.login(userId, password)!=null) {
-			session.setAttribute("empl",es.login(userId, password));
-			Employee em=es.login(userId, password);
+			Employee emp=es.login(userId, password);
+			session.setAttribute("empl",emp);
+			session.setAttribute("department", ds.getDepart(emp.getDepartmentId()));
+			session.setAttribute("position", ps.getPosiont(emp.getPositionId()));
+			session.setAttribute("suggestion",ss.mainList());
+			session.setAttribute("notice", ns.mainList());
 			return "main";
-				
-			
 		}else {
 			model.addAttribute("result", true);
 			return "login";
 		}
-		
-	
 	}
+	@GetMapping("/noticeList")
+	@ResponseBody
+	public List<NoticeBoard> mainList(){
+		return ns.mainList();
+	}
+	@GetMapping("/suggestionList")
+	@ResponseBody
+	public List<SuggestionBoard> mainList2(){
+		return ss.mainList();
+	}
+	
 
 	@GetMapping("/join")
 	public String join(Model model) {
@@ -93,7 +110,6 @@ public class ERPController {
 		
 		employee.setManager("비권한");
 		employee.setStatus("근무");
-		System.out.println("민현씨 상준씨 주원씨 진출씨 정길씨 민현인 바보 동의!대단하시다.");
 		if(imgName.getOriginalFilename().equals("")) {
 			employee.setImgName("normalImg.jpg");
 		}else {
@@ -116,8 +132,6 @@ public class ERPController {
 	}
 	@GetMapping("/main")
 	public String main(Model model) {
-		model.addAttribute("suggestion",ss.mainList());
-		model.addAttribute("notice", ns.mainList());
 		return "main";
 	}
 	

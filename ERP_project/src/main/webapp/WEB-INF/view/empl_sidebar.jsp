@@ -305,7 +305,7 @@ nav::after {
 						class="d-flex align-items-center text-black text-decoration-none dropdown-toggle"
 						id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
 						<img src="/image/${empl.imgName }" alt="" width="70px"
-						height="100px" class="me-2"> <strong>${empl.name }
+						height="100px" class="me-2"><br> <strong>직급 : ${department } 부서:${position }<br> ${empl.name }
 							님</strong>
 					</a>
 					<ul class="dropdown-menu dropdown-menu-dark text-small shadow"

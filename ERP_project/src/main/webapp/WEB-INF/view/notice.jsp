@@ -60,7 +60,7 @@
     	<tr onclick="window.open('/noticeContent?id=${l.id }')">
        	 	<td>${l.id }</td>
       		<td>${l.title }</td>
-        	<td>${l.nickName }</td>
+        	<td>${l.writer }</td>
         	<td>${l.writeDate }</td>
         	<td>${l.count }</td>
    		</tr>

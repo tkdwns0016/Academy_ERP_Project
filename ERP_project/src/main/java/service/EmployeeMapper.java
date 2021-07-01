@@ -44,6 +44,7 @@ public interface EmployeeMapper {
 	
 	@Select("select count(user_id) from employee where department_id=#{departmentId}")
 	public int userIdCount(int departmentId);
+
 	
 }
 

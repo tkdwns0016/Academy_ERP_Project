@@ -25,6 +25,7 @@ public class EmployeeService {
 	public Employee login(int userId, String password) {
 		return em.select(userId, password);
 	}
+
 	public List<Employee> selectList(){
 		return em.selectList();
 	}

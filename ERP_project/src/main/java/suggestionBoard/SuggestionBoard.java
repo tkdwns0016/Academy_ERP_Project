@@ -2,11 +2,14 @@ package suggestionBoard;
 
 import java.time.LocalDate;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class SuggestionBoard {
 	private int id;
 	private String title;
 	private int writer;
 	private String content;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate writeDate;
 	private int count;
 	
