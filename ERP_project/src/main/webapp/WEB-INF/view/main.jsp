@@ -151,6 +151,11 @@
     	text-decoration: none;
     	color: black;
     }
+    #calendar{
+    	height: 300px;
+    	
+    }
+    
 @media screen (min-width:1500px);
   </style>
   <link href='/static/main.css' rel='stylesheet' />
@@ -159,7 +164,9 @@
  <script>
 
   document.addEventListener('DOMContentLoaded', function() {
-    var calendarEl = document.getElementById('calendar');
+   
+	  
+	 var calendarEl = document.getElementById('calendar');
     var today=new Date();
     var modal = document.getElementById('myModal');
     var arr;
@@ -212,6 +219,11 @@
 	for(let i=0;i<arr.length;i++){
 		calendar.addEvent(arr[i]);
 	}
+	$("a").css("text-decoration","none");
+	$("a").css("color","black");
+	$(".fc-scroller-liquid-absolute").removeAttr("style");
+
+	
 	
   });
 
@@ -245,7 +257,7 @@
           <th></th>
         </tr>
       </table>
-    	<div id='calendar'></div>
+    	<div id='calendar' style="overflow: hidden"></div>
    
     </div>
     

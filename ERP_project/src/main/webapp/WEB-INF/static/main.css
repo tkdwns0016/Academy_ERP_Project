@@ -5,7 +5,9 @@
   border-width: 0.5px 0.5px 0.5px 1px;
   padding:50px;
   margin : auto;
+  top:100px;
   width : 800px;
+  height :80%;
   box-shadow: 14px 15px 13px -3px gainsboro;
   border-radius: 7px;
  }

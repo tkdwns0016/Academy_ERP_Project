@@ -67,9 +67,10 @@
 	for(let i=0;i<arr.length;i++){
 		calendar.addEvent(arr[i]);
 	}
-	
-  });
+	$("a").css('text-decoration','none')
+	$("a").css('color','black')
 
+  });
 </script>
 
 
@@ -154,7 +155,7 @@ tr td{
    
   </div>
 
-  <div class="modal hidden">
+  <div class="modal">
     <div class="modal-content">
         <div style="text-align: center; font-size: 20px; font-weight: bold;"> 교육 일정</div>
         <br>
@@ -171,7 +172,7 @@ tr td{
         </div>
 
   </div>
-  <button value="체크"></button>
+
 <script>
   $(".cancle")[0].onclick=function(){
     $(".modal")[0].classList.add('hidden');
