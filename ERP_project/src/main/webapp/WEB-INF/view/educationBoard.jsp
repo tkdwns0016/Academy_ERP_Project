@@ -29,7 +29,7 @@
     			arr=result;	
     			events = arr.map(function(item){
     				return{
-    					title: item.title+' <'+item.departmentId+'>',
+    					title: '['+item.id+']'+" "+ item.title+" "+' <'+item.departmentId+'>',
     					start: item.startDate,
     					end: item.endDate
     				}
@@ -49,8 +49,21 @@
       select: function(arg) {
         $(".mo")[0].classList.remove('hidden');  
       },
-      eventClick: function(arg) {
+      eventClick: function(event) {
+    	  
     	  $(".mo")[0].classList.remove('hidden');  
+    	  var id=event.event.title.substring(1,2)-1;
+    	  
+    	  $(".title").val(arr[id].title);
+    	  $(".st-date").val(arr[id].startDate);
+    	  
+    	 
+    	  
+    	  $(".content").val(arr[id].memo);
+    	  
+    	  
+    	
+    	  
       },
       editable: true,
       dayMaxEvents: true, // allow "more" link when too many events
@@ -162,13 +175,13 @@ tr td{
         <br>
        <form action="/educationBoard" method="POST"> 
          <table>
-           <tr><td class="edu_name">타이틀</td>      <td class="edu_sml"> <input class="bar-1" type="text" name="title" placeholder="제목 입력"><br></td></tr>
-           <tr><td class="edu_name">교육 시작일</td> <td class="edu_sml">  <input class="bar-1" type="date" name="startDate"><br></td></tr>
-           <tr><td class="edu_name">교육 종료일</td> <td class="edu_sml"> <input class="bar-1" type="date" name="endDate"> <br></td></tr>
+           <tr><td class="edu_name">타이틀</td>      <td class="edu_sml"> <input class="bar-1 title" type="text" name="title" placeholder="제목 입력"><br></td></tr>
+           <tr><td class="edu_name">교육 시작일</td> <td class="edu_sml">  <input class="bar-1 st-date" type="datetime-local" name="startDate"><br></td></tr>
+           <tr><td class="edu_name">교육 종료일</td> <td class="edu_sml"> <input class="bar-1 ed-date" type="datetime-local" name="endDate"> <br></td></tr>
            <tr><td class="edu_name_lrg">교육 내용</td>   <td> <textarea class="content" name="memo" placeholder="교육 내용 입력"></textarea> <br></td></tr><br>
           </table>
           <br>
-          <input class="cancle" style="margin-left: 45%;" type="submit" value="저장">&nbsp; <input class="cancle" type="reset" value="취소">  
+          <input class="cancle" style="margin-left: 45%;" type="submit" value="수정">&nbsp; <input class="cancle" type="reset" value="삭제">  
         </form> 
         </div>
 

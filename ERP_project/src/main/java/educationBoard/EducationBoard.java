@@ -10,10 +10,10 @@ public class EducationBoard {
 	private int id;
 	private String title;
 	@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm")
+	@JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm")
 	private LocalDateTime startDate;
 	@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm")
+	@JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm")
 	private LocalDateTime endDate;
 	private String memo;
 	private int departmentId;

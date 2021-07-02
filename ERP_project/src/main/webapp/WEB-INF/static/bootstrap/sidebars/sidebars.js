@@ -1,7 +1,7 @@
 /* global bootstrap: false */
 window.addEventListener("DOMContentLoaded",function(){
 var i = true;
-console.log("test1");
+
 	$(".slide")[0].onclick=function() {
 	console.log("test2");
 		if (i) {

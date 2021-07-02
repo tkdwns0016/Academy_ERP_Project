@@ -311,7 +311,7 @@ font-size: 15px;
 			<div class="d-flex flex-column flex-shrink-0 p-3 bg-light"
 				style="position: absolute; width: 100%; height: 100%;">
 				<div class="dropdown" style="top:;">
-					<img src="/image/${empl.imgName }" alt="" width="100px"
+					<img src="/image/21101001.png" alt="" width="100px"
 						height="120px" class="me-2">
 					<a href="#"
 						class="d-flex align-items-center text-black text-decoration-none dropdown-toggle"
@@ -414,7 +414,7 @@ font-size: 15px;
 	<!-- 사람클릭 시 나오는 것 -->
 	<script src="/static/bootstrap/assets/dist/js/bootstrap.bundle.min.js"></script>
 
-	<script src="/static/bootstrap/sidebars/sidebars.js?var=3"></script> 
+	<script src="/static/bootstrap/sidebars/sidebars.js"></script> 
 
 
 

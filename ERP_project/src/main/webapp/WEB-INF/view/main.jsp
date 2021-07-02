@@ -132,6 +132,9 @@
         <tr style="height:20px"><td></td><td></td><td></td></tr>
         <c:forEach var="i" begin="0" end="5">
         <tr>
+         <td style="width:20px; height: 50px;" onclick="location.href='/noticeContent?id=${notice[i].id }';">${notice[i].id }</td>
+        <td style="width:auto; height: 50px;" onclick="location.href='/noticeContent?id=${notice[i].id }';">${notice[i].title }</td>
+        <td style="width:20px; height: 50px;" onclick="location.href='/noticeContent?id=${notice[i].id }';">${notice[i].writer }</td>
        </tr>
         </c:forEach>
     </table>
@@ -155,9 +158,9 @@
 		<tr style="height:20px"><td></td><td></td><td></td></tr>
         <c:forEach var="i" begin="0" end="5">
        <tr>
-        <td style="width:20px; onclick="location.href='/suggestionContent?id=${suggestion[i].id }';">${suggestion[i].id }</td>
-        <td style="width:auto; onclick="location.href='/suggestionContent?id=${suggestion[i].id }';">${suggestion[i].title }</td>
-        <td style="width:20px; onclick="location.href='/suggestionContent?id=${suggestion[i].id }';">${suggestion[i].writer }</td>
+        <td style="width:20px; height: 50px;" onclick="location.href='/suggestionContent?id=${suggestion[i].id }';">${suggestion[i].id }</td>
+        <td style="width:auto; height: 50px;" onclick="location.href='/suggestionContent?id=${suggestion[i].id }';">${suggestion[i].title }</td>
+        <td style="width:20px; height: 50px;" onclick="location.href='/suggestionContent?id=${suggestion[i].id }';">${suggestion[i].writer }</td>
         </tr>
         </c:forEach>
       </table>
@@ -270,20 +273,7 @@
     }, 2000)
   })
 
-  function side_slide() {
-    if (i) {
-      $("nav").animate({
-        left: '0%'
-      }, 0);
-      i = false;
-    } else {
-      $("nav").animate({
-        left: '-20%'
-      }, 0);
-      i = true;
-    }
-  }
-
+ 
   function search() {
     document.querySelector(".search_form").submit();
   }

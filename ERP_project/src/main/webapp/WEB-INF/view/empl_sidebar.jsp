@@ -394,36 +394,6 @@ nav::after {
 
 
 </body>
-<!-- 스크립트 -->
-<script>
-$(function(){
-	
-	var i = true;
 
-	function side_slide() {
-		if (i) {
-			$("section").animate({
-				width : '80%'
-			}, 500)
-			$("nav").animate({
-				left : '0%'
-			}, 500);
-			i = false;
-		} else {
-			$("section").animate({
-				width : '100%'
-			}, 500)
-			$("nav").animate({
-				left : '-20%'
-			}, 500);
-			i = true;
-		}
-	}
-
-	function search() {
-		document.querySelector(".search_form").submit();
-	}
-})
-</script>
 
 </html>
