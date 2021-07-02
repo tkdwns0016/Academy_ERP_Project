@@ -11,6 +11,7 @@
   box-shadow: 14px 15px 13px -3px gainsboro;
   border-radius: 7px;
  }
+ 
 .fc-not-allowed,
 .fc-not-allowed .fc-event { /* override events' custom cursors */
   cursor: not-allowed;
@@ -54,7 +55,7 @@
     cursor: pointer;
   }
 .fc a[data-navlink]:hover {
-    text-decoration: underline;
+    text-decoration: none;
   }
 .fc-direction-ltr {
   direction: ltr;
@@ -1444,7 +1445,7 @@ A VERTICAL event
 
 }
 .fc .fc-list-event.fc-event-forced-url:hover a {
-    text-decoration: underline;
+    text-decoration: none;
   }
 
 

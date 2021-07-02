@@ -4,49 +4,19 @@
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 <!DOCTYPE html>
 <html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
 
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-    }
 
-    a {
-      text-decoration: none;
-      color: black;
-    }
-
-    html,
-    body {
-      height: 100%;
-    }
-
-    header {
-      width: 100%;
-      height: 10%;
-      position: relative;
-      float: right;
-      background-color: white;
-      z-index: 3;
-    }
-
-    .headerdiv {
-      height: 100%;
-    }
     section {
       width: 100%;
       height: 100%;
       max-width: 100%
     }
 
-    .slide_div {
-      position: relative;
-      overflow: hidden;
-      width: 1300px;
-      top: 20px;
-      height: 30%;
-      margin: 0 auto;
-    }
+
 
     .img {
       width: 100%;
@@ -97,141 +67,23 @@
       width: 1%;
     }
 
-    .search {
-      position: relative;
-      margin-top: -15px;
-      height: 32px;
-      width: 32px;
-      color: black;
-      top: -25px;
-      left: 85%;
-      cursor: pointer;
-    }
-
-    .search_form {
-      position: absolute;
-      width: 250px;
-      top: 50%;
-      left: 80%;
-      clear: both;
-      height: 38px;
-    }
-
-    .login {
-      position: absolute;
-      top: 50%;
-      margin-top: -19px;
-      height: 38px;
-      left: 90%;
-    }
-
-    .three_line:hover {
-      cursor: pointer;
-    }
-
-    .three_line {
-      width: 30px;
-      height: 30px;
-      position: absolute;
-      top: 50%;
-      left: 3%;
-      margin-top: -15px;
-    }
-
-    .svg {
-      display: none;
-    }
-
-    .menu_bar {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-    }
-    .no-line{
-    	text-decoration: none;
-    	color: black;
-    }
+   
     #calendar{
     	height: 300px;
     	
     }
-    
-@media screen (min-width:1500px);
+  .fc-daygrid-day-number{
+  	text-decoration:none;
+  	color:black;
+  }
+  .fc-daygrid-day-number:hover {
+	color:black;
+}
   </style>
+  </head>
   <link href='/static/main.css' rel='stylesheet' />
 <script src='/static/main.js'></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
- <script>
 
-  document.addEventListener('DOMContentLoaded', function() {
-   
-	  
-	 var calendarEl = document.getElementById('calendar');
-    var today=new Date();
-    var modal = document.getElementById('myModal');
-    var arr;
-    var events;
-    function list(){
-    	$.ajax({
-    		url:"/list",
-    		async:false,
-    		type:"get",
-    		dataType:"json",
-    		success:function(result){
-    			arr=result;	
-    			events = arr.map(function(item){
-    				return{
-    					title: item.title+' <'+item.departmentId+'>',
-    					start: item.startDate,
-    					end: item.endDate
-    				}
-    			});
-    		}
-    	});
-    };
-    list()
-    
-    var calendar = new FullCalendar.Calendar(calendarEl, {
-     
-      headerToolbar: {
-        left: 'prev,next today',
-        center: 'title',
-        right: 'dayGridMonth,timeGridWeek,timeGridDay'
-      },
-      initialDate: today,
-      navLinks: true, // can click day/week names to navigate views
-      selectable: true,
-      selectMirror: true,
-      
-      select: function(arg) {
-        $(".modal")[0].classList.remove('hidden');  
-      },
-      eventClick: function(arg) {
-        if (confirm('Are you sure you want to delete this event?')) {
-          arg.event.remove()
-        }
-      },
-      editable: true,
-      dayMaxEvents: true, // allow "more" link when too many events
-      events: events });
-
-    calendar.render();
-	for(let i=0;i<arr.length;i++){
-		calendar.addEvent(arr[i]);
-	}
-	$("a").css("text-decoration","none");
-	$("a").css("color","black");
-	$(".fc-scroller-liquid-absolute").removeAttr("style");
-
-	
-	
-  });
-
-</script>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
 
 <body class="body" onload="showImage()">
 	<c:if test="${empl.manager=='권한' }">
@@ -257,7 +109,7 @@
           <th></th>
         </tr>
       </table>
-    	<div id='calendar' style="overflow: hidden"></div>
+    	<div id='calendar' ></div>
    
     </div>
     
@@ -267,7 +119,7 @@
         <tr style="background: #f6f6f6; border-bottom: 1px solid black;">
           <th></th>
           <th style="text-align: center; font-size: 24px;">공지사항</th>
-          <th style="text-align: right;"><a class="no-line" href="/notice">+더보기</a>&nbsp;&nbsp;</th>
+          <th style="text-align: right;"> <a class="no-line" href="/notice">+더보기</a>&nbsp;&nbsp;</th>
         </tr>
       </table>
 
@@ -280,10 +132,7 @@
         <tr style="height:20px"><td></td><td></td><td></td></tr>
         <c:forEach var="i" begin="0" end="5">
         <tr>
-        <td><a class="no-line" href="/noticeContext?id=${notice[i].id }">${notice[i].id }</a></td>
-        <td><a class="no-line" href="/noticeContext?id=${notice[i].id }">${notice[i].title }</a></td>
-        <td><a class="no-line" href="/noticeContext?id=${notice[i].id }">${notice[i].writer }</a></td>
-        </tr>
+       </tr>
         </c:forEach>
     </table>
     </div>
@@ -306,9 +155,9 @@
 		<tr style="height:20px"><td></td><td></td><td></td></tr>
         <c:forEach var="i" begin="0" end="5">
        <tr>
-        <td style="width:20px;"><a class="no-line" href="/suggestionContent?id=${suggestion[i].id }">${suggestion[i].id }</a></td>
-        <td style="width:auto;"><a class="no-line" href="/suggestionContent?id=${suggestion[i].id }">${suggestion[i].title }</a></td>
-        <td style="width:20px;"><a class="no-line" href="/suggestionContent?id=${suggestion[i].id }">${suggestion[i].writer }</a></td>
+        <td style="width:20px; onclick="location.href='/suggestionContent?id=${suggestion[i].id }';">${suggestion[i].id }</td>
+        <td style="width:auto; onclick="location.href='/suggestionContent?id=${suggestion[i].id }';">${suggestion[i].title }</td>
+        <td style="width:20px; onclick="location.href='/suggestionContent?id=${suggestion[i].id }';">${suggestion[i].writer }</td>
         </tr>
         </c:forEach>
       </table>
@@ -321,8 +170,66 @@
 
 </body>
 <!-- 스크립트 -->
-<script>
 
+ <script>
+/* $(function(){
+	document.querySelectorAll(".fc-prev-button")[0].onclick=function(){
+	  $(".fc-daygrid-day-number").css("text-decoration","none");
+	  $(".fc-daygrid-day-number").css("color","black");
+	}
+}); */
+  document.addEventListener('DOMContentLoaded', function() {
+	  
+	  
+	 var calendarEl = document.getElementById('calendar');
+    var today=new Date();
+    var events;
+    function list(){
+    	$.ajax({
+    		url:"/list",
+    		async:false,
+    		type:"get",
+    		dataType:"json",
+    		success:function(result){
+    			arr=result;	
+    			events = arr.map(function(item){
+    				return{
+    					title: item.title+' <'+item.departmentId+'>',
+    					start: item.startDate,
+    					end: item.endDate
+    				}
+    			});
+    		}
+    	});
+    };
+    list()
+    
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+     
+   
+      initialDate: today,
+      navLinks: false, // can click day/week names to navigate views
+      selectable: false,
+      selectMirror: true,
+      
+      select: function(arg) {
+        
+      },
+      editable: true,
+      dayMaxEvents: true, // allow "more" link when too many events
+      events: events });
+
+    calendar.render();
+	for(let i=0;i<arr.length;i++){
+		calendar.addEvent(arr[i]);
+	}
+
+	$(".fc-scroller-liquid-absolute").removeAttr("style");
+	$("a").css("text-decoration","none");
+	$("a").css("color","black");
+	
+	
+  });
 
 	
   var img = new Array();
@@ -381,5 +288,9 @@
     document.querySelector(".search_form").submit();
   }
 
+  window.onload =function(){
+	
+  }
+  
 </script>
 </html>

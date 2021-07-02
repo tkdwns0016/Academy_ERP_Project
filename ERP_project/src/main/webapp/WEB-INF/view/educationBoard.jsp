@@ -41,23 +41,16 @@
     
     var calendar = new FullCalendar.Calendar(calendarEl, {
      
-      headerToolbar: {
-        left: 'prev,next today',
-        center: 'title',
-        right: 'dayGridMonth,timeGridWeek,timeGridDay'
-      },
       initialDate: today,
       navLinks: true, // can click day/week names to navigate views
       selectable: true,
       selectMirror: true,
       
       select: function(arg) {
-        $(".modal")[0].classList.remove('hidden');  
+        $(".mo")[0].classList.remove('hidden');  
       },
       eventClick: function(arg) {
-        if (confirm('Are you sure you want to delete this event?')) {
-          arg.event.remove()
-        }
+    	  $(".mo")[0].classList.remove('hidden');  
       },
       editable: true,
       dayMaxEvents: true, // allow "more" link when too many events
@@ -73,7 +66,6 @@
   });
 </script>
 
-
 <style>
 .hidden{
 
@@ -82,9 +74,9 @@ display: none;
 a{
 	text-decoration: none;
 }
-.modal{
-            position: fixed; /* Stay in place */
-            z-index: 1; /* Sit on top */
+.mo{
+            position: absolute; /* Stay in place */
+            z-index: 10; /* Sit on top */
             left: 0;
             top: 0;
             width: 100%; /* Full width */
@@ -94,7 +86,7 @@ a{
             background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
           
  }
-.modal-content {
+.mo-content {
             background-color: #fefefe;
             margin: 15% auto; 
             padding: 20px;
@@ -138,7 +130,16 @@ tr td{
 .bar-1{
   width: 98%;
 }
+  .fc-daygrid-day-number{
+  	text-decoration:none;
+  	color:black;
+  }
+  .fc-daygrid-day-number:hover {
+	color:black;
+}
 </style>
+
+
 </head>
 <body>
 	<c:if test="${empl.manager=='권한' }">
@@ -155,8 +156,8 @@ tr td{
    
   </div>
 
-  <div class="modal">
-    <div class="modal-content">
+  <div class="mo hidden">
+    <div class="mo-content">
         <div style="text-align: center; font-size: 20px; font-weight: bold;"> 교육 일정</div>
         <br>
        <form action="/educationBoard" method="POST"> 
@@ -174,11 +175,11 @@ tr td{
   </div>
 
 <script>
-  $(".cancle")[0].onclick=function(){
-    $(".modal")[0].classList.add('hidden');
+  $(".cancle")[0].onclick=function(){  
+    $(".mo")[0].classList.add("hidden");
   }
   $(".cancle")[1].onclick=function(){
-    $(".modal")[0].classList.add('hidden');
+	  $(".mo")[0].classList.add("hidden");
   }
 </script>
 </body>
