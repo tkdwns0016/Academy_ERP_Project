@@ -50,11 +50,11 @@ public class ERPController {
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
 		session.invalidate();
-		return "login";
+		return "login/login";
 	}
 	@GetMapping("/login")
 	public String loginCheck() {
-		return "login"; 
+		return "login/login"; 
 	}
 	@PostMapping("/login")
 	public String login(Model model ,HttpSession session, int userId, String password) {
@@ -65,10 +65,10 @@ public class ERPController {
 			session.setAttribute("position", ps.getPosiont(emp.getPositionId()));
 			session.setAttribute("suggestion",ss.mainList());
 			session.setAttribute("notice", ns.mainList());
-			return "main";
+			return "main/main";
 		}else {
 			model.addAttribute("result", true);
-			return "login";
+			return "login/login";
 		}
 	}
 	@GetMapping("/noticeList")
@@ -85,7 +85,7 @@ public class ERPController {
 
 	@GetMapping("/join")
 	public String join(Model model) {
-		return "joinForm";
+		return "joinForm/joinForm";
 	}
 	@PostMapping("/join")
 	public String postJoin(Employee employee,String birthDate1,String birthDate2,MultipartFile imgName) {
@@ -128,11 +128,11 @@ public class ERPController {
 	}
 	@GetMapping("/popup")
 	public String popup() {
-		return "popup";
+		return "login/popup";
 	}
 	@GetMapping("/main")
 	public String main(Model model) {
-		return "main";
+		return "main/main";
 	}
 	
 	

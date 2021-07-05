@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -13,24 +15,26 @@ public class EducationBoardController {
 	EducationBoardService eds;
 	
 	@GetMapping("/educationBoard")
-	public String test(int departmentId) {
-		if(departmentId==10) {
-			
-		}else if(departmentId==20) {
-			
-		}else if(departmentId==30) {
-			
-		}else if(departmentId==40){
-			
-		}else {
-			return "main";
-		}
+	public String educationBoard(Model model, int departmentId) {
+		model.addAttribute("departmentId",departmentId);
 		
-		return "educationBoard";
+		return "education/educationBoard";
 	}
-	@GetMapping("/list")
-	public @ResponseBody List<EducationBoard> getList() {
+	@GetMapping("/mainlist")
+	public @ResponseBody List<EducationBoard> getMainList() {
 		
 		return eds.getList();
+	}
+	@GetMapping("/list")
+	public @ResponseBody List<EducationBoard> getList(int departmentId) {
+		
+		return eds.getBoardWithDepatmentId(departmentId);
+	}
+	@PostMapping("/educationBoard")
+	public String CRUD(Model model, EducationBoard educationBoard,String button) {
+		System.out.println(button);
+		System.out.println(educationBoard);
+		model.addAttribute("departmentId",educationBoard.getDepartmentId());
+		return "education/educationBoard";
 	}
 }

@@ -17,9 +17,17 @@ public class EducationBoard {
 	private LocalDateTime endDate;
 	private String memo;
 	private int departmentId;
+	private int writer;
 	
+
+	public int getWriter() {
+		return writer;
+	}
+	public void setWriter(int writer) {
+		this.writer = writer;
+	}
 	public EducationBoard(int id, String title, LocalDateTime startDate, LocalDateTime endDate, String memo,
-			int departmentId) {
+			int departmentId, int writer) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -27,6 +35,7 @@ public class EducationBoard {
 		this.endDate = endDate;
 		this.memo = memo;
 		this.departmentId = departmentId;
+		this.writer = writer;
 	}
 	public EducationBoard() {
 		super();
@@ -71,8 +80,9 @@ public class EducationBoard {
 	@Override
 	public String toString() {
 		return "EducationBoard [id=" + id + ", title=" + title + ", startDate=" + startDate + ", endDate=" + endDate
-				+ ", memo=" + memo + ", departmentId=" + departmentId + "]";
+				+ ", memo=" + memo + ", departmentId=" + departmentId + ", writer=" + writer + "]";
 	}
+	
 	
 	
 }

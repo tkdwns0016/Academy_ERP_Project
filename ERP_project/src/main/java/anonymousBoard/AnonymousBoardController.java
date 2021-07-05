@@ -18,11 +18,11 @@ public class AnonymousBoardController {
 		 }else {
 			 model.addAttribute("list", as.getService("1"));
 		 }
-		 return "anonymous";
+		 return "anonymous/anonymous";
 	 }
 	 @GetMapping("/anonymousContent")
 		public String anonymousContent(Model model,int id) {
 		 model.addAttribute("an", as.showContent(id));
-			return "anonymousContent";
+			return "anonymous/anonymousContent";
 		}
 }

@@ -17,12 +17,12 @@ public class NoticeBoardController {
 			 }else {
 				 model.addAttribute("list", ns.getService("1"));
 			 }
-		return "notice";
+		return "notice/notice";
 	}
 	
 	@GetMapping("/noticeContent")
 	public String noticeContent(Model model,int id) {
 		 model.addAttribute("notice", ns.showContent(id));
-			return "noticeContent";
+			return "notice/noticeContent";
 	}
 }

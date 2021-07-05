@@ -13,5 +13,8 @@ EducationBoardMepper em;
 	public List<EducationBoard> getList(){
 		return em.selectList();
 	}
+	public List<EducationBoard> getBoardWithDepatmentId(int departmentId) {
+		return em.selectEducation(departmentId);
+	}
 
 }

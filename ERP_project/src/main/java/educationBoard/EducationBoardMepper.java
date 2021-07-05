@@ -19,6 +19,8 @@ public interface EducationBoardMepper {
 	
 	@Select("select * from education_board where id=#{id}")
 	public EducationBoard select(int id);
+	@Select("select * from education_board where department_id=#{departmentId}")
+	public List<EducationBoard> selectEducation(int departmentId);
 	
 	@Insert("insert into education_board(title,start_date,end_date,memo,department_id) "
 			+ "values(#{title},#{startDate},#{endDate},#{memo},#{departmentId})")

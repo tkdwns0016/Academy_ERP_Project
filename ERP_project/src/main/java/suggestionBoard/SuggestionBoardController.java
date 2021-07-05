@@ -18,12 +18,12 @@ public class SuggestionBoardController {
 		}else {
 			model.addAttribute("list", ss.getService("1"));
 		}
-		return "suggestion";
+		return "suggestion/suggestion";
 	}
 	@GetMapping("/suggestionContent")
 	public String suggestionContent(Model model,int id) {
 		model.addAttribute("suggestionBoard", ss.showContent(id));
 		
-		return "suggestionContent";
+		return "suggestion/suggestionContent";
 	}
 }
