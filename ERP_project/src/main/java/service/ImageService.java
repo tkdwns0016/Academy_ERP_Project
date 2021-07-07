@@ -9,27 +9,30 @@ import org.springframework.web.multipart.MultipartFile;
 @Service
 public class ImageService {
 
-	public Boolean saveUploadedFile(MultipartFile imgName, int userId) {
-		String uploadFolder = "/WEB-INF/image";
-		
+	public Employee saveUploadedFile(MultipartFile imgName, Employee employee) {
+		String uploadFolder = "/";
+		if(imgName.getOriginalFilename().equals("")) {
+			employee.setImgName("normalImg.jpg");
+			return employee;
+		}
 		
 		File dir = new File(uploadFolder);
 		if (!dir.exists()) {
 			dir.mkdirs();
 		}
-		
 		String extension = imgName.getOriginalFilename().substring(imgName.getOriginalFilename().lastIndexOf("."));
-		File file = new File(uploadFolder, userId + extension);
+		File file = new File(uploadFolder, employee.getUserId() + extension);
 		// 실제로 파일을 저장
 		try {
 			imgName.transferTo(file);
-			return true;
+			employee.setImgName(employee.getUserId() + extension);
+			return employee;
 		} catch (IllegalStateException e) {
 			e.printStackTrace();
-			return false;
+			return null;
 		} catch (IOException e) {
 			e.printStackTrace();
-			return false;
+			return null;
 		}
 	}
 

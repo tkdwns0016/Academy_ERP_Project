@@ -22,13 +22,13 @@ public interface EducationBoardMepper {
 	@Select("select * from education_board where department_id=#{departmentId}")
 	public List<EducationBoard> selectEducation(int departmentId);
 	
-	@Insert("insert into education_board(title,start_date,end_date,memo,department_id) "
-			+ "values(#{title},#{startDate},#{endDate},#{memo},#{departmentId})")
-	public EducationBoard insert(EducationBoard educationBoard);
+	@Insert("insert into education_board(title,start_date,end_date,memo,department_id,writer) "
+			+ "values(#{title},#{startDate},#{endDate},#{memo},#{departmentId},#{writer})")
+	public int insert(EducationBoard educationBoard);
 	
 	@Update("update education_board set title=#{title},"
-			+ "startDate=#{startDate},endDate=#{endDate},memo=#{memo},"
-			+ "departmentId=#{departmentId} where id=#{id}")
+			+ "start_date=#{startDate},end_date=#{endDate},memo=#{memo},"
+			+ "department_id=#{departmentId} where id=#{id}")
 	public int update(EducationBoard educationBoard);
 	
 	@Delete("delete from education_board where id=#{id}")

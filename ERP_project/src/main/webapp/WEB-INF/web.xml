@@ -31,7 +31,7 @@
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 		<multipart-config>
-			<location>C:/Users/TJOEUN/git/Project_ERP/ERP_project/src/main/webapp/WEB-INF/</location>
+			<location>C:/Users/JungGil/git/Project_ERP/ERP_project/src/main/webapp/WEB-INF/image</location>
 			<max-file-size>10000000</max-file-size>
 			<max-request-size>4000000</max-request-size>
 		</multipart-config>

@@ -50,7 +50,7 @@ button:hover {
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"
 	type="text/javascript"></script>
 
-<script src="js/bootstrap.js"></script>
+<script src="/static/bootstrap/assets/dist/js/bootstrap.js"></script>
 </head>
 <body>
 	<c:if test="${empl.manager=='권한' }">
@@ -64,33 +64,43 @@ button:hover {
 	<section style="float: right; width: 100%; height: 100%; top: 100px">
 		<div style="width: 80%; margin: 40px auto;">
 			<div style="text-align: center;">
-				<H2>공지사항</H2>
+				<H2>인사 정보 리스트</H2>
 			</div>
+			<div style="width: 100%;bottom: 10px">
+			<form action="/emplList" method="post">
+			<table>
+			<tr>
+			<th>성명</th><th><input type="text" name="name" ></th><th>사번</th><th><input type="text" name="userId" ></th>				 
+					<th colspan="3"></th><th><input type="submit" value="검색"></th>
+			</tr>
+			</table>
+			</form>
+			</div>   
 			<table class="table table-sm table-hover">
 		
 				<thead class="table-light">
-						<tr>
-				<th colspan="5" style="background: white; border: none">
-						<button style="float: right; border-radius: 7px;" onclick="location.href=('/noticeWriter')">작성</button>
-				</th>
-				</tr>
+			
 					<tr>
-						<th scope="col">번호</th>
-						<th scope="col">제목</th>
-						<th scope="col">작성자</th>
-						<th scope="col">날짜</th>
-						<th scope="col">조회수</th>
+						<th scope="col">사번</th>
+						<th scope="col">이름</th>
+						<th scope="col">주소</th>
+						<th scope="col">주민등록번호</th>
+						<th scope="col">부서</th>
+						<th scope="col">직급</th>
+						<th scope="col">상태</th>
 					</tr>
 				</thead>
 				<tbody>
-
-					<c:forEach var="l" items="${list.tablelist }">
-						<tr onclick="location.href=('/noticeSearch?id=${l.id }')">
-							<td>${l.id }</td>
-							<td>${l.title }</td>
-							<td>${l.writer }</td>
-							<td>${l.writeDate }</td>
-							<td>${l.count }</td>
+				
+					<c:forEach var="l" items="${emplList }">
+						<tr onclick="location.href=('/emplInfo?id=${l.id }')">
+							<td>${l.userId }</td>
+							<td>${l.name }</td>
+							<td>${l.address1 } ${l.address2 }</td>
+							<td>${l.birthDate.substring(0,6) }-${l.birthDate.substring(7,8)}******</td>
+							<td>${l.department.departmentName }</td>
+							<td>${l.position.position }</td>
+							<td>${l.status }</td>
 						</tr>
 
 					</c:forEach>

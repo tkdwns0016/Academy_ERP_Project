@@ -1,5 +1,6 @@
 package service;
 
+import java.io.File;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+
 
 import anonymousBoard.AnonymousBoard;
 import anonymousBoard.AnonymousBoardService;
@@ -81,50 +83,34 @@ public class ERPController {
 	public List<SuggestionBoard> mainList2(){
 		return ss.mainList();
 	}
-	
-
+	@GetMapping("/emplList")
+	public String emplList(Model model,String page){
+		
+		if (page != null) {
+			model.addAttribute("list", es.employeeService(page));
+		} else {
+			model.addAttribute("list", es.employeeService("1"));
+		}
+		model.addAttribute("emplList",es.getEmplList());
+		return "emplList";
+	}
+	@PostMapping("/emplList")
+	public String emplSearch(Model model,String name,String userId) {
+		es.searchInfo(name,userId);
+		//model.addAttribute("searchList", ) ;
+		
+		return "emplList";
+	}
 	@GetMapping("/join")
 	public String join(Model model) {
 		return "joinForm/joinForm";
 	}
 	@PostMapping("/join")
-	public String postJoin(Employee employee,String birthDate1,String birthDate2,MultipartFile imgName) {
-		String userId = "";
-		LocalDate now = LocalDate.now();
-		String str=now.getYear()+"";
-		String classId=str.substring(2,4)+employee.getDepartmentId();
-//		int userId=es.selectUserId(employee.getDepartmentId());
-//		System.out.println("유저아이디:"+userId);
-		
-		/* 유저 아이디 */
-		userId=classId+"0000";
-		int IdCount=es.userIdCount(employee.getDepartmentId());
-		IdCount+=1;
-		int userId2= Integer.parseInt(userId)+IdCount;
-		employee.setUserId(userId2);
-		
-		employee.setBirthDate(birthDate1+birthDate2);
-		
-		employee.setPassword(userId2+"");
-		employee.setHireDate(now);
-		
-		employee.setManager("비권한");
-		employee.setStatus("근무");
-		if(imgName.getOriginalFilename().equals("")) {
-			employee.setImgName("normalImg.jpg");
-		}else {
-			
-			boolean result=is.saveUploadedFile(imgName, userId2);
-			if(result) {
-				String extension = imgName.getOriginalFilename().substring(imgName.getOriginalFilename().lastIndexOf("."));
-				employee.setImgName(userId2+extension);
-			}else {
-				employee.setImgName("normalImg.jpg");
-			}
-		}
+	public String postJoin(Model model, Employee employee,String birthDate1,String birthDate2,MultipartFile imgName) {
 	
-		es.insertEmployee(employee);
-		return "list";
+		boolean result= es.insertEmployee(employee,birthDate1,birthDate2,imgName);
+		model.addAttribute("result", result);
+		return "joinForm/joinForm";
 	}
 	@GetMapping("/popup")
 	public String popup() {
@@ -134,6 +120,19 @@ public class ERPController {
 	public String main(Model model) {
 		return "main/main";
 	}
-	
+	@PostMapping("/myInfo")
+	public String updateEmpl(Model model, Employee employee,MultipartFile uploadFile,String birthDate1,String birthDate2,HttpSession session) {
+		if(uploadFile.getOriginalFilename().equals("")) {
+			Employee empl=(Employee)session.getAttribute("empl");
+			employee.setImgName(empl.getImgName());
+			boolean result=es.noImgUpdateEmpl(employee, birthDate1, birthDate2);
+			model.addAttribute("result", result);
+		}else {
+			
+			boolean result=es.updateEmpl(employee,birthDate1,birthDate2,uploadFile);
+			model.addAttribute("result", result);
+		}
+		return "myInfo";
+	}     
 	
 }

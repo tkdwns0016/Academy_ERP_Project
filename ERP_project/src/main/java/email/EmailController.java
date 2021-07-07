@@ -29,21 +29,15 @@ public class EmailController {
 	 @GetMapping("/password")
 	 public String password(Model model) {
 		 
-		 return "popup";
+		 return "login/popup";
 	 }
 	 
 	 @PostMapping("/password")
 	    public String sendMail(Model model,int userId,String name,String birthDate) {
-		 System.out.println(userId);
-		 System.out.println(name);
-		 System.out.println(birthDate);
-		 System.out.println(es.select(userId,name,birthDate));
 		 if(es.select(userId,name,birthDate)!=null) {
 			 Employee emp=es.select(userId,name,birthDate); 
 			 emp.setPassword(emp.getUserId()+"");
 			 es.update(emp);
-			 JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
-			 System.out.println("emp");
 			 try {
 				 email.setContent("비밀번호는 사원번호로 초기화되었습니다.");
 				 email.setReceiver(emp.getEmail());
@@ -54,10 +48,10 @@ public class EmailController {
 				 e.printStackTrace();
 			 }
 			 model.addAttribute("result", true);
-			 return "popup";
+			 return "login/popup";
 		 }else {
 			model.addAttribute("result", false);
-			return "popup";
+			return "login/popup";
 		 }
 		 
 	     }

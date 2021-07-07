@@ -311,7 +311,7 @@ font-size: 15px;
 			<div class="d-flex flex-column flex-shrink-0 p-3 bg-light"
 				style="position: absolute; width: 100%; height: 100%;">
 				<div class="dropdown" style="top:;">
-					<img src="/image/21101001.png" alt="" width="100px"
+					<img src="/image/${empl.imgName }" alt="" width="100px"
 						height="120px" class="me-2">
 					<a href="#"
 						class="d-flex align-items-center text-black text-decoration-none dropdown-toggle"
@@ -333,7 +333,7 @@ font-size: 15px;
 					</ul>
 				</div>
 				<hr>
-				<a href="/"
+				<a href="/main"
 					class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
 					<svg class="bi me-2" width="30" height="24">
             <use xlink:href="#bootstrap" /></svg> 
@@ -348,6 +348,7 @@ font-size: 15px;
 						<div class="collapse" id="home-collapse">
 							<ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
 								<li><a href="/join" class="link-dark rounded">신규 등록</a></li>
+								<li><a href="/emplList" class="link-dark rounded">인사 정보 리스트</a></li>
 							</ul>
 						</div>
 					</li>

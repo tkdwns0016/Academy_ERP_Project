@@ -4,30 +4,16 @@ import java.time.LocalDate;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-
 public class NoticeBoard {
 	private int id;
-	private int writer;
+	private String writer;
 	private String title;
 	private String content;
+	private String password;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate writeDate;
 	private int count;
-	
-	public NoticeBoard(int id, int writer, String title, String content, LocalDate writeDate,int count) {
-		super();
-		this.id = id;
-		this.writer = writer;
-		this.title = title;
-		this.content = content;
-		this.writeDate = writeDate;
-		this.count = count;
-	}
-
-	public NoticeBoard() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+	private String filename;
 
 	public int getId() {
 		return id;
@@ -37,11 +23,11 @@ public class NoticeBoard {
 		this.id = id;
 	}
 
-	public int getWriter() {
+	public String getWriter() {
 		return writer;
 	}
 
-	public void setWriter(int writer) {
+	public void setWriter(String writer) {
 		this.writer = writer;
 	}
 
@@ -61,6 +47,14 @@ public class NoticeBoard {
 		this.content = content;
 	}
 
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 	public LocalDate getWriteDate() {
 		return writeDate;
 	}
@@ -72,18 +66,41 @@ public class NoticeBoard {
 	public int getCount() {
 		return count;
 	}
-	
+
 	public void setCount(int count) {
 		this.count = count;
 	}
-	
-	
-	@Override
-	public String toString() {
-		return "NoticeBoard [id=" + id + ", writer=" + writer + ", title=" + title + ", content=" + content + ", writeDate="
-				+ writeDate + ", count=" + count + "]";
+
+	public String getFilename() {
+		return filename;
 	}
 
-	
-	
+	public void setFilename(String filename) {
+		this.filename = filename;
+	}
+
+	@Override
+	public String toString() {
+		return "NoticeBoard [id=" + id + ", writer=" + writer + ", title=" + title + ", content=" + content
+				+ ", password=" + password + ", writeDate=" + writeDate + ", count=" + count + ", filename=" + filename
+				+ "]";
+	}
+
+	public NoticeBoard(int id, String writer, String title, String content, String password, LocalDate writeDate,
+			int count, String filename) {
+		super();
+		this.id = id;
+		this.writer = writer;
+		this.title = title;
+		this.content = content;
+		this.password = password;
+		this.writeDate = writeDate;
+		this.count = count;
+		this.filename = filename;
+	}
+
+	public NoticeBoard() {
+		super();
+	}
+
 }

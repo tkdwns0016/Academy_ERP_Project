@@ -4120,7 +4120,7 @@ var FullCalendar = (function (exports) {
         },
         weekText: 'W',
         allDayText: 'all-day',
-        moreLinkText: 'more',
+        moreLinkText: '',
         noEventsText: 'No events to display',
     };
     function organizeRawLocales(explicitRawLocales) {

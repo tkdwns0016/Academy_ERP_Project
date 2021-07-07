@@ -38,6 +38,7 @@
 	<c:if test="${empl.manager=='비권한' }">
 		<tiles:insertAttribute name="empl_side" />
 	</c:if>
+	
 	<section style="float: right; width: 100%; height: 100%; top:100px">
 	<div style="width: 80%; margin:40px auto;">
 	<div style="text-align: center;">

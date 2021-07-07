@@ -2,9 +2,13 @@ package service;
 
 import java.time.LocalDate;
 
+
 import org.springframework.format.annotation.DateTimeFormat;
 
-public class Employee {
+import department.Department;
+import position.Position;
+
+public class EmplClass {
 	private int id;
 	private String name;
 	private int userId;
@@ -18,13 +22,40 @@ public class Employee {
 	private LocalDate hireDate;
 	private String birthDate;
 	private String sex;
-	private int departmentId;
+	private Department department;
 	private String imgName;
-	private int positionId;
+	private Position position;
 	private long salary;
 	private String manager; 
 	private String status;
-	
+
+	public EmplClass(int id, String name, int userId, String password, String addressId, String address1,
+			String address2, String phone, String email, LocalDate hireDate, String birthDate, String sex,
+			Department department, String imgName, Position position, long salary, String manager, String status) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.userId = userId;
+		this.password = password;
+		this.addressId = addressId;
+		this.address1 = address1;
+		this.address2 = address2;
+		this.phone = phone;
+		this.email = email;
+		this.hireDate = hireDate;
+		this.birthDate = birthDate;
+		this.sex = sex;
+		this.department = department;
+		this.imgName = imgName;
+		this.position = position;
+		this.salary = salary;
+		this.manager = manager;
+		this.status = status;
+	}
+	public EmplClass() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	public int getId() {
 		return id;
 	}
@@ -43,7 +74,6 @@ public class Employee {
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
-	
 	public String getPassword() {
 		return password;
 	}
@@ -98,11 +128,11 @@ public class Employee {
 	public void setSex(String sex) {
 		this.sex = sex;
 	}
-	public int getDepartmentId() {
-		return departmentId;
+	public Department getDepartment() {
+		return department;
 	}
-	public void setDepartmentId(int departmentId) {
-		this.departmentId = departmentId;
+	public void setDepartment(Department department) {
+		this.department = department;
 	}
 	public String getImgName() {
 		return imgName;
@@ -110,11 +140,11 @@ public class Employee {
 	public void setImgName(String imgName) {
 		this.imgName = imgName;
 	}
-	public int getPositionId() {
-		return positionId;
+	public Position getPosition() {
+		return position;
 	}
-	public void setPositionId(int positionId) {
-		this.positionId = positionId;
+	public void setPosition(Position position) {
+		this.position = position;
 	}
 	public long getSalary() {
 		return salary;
@@ -134,48 +164,14 @@ public class Employee {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	
-	
-	
-	public Employee() {
-		super();
-	}
-	
-	public Employee(int id, String name, int userId, String password, String addressId, String address1,
-			String address2, String phone, String email, LocalDate hireDate, String birthDate, String sex,
-			int departmentId, String imgName, int positionId, long salary, String manager, String status) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.userId = userId;
-		this.password = password;
-		this.addressId = addressId;
-		this.address1 = address1;
-		this.address2 = address2;
-		this.phone = phone;
-		this.email = email;
-		this.hireDate = hireDate;
-		this.birthDate = birthDate;
-		this.sex = sex;
-		this.departmentId = departmentId;
-		this.imgName = imgName;
-		this.positionId = positionId;
-		this.salary = salary;
-		this.manager = manager;
-		this.status = status;
-	}
-	
 	@Override
 	public String toString() {
-		return "Employee [id=" + id + ", name=" + name + ", userId=" + userId + ", password="
-				+ password + ", addressId=" + addressId + ", address1=" + address1 + ", address2=" + address2
-				+ ", phone=" + phone + ", email=" + email + ", hireDate=" + hireDate + ", birthDate=" + birthDate
-				+ ", sex=" + sex + ", departmentId=" + departmentId + ", imgName=" + imgName + ", positionId="
-				+ positionId + ", salary=" + salary + ", manager=" + manager + ", status=" + status + "]";
+		return "EmplClass [id=" + id + ", name=" + name + ", userId=" + userId + ", password=" + password
+				+ ", addressId=" + addressId + ", address1=" + address1 + ", address2=" + address2 + ", phone=" + phone
+				+ ", email=" + email + ", hireDate=" + hireDate + ", birthDate=" + birthDate + ", sex=" + sex
+				+ ", department=" + department + ", imgName=" + imgName + ", position=" + position + ", salary="
+				+ salary + ", manager=" + manager + ", status=" + status + "]";
 	}
 	
-	
-	
-
 	
 }

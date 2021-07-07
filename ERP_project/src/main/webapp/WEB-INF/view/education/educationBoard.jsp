@@ -14,26 +14,38 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 	document.addEventListener('DOMContentLoaded', function() {
-		var today = new Date();
-		var dd = today.getDate();
-		var mm = today.getMonth()+1; //January is 0 so need to add 1 to make it 1!
-		var yyyy = today.getFullYear();
-		var hh =today.getHours();
-		var MM = today.getMinutes();
-		if(dd<10){
-		  dd='0'+dd
-		} 
-		if(mm<10){
-		  mm='0'+mm
-		} 
-		if(hh<10){
-			hh='0'+hh
+		
+		 function today(time){
+			var dd = time.getDate();
+			var mm = time.getMonth()+1; 
+			var yyyy = time.getFullYear();
+			var hh =time.getHours();
+			var MM = time.getMinutes();
+			if(dd<10){
+			  dd='0'+dd
+			}else{
+				dd=dd;
+			} 
+			if(mm<10){
+			  mm='0'+mm
+			}else{
+				mm=mm;
+			} 
+			if(hh<10){
+				hh='0'+hh
+			}else{
+				hh=hh;
+			}
+			
+			if(MM<10){
+				MM='0'+MM;
+			}else{
+				MM=MM;
+			}
+			time = yyyy+'-'+mm+'-'+dd+"T"+hh+":"+MM+":00";
+			return time;
 		}
-		if(MM<10){
-			MM='0'+MM;
-		}
-		today = yyyy+'-'+mm+'-'+dd+"T"+hh+":"+MM;
-		$(".st-date")[0].setAttribute("min", today);
+		$(".st-date")[0].setAttribute("min", today(new Date));
 		$(".cancle")[0].onclick = function() {
 			$(".mo")[0].classList.add("hidden");
 			$(".title").val("");
@@ -67,15 +79,26 @@
 				type : "get",
 				dataType : "json",
 				success : function(result) {
+					for(let i=0;i<result.length;i++){
+	    				if(result[i].departmentId==10){
+	    					result[i].departmentId="경영팀 10"
+	    				}else if(result[i].departmentId==20){
+	    					result[i].departmentId="개발팀 20"
+	    				}else if(result[i].departmentId==30){
+	    					result[i].departmentId="인사팀 30"
+	    				}else{
+	    					result[i].departmentId="영업팀 40"
+	    				}
+	    			}
 					arr = result;
 					events = arr.map(function(item) {
 						return {
 							publicId : item.id,
-							title : item.title,
+							title : item.title+" ["+item.departmentId.substring(0,3)+"]",
 							start : item.startDate,
 							end : item.endDate,
 							STATUS : item.memo,
-							groupId : ${departmentId},
+							groupId : item.departmentId.substring(4,6),
 							id : item.writer
 						}
 					});
@@ -93,30 +116,45 @@
 			selectMirror : true,
 			selectHelper: false,
 			select : function(start) {
-				var start=start.start;
-				var startYY=start.getFullYear();
-				var startMM=start.getMonth()+1;
-				if(startMM<10){
-					startMM='0'+startMM;
-				}
-				var startDD=start.getDate();
-				if(startDD<10){
-					startDD='0'+startDD;
-				}
-				var startHH=start.getHours();
-				if(startHH<10){
-					startHH='0'+startHH;
+				function today(time){
+					var dd = time.getDate();
+					var mm = time.getMonth()+1; 
+					var yyyy = time.getFullYear();
+					var hh =time.getHours();
+					var MM = time.getMinutes();
+					if(dd<10){
+					  dd='0'+dd
+					}else{
+						dd=dd;
+					} 
+					if(mm<10){
+					  mm='0'+mm
+					}else{
+						mm=mm;
+					} 
+					if(hh<10){
+						hh='0'+hh
+					}else{
+						hh=hh;
+					}
+					
+					if(MM<10){
+						MM='0'+MM;
+					}else{
+						MM=MM;
+					}
+					time = yyyy+'-'+mm+'-'+dd+"T"+hh+":"+MM+":00";
+					return time;
 				}
 				
-				var startmm=start.getMinutes();
-				if(startmm<10){
-					startmm='0'+startmm;
+				var start=today(start.start);
+				if(start<today(new Date)){
+					start=today(new Date)		
 				}
-				var startVal=startYY+"-"+startMM+"-"+startDD+"T"+startHH+":"+startmm;
-				var startMax=startYY+"-"+startMM+"-"+startDD+"T"+"24:00";
-				$(".st-date")[0].setAttribute("min", startVal);
+				var startMax=start.getFullYear+"-"+start.getMonth+"-"+start.getDate+"T"+"24:00";
+				$(".st-date")[0].setAttribute("min", start);
 				$(".st-date")[0].setAttribute("max", startMax);
-				$(".ed-date")[0].setAttribute("min", startVal);
+				$(".ed-date")[0].setAttribute("min", start);
 				$(".title")[0].removeAttribute("readonly");
 				$(".st-date")[0].removeAttribute("readonly");
 				$(".ed-date")[0].removeAttribute("readonly");
@@ -236,6 +274,14 @@
 	background: #eeeeeee;
 }
 
+.cancle {
+	position: relative;
+	top: -10%;
+	left: 95%;
+	border: none;
+	background: #c9dff8;
+}
+
 .hidden {
 	display: none;
 }
@@ -250,15 +296,52 @@ a {
 	left: 0;
 	top: 0;
 	width: 100%; /* Full width */
+	height: 140%; /* Full height */
+	overflow: auto; /* Enable scroll if needed */
+	background-color: rgb(0, 0, 0); /* Fallback color */
+	background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+
+
+@media screen and (max-width:1500px) {
+	.mo-content {
+		overflow: unset;
+	}
+}
+@media screen and (max-width:1300px) {
+	.mo-content {
+		overflow: scroll;
+	}
+}
+.mo-content {
+	background-color: #fefefe;
+	position: absolute;
+	margin: 15% 40%;
+	border: 1px solid #888;
+	width: 40%;
+	left:-130px;
+	
+	padding: 10px;
+	font-size: 90%
+}
+
+.mo1 {
+	position: absolute; /* Stay in place */
+	z-index: 10; /* Sit on top */
+	left: 0;
+	top: 0;
+	width: 100%; /* Full width */
 	height: 100%; /* Full height */
 	overflow: auto; /* Enable scroll if needed */
 	background-color: rgb(0, 0, 0); /* Fallback color */
 	background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
 }
 
-.mo-content {
+.mo1-content {
 	background-color: #fefefe;
-	margin: 15% auto;
+	position: absolute;
+	margin: 15% 30%;
 	padding: 20px;
 	border: 1px solid #888;
 	width: 40%;
@@ -275,6 +358,7 @@ body {
 .teduri {
 	position: relative;
 	top: 15%;
+	height: 110%;
 }
 
 #calendar {
@@ -292,11 +376,11 @@ tr td {
 }
 
 .edu_name {
-	width: 100px;
+	width: 20%;
 }
 
 .edu_sml {
-	width: 500px;
+	width: 20%;
 }
 
 .edu_name_lrg {
@@ -326,11 +410,16 @@ tr td {
 }
 
 .title {
-	width: 100%;
+	width: 100%%;
 }
 
 .btn-1 {
 	margin-left: 45%;
+}
+
+.footer {
+	position: relative;
+	height: 100px;
 }
 </style>
 
@@ -345,18 +434,30 @@ tr td {
 		<tiles:insertAttribute name="empl_side" />
 
 	</c:if>
+	<c:if test="${not empty result}">
+		<script>
+		if(${result}){
+			
+			alert("1개의 게시물이 정상적으로 ${button} 되었습니다.");
+		}
+		if(${!result}){
+			alert("정상적으로 처리되지 않았습니다.");
+		}
+		</script>
 
+	</c:if>
 	<div class='teduri'>
 		<div id='calendar'></div>
-
+		<br>
+		<br>
 	</div>
 
 	<div class="mo hidden">
 		<div class="mo-content">
 			<div class="title"
-				style="text-align: center; font-size: 20px; font-weight: bold;">
-				교육 일정 <input class="cancle cancel-position" type="button" value="X">
-			</div>
+				style="text-align: center; font-size: 20px; width: 90%; font-weight: bold;">
+				교육 일정</div>
+			<input class="cancle cancel-position" type="button" value="X">
 			<br>
 			<form action="/educationBoard" method="POST">
 				<table class="modal-table">
@@ -383,19 +484,18 @@ tr td {
 					<br>
 				</table>
 				<input type="hidden" name="writer" value="${empl.userId }">
-				<input class="edu-dep" type="hidden" name="departmentId" value="${departmentId}">
-				<input class="edu-id" type="hidden" name="id">
-				<br> <input class='modal-button btn-1' name='button'
-					type='submit' value='수정'>&nbsp;<input class='modal-button'
-					name='button' type='submit' value='삭제'> <br>
+				<input class="edu-dep" type="hidden" name="departmentId"
+					value="${departmentId}"> <input class="edu-id"
+					type="hidden" name="id"> <br> <input
+					class='modal-button btn-1' name='button' type='submit' value='수정'>&nbsp;<input
+					class='modal-button' name='button' type='submit' value='삭제'>
+				<br>
 
 			</form>
 		</div>
 
 	</div>
 
-	<script>
-		
-	</script>
+
 </body>
 </html>

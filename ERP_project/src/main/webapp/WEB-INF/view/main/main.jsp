@@ -6,6 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
 <title>Insert title here</title>
 
   <style>
@@ -185,7 +186,7 @@
   document.addEventListener('DOMContentLoaded', function() {
 	 
 	 
-	 var calendarEl = document.getElementById('calendar');
+	var calendarEl = document.getElementById('calendar');
     var today=new Date();
     var events;
     function list(){
@@ -195,12 +196,28 @@
     		type:"get",
     		dataType:"json",
     		success:function(result){
+    			for(let i=0;i<result.length;i++){
+    				if(result[i].departmentId==10){
+    					result[i].departmentId="경영팀 10"
+    				}else if(result[i].departmentId==20){
+    					result[i].departmentId="개발팀 20"
+    				}else if(result[i].departmentId==30){
+    					result[i].departmentId="인사팀 30"
+    				}else{
+    					result[i].departmentId="영업팀 40"
+    				}
+    			}
     			arr=result;	
+    			
     			events = arr.map(function(item){
     				return{
-    					title: item.title+' <'+item.departmentId+'>',
-    					start: item.startDate,
-    					end: item.endDate
+    					publicId : item.id,
+						title : item.title +" ["+item.departmentId.substring(0,3)+"]",
+						start : item.startDate,
+						end : item.endDate,
+						STATUS : item.memo,
+						groupId : item.departmentId.substring(4,6),
+						id : item.writer
     				}
     			});
     		}
@@ -216,8 +233,8 @@
       selectable: false,
       selectMirror: true,
       
-      select: function(arg) {
-        
+      eventClick : function(event) {
+    	  location.href="/educationBoard?departmentId="+event.event.groupId;
       },
       editable: true,
       dayMaxEvents: true, // allow "more" link when too many events
