@@ -22,7 +22,9 @@ public class AnonymousBoardController {
 	 }
 	 @GetMapping("/anonymousContent")
 		public String anonymousContent(Model model,int id) {
-		 model.addAttribute("an", as.showContent(id));
-			return "anonymous/anonymousContent";
+		 AnonymousBoard result=as.showContent(id);
+		 model.addAttribute("result", result);
+		 model.addAttribute("writer", result.getNickName());
+			return "anonymous/anonymousSearch";
 		}
 }

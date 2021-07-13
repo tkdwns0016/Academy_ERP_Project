@@ -83,24 +83,7 @@ public class ERPController {
 	public List<SuggestionBoard> mainList2(){
 		return ss.mainList();
 	}
-	@GetMapping("/emplList")
-	public String emplList(Model model,String page){
-		
-		if (page != null) {
-			model.addAttribute("list", es.employeeService(page));
-		} else {
-			model.addAttribute("list", es.employeeService("1"));
-		}
-		model.addAttribute("emplList",es.getEmplList());
-		return "emplList";
-	}
-	@PostMapping("/emplList")
-	public String emplSearch(Model model,String name,String userId) {
-		es.searchInfo(name,userId);
-		//model.addAttribute("searchList", ) ;
-		
-		return "emplList";
-	}
+	
 	@GetMapping("/join")
 	public String join(Model model) {
 		return "joinForm/joinForm";
@@ -134,5 +117,49 @@ public class ERPController {
 		}
 		return "myInfo";
 	}     
-	
+	@GetMapping("/emplList")
+	public String test(Model model,String page) {
+		if(page!=null) {
+			model.addAttribute("emplList",es.employeeService(page));
+		}else {
+			model.addAttribute("emplList",es.employeeService("1"));
+		}
+		return "emplListNew";
+	}
+	@PostMapping("/emplList")
+	public String test1(Model model,String searchOption,String search,String page) {
+		ServiceClass sc = es.search("1",searchOption , search);
+		if(sc!=null) {
+			if(page!=null) {
+				model.addAttribute("searchList", es.search(page,searchOption , search));
+			}else {
+				model.addAttribute("searchList", sc);
+			}
+		}else {
+			boolean result=true;
+			if(page!=null) {
+				model.addAttribute("emplList",es.employeeService(page));
+			}else {
+				model.addAttribute("emplList",es.employeeService("1"));
+			}
+			model.addAttribute("result",result);
+		}
+		return "emplListNew";
+	}	
+	@GetMapping("/emplInfo")
+	public String emplInfo(Model model,int userId) {
+		model.addAttribute("resultEmpl", es.selectWithUserId(userId)); 
+		
+		return "emplInfo";
+	}
+	@PostMapping("/emplInfo")
+	public String emplUpdate(Model model,Employee emp, String page) {
+		model.addAttribute("resultUpdate", es.update(emp));
+		if(page!=null) {
+			model.addAttribute("emplList",es.employeeService(page));
+		}else {
+			model.addAttribute("emplList",es.employeeService("1"));
+		}
+		return "emplListNew";
+	}
 }

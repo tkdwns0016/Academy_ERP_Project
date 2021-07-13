@@ -120,7 +120,7 @@
       <table style=" margin-bottom: 5%;">
         <tr style="background: #f6f6f6; border-bottom: 1px solid black;">
           <th></th>
-          <th style="text-align: center; font-size: 24px;">공지사항</th>
+          <th style="text-align: center; font-size: 22px;">공지사항</th>
           <th style="text-align: right;"> <a class="no-line" href="/notice">+더보기</a>&nbsp;&nbsp;</th>
         </tr>
       </table>
@@ -133,10 +133,10 @@
         </tr>
         <tr style="height:20px"><td></td><td></td><td></td></tr>
         <c:forEach var="i" begin="0" end="5">
-        <tr>
-         <td style="width:20px; height: 50px;" onclick="location.href='/noticeContent?id=${notice[i].id }';">${notice[i].id }</td>
-        <td style="width:auto; height: 50px;" onclick="location.href='/noticeContent?id=${notice[i].id }';">${notice[i].title }</td>
-        <td style="width:20px; height: 50px;" onclick="location.href='/noticeContent?id=${notice[i].id }';">${notice[i].writer }</td>
+        <tr onclick="location.href=('/noticeSearch?id=${notice[i].id }')">
+         <td style="width:20px; height: 50px;" >${notice[i].id }</td>
+        <td style="width:auto; height: 50px;" >${notice[i].title }</td>
+        <td style="width:20px; height: 50px;" >${notice[i].writer }</td>
        </tr>
         </c:forEach>
     </table>
@@ -147,7 +147,7 @@
       <table style=" margin-bottom: 5%;">
         <tr style="background: #f6f6f6; border-bottom: 1px solid black;">
           <th></th>
-          <th style="text-align: center; font-size: 24px;">건의 게시판</th>
+          <th style="text-align: center; font-size: 22px;">건의 게시판</th>
           <th style="text-align: right;"><a class="no-line" href="/suggestion">+더보기</a>&nbsp;&nbsp;</th>
         </tr>
       </table>
@@ -159,10 +159,10 @@
         </tr>
 		<tr style="height:20px"><td></td><td></td><td></td></tr>
         <c:forEach var="i" begin="0" end="5">
-       <tr>
-        <td style="width:20px; height: 50px;" onclick="location.href='/suggestionContent?id=${suggestion[i].id }';">${suggestion[i].id }</td>
-        <td style="width:auto; height: 50px;" onclick="location.href='/suggestionContent?id=${suggestion[i].id }';">${suggestion[i].title }</td>
-        <td style="width:20px; height: 50px;" onclick="location.href='/suggestionContent?id=${suggestion[i].id }';">${suggestion[i].writer }</td>
+       <tr onclick="location.href=('/suggestionSearch?id=${suggestion[i].id }')">
+        <td style="width:20px; height: 50px;">${suggestion[i].id }</td>
+        <td style="width:auto; height: 50px;">${suggestion[i].title }</td>
+        <td style="width:20px; height: 50px;">${suggestion[i].writer }</td>
         </tr>
         </c:forEach>
       </table>

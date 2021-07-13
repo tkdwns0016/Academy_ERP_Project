@@ -29,8 +29,8 @@ $("#fileUpload").change(function(){
 fileList = $("#fileUpload")[0].files;
 fileListTag = '';
 fileListTag += '<ul>';
-for(i = 0; i < fileList.length; i++){
-  fileListTag += "<li>"+fileList[i].name+"</li>";
+for(let i = 0; i < fileList.length; i++){
+  fileListTag += "<li class='notiLi'>"+fileList[i].name+"</li>";
  
 }
 fileListTag += '</ul>';

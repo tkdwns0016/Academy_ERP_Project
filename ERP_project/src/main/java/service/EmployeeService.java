@@ -3,15 +3,13 @@ package service;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.swing.text.Position;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import department.Department;
+import position.Position;
 
 @Service
 public class EmployeeService {
@@ -21,27 +19,17 @@ public class EmployeeService {
 	ImageService is;
 
 	public ServiceClass employeeService(String page) {
-		List<Employee> list=em.selectList();
-	
-		ServiceClass serviceClass=new ServiceClass(Integer.parseInt(page), list,20, em.EmpleCount());
+		ServiceClass serviceClass=new ServiceClass(Integer.parseInt(page),20, em.EmpleCount());
+		List<EmplClass> emplList= em.selectECList(serviceClass.getFirstRow(),20);
+		List<Employee> list = em.selectList(serviceClass.getFirstRow(),20);
+		for(int i=0; i<list.size();i++) {
+			emplList.get(i).setDepartment(em.getDepartment(list.get(i).getDepartmentId()));
+			emplList.get(i).setPosition(em.getPosition(list.get(i).getPositionId()));
+		}
+		serviceClass.setTablelist(emplList);
 		return serviceClass;
 	}
-	public List<EmplClass> getEmplList(){
-		List<EmplClass> emplList= new ArrayList<EmplClass>();
-		List<Employee> list = em.selectList();
-		for(int i=0;i<list.size();i++) {
-			emplList.add(new EmplClass(
-					list.get(i).getId(),list.get(i).getName(),
-					list.get(i).getUserId(),list.get(i).getPassword(),list.get(i).getAddressId(),
-					list.get(i).getAddress1(),list.get(i).getAddress2(),list.get(i).getPhone(),
-					list.get(i).getEmail(),list.get(i).getHireDate(),list.get(i).getBirthDate(),
-					list.get(i).getSex(),em.getDepartment(list.get(i).getDepartmentId()),
-					list.get(i).getImgName(),em.getPosition(list.get(i).getPositionId()),
-					list.get(i).getSalary(),list.get(i).getManager(),list.get(i).getStatus()
-					));
-		}
-		return emplList;
-	}
+	
 	public Employee select(int userId,String name,String birthDate) { 
 		return em.changePassword(userId,name,birthDate);
 	}
@@ -69,17 +57,19 @@ public class EmployeeService {
 		}
 		return result;
 	}
-	public void update(Employee employee) {
-		em.update(employee);
+	public boolean update(Employee employee) {
+		int affectedRow=em.updateEmplInfo(employee);
+		boolean result=true;
+		if(affectedRow==-1) {
+			result=false;
+		}
+		return result;
 	}
 	
 	public Employee login(int userId, String password) {
 		return em.select(userId, password);
 	}
 
-	public List<Employee> selectList(){
-		return em.selectList();
-	}
 	
 	public int selectUserId(int departmentId) {
 		return em.getUserId(departmentId);
@@ -113,22 +103,163 @@ public class EmployeeService {
 		}
 		return result;
 	}
-	public List<EmplClass> searchInfo(String name, String userId) {
+	public ServiceClass searchInfo(String name, String userId,String page) {
 		List<EmplClass> list = new ArrayList<EmplClass>();
-		System.out.println(name);
-		System.out.println(name.trim());
-		System.out.println(!name.trim().equals(""));
+		List<Employee> emplList;
+		List<EmplClass> listEc;
 		if(!name.trim().equals("")) {
-			System.out.println(em.getSearchName(name));
-			//return ;
+			ServiceClass serviceClass=new ServiceClass(Integer.parseInt(page),20, em.SearchNameCount());
+			
+			emplList=em.getEmplSearchName(name);
+			listEc=em.getEcSearchName(name);
+			for(int i=0; i<listEc.size();i++) {
+				listEc.get(i).setDepartment(em.getDepartment(emplList.get(i).getDepartmentId()));
+				listEc.get(i).setPosition(em.getPosition(emplList.get(i).getPositionId()));
+				list.add(listEc.get(i));
+			}
+			serviceClass.setTablelist(list);
+			return serviceClass;
 		}
-		/*
-		 * if(!userId.trim().equals("")) { //return em.getSerachUserId(userId); }
-		 * if(name!=null && userId!=null) { // return em.getSearchAll(name,userId); }
-		 */
+		
+		  if(!userId.trim().equals("")) { 
+			  ServiceClass serviceClass=new ServiceClass(Integer.parseInt(page),20, em.SearchUserIdCount());
+			  emplList=em.getEmplSerachUserId(Integer.parseInt(userId));
+			  listEc=em.getEcSerachUserId(Integer.parseInt(userId));
+			  for(int i=0; i<listEc.size();i++) {
+					listEc.get(i).setDepartment(em.getDepartment(emplList.get(i).getDepartmentId()));
+					listEc.get(i).setPosition(em.getPosition(emplList.get(i).getPositionId()));
+					list.add(listEc.get(i));
+				}
+			  serviceClass.setTablelist(list);
+			  return serviceClass;
+		  }
+		  if(name!=null && userId!=null) { 
+			   
+			  emplList=em.getEmplSearchAll(name,Integer.parseInt(userId));
+			  listEc=em.getEcSearchAll(name,Integer.parseInt(userId));
+			  for(int i=0; i<listEc.size();i++) {
+					listEc.get(i).setDepartment(em.getDepartment(emplList.get(i).getDepartmentId()));
+					listEc.get(i).setPosition(em.getPosition(emplList.get(i).getPositionId()));
+					list.add(listEc.get(i));
+				}
+			  ServiceClass serviceClass=new ServiceClass(Integer.parseInt(page),20, em.SearchAllCount());
+			  serviceClass.setTablelist(list);
+			  return serviceClass;
+		  }
+		  
+		 
 		return null;
 	}
-	
+	public ServiceClass search(String page, String SearchOption, String search) {
+		List<Employee> empl = new ArrayList<Employee>();
+		List<EmplClass>emplC= new ArrayList<EmplClass>();
+		int count=0;
+		ServiceClass sc;
+		switch (SearchOption) {
+		case "position":
+			Position p=em.getSearchPo(search);
+			count=em.searchCountWithPositionId(p.getPositionId());
+			if(p!=null) {
+				sc = new ServiceClass(Integer.parseInt(page), 20, count);
+				empl= em.searchEmplListWithPositionId(p.getPositionId(),sc.getFirstRow(),20);
+				
+				if(!empl.isEmpty()) {
+					emplC= em.searchECListWithPositionId(p.getPositionId(),sc.getFirstRow(),20);
+					for(int i=0;i<emplC.size();i++) {
+						emplC.get(i).setDepartment(em.getDepartment(empl.get(i).getDepartmentId())); 
+						emplC.get(i).setPosition(em.getPosition(empl.get(i).getPositionId())); 
+					}
+					sc.setTablelist(emplC);
+				}else {
+					return null;
+				}
+			}else {
+				return null;
+			}
+			break;
 
+		case "department":
+			Department d = em.getSearchDep(search);
+			if(d!=null) {
+				count=em.searchCountWithDepartmentId(d.getDepartmentId());
+				sc = new ServiceClass(Integer.parseInt(page), 20, count);
+				
+				empl= em.searchEmplListWithDepartmentId(d.getDepartmentId(),sc.getFirstRow(),20);
+				if(!empl.isEmpty()) {
+					emplC= em.searchECListWithDepartmentId(d.getDepartmentId(),sc.getFirstRow(),20);
+					for(int i=0;i<emplC.size();i++) {
+						emplC.get(i).setDepartment(em.getDepartment(empl.get(i).getDepartmentId())); 
+						emplC.get(i).setPosition(em.getPosition(empl.get(i).getPositionId())); 
+					}
+					
+					sc.setTablelist(emplC);
+				}else {
+					return null;
+				}
+			}else {
+				return null;
+				
+			}
+			break;
+
+		case "name":
+			count=em.searchCountWithName(search);
+			sc = new ServiceClass(Integer.parseInt(page), 20, count);
+			empl= em.searchEmplListWithName(search,sc.getFirstRow(),20);
+			if(!empl.isEmpty()) {
+				
+				emplC= em.searchECListWithName(search,sc.getFirstRow(),20);
+				for(int i=0;i<emplC.size();i++) {
+					emplC.get(i).setDepartment(em.getDepartment(empl.get(i).getDepartmentId())); 
+					emplC.get(i).setPosition(em.getPosition(empl.get(i).getPositionId())); 
+				}
+				sc.setTablelist(emplC);
+			}else {
+				return null;
+			}
+			break;
+
+		case "hire_date":
+			count=em.searchCountWithHireDate(search);
+			sc = new ServiceClass(Integer.parseInt(page), 20, count);
+			empl= em.searchEmplListWithHireDate(search,sc.getFirstRow(),20);
+			if(!empl.isEmpty()) {
+				emplC= em.searchECListWithHireDate(search,sc.getFirstRow(),20);
+				for(int i=0;i<emplC.size();i++) {
+					emplC.get(i).setDepartment(em.getDepartment(empl.get(i).getDepartmentId())); 
+					emplC.get(i).setPosition(em.getPosition(empl.get(i).getPositionId())); 
+				}
+				sc.setTablelist(emplC);
+			}else {
+				return null;
+			}
+			break;
+
+		case "user_id":
+			count=em.searchCountWithUserId(search);
+			sc = new ServiceClass(Integer.parseInt(page), 20, count);
+			empl= em.searchEmplListWithUserId(search,sc.getFirstRow(),20);
+			if(!empl.isEmpty()) {
+				emplC= em.searchECListWithUserId(search,sc.getFirstRow(),20);
+				for(int i=0;i<emplC.size();i++) {
+					emplC.get(i).setDepartment(em.getDepartment(empl.get(i).getDepartmentId())); 
+					emplC.get(i).setPosition(em.getPosition(empl.get(i).getPositionId())); 
+				}
+				sc.setTablelist(emplC);
+			}else {
+				return null;
+			}
+			break;
+
+		default:
+			return null;
+		}
+		 return sc;
+	}
+
+	public Employee selectWithUserId(int userId) {
+		Employee ep=em.getEmplSeletWithUserId(userId);
+		return ep;
+	}
 }
 

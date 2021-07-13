@@ -16,7 +16,7 @@
 
 
 .full_modal1{
-	position: absolute; /* Stay in place */
+	position: fixed; /* Stay in place */
 	z-index: 10; /* Sit on top */
 	left: 0;
 	top: 0;
@@ -27,7 +27,7 @@
 	background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
 }
 .full_modal2{
-position: absolute; /* Stay in place */
+position: fixed; /* Stay in place */
 	z-index: 10; /* Sit on top */
 	left: 0;
 	top: 0;

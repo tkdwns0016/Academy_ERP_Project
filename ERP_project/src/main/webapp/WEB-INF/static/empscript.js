@@ -1,4 +1,6 @@
     window.addEventListener('load', () => {
+    
+    
       const forms = document.getElementsByClassName('validation-form');
 	var button = $(".button");
  	console.dir(button);

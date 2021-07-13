@@ -27,16 +27,14 @@ public class FileController {
 	@GetMapping("/upload")
 	public String writeBoard(Model m,HttpSession session) {
 		Employee emp = (Employee) session.getAttribute("empl");
-		if(emp.getDepartmentId()==10) {
-			m.addAttribute("dep","경영팀");
-		}
+
 		return "fileupload";
 	}
 
 	@PostMapping("/upload")
 	public String upload(List<MultipartFile> fileName, Model model) {
 	
-		String uploadFolder = "E:/files";
+		String uploadFolder = "/file";
 		
 		
 		

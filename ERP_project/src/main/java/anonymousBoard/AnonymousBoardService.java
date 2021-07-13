@@ -14,12 +14,12 @@ public class AnonymousBoardService {
 	AnonymousBoardMapper am;
 	
 	public ServiceClass getService(String page){
-		ServiceClass sc= new ServiceClass(Integer.parseInt(page), am.selectList(), 20, am.count());
+		ServiceClass sc= new ServiceClass(Integer.parseInt(page), 20, am.count());
+		sc.setTablelist(am.selectList(sc.getFirstRow(),20));
 		return sc;
 	}
 	public AnonymousBoard showContent(int id) {
 		AnonymousBoard ab=am.select(id);
-		am.countPlus(ab.getCount()+1,id);
 		return ab;
 	}
 }

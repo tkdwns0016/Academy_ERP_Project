@@ -57,7 +57,7 @@
     <tbody>
    
   	 <c:forEach var="l" items="${list.tablelist }">
-    	<tr onclick="window.open('/anonymousContent?id=${l.id }')">
+    	<tr onclick="location.href=('/anonymousContent?id=${l.id }')">
        	 	<td>${l.id }</td>
       		<td>${l.title }</td>
         	<td>${l.nickName }</td>
@@ -72,28 +72,46 @@
 </table>
 
 <div class="border-dee3eb" style="text-align: center;">
-<c:if test="${list.totPage<list.lastPage }">
-	<c:forEach var="link" begin="${list.firstPage }" end="${list.lastPage }">
-		<a href="/anonymous?page=${link }">[${link }]</a>
-	</c:forEach>
-</c:if>
-	<c:forEach var="link" begin="${list.firstPage }" end="${list.lastPage }">
-		<a href="/anonymous?page=${link }">[${link }]</a>
-	</c:forEach>
-<c:if test="${list.firstPage>1 && list.lastPage<totPage }">
-	<a href="/anonymous?page=${list.firstPage-1 }">[이전]</a>
-		<c:forEach var="link" begin="${list.firstPage }" end="${list.lastPage }">
-			<a href="/anonymous?page=${link }">[${link}]</a>
-		</c:forEach>
-	<a href="/anonymous?page=${list.lastPage+1 }">[다음]</a>
-</c:if>
-<c:if test="${ list.firstPage>1 && list.lastPage>=list.totPage }">
-	<a href="/anonymous?page=${list.firstPage-1 }">[이전]</a>
-		<c:forEach var="link" begin="${list.firstPage }" end="${list.totPage}">
-			<a href="/anonymous?page=${link }">[${link}]</a>
-		</c:forEach>
-
-</c:if>	
+	<c:choose>
+			
+			<c:when test="${list.firstPage<=2 && list.totPage<=3 }">
+				<c:forEach var="link" begin="1"
+					end="${list.lastPage }">
+					<a href="/notice?page=${link }">[${link }]</a>
+				</c:forEach>
+			</c:when>
+			<c:when test="${list.firstPage<2 && list.totPage>3 }">
+				<c:forEach var="link" begin="1"
+					end="${list.lastPage }">
+					<a href="/notice?page=${link }">[${link }]</a>
+				</c:forEach>
+				<a href="/notice?page=${list.firstPage+1 }">[다음]</a>
+			</c:when>
+			<c:when test="${list.firstPage>=2&&list.firstPage<list.totPage-2}">
+					<a href="/notice?page=${list.firstPage-1 }">[이전]</a>
+				<c:forEach var="link" begin="${list.firstPage }"
+					end="${list.lastPage }">
+					<a href="/notice?page=${link }">[${link }]</a>
+				</c:forEach>
+					<a href="/notice?page=${list.firstPage+1 }">[다음]</a>
+			</c:when>
+			<c:when test="${list.firstPage>list.totPage-3}">
+					<a href="/notice?page=${list.firstPage-1 }">[이전]</a>
+						<c:forEach var="link" begin="${list.totPage-2 }"
+						end="${list.lastPage }">
+					<a href="/notice?page=${link }">[${link }]</a>
+				</c:forEach>
+			</c:when>
+			<c:otherwise>
+					<a href="/notice?page=${list.firstPage-1 }">[이전]</a>
+				<c:forEach var="link" begin="${list.firstPage }"
+					end="${list.lastPage }">
+					<a href="/notice?page=${link }">[${link }]</a>
+				</c:forEach>
+					<a href="/notice?page=${list.firstPage+1 }">[다음]</a>
+	
+			</c:otherwise>	
+			</c:choose>
 
 </div>
 <div class="temp-box" box-three></div>

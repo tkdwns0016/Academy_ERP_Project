@@ -10,11 +10,13 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import anonymousBoard.AnonymousBoard;
+import service.EmplClass;
+import service.Employee;
 
 @Mapper
 public interface SuggestionBoardMapper {
-	@Select("select * from suggestion_board order by id desc")
-	public List<SuggestionBoard> selectList();
+	@Select("select * from suggestion_board order by id desc limit #{firstRow},#{pagePerCount}")
+	public List<SuggestionBoard> selectList(@Param("firstRow")int firstRow,@Param("pagePerCount")int pagePerCount);
 	@Select("select * from suggestion_board order by id desc limit 5")
 	public List<SuggestionBoard> mainList();
 	
@@ -35,4 +37,10 @@ public interface SuggestionBoardMapper {
 	public int countPlus(@Param("count")int count,@Param("id")int id);
 	@Delete("delete from suggestion_board where id=#{id}")
 	public int delete(int id);
+	@Select("select name,department_id from employee where user_id=#{writer}")
+	public Employee getWriter(int writer);
+	@Select("select name from employee where user_id=#{writer}")
+	public EmplClass getECWriter(int writer);
+	@Select("select department_name from department where department_id=#{departmentId}")
+	public String getDepartment(int departmentId);
 }

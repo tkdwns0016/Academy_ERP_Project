@@ -32,7 +32,7 @@
 	<property name="configLocation" value="/WEB-INF/config/mybatis_config.xml"/>
 	</bean>
 	
-	<mybatis-spring:scan base-package="anonymousBoard, attendance, department, educationBoard, noticeBoard, position, suggestionBoard welfare,service, email"/>
+	<mybatis-spring:scan base-package="anonymousBoard, attendance, department, educationBoard, noticeBoard, position, suggestionBoard, welfare,service, email"/>
 	
 	
 

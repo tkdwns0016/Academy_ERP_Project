@@ -12,10 +12,10 @@ public class SuggestionBoard {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate writeDate;
 	private int count;
+	private String password;
 	
-	
-
-	public SuggestionBoard(int id, String title, int writer, String content, LocalDate writeDate, int count) {
+	public SuggestionBoard(int id, String title, int writer, String content, LocalDate writeDate, int count,
+			String password) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -23,67 +23,59 @@ public class SuggestionBoard {
 		this.content = content;
 		this.writeDate = writeDate;
 		this.count = count;
+		this.password = password;
 	}
-
 	public SuggestionBoard() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
 	public int getId() {
 		return id;
 	}
-
 	public void setId(int id) {
 		this.id = id;
 	}
-
 	public String getTitle() {
 		return title;
 	}
-
 	public void setTitle(String title) {
 		this.title = title;
 	}
-
 	public int getWriter() {
 		return writer;
 	}
-
 	public void setWriter(int writer) {
 		this.writer = writer;
 	}
-
 	public String getContent() {
 		return content;
 	}
-
 	public void setContent(String content) {
 		this.content = content;
 	}
-
 	public LocalDate getWriteDate() {
 		return writeDate;
 	}
-
-	public int getCount() {
-		return count;
-	}
-
-	public void setCount(int count) {
-		this.count = count;
-	}
-
 	public void setWriteDate(LocalDate writeDate) {
 		this.writeDate = writeDate;
 	}
-
+	public int getCount() {
+		return count;
+	}
+	public void setCount(int count) {
+		this.count = count;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
 	@Override
 	public String toString() {
 		return "SuggestionBoard [id=" + id + ", title=" + title + ", writer=" + writer + ", content=" + content
-				+ ", writeDate=" + writeDate + ", count=" + count + "]";
+				+ ", writeDate=" + writeDate + ", count=" + count + ", password=" + password + "]";
 	}
-
-
-
+	
+	
 }

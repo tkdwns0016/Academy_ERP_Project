@@ -1,48 +1,55 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+	<c:if test="${empl.manager=='권한' }">
+
+		<tiles:insertAttribute name="root_side" />
+	</c:if>
+	<c:if test="${empl.manager=='비권한' }">
+		<tiles:insertAttribute name="empl_side" />
+
+	</c:if>
     
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
-    <script src="/path/to/js/summernote-ext-ajaxfileupload.js"></script>
-    <script src="summernote/angsummernote-ko-KR.js"></script>
     <link href="/static/community/notice/noticeWriter.css" rel="stylesheet">
-    <script src="/static/community/notice/noticeWriter.js"></script>
-  </head>
+    
+    </head>
   <body>
 
     <h2>글 작성</h2><br>
 
-    <form method="post" action="/noticeWriter" >
-      <table>
+    <form method="post" action="/noticeWriter?writer=${empl.userId }" enctype="multipart/form-data" >  
+      <table class="notiTable">
         
         <tr>
-          <td>작성자</td>
-          <td style="width: 60%;">&nbsp;<input type="text" id="writer" name="writer" style="width: 90%; " placeholder="작성자"  readonly value="[${empl.departmentId}]${empl.name}"/><br></td>
-          <td>비밀번호</td>
-          <td><input type="password" name="password" maxlength="4" size="30" required></td>
+          <td class="fchild ntd">작성자</td>
+          <td class="ntd" style="width: 60%;">&nbsp;<input type="text" id="writer"  style="width: 90%; " placeholder="작성자"  readonly value="[${department}]${empl.name}"/><br></td>
+          <td class="fchild ntd">비밀번호</td>
+          <td class="ntd"><input type="password" name="password" maxlength="4" size="30" required></td>
         </tr>
         <tr>
-          <td>제목</td>
-          <td colspan="3">&nbsp;<input type="text"  id="title" name="title"  style="width: 90%;" placeholder="제목" "/></td>
+          <td class="fchild ntd">제목</td>
+          <td class="ntd" colspan="3">&nbsp;<input type="text"  id="title" name="title"  style="width: 90%;" placeholder="제목" "/></td>
         </tr>
         <tr>	
-          <td>
+          <td class="fchild ntd">
             내용
           </td>
-          <td colspan="3">
+          <td colspan="3" class="ntd">
             <textarea id="summernote" name="content"></textarea> 
           </td>
      
           </tr>
           <tr>
-            <td>파일첨부</td>
-             <td colspan="3" style="height: auto;">&nbsp;<input type="file" id="fileUpload" multiple="multiple" name="filename" >
+            <td class="fchild ntd">파일첨부</td>
+             <td class="ntd" colspan="3" style="height: auto;">&nbsp;<input type="file" id="fileUpload" multiple="multiple" name="filename" >
               <span id="fileList"></span>
               
              </td>
@@ -57,8 +64,11 @@
           <input id="subBtn" type="button" value="취소"  onclick="history.go(-1);"/>
         </form>
           
+       
 
-     
+
 
   </body>
+    <script src="/static/community/notice/noticeWriter.js"></script>
 </html>
+

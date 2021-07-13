@@ -5,6 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import noticeBoard.NoticeBoard;
+
 @Controller
 public class SuggestionBoardController {
 
@@ -20,10 +22,11 @@ public class SuggestionBoardController {
 		}
 		return "suggestion/suggestion";
 	}
-	@GetMapping("/suggestionContent")
+	@GetMapping("/suggestionSearch")
 	public String suggestionContent(Model model,int id) {
-		model.addAttribute("suggestionBoard", ss.showContent(id));
-		
-		return "suggestion/suggestionContent";
+		SuggestionBoard result=ss.showContent(id);
+		model.addAttribute("result", result);
+		model.addAttribute("writer", ss.getWriter(result.getWriter()));
+		return "suggestion/suggestionSearch";
 	}
 }

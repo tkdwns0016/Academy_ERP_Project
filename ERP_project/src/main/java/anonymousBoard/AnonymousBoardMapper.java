@@ -12,8 +12,8 @@ import org.apache.ibatis.annotations.Update;
 
 @Mapper
 public interface AnonymousBoardMapper {
-	@Select("select * from anonymous_board order by id desc")
-	public List<AnonymousBoard> selectList();
+	@Select("select * from anonymous_board order by id desc limit #{firstRow},#{pagePerCount}")
+	public List<AnonymousBoard> selectList(@Param("firstRow") int firstRow,@Param("pagePerCount")int pagePerCount);
 	
 	@Select("select count(*) from anonymous_board")
 	public int count();

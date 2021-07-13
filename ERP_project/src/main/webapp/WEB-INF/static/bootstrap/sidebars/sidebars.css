@@ -6,7 +6,7 @@ body {
 html {
   height: -webkit-fill-available;
 }
-main {
+.main {
   display: flex;
   flex-wrap: nowrap;
   height: 100vh;
@@ -83,6 +83,8 @@ main {
 .scrollarea {
   overflow-y: auto;
 }
-
+.emplLi{
+	list-style: none;
+}
 .fw-semibold { font-weight: 600; }
 .lh-tight { line-height: 1.25; }

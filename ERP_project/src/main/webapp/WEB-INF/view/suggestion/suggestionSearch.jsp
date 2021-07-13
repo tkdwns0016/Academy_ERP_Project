@@ -1,12 +1,7 @@
-<%@page import="noticeBoard.NoticeBoard"%>
-<%@page import="com.mysql.cj.xdevapi.Result"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
-
-
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,23 +35,11 @@ input[type=button]{
 .modal-table{
 	font-family: MaplestoryOTFLight;
 }
-.file-li{
-	list-style: none;
-}
-.file-link{
-	text-decoration: none;
-	color: black;
-}
+
 </style>
 
 </head>
 <body>
-<c:if test="${empty empl }">
-	<script>
-		alert("로그인 정보가 없습니다.")
-		location.href="/login";
-	</script>
-</c:if>
 	<c:if test="${empl.manager=='권한' }">
 
 		<tiles:insertAttribute name="root_side" />
@@ -98,18 +81,7 @@ input[type=button]{
 			</tr>
 			<tr style="height: auto;">
 				<td class="borderS-td-color" style="height: 50px;">첨부파일</td>
-				<td colspan="5" class="borderS-td-padding">
-					<ul>
-					<c:if test="${empty file }">
-						저장된 파일이 없습니다.
-					</c:if>
-					<c:if test="${not empty file }">
-					<c:forEach var="file" items="${file }" >
-						 <li class="file-li"><a class="file-link" href="/filedownload?id=${result.id }&filename=${file}">${file}</a></li>
-					</c:forEach>
-					</c:if>
-					</ul>
-				</td>
+				<td colspan="5" class="borderS-td-padding"><input type="file" multiple="multiple"></td>
 			</tr>
 			<tr style="height: 10px;">
 
@@ -117,17 +89,13 @@ input[type=button]{
 			<tr>
 				<td colspan="6"
 					style="text-align: right; border-left: hidden; border-right: hidden; border-bottom: hidden;">
-					<c:if test="${beforeIndex ne result.id }">
-					<button onclick="location.href=('/noticeSearch?id=${beforeIndex}')" style="float: left; width: 60px; height: 30px">이전</button>&nbsp;
-					</c:if>
-					<c:if test="${nextIndex ne result.id }">
-					<button onclick="location.href=('/noticeSearch?id=${nextIndex}')" style="float:left; width: 60px; height: 30px; margin-left: 5px">다음</button>
-					</c:if>
+					<button style="float: left; width: 60px; height: 30px">이전</button>&nbsp;
+					<button style="float:left; width: 60px; height: 30px; margin-left: 5px">다음</button>
 					
 					<button onclick="modifyOn()" style="width: 60px; height: 30px;">수정</button>
 					<button onclick="deleteOn()" style="width: 60px; height: 30px;">삭제</button>
 					<button class="listButton" style="width: 60px; height: 30px;"
-						onclick="location.href=('/notice')">목록</button>
+						onclick="history.go(-1); return false;">목록</button>
 				</td>
 			</tr>
 		</table>

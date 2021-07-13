@@ -15,10 +15,9 @@ public class ServiceClass {
 	private int pagePerCount;//몇개로 짜를건지
 	private int totCount;//테이블 개수
 	
-	public ServiceClass(int currentPage, List tablelist,
+	public ServiceClass(int currentPage,
 			int pagePerCount, int totCount) {
 		this.currentPage = currentPage;
-		this.tablelist = tablelist;
 		this.pagePerCount = pagePerCount;
 		this.totCount = totCount;
 		totPage=(int)Math.ceil((double)totCount/pagePerCount);
@@ -97,7 +96,7 @@ public class ServiceClass {
 		return lastPage;
 	}
 
-	public List<?> getTablelist() {
+	public List getTablelist() {
 		return tablelist;
 	}
 

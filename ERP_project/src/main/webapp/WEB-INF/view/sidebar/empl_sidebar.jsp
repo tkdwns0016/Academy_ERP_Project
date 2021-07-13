@@ -213,24 +213,24 @@ nav::after {
 
 					<ul
 						class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small set">
-						<li><a id="font" href="/main"
+						<li class="emplLi"><a id="font" href="/main"
 							class="nav-link text-white bi-house-door hover"> <svg
 									class="bi d-block mx-auto mb-1" width="24" height="24">
                     <use xlink:href="#home" /></svg> Home
 						</a></li>
-						<li><a id="font" href="/main" class="nav-link text-white hover"> <svg
+						<li class="emplLi"><a id="font" href="/main" class="nav-link text-white hover"> <svg
 									class="bi d-block mx-auto mb-1" width="24" height="24">
                     <use xlink:href="#speedometer2" /></svg> Dashboard
 						</a></li>
-						<li><a id="font" href="/main" class="nav-link text-white hover"> <svg
+						<li class="emplLi"><a id="font" href="/main" class="nav-link text-white hover"> <svg
 									class="bi d-block mx-auto mb-1" width="24" height="24">
                     <use xlink:href="#table" /></svg> Orders
 						</a></li>
-						<li><a id="font" href="/main" class="nav-link text-white hover"> <svg
+						<li class="emplLi"><a id="font" href="/main" class="nav-link text-white hover"> <svg
 									class="bi d-block mx-auto mb-1" width="24" height="24">
                     <use xlink:href="#grid" /></svg> Products
 						</a></li>
-						<li><a id="font" href="/main" class="nav-link text-white hover"> <svg
+						<li class="emplLi"><a id="font" href="/main" class="nav-link text-white hover"> <svg
 									class="bi d-block mx-auto mb-1" width="24" height="24">
                     <use xlink:href="#people-circle" /></svg> Customers
 						</a></li>
@@ -294,7 +294,7 @@ nav::after {
 		</article>
 
 
-		<main>
+		<main class="main">
 			</div>
 			
 			
@@ -308,13 +308,11 @@ nav::after {
 						height="100px" class="me-2"><br> <strong>직급 : ${department } 부서:${position }<br> ${empl.name }
 							님</strong>
 					</a>
-					<ul class="dropdown-menu dropdown-menu-dark text-small shadow"
-						aria-labelledby="dropdownUser1">
-						<li><a class="dropdown-item" href="/myInfo">Profile</a></li>
-						<li>
+				<li class="emplLi"><a class="dropdown-item" href="/myInfo">Profile</a></li>
+						<li class="emplLi">
 							<hr class="dropdown-divider">
 						</li>
-						<li><a class="dropdown-item" href="/logout">Sign out</a></li>
+						<li class="emplLi"><a class="dropdown-item" href="/logout">Sign out</a></li>
 					</ul>
 				</div>
 				<hr>
@@ -332,10 +330,10 @@ nav::after {
 							aria-expanded="false">교육관리</button>
 									<div class="collapse" id="dashboard-collapse">
 							<ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-								<li><a href="/educationBoard?departmentId=10" class="link-dark rounded">경영팀 교육 일정</a></li>
-								<li><a href="/educationBoard?departmentId=20" class="link-dark rounded">개발팀 교육 일정</a></li>
-								<li><a href="/educationBoard?departmentId=30" class="link-dark rounded">인사팀 교육 일정</a></li>
-								<li><a href="/educationBoard?departmentId=40" class="link-dark rounded">영업팀 교육 일정 </a></li>
+								<li class="emplLi"><a href="/educationBoard?departmentId=10" class="link-dark rounded">경영팀 교육 일정</a></li>
+								<li class="emplLi"><a href="/educationBoard?departmentId=20" class="link-dark rounded">개발팀 교육 일정</a></li>
+								<li class="emplLi"><a href="/educationBoard?departmentId=30" class="link-dark rounded">인사팀 교육 일정</a></li>
+								<li class="emplLi"><a href="/educationBoard?departmentId=40" class="link-dark rounded">영업팀 교육 일정 </a></li>
 							</ul>
 						</div>
 					</li>
@@ -347,7 +345,7 @@ nav::after {
 							aria-expanded="false">근태관리</button>
 						<div class="collapse" id="check-collapse">
 							<ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-								<li><a href="#" class="link-dark rounded">출/퇴근 체크</a></li>
+								<li class="emplLi"><a href="#" class="link-dark rounded">출/퇴근 체크</a></li>
 							</ul>
 						</div>
 					</li>
@@ -372,9 +370,9 @@ nav::after {
 							aria-expanded="false">커뮤니티</button>
 						<div class="collapse" id="community-collapse">
 							<ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-								<li><a href="/notice" class="link-dark rounded">공지사항</a></li>
-								<li><a href="/suggestion" class="link-dark rounded">건의 게시판</a></li>
-								<li><a href="/anonymous" class="link-dark rounded">익명 게시판</a></li>
+								<li class="emplLi"><a href="/notice" class="link-dark rounded">공지사항</a></li>
+								<li class="emplLi"><a href="/suggestion" class="link-dark rounded">건의 게시판</a></li>
+								<li class="emplLi"><a href="/anonymous" class="link-dark rounded">익명 게시판</a></li>
 							</ul>
 						</div>
 					</li>

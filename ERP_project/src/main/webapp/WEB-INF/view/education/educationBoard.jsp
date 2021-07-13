@@ -316,7 +316,7 @@ a {
 }
 .mo-content {
 	background-color: #fefefe;
-	position: absolute;
+	position: fixed;
 	margin: 15% 40%;
 	border: 1px solid #888;
 	width: 40%;
@@ -340,7 +340,7 @@ a {
 
 .mo1-content {
 	background-color: #fefefe;
-	position: absolute;
+	position: fixed;
 	margin: 15% 30%;
 	padding: 20px;
 	border: 1px solid #888;

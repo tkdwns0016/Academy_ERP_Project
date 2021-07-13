@@ -60,7 +60,7 @@
     <tbody>
    
    	 <c:forEach var="l" items="${list.tablelist }">
-    	<tr onclick="window.open('/suggestionContent?id=${l.id }')">
+    	<tr onclick="location.href=('/suggestionSearch?id=${l.id }')">
        	 	<td>${l.id }</td>
       		<td>${l.title }</td>
         	<td>${l.writer }</td>
@@ -74,28 +74,47 @@
 </table>
 
 <div class="border-dee3eb" style="text-align: center;">
-<c:if test="${list.totPage<list.lastPage }">
-	<c:forEach var="link" begin="${list.firstPage }" end="${list.lastPage }">
-		<a href="/suggestion?page=${link }">[${link }]</a>
-	</c:forEach>
-</c:if>
-	<c:forEach var="link" begin="${list.firstPage }" end="${list.lastPage }">
-		<a href="/suggestion?page=${link }">[${link }]</a>
-	</c:forEach>
-<c:if test="${list.firstPage>1 && list.lastPage<totPage }">
-	<a href="/suggestion?page=${list.firstPage-1 }">[이전]</a>
-		<c:forEach var="link" begin="${list.firstPage }" end="${list.lastPage }">
-			<a href="/suggestion?page=${link }">[${link}]</a>
-		</c:forEach>
-	<a href="/suggestion?page=${list.lastPage+1 }">[다음]</a>
-</c:if>
-<c:if test="${ list.firstPage>1 && list.lastPage>=list.totPage }">
-	<a href="/suggestion?page=${list.firstPage-1 }">[이전]</a>
-		<c:forEach var="link" begin="${list.firstPage }" end="${list.totPage}">
-			<a href="/suggestion?page=${link }">[${link}]</a>
-		</c:forEach>
+	<c:choose>
+			
+			<c:when test="${list.firstPage<=2 && list.totPage<=3 }">
+				<c:forEach var="link" begin="1"
+					end="${list.lastPage }">
+					<a href="/suggestion?page=${link }">[${link }]</a>
+				</c:forEach>
+			</c:when>
+			<c:when test="${list.firstPage<2 && list.totPage>3 }">
+				<c:forEach var="link" begin="1"
+					end="${list.lastPage }">
+					<a href="/suggestion?page=${link }">[${link }]</a>
+				</c:forEach>
+				<a href="/suggestion?page=${list.firstPage+1 }">[다음]</a>
+			</c:when>
+			<c:when test="${list.firstPage>=2&&list.firstPage<list.totPage-2}">
+					<a href="/suggestion?page=${list.firstPage-1 }">[이전]</a>
+				<c:forEach var="link" begin="${list.firstPage }"
+					end="${list.lastPage }">
+					<a href="/suggestion?page=${link }">[${link }]</a>
+				</c:forEach>
+					<a href="/suggestion?page=${list.firstPage+1 }">[다음]</a>
+			</c:when>
+			<c:when test="${list.firstPage>list.totPage-3}">
+					<a href="/suggestion?page=${list.firstPage-1 }">[이전]</a>
+						<c:forEach var="link" begin="${list.totPage-2 }"
+						end="${list.lastPage }">
+					<a href="/suggestion?page=${link }">[${link }]</a>
+				</c:forEach>
+			</c:when>
+			<c:otherwise>
+					<a href="/suggestion?page=${list.firstPage-1 }">[이전]</a>
+				<c:forEach var="link" begin="${list.firstPage }"
+					end="${list.lastPage }">
+					<a href="/suggestion?page=${link }">[${link }]</a>
+				</c:forEach>
+					<a href="/suggestion?page=${list.firstPage+1 }">[다음]</a>
+	
+			</c:otherwise>	
+			</c:choose>
 
-</c:if>	
 
 </div>
 	<div class="temp-box" box-three></div>
