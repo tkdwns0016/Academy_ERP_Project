@@ -44,4 +44,19 @@ public class SuggestionBoardService {
 		
 		return ec;
 	}
+	public Map<String, Integer> getIndexInfo(int id) {
+		Map<String, Integer> index = new HashMap<String, Integer>();
+		
+		if(sm.getFirstIndex()==id) {
+			index.put("beforeIndex",id);
+		}else {
+			index.put("beforeIndex",sm.getBeforeIndex(id));
+		}
+		if(sm.getLastIndex()==id) {
+			index.put("nextIndex",id);
+		}else {
+			index.put("nextIndex", sm.getNextIndex(id));
+		}
+		return index;
+	}
 }

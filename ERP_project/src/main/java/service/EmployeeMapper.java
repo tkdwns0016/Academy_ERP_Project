@@ -42,20 +42,22 @@ public interface EmployeeMapper {
 	@Insert("insert into employee values(0,#{name},#{userId},"
 			+ "#{password},#{addressId},#{address1},#{address2},#{phone},"
 			+ "#{email},#{hireDate},#{birthDate},#{sex},#{departmentId},#{imgName},"
-			+ "#{positionId},#{salary},#{manager},#{status})")
+			+ "#{positionId},#{salary},#{manager},#{status},#{englishName},#{lunarCalendar},"
+			+ "#{birth},#{koreanForeigner},#{companyPhone},#{marriage},#{companyAddress},"
+			+ "#{salaryPaymentStandards},#{workType},#{remark})")
 	public int insert(Employee employee);
 	
-	@Update("update employee set name=#{name},user_id=#{userId},"
+	@Update("update employee set name=#{name},"
 			+ "password=#{password},address_id=#{addressId},"
 			+ "address1=#{address1},address2=#{address2},phone=#{phone},"
-			+ "email=#{email},hire_date=#{hireDate},birth_date=#{birthDate},"
-			+ "sex=#{sex},department_id=#{departmentId},img_name=#{imgName},"
-			+ "position_id=#{positionId},salary=#{salary},manager=#{manager},status=#{status},english_name=#{englishName},"
+			+ "email=#{email},birth_date=#{birthDate},"
+			+ "sex=#{sex},img_name=#{imgName},"
+			+ "english_name=#{englishName},"
 			+ "lunar_calendar=#{lunarCalendar},birth=#{birth},korean_foreigner=#{koreanForeigner},"
-			+ "company_phone=#{companyPhone},marriage=#{marriage},"
-			+ "company_address=#{companyAddress},salary_payment_standards=#{salaryPaymentStandards},"
-			+ "work_type=#{workType},remark=#{remark} where id=#{id}")
+			+ "marriage=#{marriage} "
+			+ "where id=#{id}")
 	public int update(Employee employee);
+	
 	@Update("update employee set name=#{name},user_id=#{userId},"
 			+ "phone=#{phone},"
 			+ "email=#{email},hire_date=#{hireDate},"

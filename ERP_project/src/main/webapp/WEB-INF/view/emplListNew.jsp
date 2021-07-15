@@ -53,28 +53,16 @@ input[type=search] {
 		<tiles:insertAttribute name="empl_side" />
 
 	</c:if>
-<c:if test="${not empty resultUpdate }">
+<c:if test="${not empty result }">
 	<script>
 		alert("검색 결과를 찾을수 없습니다.")
 	</script>
 </c:if>
-<c:if test="${not empty resultUpdate }">
-	<c:if test="${resultUpdate }">
-	<script>
-		alert("인사 정보 수정이 완료 되었습니다.")
-	</script>
-	</c:if>
-	
-	<c:if test="${!resultUpdate }">
-	<script>
-		alert("데이터 수정에 실패하였습니다.")
-	</script>
-	</c:if>
-</c:if>
+
 	<form action="/emplList" method="post">
 		<div class="container-work">
 			<h2>인사 정보 리스트</h2>
-			<div style="position: relative; left: 37.7%;">
+			<div style="position: relative; left: 37%;">
 				<select name="searchOption" required="required">
 					<option value="position">직급</option>
 					<option value="department">부서</option>
@@ -83,10 +71,10 @@ input[type=search] {
 					<option value="user_id">사번</option>
 				</select> <input type="search" name="search" size="15" placeholder="search..."> 
 			
-				<i	class="fas fa-search" style="position: absolute; left: 610px; top: 7px;"></i>
+				<i	class="fas fa-search" style="position: absolute; left: 700px; top: 7px;"></i>
 
 			</div>
-			<table style="position: relative; left: 45px;">
+			<table style="position: relative; width: 95%">
 				<tr style="background-color: ghostwhite;">
 					<th width="7%">부서명</th>
 					<th width="5%">직급</th>
@@ -146,7 +134,7 @@ input[type=search] {
 				</c:forEach>
 				<a href="/emplList?page=${emplList.firstPage+1 }">[다음]</a>
 			</c:when>
-			<c:when test="${emplList.firstPage>=2&&emplList.firstPage<emplList.totPage-2}">
+			<c:when test="${emplList.firstPage>=3&&emplList.firstPage<emplList.totPage-2}">
 					<a href="/emplList?page=${emplList.firstPage-1 }">[이전]</a>
 				<c:forEach var="link" begin="${emplList.firstPage }"
 					end="${emplList.lastPage }">
@@ -189,7 +177,7 @@ input[type=search] {
 				</c:forEach>
 				<a href="/emplList?page=${searchList.firstPage+1 }">[다음]</a>
 			</c:when>
-			<c:when test="${searchList.firstPage>=2&&searchList.firstPage<searchList.totPage-2}">
+			<c:when test="${searchList.firstPage>=3&&searchList.firstPage<searchList.totPage-2}">
 					<a href="/emplList?page=${searchList.firstPage-1 }">[이전]</a>
 				<c:forEach var="link" begin="${searchList.firstPage }"
 					end="${searchList.lastPage }">
@@ -223,7 +211,7 @@ input[type=search] {
     function popup(e){
         var url = "/emplInfo?userId="+e;
         var name = "test";
-        var option = "width = 950, height = 580, top = 100, left = 200, scrollbars=no";
+        var option = "width = 780, height = 480, top = 100, left = 200, scrollbars=no";
         window.open(url, name, option);
     }
  </script>

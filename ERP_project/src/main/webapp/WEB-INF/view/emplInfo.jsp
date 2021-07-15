@@ -104,7 +104,21 @@ input:focus {
 }
 </style>
 <body>
-
+<c:if test="${not empty resultUpdate }">
+	<c:if test="${resultUpdate }">
+	<script>
+		alert("인사 정보 수정이 완료 되었습니다.")
+		window.close()
+	</script>
+	</c:if>
+	
+	<c:if test="${!resultUpdate }">
+	<script>
+		alert("데이터 수정에 실패하였습니다.")
+		window.close();
+	</script>
+	</c:if>
+</c:if>
 	<form action="/emplInfo?id=${resultEmpl.id }" method="post">
 		<div class="container-resultEmplSearch">
 			<table>

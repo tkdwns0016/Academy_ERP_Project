@@ -14,7 +14,7 @@
  
     // 파일 업로드된 경로
   
-    String savePath = "D:/files/"+request.getAttribute("id")+"/";
+    String savePath = "D:/files/noticeBoard/"+request.getAttribute("id")+"/";
     System.out.println("파일경로:"+savePath);
     // 서버에 실제 저장된 파일명
     String filename = (String)request.getAttribute("filename");

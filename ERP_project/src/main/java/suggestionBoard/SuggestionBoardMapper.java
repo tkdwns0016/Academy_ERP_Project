@@ -43,4 +43,13 @@ public interface SuggestionBoardMapper {
 	public EmplClass getECWriter(int writer);
 	@Select("select department_name from department where department_id=#{departmentId}")
 	public String getDepartment(int departmentId);
+	@Select("select id from suggestion_board order by id desc limit 1")
+	public int getLastIndex();
+	@Select("select id from suggestion_board order by id asc limit 1")
+	public int getFirstIndex();
+	@Select("select id from suggestion_board where id=(select min(id) from suggestion_board where id>#{id})")
+	public int getNextIndex(int id);
+	@Select("select id from suggestion_board where id=(select max(id) from suggestion_board where id<#{id})")
+	public int getBeforeIndex(int id);
+	
 }

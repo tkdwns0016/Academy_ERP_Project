@@ -49,6 +49,18 @@
 		<tiles:insertAttribute name="empl_side" />
 
 	</c:if>
+	<c:if test="${not empty result }">
+		<c:if test="${result }">
+			<script>
+				alert("인사 등록이 완료되었습니다.")
+			</script>
+		</c:if>
+		<c:if test="${result }">
+			<script>
+				alert("데이터 전송에 실패하였습니다.")
+			</script>
+		</c:if>
+	</c:if>
     <div id="divContainer" >
     
   <div class="input-form-backgroud row"></div>
@@ -60,8 +72,8 @@
       <table id="table2">
           <tr class="register" height="30">
               <td width="5%" align="center">*</td>
-              <td width="15%">사원 ID</td>
-              <td ><input type="text" disabled="disabled" name="userId" id="userId"  /></td>
+              <td width="15%">이 름</td>
+              <td ><input type="text"  name="name" id="userId"  placeholder="이름"/></td>
             <td></td><td></td>
               <td rowspan="5" style="text-align: center; width: 200px;" class="filebox">
                 <img src="/image/normalImg.jpg" width="150px" class="img-circle" height="150px">
@@ -74,36 +86,28 @@
           <tr height="7">
               <td colspan="3" style="height: 5px;"><hr /></td>
           </tr>
-          <tr class="register" height="10">
+          <tr class="register" height="30">
               <td width="5%" align="center">*</td>
-              <td width="15%">비밀번호</td>
-              <td><input type="password" disabled="disabled" name="password" id="password"  id="pw" onchange="isSame()" /></td>
+              <td width="15%">영문이름</td>
+              <td><input type="text"  name="englishName" id="phone" placeholder="영문이름"  pattern="^[a-zA-Z]{.}" />&nbsp;&nbsp;<span id="same"></span> </td>
           </tr>
           <tr height="7">
               <td colspan="3"><hr /></td>
           </tr>
           <tr class="register" height="30">
               <td width="5%" align="center">*</td>
-              <td width="15%">비밀번호 확인</td>
-              <td><input type="password" disabled="disabled" name="password2" id="password2"  id="pwCheck" onchange="isSame()" />&nbsp;&nbsp;<span id="same"></span></td>
+              <td width="15%">휴대전화</td>
+              <td><input  type="tel"  name="phone" id="phone" placeholder="010-0000-0000"  pattern="[01]{3}-[0-9]{4}-[0-9]{4}" />&nbsp;&nbsp;<span id="same"></span></td>
           </tr>
           <tr height="7">
-              <td colspan="7"><hr/></td>
+              <td colspan="3"><hr /></td>
           </tr>
           <tr class="register" height="30">
               <td width="5%" align="center">*</td>
-              <td width="15%">이 름</td>
-              <td><input type="text" name="name" id="name" /></td>
-          </tr>
-          <tr height="7">
-              <td colspan="7"><hr /></td>
-          </tr>
-          <tr class="register" height="30">
-              <td width="5%" align="center">*</td>
-              <td width="15%">성 별</td>
-              <td>
-                  남 성<input type="radio" name="sex"  id="sex"  value="남성" checked />&nbsp;&nbsp;&nbsp;여 성<input type="radio" name="sex" id="sex" value="여성"/>
-              </td>
+              <td width="15%">이메일</td>
+              <td><input type="text"   id="email"
+                name="email"
+                placeholder="abcd1234@example.com" />&nbsp;&nbsp;<span id="same"></span></td>
           </tr>
           <tr height="7">
               <td colspan="7"><hr /></td>
@@ -113,17 +117,62 @@
                 <td width="15%">주민등록번호</td>
                 <td width="10%"> <input type="text" pattern="[0-9]{6}" name="birthDate1"
                  size=6 maxlength=6 
-                id="exampleInputEmail3" placeholder="앞자리 6자리"
+                id="sample6_postcode" placeholder="앞자리 6자리"
                 style="width: 150px;">
 			
 			     ㅡ
 			
                  <input type="password" 
                  name="birthDate2" pattern="[0-9]{7}"  size=7
-                 id="exampleInputPassword3" maxlength=7 placeholder="뒷자리 7자리"
+                 id="sample6_postcode" maxlength=7 placeholder="뒷자리 7자리"
                  style="width: 150px;">
             </td>
             </tr>
+             <tr height="7">
+              <td colspan="7"><hr/></td>
+          </tr>
+          <tr class="register" height="30">
+              <td width="5%" align="center">*</td>
+              <td width="15%">내/외국인</td>
+              <td>
+                  내국인&nbsp;&nbsp;<input type="radio" name="koreanForeigner"  id="koreanForeigner"  value="내국인" checked />&nbsp;&nbsp;&nbsp;외국인&nbsp;&nbsp;<input type="radio" name="lunarCalendar" id="lunarCalendar" value="외국인"/>
+              </td>
+              </tr>
+          <tr height="7">
+              <td colspan="7"><hr/></td>
+          </tr>
+          <tr class="register" height="30">
+              <td width="5%" align="center">*</td>
+              <td width="15%">양력/음력</td>
+              <td>
+                  양력&nbsp;&nbsp;<input type="radio" name="lunarCalendar"  id="lunarCalendar"  value="양력" checked />&nbsp;&nbsp;&nbsp;음력&nbsp;&nbsp;<input type="radio" name="koreanForeigner" id="koreanForeigner" value="음력"/>
+              </td>
+              </tr>
+          <tr height="7">
+              <td colspan="7"><hr /></td>
+          </tr>
+          <tr class="register" height="30">
+              <td width="5%" align="center">*</td>
+              <td width="15%">성 별</td>
+              <td>
+                  남성&nbsp;&nbsp;<input type="radio" name="sex"  id="sex"  value="남성" checked />&nbsp;&nbsp;&nbsp;여성&nbsp;&nbsp;<input type="radio" name="sex" id="sex" value="여성"/>
+              </td>
+          </tr>
+          <tr height="7">
+            <td colspan="7"><hr /></td>
+          </tr>
+          <tr class="register" height="30">
+              <td width="5%" align="center">*</td>
+              <td width="15%">결혼유무</td>
+               <td>
+                <select name="marriage" id="root">
+					<option value="">선택</option>
+					<option value="미혼">미혼</option>
+					<option value="기혼">기혼</option>
+				</select>
+               </td>
+          </tr>
+         
 
          
           <tr height="7">
@@ -133,24 +182,13 @@
 
           <tr class="register" height="30">
               <td width="5%" align="center">*</td>
-              <td width="15%">휴대전화</td>
-              <td><input type="tel"  name="phone" id="phone"  pattern="[01]{3}-[0-9]{4}-[0-9]{4}" >
-              </td>
-          </tr>
-          <tr height="7">
-            <td colspan="7"><hr /></td>
-          </tr>
-          <tr class="register" height="30">
-              <td width="5%" align="center">*</td>
-              <td width="15%">이메일</td>
-              <td> 
-       
-                <input 
-                type="text"   id="email"
-                name="email"
-                placeholder="abcd1234@example.com" 
-                >
-        
+              <td width="15%">근무형태</td>
+              <td>
+                <select name="workType" id="root">
+					<option value="">선택</option>
+					<option value="정규직">정규직</option>
+					<option value="비정규직">비정규직</option>
+				</select>
             </td>
           </tr>
 
@@ -161,10 +199,27 @@
 
           <tr class="register" height="30">
             <td width="5%" align="center">*</td>
+            <td width="15%">급여지급기준</td>
+            <td>
+                <select name="salaryPaymentStandards" id="root">
+					<option value="">선택</option>
+					<option value="연봉제">연봉제</option>
+					<option value="주급제">주급제</option>
+					<option value="일급제">일급제</option>
+				</select>
+            </td>
+         
+          <tr height="7">
+            <td colspan="7"><hr /></td>
+          </tr>
+
+
+          <tr class="register" height="30">
+            <td width="5%" align="center">*</td>
             <td width="15%">부 서</td>
             <td>
                 <select name="departmentId" id="root">
-					<option value="">부서선택</option>
+					<option value="">선택</option>
 					<option value="10">경영팀</option>
 					<option value="20">개발팀</option>
 					<option value="30">인사팀</option>
@@ -182,7 +237,7 @@
             <td>
                 <select 
 								name="positionId" id="root">
-								<option value="">직급선택</option>
+								<option value="">선택</option>
 								<option value="1">사원</option>
 								<option value="2">대리</option>
 								<option value="3">과장</option>
@@ -205,7 +260,7 @@
             <td width="15%">연 봉</td>
             <td>
                 <input 
-                id=salary type="text"  name="salary"
+                id="sample6_postcode" type="text"  name="salary"
                 placeholder="연봉을 입력하세요">
             </td>
           </tr>
@@ -248,7 +303,7 @@
 </div>
 <div>&nbsp;</div>
 <div>&nbsp;</div>
-
+</div>
 
 </body>
 </html>

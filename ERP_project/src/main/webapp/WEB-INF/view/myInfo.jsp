@@ -75,8 +75,8 @@
       <table id="table2">
           <tr class="register" height="30">
               <td width="5%" align="center">*</td>
-              <td width="15%">사원 ID</td>
-              <td ><input type="text" readonly="readonly" name="userId" id="userId" value="${empl.userId }"/></td>
+              <td width="15%">이 름</td>
+              <td ><input type="text" name="name" id="name" value="${empl.name }"/></td>
             <td></td><td></td>
               <td rowspan="5" style="text-align: center; width: 200px;" class="filebox">
                 <img src="/image/${empl.imgName }?<%=new Date() %>" width="150px" name="imgName" class="img-circle" height="150px">
@@ -86,7 +86,15 @@
                         class="upload-hidden file_input">
                 </td>
           </tr>
-         
+          <tr height="7">
+              <td colspan="3" ><hr/></td>
+          </tr>
+          
+          <tr class="register" height="10">
+              <td width="5%" align="center">*</td>
+              <td width="15%">영문이름</td>
+              <td><input type="text" name="englishName" id="name" value="${empl.englishName}"/></td>
+          </tr>
           <tr height="7">
               <td colspan="3" style="height: 5px;"><hr /></td>
           </tr>
@@ -103,37 +111,9 @@
               <td width="5%" align="center">*</td>
               <td width="15%">비밀번호 확인</td>
               <td><input type="password" name="password2" id="pwCheck" value="${empl.password }" onchange="isSame()" />&nbsp;&nbsp;<span id="same"></span></td>
-          <input type="text" name="id" hidden="hidden" value="${empl.id }">
-           <input type="text" name="manager" hidden="hidden" value="${empl.manager}">
-           <input type="text" name="status" hidden="hidden" value="${empl.status}">
-           <input type="text" name="hireDate" hidden="hidden" value="${empl.hireDate}">
+       
           </tr>
-          <tr height="7">
-              <td colspan="7"><hr/></td>
-          </tr>
-          <tr class="register" height="30">
-              <td width="5%" align="center">*</td>
-              <td width="15%">이 름</td>
-              <td><input type="text" name="name" id="name" value="${empl.name }"/></td>
-          </tr>
-          <tr height="7">
-              <td colspan="7"><hr /></td>
-          </tr>
-          <tr class="register" height="30">
-              <td width="5%" align="center">*</td>
-              <td width="15%">성 별</td>
-              <td>
-              <c:if test="${empl.sex=='남성' }">
-              
-                  남 성<input type="radio" name="sex"  id="sex"  value="남성" checked="checked" />&nbsp;&nbsp;&nbsp;여 성<input type="radio" name="sex" id="sex" value="여성"/>
-              </c:if>
-               <c:if test="${empl.sex=='여성' }">
-              
-                  남 성<input type="radio" name="sex"  id="sex"  value="남성"  />&nbsp;&nbsp;&nbsp;여 성<input type="radio" name="sex" id="sex" value="여성" checked="checked"/>
-              </c:if>
-              </td>
-          </tr>
-          <tr height="7">
+                    <tr height="7">
               <td colspan="7"><hr /></td>
           </tr>
             <tr class="register" height="30">
@@ -152,9 +132,7 @@
                  style="width: 150px;">
             </td>
             </tr>
-
-         
-          <tr height="7">
+                      <tr height="7">
             <td colspan="7"><hr /></td>
           </tr>
 
@@ -181,109 +159,95 @@
         
             </td>
           </tr>
-
-          <tr height="7">
-            <td colspan="7"><hr /></td>
-          </tr>
-
-
-          <tr class="register" height="30">
-            <td width="5%" align="center">*</td>
-            <td width="15%">부 서</td>
-            <td>
-               <c:if test="${empl.departmentId==10 }">
-                <select name="departmentId" id="root">
-					<option value="10">경영팀</option>
-				</select>
-               </c:if>
-               <c:if test="${empl.departmentId==20 }">
-                <select name="departmentId" id="root">
-					<option value="20">개발팀</option>
-				</select>
-               </c:if>
-               <c:if test="${empl.departmentId==30 }">
-                <select name="departmentId" id="root">
-					<option value="30">인사팀</option>
-				</select>
-               </c:if>
-               <c:if test="${empl.departmentId==40 }">
-                <select  name="departmentId" id="root">
-					<option value="40">영업팀</option>
-				</select>
-               </c:if>
-               
-            </td>
             
-          <tr height="7">
+          
+              <tr height="7">
+              <td colspan="7"><hr /></td>
+          </tr>
+          <tr class="register" height="30">
+              <td width="5%" align="center">*</td>
+              <td width="15%">내/외국인</td>
+              <td>
+              <c:if test="${empl.koreanForeigner=='내국인' }">
+              
+                  내국인&nbsp;&nbsp;<input type="radio" name="koreanForeigner"  id="koreanForeigner"  value="내국인" checked="checked" />&nbsp;&nbsp;&nbsp;외국인&nbsp;&nbsp;<input type="radio" name="koreanForeigner" id="koreanForeigner" value="외국인"/>
+              </c:if>
+               <c:if test="${empl.koreanForeigner=='외국인' }">
+              
+                  내국인&nbsp;&nbsp;<input type="radio" name="koreanForeigner"  id="koreanForeigner"  value="내국인"  />&nbsp;&nbsp;&nbsp;외국인&nbsp;&nbsp;<input type="radio" name="koreanForeigner" id="koreanForeigner" value="외국인" checked="checked"/>
+              </c:if>
+              </td>
+                <tr height="7">
             <td colspan="7"><hr /></td>
           </tr>
 
-          <tr class="register" height="30">
-            <td width="5%" align="center">*</td>
-            <td width="15%">직 급</td>
-            <td>
-               
-              <c:if test="${empl.positionId==1 }">
-                <select name="positionId">
-					<option value="1">사원</option>
-				</select>
-              </c:if>
-               <c:if test="${empl.positionId==2 }">
-                <select name="positionId">
-					<option value="2">대리</option>
-				</select>
-               </c:if>
-              <c:if test="${empl.positionId==3 }">
-                <select name="positionId">
-					<option value="3">과장</option>
-				</select>
-               </c:if>
-              <c:if test="${empl.positionId==4 }">
-                <select name="positionId">
-					<option value="4">차장</option>
-				</select>
-               </c:if>
-             <c:if test="${empl.positionId==5 }">
-                <select name="positionId">
-               		<option value="5">팀장</option>
-              	</select>
-             </c:if>
-                <c:if test="${empl.positionId==6 }">
-                <select name="positionId">
-               		<option value="6">부장</option>
-              	</select>
-             </c:if>
-             <c:if test="${empl.positionId==7 }">
-                <select name="positionId">
-               		<option value="7">상무</option>
-              	</select>
-             </c:if>
-             <c:if test="${empl.positionId==8 }">
-                <select name="positionId">
-               		<option value="8">회장</option>
-              	</select>
-             </c:if>
-             <c:if test="${empl.positionId==9 }">
-                <select name="positionId">
-               		<option value="9">비정규직</option>
-              	</select>
-             </c:if>
-            </td>
-          </tr>
 
+          <tr class="register" height="30">
+              <td width="5%" align="center">*</td>
+              <td width="15%">생일</td>
+              <td><input type="text"  name="birth" id="phone" value="${empl.birth }">
+              </td>
+          </tr>
+          </tr>
+                <tr height="7">
+              <td colspan="7"><hr /></td>
+          </tr>
+          <tr class="register" height="30">
+              <td width="5%" align="center">*</td>
+              <td width="15%">양력/음력</td>
+              <td>
+              <c:if test="${empl.lunarCalendar=='양력' }">
+              
+                  양력&nbsp;&nbsp;<input type="radio" name="lunarCalendar"  id="lunarCalendar"  value="양력" checked="checked" />&nbsp;&nbsp;&nbsp;음력&nbsp;&nbsp;<input type="radio" name="lunarCalendar" id="lunarCalendar" value="음력"/>
+              </c:if>
+               <c:if test="${empl.lunarCalendar=='음력' }">
+              
+                  양력&nbsp;&nbsp;<input type="radio" name="lunarCalendar"  id="lunarCalendar"  value="양력"  />&nbsp;&nbsp;&nbsp;음력&nbsp;&nbsp;<input type="radio" name="lunarCalendar" id="lunarCalendar" value="음력" checked="checked"/>
+              </c:if>
+              </td>
+          </tr>
           <tr height="7">
               <td colspan="7"><hr /></td>
           </tr>
+          <tr class="register" height="30">
+              <td width="5%" align="center">*</td>
+              <td width="15%">성 별</td>
+              <td>
+              <c:if test="${empl.sex=='남성' }">
+              
+                  남성&nbsp;&nbsp;<input type="radio" name="sex"  id="sex"  value="남성" checked="checked" />&nbsp;&nbsp;&nbsp;여성&nbsp;&nbsp;<input type="radio" name="sex" id="sex" value="여성"/>
+              </c:if>
+               <c:if test="${empl.sex=='여성' }">
+              
+                  남성&nbsp;&nbsp;<input type="radio" name="sex"  id="sex"  value="남성"  />&nbsp;&nbsp;&nbsp;여성&nbsp;&nbsp;<input type="radio" name="sex" id="sex" value="여성" checked="checked"/>
+              </c:if>
+              </td>
+          </tr>
+
+         
+
+          <tr height="7">
+            <td colspan="7"><hr /></td>
+          </tr>
+
 
           <tr class="register" height="30">
             <td width="5%" align="center">*</td>
-            <td width="15%">연 봉</td>
+            <td width="15%">결혼유무</td>
             <td>
-                <input 
-                id=salary type="text" readonly="readonly"  name="salary"
-                value="${empl.salary }">
+                <select name="marriage" id="root">
+               <c:if test="${empl.marriage=='미혼' }">
+					<option value="미혼" selected="selected">미혼</option>
+					<option value="기혼">기혼</option>
+               </c:if>
+               <c:if test="${empl.marriage=='기혼' }">
+               		<option value="미혼">미혼</option>
+					<option value="기혼"selected="selected">기혼</option>
+               </c:if>
+				</select>
             </td>
-          </tr>
+            
+  
 
           <tr height="7">
               <td colspan="7"><hr /></td>

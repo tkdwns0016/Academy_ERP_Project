@@ -376,7 +376,7 @@ font-size: 15px;
 						<div class="collapse" id="check-collapse">
 							<ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
 								<li class="rootemplLi"><a href="#" class="link-dark rounded">출/퇴근 체크</a></li>
-								<li class="rootemplLi"><a href="#" class="link-dark rounded">근태리스트</a></li>
+								<li class="rootemplLi"><a href="/attendance" class="link-dark rounded">근태리스트</a></li>
 							</ul>
 						</div>
 					</li>

@@ -2,6 +2,7 @@ package service;
 
 import java.io.File;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -67,6 +68,7 @@ public class ERPController {
 			session.setAttribute("position", ps.getPosiont(emp.getPositionId()));
 			session.setAttribute("suggestion",ss.mainList());
 			session.setAttribute("notice", ns.mainList());
+			
 			return "main/main";
 		}else {
 			model.addAttribute("result", true);
@@ -108,6 +110,7 @@ public class ERPController {
 		if(uploadFile.getOriginalFilename().equals("")) {
 			Employee empl=(Employee)session.getAttribute("empl");
 			employee.setImgName(empl.getImgName());
+			employee.setId(empl.getId());
 			boolean result=es.noImgUpdateEmpl(employee, birthDate1, birthDate2);
 			model.addAttribute("result", result);
 		}else {
@@ -155,11 +158,7 @@ public class ERPController {
 	@PostMapping("/emplInfo")
 	public String emplUpdate(Model model,Employee emp, String page) {
 		model.addAttribute("resultUpdate", es.update(emp));
-		if(page!=null) {
-			model.addAttribute("emplList",es.employeeService(page));
-		}else {
-			model.addAttribute("emplList",es.employeeService("1"));
-		}
-		return "emplListNew";
+		
+		return "emplInfo";
 	}
 }

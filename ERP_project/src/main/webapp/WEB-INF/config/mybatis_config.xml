@@ -19,5 +19,7 @@
   		<typeAlias type="position.Position" alias="Position"/>
   		<typeAlias type="suggestionBoard.SuggestionBoard" alias="SuggestionBoard"/>
   		<typeAlias type="welfare.Welfare" alias="Welfare"/>  
+  		<typeAlias type="payment.Payment" alias="Payment"/>  
+  		<typeAlias type="payment.Account" alias="Account"/>  
   	</typeAliases>
   </configuration>

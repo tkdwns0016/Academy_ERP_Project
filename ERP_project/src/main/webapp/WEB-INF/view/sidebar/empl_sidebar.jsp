@@ -15,8 +15,7 @@
 <!-- Custom styles for this template -->
 <link href="/static/bootstrap/sidebars/sidebars.css" rel="stylesheet">
 
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <style type="text/css">
 
 * {
@@ -204,7 +203,7 @@ nav::after {
 			<div class="container">
 				<div
 					class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-					<svg class="three_line" onclick="side_slide()"
+					<svg class="three_line slide"
 						xmlns="http://www.w3.org/2000/svg" fill="currentColor"
 						viewBox="0 0 16 16">
               <path fill-rule="evenodd"
@@ -218,21 +217,21 @@ nav::after {
 									class="bi d-block mx-auto mb-1" width="24" height="24">
                     <use xlink:href="#home" /></svg> Home
 						</a></li>
-						<li class="emplLi"><a id="font" href="/main" class="nav-link text-white hover"> <svg
+						<li class="emplLi"><a id="font" href="/notice" class="nav-link text-white hover"> <svg
 									class="bi d-block mx-auto mb-1" width="24" height="24">
-                    <use xlink:href="#speedometer2" /></svg> Dashboard
+                    <use xlink:href="#speedometer2" /></svg> NoticeBoard
 						</a></li>
-						<li class="emplLi"><a id="font" href="/main" class="nav-link text-white hover"> <svg
+						<li class="emplLi"><a id="font" href="/educationBoard?departmentId=${empl.departmentId }" class="nav-link text-white hover"> <svg
 									class="bi d-block mx-auto mb-1" width="24" height="24">
-                    <use xlink:href="#table" /></svg> Orders
+                    <use xlink:href="#table" /></svg> Calendar
 						</a></li>
 						<li class="emplLi"><a id="font" href="/main" class="nav-link text-white hover"> <svg
 									class="bi d-block mx-auto mb-1" width="24" height="24">
                     <use xlink:href="#grid" /></svg> Products
 						</a></li>
-						<li class="emplLi"><a id="font" href="/main" class="nav-link text-white hover"> <svg
+						<li class="emplLi"><a id="font" href="/myInfo" class="nav-link text-white hover"> <svg
 									class="bi d-block mx-auto mb-1" width="24" height="24">
-                    <use xlink:href="#people-circle" /></svg> Customers
+                    <use xlink:href="#people-circle" /></svg> MyInfo
 						</a></li>
 					</ul>
 				</div>
@@ -301,13 +300,20 @@ nav::after {
 			<div class="d-flex flex-column flex-shrink-0 p-3 bg-light"
 				style="position: absolute; width: 100%; height: 100%;">
 				<div class="dropdown" style="top:;">
+				<img src="/image/${empl.imgName }" alt="" width="100px"
+						height="120px" class="me-2">
 					<a href="#"
 						class="d-flex align-items-center text-black text-decoration-none dropdown-toggle"
 						id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-						<img src="/image/${empl.imgName }" alt="" width="70px"
-						height="100px" class="me-2"><br> <strong>직급 : ${department } 부서:${position }<br> ${empl.name }
-							님</strong>
+						 <table style="border-collapse: collapse;">
+						 	<tr><td class="font1">&nbsp;직급</td><td class="font2">&nbsp; ${department }</td></tr>
+						 	<tr><td class="font1">&nbsp;부서</td><td class="font2">${position }</td></tr>
+						 	<tr><td class="font1" colspan="2">${empl.name }님</td></tr>
+						 </table>
+						  
 					</a>
+						<ul class="dropdown-menu dropdown-menu-dark text-small shadow"
+						aria-labelledby="dropdownUser1">
 				<li class="emplLi"><a class="dropdown-item" href="/myInfo">Profile</a></li>
 						<li class="emplLi">
 							<hr class="dropdown-divider">

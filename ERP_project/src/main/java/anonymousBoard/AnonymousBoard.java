@@ -11,8 +11,8 @@ public class AnonymousBoard {
 	private LocalDate writeDate;
 	private String password;
 	private int count;
-	
-	public AnonymousBoard(int id, String title, String content, int writer,String nickName, LocalDate writeDate,String password,int count) {
+	private String filename;
+	public AnonymousBoard(int id, String title, String content, int writer,String nickName, LocalDate writeDate,String password,int count,String filename) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -22,6 +22,7 @@ public class AnonymousBoard {
 		this.writeDate = writeDate;
 		this.password=password;
 		this.count = count;
+		this.filename = filename;
 	}
 
 	public String getNickName() {
@@ -35,6 +36,14 @@ public class AnonymousBoard {
 	public AnonymousBoard() {
 		super();
 		// TODO Auto-generated constructor stub
+	}
+
+	public String getFilename() {
+		return filename;
+	}
+
+	public void setFilename(String filename) {
+		this.filename = filename;
 	}
 
 	public int getId() {
@@ -97,7 +106,7 @@ public class AnonymousBoard {
 	public String toString() {
 		return "AnonymousBoard [id=" + id + ", title=" + title + ", content=" + content + ", writer=" + writer
 				+ ", nickName=" + nickName + ", writeDate=" + writeDate + ", password=" + password + ", count=" + count
-				+ "]";
+				+ ", filename=" + filename + "]";
 	}
 
 

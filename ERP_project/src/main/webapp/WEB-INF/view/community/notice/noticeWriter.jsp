@@ -21,13 +21,23 @@
     <link href="/static/community/notice/noticeWriter.css" rel="stylesheet">
     
     </head>
+     <style>
+    	section{
+    	position: relative;
+    	height: 100%;
+    	width: 100%;
+    	top: 10%;
+	
+	}
+    </style>
   <body>
 
-    <h2>글 작성</h2><br>
+<section>
 
-    <form method="post" action="/noticeWriter?writer=${empl.userId }" enctype="multipart/form-data" >  
-      <table class="notiTable">
-        
+    <form method="post" style="width:65%" action="/noticeWriter?writer=${empl.userId }" enctype="multipart/form-data" >  
+      <table style="position: relative; top: -50px" class="notiTable">
+        <tr><td style="font-size: 2em" colspan="3">글 작성</td></tr>
+        <tr><td colspan="3">&nbsp;</td></tr>
         <tr>
           <td class="fchild ntd">작성자</td>
           <td class="ntd" style="width: 60%;">&nbsp;<input type="text" id="writer"  style="width: 90%; " placeholder="작성자"  readonly value="[${department}]${empl.name}"/><br></td>
@@ -65,7 +75,7 @@
         </form>
           
        
-
+</section>
 
 
   </body>

@@ -132,11 +132,11 @@
           <th style="width:10%;">작성자</th>
         </tr>
         <tr style="height:20px"><td></td><td></td><td></td></tr>
-        <c:forEach var="i" begin="0" end="5">
+        <c:forEach var="i" begin="0" end="4">
         <tr onclick="location.href=('/noticeSearch?id=${notice[i].id }')">
          <td style="width:20px; height: 50px;" >${notice[i].id }</td>
         <td style="width:auto; height: 50px;" >${notice[i].title }</td>
-        <td style="width:20px; height: 50px;" >${notice[i].writer }</td>
+        <td style="width:10px; height: 50px;" >${notice[i].writer }</td>
        </tr>
         </c:forEach>
     </table>
@@ -158,7 +158,7 @@
           <th style="width:10%;">작성자</th>
         </tr>
 		<tr style="height:20px"><td></td><td></td><td></td></tr>
-        <c:forEach var="i" begin="0" end="5">
+        <c:forEach var="i" begin="0" end="4">
        <tr onclick="location.href=('/suggestionSearch?id=${suggestion[i].id }')">
         <td style="width:20px; height: 50px;">${suggestion[i].id }</td>
         <td style="width:auto; height: 50px;">${suggestion[i].title }</td>
@@ -238,6 +238,7 @@
       },
       editable: true,
       dayMaxEvents: true, // allow "more" link when too many events
+      eventLimit:false,
       events: events });
 
     calendar.render();

@@ -5,8 +5,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class AttendanceController {
-	@GetMapping("/attendace")
+	@GetMapping("/attendance")
 	public String attendace() {
-		return "attendance/attendance";
+		return "attendance/attendanceList";
 	}
 }

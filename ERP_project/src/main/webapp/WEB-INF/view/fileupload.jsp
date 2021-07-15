@@ -39,7 +39,7 @@
 			<tr>
 				<td>제목</td>
 				<td colspan="3">&nbsp;<input type="text" id="title"
-					name="title" style="width: 90%;" placeholder="제목" "/></td>
+					name="title" style="width: 90%;" placeholder="제목" /></td>
 			</tr>
 			<tr>
 				<td>내용</td>

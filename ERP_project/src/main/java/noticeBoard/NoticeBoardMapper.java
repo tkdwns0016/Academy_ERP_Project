@@ -4,10 +4,14 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.InsertProvider;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.SelectKey;
 import org.apache.ibatis.annotations.Update;
+import org.junit.runners.Parameterized.Parameters;
 
 import anonymousBoard.AnonymousBoard;
 import service.EmplClass;
@@ -28,9 +32,10 @@ public interface NoticeBoardMapper {
 	
 	@Insert("insert into notice_board(writer,title,content,password,write_date,filename) "
 			+ " values(#{writer},#{title},#{content},#{password},#{writeDate},#{filename})")
+	@Options(useGeneratedKeys = true, keyProperty = "id")
 	public boolean insert(NoticeBoard noticeBoard);
 	
-	@Update("update notice_board set writer=#{writer}, title=#{title}, content=#{content}"
+	@Update("update notice_board set writer=#{writer}, title=#{title}, content=#{content},password=#{password},filename=#{filename}"
 			+ " where id=#{id}")
 	public int update(NoticeBoard noticeboard);
 	
@@ -54,5 +59,29 @@ public interface NoticeBoardMapper {
 	@Select("select id from notice_board where id=(select max(id) from notice_board where id<#{id})")
 	public int getBeforeIndex(int id);
 	
+	@Insert("insert into notice_comment values(0,#{boardId},#{comment},#{writerId},#{writerName},#{writerDepartmentName},#{writeDate})")
+	public void setComment(NoticeComment noticeComment);
+	/* comment show */
+	@Select("select * from notice_comment where board_id = #{boardId}")
+	public List<NoticeComment> getCommentList(int boardId);
+	@Select("select count(*) from notice_comment where board_id = #{boardId}")
+	public int getCommentCount(int boardId);
+	@Delete("delete from notice_comment where id=#{deleteNo}")
+	public void deleteComment(String deleteNo);
 	
+	@Update("update notice_comment set comment=#{updateComment} where id=#{updateCommentId}")
+	public void updateComment(@Param("updateComment") String updateComment,@Param("updateCommentId") String updateCommentId);
+
+	@Select("select count(viewer_ip) from notice_view where board_id=#{boardId}")
+	public int getViewCount(int boardId);
+	
+	@Insert("insert notice_view values(0,#{boardId},#{viewerIp})")
+	public void setNoticeViewer(NoticeView noticeView);
+	@Select("select count(*) from notice_view where board_id=#{boardId} and viewer_ip=#{viewerIp}")
+	public String getOverlapCount(NoticeView noticeView);
+	/*to Notice-count*/
+	@Update("update notice_board set count = #{count} where id = #{boardId};")
+	public void setNoticeBoardCount(@Param("count") int count,@Param("boardId") int boardId);
+
+
 }

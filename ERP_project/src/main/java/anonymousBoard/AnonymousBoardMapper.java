@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -21,9 +22,10 @@ public interface AnonymousBoardMapper {
 	@Select("select * from anonymous_board where id=#{id}")
 	public AnonymousBoard select(int id);
 	
-	@Insert("insert into anonymous_board(title,content,writer,wirte_date) "
-			+ "values(#{title},#{content},#{writer},#{writeDate})")
-	public AnonymousBoard insert(AnonymousBoard anonimouseBoard);
+	@Insert("insert into anonymous_board "
+			+ "values(0,#{title},#{content},#{writer},#{nickName},#{writeDate},0,#{password},#{filename})")
+	@Options(useGeneratedKeys = true, keyProperty  = "id") 
+	public boolean insert(AnonymousBoard anonimouseBoard);
 	
 	@Update("update anonymous_board set title=#{title},content=#{content},"
 			+ "writer=#{writer},write_date=#{writeDate} where id=#{id}")
@@ -32,4 +34,13 @@ public interface AnonymousBoardMapper {
 	public int countPlus(@Param("count")int count,@Param("id")int id);
 	@Delete("delete from anonymous_board where id=#{id}")
 	public int delete(int id);
+	@Select("select id from anonymous_board order by id desc limit 1")
+	public int getLastIndex();
+	@Select("select id from anonymous_board order by id asc limit 1")
+	public int getFirstIndex();
+	@Select("select id from anonymous_board where id=(select min(id) from anonymous_board where id>#{id})")
+	public int getNextIndex(int id);
+	@Select("select id from anonymous_board where id=(select max(id) from anonymous_board where id<#{id})")
+	public int getBeforeIndex(int id);
+	
 }

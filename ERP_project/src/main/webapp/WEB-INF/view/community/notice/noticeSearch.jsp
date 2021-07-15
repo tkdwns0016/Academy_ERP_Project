@@ -6,7 +6,6 @@
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 
 
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,46 +16,74 @@
 <link href="/static/community/notice/noticeSearch.css" rel="stylesheet">
 <style>
 @font-face {
-    font-family: 'MaplestoryOTFLight';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/MaplestoryOTFLight.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-button{
-    background-color: gainsboro; 
-    border-radius: 5px;
-    border: none;
+	font-family: 'MaplestoryOTFLight';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/MaplestoryOTFLight.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
 }
 
-
-input[type=button]{
-	background-color: gainsboro; 
-    border-radius: 5px;
-    border: none;
-    width: auto;
-    height: 23px;
-    padding: 0 3px;
+button {
+	background-color: gainsboro;
+	border-radius: 5px;
+	border: none;
 }
-.modal-table{
+
+input[type=button] {
+	background-color: gainsboro;
+	border-radius: 5px;
+	border: none;
+	width: auto;
+	height: 23px;
+	padding: 0 3px;
+}
+
+.modal-table {
 	font-family: MaplestoryOTFLight;
 }
-.file-li{
+
+.file-li {
 	list-style: none;
 }
-.file-link{
+
+.file-link {
 	text-decoration: none;
 	color: black;
 }
+.width_auto{
+	width: 200px;
+}
+.comment_content{
+	text-align: left;
+	width: 65%;
+}
+.comment_tr_border{
+border-bottom:1px solid gainsboro;
+background:aliceblue;
+}
+.modi_button{
+position: relative;
+border-radius: 5px;
+height: 30px;
+width:70px;
+}
+.modi_textarea{
+width:85%;
+resize:none;
+height:150px;
+float:left;
+position:relative;
+}
 </style>
-
 </head>
 <body>
-<c:if test="${empty empl }">
-	<script>
+	<c:if test="${empty empl }">
+		<script>
 		alert("로그인 정보가 없습니다.")
 		location.href="/login";
 	</script>
-</c:if>
+	</c:if>
 	<c:if test="${empl.manager=='권한' }">
 
 		<tiles:insertAttribute name="root_side" />
@@ -87,27 +114,28 @@ input[type=button]{
 				<td class="borderS-td-color" style="width: 10%;">등록일</td>
 				<td class="borderS-td-padding">${result.writeDate }</td>
 				<td class="borderS-td-color" style="width: 10%;">조회수</td>
-				<td style="text-align: center; width: 10%;">4</td>
+				<td style="text-align: center; width: 10%;">${result.count }</td>
 			</tr>
 			<tr>
 				<td class="borderS-td-color">내용</td>
 				<td colspan="5" style="height: 300px;">
 					<div class="content"
-						style="max-height: 100%; width: 98.5%; margin: 5px;" >${result.content }</div>
+						style="max-height: 100%; width: 98.5%; margin: 5px;">${result.content }</div>
 				</td>
 			</tr>
 			<tr style="height: auto;">
 				<td class="borderS-td-color" style="height: 50px;">첨부파일</td>
 				<td colspan="5" class="borderS-td-padding">
 					<ul>
-					<c:if test="${empty file }">
+						<c:if test="${empty file }">
 						저장된 파일이 없습니다.
 					</c:if>
-					<c:if test="${not empty file }">
-					<c:forEach var="file" items="${file }" >
-						 <li class="file-li"><a class="file-link" href="/filedownload?id=${result.id }&filename=${file}">${file}</a></li>
-					</c:forEach>
-					</c:if>
+						<c:if test="${not empty file }">
+							<c:forEach var="file" items="${file }">
+								<li class="file-li"><a class="file-link"
+									href="/filedownload?id=${result.id }&filename=${file}">${file}</a></li>
+							</c:forEach>
+						</c:if>
 					</ul>
 				</td>
 			</tr>
@@ -118,12 +146,14 @@ input[type=button]{
 				<td colspan="6"
 					style="text-align: right; border-left: hidden; border-right: hidden; border-bottom: hidden;">
 					<c:if test="${beforeIndex ne result.id }">
-					<button onclick="location.href=('/noticeSearch?id=${beforeIndex}')" style="float: left; width: 60px; height: 30px">이전</button>&nbsp;
+						<button
+							onclick="location.href=('/noticeSearch?id=${beforeIndex}')"
+							style="float: left; width: 60px; height: 30px">이전</button>&nbsp;
+					</c:if> <c:if test="${nextIndex ne result.id }">
+						<button onclick="location.href=('/noticeSearch?id=${nextIndex}')"
+							style="float: left; width: 60px; height: 30px; margin-left: 5px">다음</button>
 					</c:if>
-					<c:if test="${nextIndex ne result.id }">
-					<button onclick="location.href=('/noticeSearch?id=${nextIndex}')" style="float:left; width: 60px; height: 30px; margin-left: 5px">다음</button>
-					</c:if>
-					
+
 					<button onclick="modifyOn()" style="width: 60px; height: 30px;">수정</button>
 					<button onclick="deleteOn()" style="width: 60px; height: 30px;">삭제</button>
 					<button class="listButton" style="width: 60px; height: 30px;"
@@ -132,7 +162,7 @@ input[type=button]{
 			</tr>
 		</table>
 		<div style="width: 800px; margin-top: auto;">
-			댓글 0개
+			댓글 ${commentCount }개
 			<hr>
 		</div>
 		<div>
@@ -141,14 +171,35 @@ input[type=button]{
 				<tr>
 
 					<td style="width: 15%;" class="borderS-td-color">댓글내용</td>
-					<td style="width: 60%; padding: 10px; border-bottom: none;"><textarea
-							style="resize: none;" cols="60" rows="6"></textarea></td>
-					<td style="width: 12%; text-align: center; border-bottom: none;"><button
-							style="width: 100px; height: 100px;">댓글등록</button></td>
+					<td style="width: 60%; padding: 10px; border-bottom: none;">
+						<form action="/noticeSearch" class="comment_form" method="get">
+							<textarea name="comment" style="resize: none;" cols="60" rows="6"></textarea>
+							<input type="hidden" name="boardId" value="${result.id}">
+							<input type="hidden" name="id" value="${result.id}">
+						</form>
+					</td>
 
+					<td style="width: 12%; text-align: center; border-bottom: none;">
+						<button onclick="comment_send()"
+							style="width: 100px; height: 100px;">댓글등록</button>
+					</td>
 				</tr>
 			</table>
-
+			<table class="comment_table">
+			<c:forEach var="comment" items="${noticeComment }">
+			
+				<tr class="comment_tr_border">
+					<td class="width_auto">[${comment.writerDepartmentName }]${comment.writerName}<br>(${comment.writeDate })</td>
+					<td class="comment_content comment_td${comment.id }">${comment.comment }</td>
+					<td>
+					<c:if test="${empl.userId==comment.writerId }">
+						<input type="button" onclick="comment_modi(${comment.id})" value="수정">						
+						<input type="button" onclick="comment_del(${result.id },${comment.id})" value="삭제">
+					</c:if>
+					</td>
+				</tr>
+				</c:forEach>
+			</table>
 		</div>
 
 	</div>
@@ -156,65 +207,66 @@ input[type=button]{
 
 	<!--  수정 모달폼  -->
 	<div class="full_modal1 hidden">
-	<div class="modal-div">
-		<form action="/noticeModify" method="post" class="modyForm">
-			<input type="hidden" name="id" value="${result.id}">
-			<table class="modal-table">
-				<tr height="20%">
-					<td rowspan="5" style="width: 20%;"><img
-						src="image/community/notice/delete.png"></td>
-				</tr>
-				<tr height="10%">
-					<td id="modal_td"><font size="6"><font color="blue">비밀번호</font>확인</font></td>
-				</tr>
-				<tr height="20%">
+		<div class="modal-div">
+			<form action="/noticeModify" method="post" class="modyForm">
+				<input type="hidden" name="id" value="${result.id}">
+				<table class="modal-table">
+					<tr height="20%">
+						<td rowspan="5" style="width: 20%;"><img
+							src="image/community/notice/delete.png"></td>
+					</tr>
+					<tr height="10%">
+						<td id="modal_td"><font size="6"><font color="blue">비밀번호</font>확인</font></td>
+					</tr>
+					<tr height="20%">
 
-					<td id="modal_td">작성할 때 입력하신 비밀번호를 입력해주세요</td>
-				</tr>
-				<tr height="10%">
-					<td id="modal_td">
-					<input type="password" id="modifyPassword" name="modifyPassword" maxlength="4"> &nbsp;
-					<input type="button" onclick="modifyCheck()" value="확인"></td>
-				</tr>
-				<tr>
-					<td id="modal_td"><input type="button" onclick="modal_out()" value="취소하기"></td>
-				</tr>
-			</table>
-		</form>
+						<td id="modal_td">작성할 때 입력하신 비밀번호를 입력해주세요</td>
+					</tr>
+					<tr height="10%">
+						<td id="modal_td"><input type="password" id="modifyPassword"
+							name="modifyPassword" maxlength="4"> &nbsp; <input
+							type="button" onclick="modifyCheck()" value="확인"></td>
+					</tr>
+					<tr>
+						<td id="modal_td"><input type="button" onclick="modal_out()"
+							value="취소하기"></td>
+					</tr>
+				</table>
+			</form>
+		</div>
+
 	</div>
-
-</div>
 	<!-- 삭제 모달 폼 -->
 	<div class="full_modal2 hidden">
-	<div id="modal-div2">
-	<form action="/deleteNotice" method="post" class="deleForm">
-			<input type="hidden" name="id" value="${result.id}">
-			<table class="modal-table">
-				<tr height="20%">
-					<td rowspan="5" style="width: 20%;"><img
-						src="image/community/notice/delete.png"></td>
-				</tr>
-				<tr height="10%">
-					<td id="modal_td"><font size="6"><font color="blue">비밀번호</font>확인</font></td>
-				</tr>
-				<tr height="20%">
-					<td id="modal_td">작성할 때 입력하신 비밀번호를 입력해주세요</td>
-				</tr>
-				<tr height="10%">
-					<td id="modal_td"><input type="password" id="deletePassword"
-						name="deletePassword" maxlength="4"> &nbsp;
-						<input type="button" onclick="deleteCheck()" value="확인"></td>
-				</tr>
-				<tr>
-					<td id="modal_td"><input type="button" onclick="modal_out2()" value="취소하기"></td>
-				</tr>
-			</table>
-		</form>
-			
+		<div id="modal-div2">
+			<form action="/deleteNotice" method="post" class="deleForm">
+				<input type="hidden" name="id" value="${result.id}">
+				<table class="modal-table">
+					<tr height="20%">
+						<td rowspan="5" style="width: 20%;"><img
+							src="image/community/notice/delete.png"></td>
+					</tr>
+					<tr height="10%">
+						<td id="modal_td"><font size="6"><font color="blue">비밀번호</font>확인</font></td>
+					</tr>
+					<tr height="20%">
+						<td id="modal_td">작성할 때 입력하신 비밀번호를 입력해주세요</td>
+					</tr>
+					<tr height="10%">
+						<td id="modal_td"><input type="password" id="deletePassword"
+							name="deletePassword" maxlength="4"> &nbsp; <input
+							type="button" onclick="deleteCheck()" value="확인"></td>
+					</tr>
+					<tr>
+						<td id="modal_td"><input type="button" onclick="modal_out2()"
+							value="취소하기"></td>
+					</tr>
+				</table>
+			</form>
+
+		</div>
+
 	</div>
-
-</div>
-
 
 </body>
 <script type="text/javascript">
@@ -251,6 +303,27 @@ input[type=button]{
 			document.getElementById("modifyPassword").value="";
 			alert("비밀번호가 틀립니다.");
 		}
+	}
+	
+	function comment_send(){
+		$(".comment_form")[0].submit()
+	}
+	function comment_del(boardId,commentId){
+		location.href="/noticeSearch?id="+boardId+"&deleteNo="+commentId;
+	}
+	function comment_modi(id){
+		var comment_td = $(".comment_td"+id);
+		var comment = comment_td.html();
+		comment_td.html("<form action='/noticeSearch' class='noticeComment_modi_form'><input type='hidden' name='id' value='"+${result.id}+"'><input type='hidden' name='updateCommentId' value='"+id+"'><textarea class='modi_textarea' name='updateComment' placeholder='"+comment+"' >"+comment+"</textarea>");
+		comment_td.append("<button type='button' class='modi_button' onclick='comment_modi_ok("+id+")'>수정하기</button")
+		comment_td.append("<button type='button' class='modi_button' onclick='comment_modi_cancel("+id+")'>취소하기</button></form>")
+	}
+	function comment_modi_ok(id){
+		$(".noticeComment_modi_form").submit();
+		}
+	function comment_modi_cancel(id){
+		var comment_td = $(".comment_td"+id);
+		comment_td.html($(".modi_textarea").prop("placeholder"));
 	}
 </script>
 </html>

@@ -19,9 +19,9 @@ public class EmployeeService {
 	ImageService is;
 
 	public ServiceClass employeeService(String page) {
-		ServiceClass serviceClass=new ServiceClass(Integer.parseInt(page),20, em.EmpleCount());
-		List<EmplClass> emplList= em.selectECList(serviceClass.getFirstRow(),20);
-		List<Employee> list = em.selectList(serviceClass.getFirstRow(),20);
+		ServiceClass serviceClass=new ServiceClass(Integer.parseInt(page),15, em.EmpleCount());
+		List<EmplClass> emplList= em.selectECList(serviceClass.getFirstRow(),15);
+		List<Employee> list = em.selectList(serviceClass.getFirstRow(),15);
 		for(int i=0; i<list.size();i++) {
 			emplList.get(i).setDepartment(em.getDepartment(list.get(i).getDepartmentId()));
 			emplList.get(i).setPosition(em.getPosition(list.get(i).getPositionId()));
@@ -87,13 +87,16 @@ public class EmployeeService {
 		employee.setUserId(userId2);
 		
 		employee.setBirthDate(birthDate1+birthDate2);
-		
+		employee.setBirth(birthDate1.substring(2,4)+"월"+birthDate1.substring(4,6)+"일");
 		employee.setPassword(userId2+"");
 		employee.setHireDate(now);
+		employee.setCompanyAddress("오주원 상사");
+		employee.setCompanyPhone("010-0000-0000");
 		
 		employee.setManager("비권한");
 		employee.setStatus("근무");
 		Employee empl=is.saveUploadedFile(imgName, employee);
+		System.out.println(employee);
 		int affectedRow=em.insert(employee);
 		boolean result;
 		if(affectedRow>=1) {
@@ -108,7 +111,7 @@ public class EmployeeService {
 		List<Employee> emplList;
 		List<EmplClass> listEc;
 		if(!name.trim().equals("")) {
-			ServiceClass serviceClass=new ServiceClass(Integer.parseInt(page),20, em.SearchNameCount());
+			ServiceClass serviceClass=new ServiceClass(Integer.parseInt(page),15, em.SearchNameCount());
 			
 			emplList=em.getEmplSearchName(name);
 			listEc=em.getEcSearchName(name);
@@ -122,7 +125,7 @@ public class EmployeeService {
 		}
 		
 		  if(!userId.trim().equals("")) { 
-			  ServiceClass serviceClass=new ServiceClass(Integer.parseInt(page),20, em.SearchUserIdCount());
+			  ServiceClass serviceClass=new ServiceClass(Integer.parseInt(page),15, em.SearchUserIdCount());
 			  emplList=em.getEmplSerachUserId(Integer.parseInt(userId));
 			  listEc=em.getEcSerachUserId(Integer.parseInt(userId));
 			  for(int i=0; i<listEc.size();i++) {
@@ -142,7 +145,7 @@ public class EmployeeService {
 					listEc.get(i).setPosition(em.getPosition(emplList.get(i).getPositionId()));
 					list.add(listEc.get(i));
 				}
-			  ServiceClass serviceClass=new ServiceClass(Integer.parseInt(page),20, em.SearchAllCount());
+			  ServiceClass serviceClass=new ServiceClass(Integer.parseInt(page),15, em.SearchAllCount());
 			  serviceClass.setTablelist(list);
 			  return serviceClass;
 		  }
@@ -160,11 +163,11 @@ public class EmployeeService {
 			Position p=em.getSearchPo(search);
 			count=em.searchCountWithPositionId(p.getPositionId());
 			if(p!=null) {
-				sc = new ServiceClass(Integer.parseInt(page), 20, count);
-				empl= em.searchEmplListWithPositionId(p.getPositionId(),sc.getFirstRow(),20);
+				sc = new ServiceClass(Integer.parseInt(page), 15, count);
+				empl= em.searchEmplListWithPositionId(p.getPositionId(),sc.getFirstRow(),15);
 				
 				if(!empl.isEmpty()) {
-					emplC= em.searchECListWithPositionId(p.getPositionId(),sc.getFirstRow(),20);
+					emplC= em.searchECListWithPositionId(p.getPositionId(),sc.getFirstRow(),15);
 					for(int i=0;i<emplC.size();i++) {
 						emplC.get(i).setDepartment(em.getDepartment(empl.get(i).getDepartmentId())); 
 						emplC.get(i).setPosition(em.getPosition(empl.get(i).getPositionId())); 
@@ -173,7 +176,8 @@ public class EmployeeService {
 				}else {
 					return null;
 				}
-			}else {
+			}
+			else {
 				return null;
 			}
 			break;
@@ -182,11 +186,11 @@ public class EmployeeService {
 			Department d = em.getSearchDep(search);
 			if(d!=null) {
 				count=em.searchCountWithDepartmentId(d.getDepartmentId());
-				sc = new ServiceClass(Integer.parseInt(page), 20, count);
+				sc = new ServiceClass(Integer.parseInt(page), 15, count);
 				
-				empl= em.searchEmplListWithDepartmentId(d.getDepartmentId(),sc.getFirstRow(),20);
+				empl= em.searchEmplListWithDepartmentId(d.getDepartmentId(),sc.getFirstRow(),15);
 				if(!empl.isEmpty()) {
-					emplC= em.searchECListWithDepartmentId(d.getDepartmentId(),sc.getFirstRow(),20);
+					emplC= em.searchECListWithDepartmentId(d.getDepartmentId(),sc.getFirstRow(),15);
 					for(int i=0;i<emplC.size();i++) {
 						emplC.get(i).setDepartment(em.getDepartment(empl.get(i).getDepartmentId())); 
 						emplC.get(i).setPosition(em.getPosition(empl.get(i).getPositionId())); 
@@ -204,11 +208,11 @@ public class EmployeeService {
 
 		case "name":
 			count=em.searchCountWithName(search);
-			sc = new ServiceClass(Integer.parseInt(page), 20, count);
-			empl= em.searchEmplListWithName(search,sc.getFirstRow(),20);
+			sc = new ServiceClass(Integer.parseInt(page), 15, count);
+			empl= em.searchEmplListWithName(search,sc.getFirstRow(),15);
 			if(!empl.isEmpty()) {
 				
-				emplC= em.searchECListWithName(search,sc.getFirstRow(),20);
+				emplC= em.searchECListWithName(search,sc.getFirstRow(),15);
 				for(int i=0;i<emplC.size();i++) {
 					emplC.get(i).setDepartment(em.getDepartment(empl.get(i).getDepartmentId())); 
 					emplC.get(i).setPosition(em.getPosition(empl.get(i).getPositionId())); 
@@ -221,10 +225,10 @@ public class EmployeeService {
 
 		case "hire_date":
 			count=em.searchCountWithHireDate(search);
-			sc = new ServiceClass(Integer.parseInt(page), 20, count);
-			empl= em.searchEmplListWithHireDate(search,sc.getFirstRow(),20);
+			sc = new ServiceClass(Integer.parseInt(page), 15, count);
+			empl= em.searchEmplListWithHireDate(search,sc.getFirstRow(),15);
 			if(!empl.isEmpty()) {
-				emplC= em.searchECListWithHireDate(search,sc.getFirstRow(),20);
+				emplC= em.searchECListWithHireDate(search,sc.getFirstRow(),15);
 				for(int i=0;i<emplC.size();i++) {
 					emplC.get(i).setDepartment(em.getDepartment(empl.get(i).getDepartmentId())); 
 					emplC.get(i).setPosition(em.getPosition(empl.get(i).getPositionId())); 
@@ -237,10 +241,10 @@ public class EmployeeService {
 
 		case "user_id":
 			count=em.searchCountWithUserId(search);
-			sc = new ServiceClass(Integer.parseInt(page), 20, count);
-			empl= em.searchEmplListWithUserId(search,sc.getFirstRow(),20);
+			sc = new ServiceClass(Integer.parseInt(page), 15, count);
+			empl= em.searchEmplListWithUserId(search,sc.getFirstRow(),15);
 			if(!empl.isEmpty()) {
-				emplC= em.searchECListWithUserId(search,sc.getFirstRow(),20);
+				emplC= em.searchECListWithUserId(search,sc.getFirstRow(),15);
 				for(int i=0;i<emplC.size();i++) {
 					emplC.get(i).setDepartment(em.getDepartment(empl.get(i).getDepartmentId())); 
 					emplC.get(i).setPosition(em.getPosition(empl.get(i).getPositionId())); 

@@ -13,9 +13,10 @@ public class SuggestionBoard {
 	private LocalDate writeDate;
 	private int count;
 	private String password;
+	private String filename;
 	
 	public SuggestionBoard(int id, String title, int writer, String content, LocalDate writeDate, int count,
-			String password) {
+			String password,String filename) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -24,6 +25,7 @@ public class SuggestionBoard {
 		this.writeDate = writeDate;
 		this.count = count;
 		this.password = password;
+		this.filename = filename;
 	}
 	public SuggestionBoard() {
 		super();
@@ -71,10 +73,17 @@ public class SuggestionBoard {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	public String getFilename() {
+		return filename;
+	}
+	public void setFilename(String filename) {
+		this.filename = filename;
+	}
 	@Override
 	public String toString() {
 		return "SuggestionBoard [id=" + id + ", title=" + title + ", writer=" + writer + ", content=" + content
-				+ ", writeDate=" + writeDate + ", count=" + count + ", password=" + password + "]";
+				+ ", writeDate=" + writeDate + ", count=" + count + ", password=" + password + ", filename=" + filename
+				+ "]";
 	}
 	
 	

@@ -7,8 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 <link href="/static/community/notice/noticeSearch.css" rel="stylesheet">
 <style>
 @font-face {
@@ -81,21 +80,35 @@ input[type=button]{
 			</tr>
 			<tr style="height: auto;">
 				<td class="borderS-td-color" style="height: 50px;">첨부파일</td>
-				<td colspan="5" class="borderS-td-padding"><input type="file" multiple="multiple"></td>
+				<td colspan="5" class="borderS-td-padding">
+				<ul>
+					<c:if test="${empty file }">
+						저장된 파일이 없습니다.
+					</c:if>
+					<c:if test="${not empty file }">
+					<c:forEach var="file" items="${file }" >
+						 <li class="file-li"><a class="file-link" href="/filedownload?id=${result.id }&filename=${file}">${file}</a></li>
+					</c:forEach>
+					</c:if>
+					</ul>
+				</td>
 			</tr>
 			<tr style="height: 10px;">
 
 			</tr>
 			<tr>
-				<td colspan="6"
+			<td colspan="6"
 					style="text-align: right; border-left: hidden; border-right: hidden; border-bottom: hidden;">
-					<button style="float: left; width: 60px; height: 30px">이전</button>&nbsp;
-					<button style="float:left; width: 60px; height: 30px; margin-left: 5px">다음</button>
-					
+					<c:if test="${beforeIndex ne result.id }">
+					<button onclick="location.href=('/suggestionSearch?id=${beforeIndex}')" style="float: left; width: 60px; height: 30px">이전</button>&nbsp;
+					</c:if>
+					<c:if test="${nextIndex ne result.id }">
+					<button onclick="location.href=('/suggestionSearch?id=${nextIndex}')" style="float:left; width: 60px; height: 30px; margin-left: 5px">다음</button>
+					</c:if>
 					<button onclick="modifyOn()" style="width: 60px; height: 30px;">수정</button>
 					<button onclick="deleteOn()" style="width: 60px; height: 30px;">삭제</button>
 					<button class="listButton" style="width: 60px; height: 30px;"
-						onclick="history.go(-1); return false;">목록</button>
+						onclick="location.href=('/suggestion')">목록</button>
 				</td>
 			</tr>
 		</table>
@@ -125,7 +138,7 @@ input[type=button]{
 	<!--  수정 모달폼  -->
 	<div class="full_modal1 hidden">
 	<div class="modal-div">
-		<form action="/noticeModify" method="post" class="modyForm">
+		<form action="/anonimousModify" method="post">
 			<input type="hidden" name="id" value="${result.id}">
 			<table class="modal-table">
 				<tr height="20%">
@@ -205,7 +218,12 @@ input[type=button]{
 	
 	function deleteCheck(){
 		if($("#deletePassword").val()==${result.password}){
+			if(confirm("삭제하시겠습니까?")){
+				
 			$(".deleForm").submit();
+			}else{
+				$(".full_modal2")[0].classList.add("hidden");		
+			}
 		}else{
 			$("#deletePassword").val("");
 			alert("비밀번호가 틀립니다.");
@@ -214,6 +232,7 @@ input[type=button]{
 	
 	function modifyCheck(){
 		if($("#modifyPassword").val()==${result.password}){
+			
 			$(".modyForm").submit();
 		}else{
 			document.getElementById("modifyPassword").value="";

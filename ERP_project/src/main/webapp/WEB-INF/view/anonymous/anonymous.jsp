@@ -39,13 +39,18 @@
 		<tiles:insertAttribute name="empl_side" />
 
 	</c:if>
-	<	<section style="float: right; width: 100%; height: 100%; top:100px">
+		<section style="float: right; width: 100%; height: 100%; top:100px">
 	<div style="width: 80%; margin:40px auto;">
 	<div style="text-align: center;">
     <H2>익명게시판</H2>
 </div>
 <table class="table table-sm table-hover"  >
     <thead class="table-light">
+    <tr>
+				<th colspan="5" style="background: white; border: none">
+						<button style="float: right; border-radius: 7px;" onclick="location.href=('/anonymousWriter')">작성</button>
+				</th>
+				</tr>
         <tr>
             <th scope="col">번호</th>
             <th scope="col">제목</th>
@@ -57,7 +62,7 @@
     <tbody>
    
   	 <c:forEach var="l" items="${list.tablelist }">
-    	<tr onclick="location.href=('/anonymousContent?id=${l.id }')">
+    	<tr onclick="location.href=('/anonymousSearch?id=${l.id }')">
        	 	<td>${l.id }</td>
       		<td>${l.title }</td>
         	<td>${l.nickName }</td>
@@ -115,7 +120,7 @@
 
 </div>
 <div class="temp-box" box-three></div>
-<div class="border-dee3eb" style="text-align: right;"> <button>작성</button></div>
+
 </div>
 </section>
 <script type="text/javascript">

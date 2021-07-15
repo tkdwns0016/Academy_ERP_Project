@@ -1,6 +1,7 @@
 package noticeBoard;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -8,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
@@ -46,28 +48,13 @@ public class NoticeBoardController {
 		return "notice/notice";
 	}
 
+		
 
 	@GetMapping("/noticeSearch")
-	public String noticeSearch(Model model, int id) {
-
-		NoticeBoard result = ns.selectOne(id);
-		if(result.getFilename()!=null) {
-			
-		String[] fileStr=result.getFilename().split(",");
-		
-		List<String> file= new ArrayList<String>();
-		for(String str: fileStr) {
-			file.add(str);
-		}
-		
-		model.addAttribute("file", file);
-		}
-		
-		model.addAttribute("beforeIndex", ns.getIndexInfo(id).get("beforeIndex"));
-		model.addAttribute("nextIndex", ns.getIndexInfo(id).get("nextIndex"));
-		model.addAttribute("result", result);
-		model.addAttribute("writer", ns.getWriter(result.getWriter()));
-		
+	public String noticeSearch(Model model, NoticeComment comment, int id, String deleteNo,String updateCommentId,String updateComment , HttpServletRequest req,
+			HttpSession session) {
+		ns.noticeSearchService(model,comment,id,deleteNo,updateCommentId,updateComment,req,session);
+	
 		
 		return "community/notice/noticeSearch"; 
 	}
@@ -85,7 +72,7 @@ public class NoticeBoardController {
 	public String postDeleteNotice(int id) {
 		ns.deleteNotice(id);
 		System.out.println(id);
-		String deleteFolder = "D:/files/"+id;
+		String deleteFolder = "D:/files/noticeBoard/"+id;
 		File file = new File(deleteFolder);
 		while(file.exists()) {
 			File[] fileList=file.listFiles();
@@ -112,38 +99,7 @@ public class NoticeBoardController {
 
 	@PostMapping("/noticeWriter")
 	public String postNoticeWriter(Model model, NoticeBoard noticeBoard, List<MultipartFile> filename) {
-		
-		String uploadFolder = "D:/files/"+ns.getLastIndex();
-		System.out.println(uploadFolder);
-		File folder = new File(uploadFolder);
-		
-		if(!folder.exists()) {
-			try {
-				folder.mkdir();
-			}catch(Exception e) {
-				System.out.println("폴더 못만들어 이바보야");
-			}
-		}
-		
-		String imgName= "";
-		for(MultipartFile fileList : filename) {
-			System.out.println(fileList.getOriginalFilename());
-			
-			File uploadFile = new File(uploadFolder, fileList.getOriginalFilename());
-	
-			imgName+=fileList.getOriginalFilename()+",";
-		try {
-			fileList.transferTo(uploadFile);
-		}catch (Exception e){
-			e.printStackTrace();
-		}
-		
-		}
-		noticeBoard.setFilename(imgName);
-		boolean result = ns.noticeWriter(noticeBoard);
-
-		model.addAttribute("result", result);
-
+		ns.noticeWriteService(model,noticeBoard,filename);
 		return "community/notice/noticeWriterResult";
 
 	}
@@ -151,14 +107,90 @@ public class NoticeBoardController {
 	/* 수정 페이지 */
 	@PostMapping("/noticeModify")
 	public String getNoticeModify(Model model, int id) {
-		NoticeBoard notice = ns.selectOne(id);
-
-		model.addAttribute("notice", notice);
+		NoticeBoard result = ns.selectOne(id);
+		if(!result.getFilename().equals("")) {
+			
+		String[] fileStr=result.getFilename().split(",");
+		
+		List<String> file= new ArrayList<String>();
+		for(String str: fileStr) {
+			file.add(str);
+		}
+		
+		model.addAttribute("file", file);
+		}
+		model.addAttribute("notice", result);
 		return "community/notice/noticeModify";
 	}
 
 	@PostMapping("/noitceModify1")
-	public String getNoticeModify1(Model model, NoticeBoard board, int id) {
+	public String getNoticeModify1(Model model, NoticeBoard board, int id,List<MultipartFile>filename1) {
+		System.out.println(board);
+		String fileName="";
+		String uploadFolder="D:/files/noticeBoard/"+board.getId();
+		if(!filename1.get(0).getOriginalFilename().equals("")) {
+			File folder = new File(uploadFolder);
+		if(!folder.exists()) {
+			folder.mkdir();
+		}
+			for(MultipartFile m:filename1) {
+				File fileList= new File(uploadFolder,m.getOriginalFilename());
+				try {
+					m.transferTo(fileList);
+				} catch (IllegalStateException | IOException e) {
+					e.printStackTrace();
+				}
+			}
+		
+			
+			for( MultipartFile m:filename1) {
+				fileName+=m.getOriginalFilename()+",";
+			}
+		}
+		if(board.getFilename()!=null) {
+			board.setFilename(board.getFilename()+","+fileName);
+			
+		}else {
+			board.setFilename(fileName);
+		}
+	
+	
+		File folder = new File(uploadFolder);
+		if(folder.exists()) {
+			if(!board.getFilename().equals("")) {
+		
+				String[] str=board.getFilename().split(",");
+				File[] fileList=folder.listFiles();
+				List<String> list= new ArrayList<String>();
+			
+				for(int i =0; i<str.length;i++) {
+					list.add(str[i]);
+				}
+				for(int i=0; i<fileList.length;i++) {
+					if(!list.contains(fileList[i].getName())) {
+						fileList[i].delete();
+					}
+				}
+
+			}else {
+				System.out.println("test1");
+			
+					File[] fileList=folder.listFiles();
+					for(int i=0; i<fileList.length;i++) {
+						System.out.println("test2");
+						System.out.println(fileList[i]);
+						fileList[i].delete();
+					
+					}
+					System.out.println("test3");
+					folder.delete();
+				
+					
+						
+				}
+			}
+			
+		
 		ns.updateNotice(board);
 		return "community/notice/noticeUpdateResult";
 	}
@@ -173,4 +205,5 @@ public class NoticeBoardController {
 		
 		return "file/fileDownload";
 	}
+
 }

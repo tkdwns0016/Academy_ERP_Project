@@ -46,6 +46,11 @@
 	</div>
 	<table class="table table-sm table-hover"  >
     <thead class="table-light">
+    	<tr>
+				<th colspan="5" style="background: white; border: none">
+						<button style="float: right; border-radius: 7px;" onclick="location.href=('/suggestionWriter')">작성</button>
+				</th>
+				</tr>
         <tr>
         
             <th scope="col">번호</th>
@@ -59,11 +64,11 @@
     
     <tbody>
    
-   	 <c:forEach var="l" items="${list.tablelist }">
+   	 <c:forEach var="l" items="${list.tablelist }" varStatus="i">
     	<tr onclick="location.href=('/suggestionSearch?id=${l.id }')">
        	 	<td>${l.id }</td>
       		<td>${l.title }</td>
-        	<td>${l.writer }</td>
+        	<td>${writer.get(i.index) }</td>
         	<td>${l.writeDate }</td>
         	<td>${l.count }</td>
    		</tr>
@@ -76,7 +81,7 @@
 <div class="border-dee3eb" style="text-align: center;">
 	<c:choose>
 			
-			<c:when test="${list.firstPage<=2 && list.totPage<=3 }">
+			<c:when test="${list.firstPage<=3 && list.totPage<=3 }">
 				<c:forEach var="link" begin="1"
 					end="${list.lastPage }">
 					<a href="/suggestion?page=${link }">[${link }]</a>
@@ -89,7 +94,7 @@
 				</c:forEach>
 				<a href="/suggestion?page=${list.firstPage+1 }">[다음]</a>
 			</c:when>
-			<c:when test="${list.firstPage>=2&&list.firstPage<list.totPage-2}">
+			<c:when test="${list.firstPage>=3&&list.firstPage<list.totPage-2}">
 					<a href="/suggestion?page=${list.firstPage-1 }">[이전]</a>
 				<c:forEach var="link" begin="${list.firstPage }"
 					end="${list.lastPage }">
@@ -118,8 +123,7 @@
 
 </div>
 	<div class="temp-box" box-three></div>
-	<div class="border-dee3eb" style="text-align: right;"> <button>작성</button></div>
-</div>
+
 </section>
 <script type="text/javascript">
 

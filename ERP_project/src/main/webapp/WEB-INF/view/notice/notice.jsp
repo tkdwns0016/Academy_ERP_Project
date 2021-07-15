@@ -61,7 +61,7 @@ button:hover {
 		<tiles:insertAttribute name="empl_side" />
 
 	</c:if>
-	<section style="float: right; width: 100%; height: 100%; top: 100px">
+	<section style="float: right; width: 100%; height: 100%; top: 10%">
 		<div style="width: 80%; margin: 40px auto;">
 			<div style="text-align: center;">
 				<H2>공지사항</H2>
@@ -71,7 +71,9 @@ button:hover {
 				<thead class="table-light">
 						<tr>
 				<th colspan="5" style="background: white; border: none">
+						<c:if test="${empl.manager=='권한' }">
 						<button style="float: right; border-radius: 7px;" onclick="location.href=('/noticeWriter')">작성</button>
+						</c:if>
 				</th>
 				</tr>
 					<tr>
@@ -115,7 +117,7 @@ button:hover {
 				</c:forEach>
 				<a href="/notice?page=${list.firstPage+1 }">[다음]</a>
 			</c:when>
-			<c:when test="${list.firstPage>=2&&list.firstPage<list.totPage-2}">
+			<c:when test="${list.firstPage>=3&&list.firstPage<list.totPage-2}">
 					<a href="/notice?page=${list.firstPage-1 }">[이전]</a>
 				<c:forEach var="link" begin="${list.firstPage }"
 					end="${list.lastPage }">
@@ -140,10 +142,11 @@ button:hover {
 	
 			</c:otherwise>	
 			</c:choose>
+		
 			</div>
-			<div class="temp-box" box-three></div>
 
 		</div>
+				<hr style ="color: #eeeeeee">
 	</section>
 	<script type="text/javascript">
 
