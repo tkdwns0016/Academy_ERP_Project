@@ -219,16 +219,19 @@ public class NoticeService {
 			boolean insertComment= nm.setComment(nc);
 			model.addAttribute("comment", insertComment);
 			model.addAttribute("resultType", "작성");
+			model.addAttribute("id",id);
 			}
 		if(deleteNo!=null) {
 				boolean deleteComment=nm.deleteComment(deleteNo);
 				model.addAttribute("comment",deleteComment);
 				model.addAttribute("resultType", "삭제");
+				model.addAttribute("id",id);
 			}
 		if(updateCommentId!=null) {
 			 boolean updateCom=nm.updateComment(updateComment,updateCommentId);
 			 model.addAttribute("comment",updateCom);
 				model.addAttribute("resultType", "수정");
+				model.addAttribute("id",id);
 		}
 		
 		model.addAttribute("commentCount", nm.getCommentCount(id));

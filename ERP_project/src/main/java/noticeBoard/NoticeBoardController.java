@@ -54,7 +54,9 @@ public class NoticeBoardController {
 	public String noticeSearch(Model model, NoticeComment comment, int id, String deleteNo,String updateCommentId,String updateComment , HttpServletRequest req,
 			HttpSession session) {
 		ns.noticeSearchService(model,comment,id,deleteNo,updateCommentId,updateComment,req,session);
-	
+		if(model.getAttribute("comment")!=null) {
+			return "community/notice/result";
+		}
 		return "community/notice/noticeSearch"; 
 	}
 
@@ -83,7 +85,7 @@ public class NoticeBoardController {
 			}
 		}
 		
-		model.addAttribute("result", result);
+		model.addAttribute("resultBoolean", result);
 		model.addAttribute("resultType", "삭제");
 		
 		return "community/notice/result";
@@ -102,7 +104,7 @@ public class NoticeBoardController {
 	@PostMapping("/noticeWriter")
 	public String postNoticeWriter(Model model, NoticeBoard noticeBoard, List<MultipartFile> filename) {
 		boolean result=ns.noticeWriteService(model,noticeBoard,filename);
-		model.addAttribute("result", result);
+		model.addAttribute("resultBoolean", result);
 		model.addAttribute("resultType", "작성");
 		return "community/notice/result";
 
@@ -197,7 +199,7 @@ public class NoticeBoardController {
 		}
 		
 		boolean result=ns.updateNotice(board);
-		model.addAttribute("result", result);
+		model.addAttribute("resultBoolean", result);
 		model.addAttribute("resultType", "수정");
 		return "community/notice/result";
 	}

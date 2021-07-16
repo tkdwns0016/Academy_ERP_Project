@@ -148,12 +148,6 @@ button:hover {
 		</div>
 				<hr style ="color: #eeeeeee">
 	</section>
-	<script type="text/javascript">
 
-	$(".click").click(()=>{
-		var plus=$(".click").val()+1;
-		$(".click").val()=plus;
-	})
-</script>
 </body>
 </html>
