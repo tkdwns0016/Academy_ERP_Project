@@ -12,6 +12,7 @@ public class AnonymousBoard {
 	private String password;
 	private int count;
 	private String filename;
+	
 	public AnonymousBoard(int id, String title, String content, int writer,String nickName, LocalDate writeDate,String password,int count,String filename) {
 		super();
 		this.id = id;

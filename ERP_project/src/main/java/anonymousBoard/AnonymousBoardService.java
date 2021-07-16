@@ -1,10 +1,18 @@
 package anonymousBoard;
 
 import java.io.File;
+import java.net.Inet4Address;
+import java.net.UnknownHostException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.annotations.Select;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +20,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
+import department.Department;
+import noticeBoard.NoticeBoard;
+import noticeBoard.NoticeComment;
+import noticeBoard.NoticeView;
+import service.EmplClass;
+import service.Employee;
 import service.ServiceClass;
 import suggestionBoard.SuggestionBoard;
 
@@ -94,9 +108,73 @@ public class AnonymousBoardService {
 		}
 		
 	}
+	public void anonymousSearchService(Model model, AnonymousComment comment, int id, String deleteNo,String updateCommentId,String updateComment , HttpServletRequest req,
+			HttpSession session) {
+		AnonymousView av=null;
+		try {
+			av = new AnonymousView(id,Inet4Address.getLocalHost().getHostAddress());
+		} catch (UnknownHostException e) {
+			e.printStackTrace();
+		}
+		if(am.getOverlapCount(av).equals("0")) {
+			am.setAnonymousViewer(av);
+			am.setAnonumousBoardCount(am.getViewCount(id), id);
+		}
+		AnonymousBoard result = am.select(id);
+		if(result.getFilename()!=null) {
+			
+		String[] fileStr=result.getFilename().split(",");
+		
+		List<String> file= new ArrayList<String>();
+		for(String str: fileStr) {
+			file.add(str);
+		}
+		
+		model.addAttribute("file", file);
+		}
+		Map<String, Integer> index = new HashMap<String, Integer>();
+		
+		if(am.getFirstIndex()==id) {
+			index.put("beforeIndex",id);
+		}else {
+			index.put("beforeIndex",am.getBeforeIndex(id));
+		}
+		if(am.getLastIndex()==id) {
+			index.put("nextIndex",id);
+		}else {
+			index.put("nextIndex", am.getNextIndex(id));
+		}
+		Employee empl=am.getWriter(result.getWriter());
+		EmplClass ec=am.getECWriter(result.getWriter());
+		Department dp =new Department(empl.getDepartmentId(),am.getDepartment(empl.getDepartmentId()));
+		ec.setDepartment(dp);
+		model.addAttribute("beforeIndex", index.get("beforeIndex"));
+		model.addAttribute("nextIndex", index.get("nextIndex"));
+		model.addAttribute("result", result);
+		model.addAttribute("writer", ec);
+		if(comment.getComment()!=null) {
+			Employee employee = (Employee) session.getAttribute("empl");
+			
+			AnonymousComment ac = new AnonymousComment(0,comment.getBoardId(), comment.getComment(), employee.getUserId() , employee.getName(),am.getDepartment(employee.getDepartmentId()),LocalDateTime.parse(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss"))));
+			am.setComment(ac);
+			}
+		if(deleteNo!=null) {
+			am.deleteComment(deleteNo);
+			}
+		if(updateCommentId!=null) {
+			am.updateComment(updateComment,updateCommentId);
+		}
+		
+		model.addAttribute("commentCount", am.getCommentCount(id));
+		model.addAttribute("noticeComment", am.getCommentList(id));	
+		model.addAttribute("result", result);
+		model.addAttribute("writer", result.getNickName());
+	}
+		
+}
 	
 		
 	
 
 	
-}
+

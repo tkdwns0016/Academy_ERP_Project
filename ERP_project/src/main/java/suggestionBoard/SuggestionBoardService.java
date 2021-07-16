@@ -1,11 +1,15 @@
 package suggestionBoard;
 
+import java.io.File;
+import java.io.IOException;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import department.Department;
 import service.EmplClass;
@@ -59,4 +63,41 @@ public class SuggestionBoardService {
 		}
 		return index;
 	}
+
+	public boolean insert(SuggestionBoard suggestionBoard,List<MultipartFile> filename) {
+		boolean result;
+		suggestionBoard.setWriteDate(LocalDate.now());
+		if(!filename.get(0).getOriginalFilename().equals("")) {
+			String imgName="";
+			for(MultipartFile m:filename) {
+				imgName+=m.getOriginalFilename()+",";
+			}
+			suggestionBoard.setFilename(imgName);
+			result= sm.insert(suggestionBoard);
+			String uploadFolder="D:/files/suggestion/"+suggestionBoard.getId();
+			File folder = new File(uploadFolder);
+			if(!folder.exists()) {
+				folder.mkdir();
+			}
+			for(MultipartFile m:filename) {
+			
+				File fileList = new File(uploadFolder,m.getOriginalFilename());
+				try {
+					m.transferTo(fileList);
+				} catch (IllegalStateException | IOException e) {
+					e.printStackTrace();
+				}
+			}
+			
+		}else {
+			result= sm.insert(suggestionBoard);
+		}
+		return result;
+	}
+
+	public boolean update(SuggestionBoard suggestionBoard) {
+		
+		return sm.update(suggestionBoard);
+	}
+	
 }

@@ -156,8 +156,9 @@ public class ERPController {
 		return "emplInfo";
 	}
 	@PostMapping("/emplInfo")
-	public String emplUpdate(Model model,Employee emp, String page) {
-		model.addAttribute("resultUpdate", es.update(emp));
+	public String emplUpdate(Model model,Employee emp) {
+		
+		model.addAttribute("resultUpdate",es.update(emp));
 		
 		return "emplInfo";
 	}

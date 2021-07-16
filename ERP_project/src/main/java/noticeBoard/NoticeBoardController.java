@@ -45,7 +45,7 @@ public class NoticeBoardController {
 			writer.add("["+ns.getWriter(nList.get(i).getWriter()).getDepartment().getDepartmentName()+"] "+ns.getWriter(nList.get(i).getWriter()).getName());
 		}
 		model.addAttribute("writer", writer);
-		return "notice/notice";
+		return "community/notice/notice";
 	}
 
 		
@@ -55,7 +55,6 @@ public class NoticeBoardController {
 			HttpSession session) {
 		ns.noticeSearchService(model,comment,id,deleteNo,updateCommentId,updateComment,req,session);
 	
-		
 		return "community/notice/noticeSearch"; 
 	}
 
@@ -69,9 +68,8 @@ public class NoticeBoardController {
 	}
 
 	@PostMapping("/deleteNotice")
-	public String postDeleteNotice(int id) {
-		ns.deleteNotice(id);
-		System.out.println(id);
+	public String postDeleteNotice(Model model, int id) {
+		boolean result=ns.deleteNotice(id);
 		String deleteFolder = "D:/files/noticeBoard/"+id;
 		File file = new File(deleteFolder);
 		while(file.exists()) {
@@ -84,7 +82,11 @@ public class NoticeBoardController {
 				
 			}
 		}
-		return "community/notice/noticeDeleteResult";
+		
+		model.addAttribute("result", result);
+		model.addAttribute("resultType", "삭제");
+		
+		return "community/notice/result";
 	}
 
 	/* 작성 페이지 */
@@ -99,8 +101,10 @@ public class NoticeBoardController {
 
 	@PostMapping("/noticeWriter")
 	public String postNoticeWriter(Model model, NoticeBoard noticeBoard, List<MultipartFile> filename) {
-		ns.noticeWriteService(model,noticeBoard,filename);
-		return "community/notice/noticeWriterResult";
+		boolean result=ns.noticeWriteService(model,noticeBoard,filename);
+		model.addAttribute("result", result);
+		model.addAttribute("resultType", "작성");
+		return "community/notice/result";
 
 	}
 
@@ -108,16 +112,19 @@ public class NoticeBoardController {
 	@PostMapping("/noticeModify")
 	public String getNoticeModify(Model model, int id) {
 		NoticeBoard result = ns.selectOne(id);
-		if(!result.getFilename().equals("")) {
+		if(result.getFilename()!=null) {
 			
-		String[] fileStr=result.getFilename().split(",");
+			if(!result.getFilename().equals("")) {
+			
+				String[] fileStr=result.getFilename().split(",");
 		
-		List<String> file= new ArrayList<String>();
-		for(String str: fileStr) {
-			file.add(str);
-		}
+				List<String> file= new ArrayList<String>();
+				for(String str: fileStr) {
+						file.add(str);
+				}
 		
-		model.addAttribute("file", file);
+				model.addAttribute("file", file);
+			}
 		}
 		model.addAttribute("notice", result);
 		return "community/notice/noticeModify";
@@ -125,11 +132,10 @@ public class NoticeBoardController {
 
 	@PostMapping("/noitceModify1")
 	public String getNoticeModify1(Model model, NoticeBoard board, int id,List<MultipartFile>filename1) {
-		System.out.println(board);
 		String fileName="";
 		String uploadFolder="D:/files/noticeBoard/"+board.getId();
+		File folder = new File(uploadFolder);
 		if(!filename1.get(0).getOriginalFilename().equals("")) {
-			File folder = new File(uploadFolder);
 		if(!folder.exists()) {
 			folder.mkdir();
 		}
@@ -155,8 +161,10 @@ public class NoticeBoardController {
 		}
 	
 	
-		File folder = new File(uploadFolder);
+		folder = new File(uploadFolder);
 		if(folder.exists()) {
+			if(board.getFilename()!=null) {
+				
 			if(!board.getFilename().equals("")) {
 		
 				String[] str=board.getFilename().split(",");
@@ -173,16 +181,12 @@ public class NoticeBoardController {
 				}
 
 			}else {
-				System.out.println("test1");
 			
 					File[] fileList=folder.listFiles();
 					for(int i=0; i<fileList.length;i++) {
-						System.out.println("test2");
-						System.out.println(fileList[i]);
 						fileList[i].delete();
 					
 					}
-					System.out.println("test3");
 					folder.delete();
 				
 					
@@ -190,9 +194,12 @@ public class NoticeBoardController {
 				}
 			}
 			
+		}
 		
-		ns.updateNotice(board);
-		return "community/notice/noticeUpdateResult";
+		boolean result=ns.updateNotice(board);
+		model.addAttribute("result", result);
+		model.addAttribute("resultType", "수정");
+		return "community/notice/result";
 	}
 
 	@GetMapping("/filedownload")

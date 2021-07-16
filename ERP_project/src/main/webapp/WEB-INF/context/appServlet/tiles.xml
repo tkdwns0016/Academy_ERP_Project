@@ -36,7 +36,7 @@
         <put-attribute name="root_side" value="/WEB-INF/view/sidebar/root_sidebar.jsp" />
         <put-attribute name="empl_side" value="/WEB-INF/view/sidebar/empl_sidebar.jsp" />
     </definition>
-	 <definition name="notice/notice" template="/WEB-INF/view/notice/notice.jsp">
+	 <definition name="community/notice/notice" template="/WEB-INF/view/community/notice/notice.jsp">
         <put-attribute name="root_side" value="/WEB-INF/view/sidebar/root_sidebar.jsp" />
         <put-attribute name="empl_side" value="/WEB-INF/view/sidebar/empl_sidebar.jsp" />
     </definition>
@@ -73,6 +73,10 @@
         <put-attribute name="empl_side" value="/WEB-INF/view/sidebar/empl_sidebar.jsp" />
     </definition>
  <definition name="suggestion/suggestionWriter" template="/WEB-INF/view/suggestion/suggestionWriter.jsp">
+        <put-attribute name="root_side" value="/WEB-INF/view/sidebar/root_sidebar.jsp" />
+        <put-attribute name="empl_side" value="/WEB-INF/view/sidebar/empl_sidebar.jsp" />
+    </definition>
+ <definition name="suggestion/suggestionModify" template="/WEB-INF/view/suggestion/suggestionModify.jsp">
         <put-attribute name="root_side" value="/WEB-INF/view/sidebar/root_sidebar.jsp" />
         <put-attribute name="empl_side" value="/WEB-INF/view/sidebar/empl_sidebar.jsp" />
     </definition>

@@ -221,7 +221,8 @@ input[type=button]{
 			if(confirm("삭제하시겠습니까?")){
 				$(".deleForm").submit();
 			}else{
-				$(".full_modal2")[0].classList.add("hidden");		
+				$(".full_modal2")[0].classList.add("hidden");
+				$("#deletePassword").val("");
 			}
 		}else{
 			$("#deletePassword").val("");

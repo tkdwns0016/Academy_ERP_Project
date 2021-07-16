@@ -7,7 +7,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 public class NoticeBoard {
 	private int id;
-	private String writer;
+	private int writer;
 	private String title;
 	private String content;
 	private String password;
@@ -24,11 +24,11 @@ public class NoticeBoard {
 		this.id = id;
 	}
 
-	public String getWriter() {
+	public int getWriter() {
 		return writer;
 	}
 
-	public void setWriter(String writer) {
+	public void setWriter(int writer) {
 		this.writer = writer;
 	}
 
@@ -87,7 +87,7 @@ public class NoticeBoard {
 				+ "]";
 	}
 
-	public NoticeBoard(int id, String writer, String title, String content, String password, LocalDate writeDate,
+	public NoticeBoard(int id, int writer, String title, String content, String password, LocalDate writeDate,
 			int count, String filename) {
 		super();
 		this.id = id;

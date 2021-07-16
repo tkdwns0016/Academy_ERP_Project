@@ -62,11 +62,11 @@ public class NoticeService {
 		return nm.delete(id);
 	}
 
-	public int updateNotice(NoticeBoard board) {
+	public boolean updateNotice(NoticeBoard board) {
 		return nm.update(board);
 	}
 
-	public EmplClass getWriter(String writer) {
+	public EmplClass getWriter(int writer) {
         Employee empl=nm.getWriter(writer);
         EmplClass ec=nm.getECWriter(writer);
         Department dp =new Department(empl.getDepartmentId(),nm.getDepartment(empl.getDepartmentId()));
@@ -101,8 +101,9 @@ public class NoticeService {
 		return index;
 	}
 
-	public void noticeWriteService(Model model, NoticeBoard noticeBoard, List<MultipartFile> filename) {
+	public boolean noticeWriteService(Model model, NoticeBoard noticeBoard, List<MultipartFile> filename) {
 		String imgName= "";
+		boolean result;
 		if(!filename.get(0).getOriginalFilename().equals("")) {
 			
 			for(MultipartFile fileList : filename) {
@@ -111,7 +112,7 @@ public class NoticeService {
 			}
 		noticeBoard.setFilename(imgName);
 		noticeBoard.setWriteDate(LocalDate.now());
-		nm.insert(noticeBoard);
+		result= nm.insert(noticeBoard);
 		String uploadFolder = "D:/files/noticeBoard/"+noticeBoard.getId();
 		File folder = new File(uploadFolder);
 		
@@ -137,8 +138,9 @@ public class NoticeService {
 		}
 		}else {
 			noticeBoard.setWriteDate(LocalDate.now());
-			nm.insert(noticeBoard);
+			result= nm.insert(noticeBoard);
 		}
+		return result;
 		
 	}
 	public void NoticeComment(HttpSession session, NoticeComment noticeComment) {
@@ -159,7 +161,7 @@ public class NoticeService {
 
 	public void updateNoticeComment(String updateComment, String updateCommentId) {
 		if(updateCommentId!=null) {
-			nm.updateComment(updateComment,updateCommentId);
+			 nm.updateComment(updateComment,updateCommentId);
 		}
 	}
 
@@ -214,13 +216,19 @@ public class NoticeService {
 			Employee employee = (Employee) session.getAttribute("empl");
 			
 			NoticeComment nc = new NoticeComment(0,comment.getBoardId(), comment.getComment(), employee.getUserId() , employee.getName(),nm.getDepartment(employee.getDepartmentId()),LocalDateTime.parse(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss"))));
-			nm.setComment(nc);
+			boolean insertComment= nm.setComment(nc);
+			model.addAttribute("comment", insertComment);
+			model.addAttribute("resultType", "작성");
 			}
 		if(deleteNo!=null) {
-			nm.deleteComment(deleteNo);
+				boolean deleteComment=nm.deleteComment(deleteNo);
+				model.addAttribute("comment",deleteComment);
+				model.addAttribute("resultType", "삭제");
 			}
 		if(updateCommentId!=null) {
-			nm.updateComment(updateComment,updateCommentId);
+			 boolean updateCom=nm.updateComment(updateComment,updateCommentId);
+			 model.addAttribute("comment",updateCom);
+				model.addAttribute("resultType", "수정");
 		}
 		
 		model.addAttribute("commentCount", nm.getCommentCount(id));

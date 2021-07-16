@@ -45,7 +45,7 @@ public interface EmployeeMapper {
 			+ "#{positionId},#{salary},#{manager},#{status},#{englishName},#{lunarCalendar},"
 			+ "#{birth},#{koreanForeigner},#{companyPhone},#{marriage},#{companyAddress},"
 			+ "#{salaryPaymentStandards},#{workType},#{remark})")
-	public int insert(Employee employee);
+	public boolean insert(Employee employee);
 	
 	@Update("update employee set name=#{name},"
 			+ "password=#{password},address_id=#{addressId},"

@@ -34,7 +34,12 @@ input[type=button]{
 .modal-table{
 	font-family: MaplestoryOTFLight;
 }
-
+.delete{
+	text-decoration: none;
+	color: black;
+	list-style: none;
+	
+}
 </style>
 
 </head>
@@ -87,7 +92,7 @@ input[type=button]{
 					</c:if>
 					<c:if test="${not empty file }">
 					<c:forEach var="file" items="${file }" >
-						 <li class="file-li"><a class="file-link" href="/filedownload?id=${result.id }&filename=${file}">${file}</a></li>
+						 <li class="file-li delete"><a class="file-link delete" href="/filedownload?id=${result.id }&filename=${file}">${file}</a></li>
 					</c:forEach>
 					</c:if>
 					</ul>
@@ -138,7 +143,7 @@ input[type=button]{
 	<!--  수정 모달폼  -->
 	<div class="full_modal1 hidden">
 	<div class="modal-div">
-		<form action="/anonimousModify" method="post">
+		<form class="modyForm" action="/suggestionModify" method="post">
 			<input type="hidden" name="id" value="${result.id}">
 			<table class="modal-table">
 				<tr height="20%">

@@ -97,14 +97,7 @@ public class EmployeeService {
 		employee.setStatus("근무");
 		Employee empl=is.saveUploadedFile(imgName, employee);
 		System.out.println(employee);
-		int affectedRow=em.insert(employee);
-		boolean result;
-		if(affectedRow>=1) {
-			result=true;
-		}else {
-			result=false;
-		}
-		return result;
+		return em.insert(employee);
 	}
 	public ServiceClass searchInfo(String name, String userId,String page) {
 		List<EmplClass> list = new ArrayList<EmplClass>();

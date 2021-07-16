@@ -2,21 +2,30 @@ package attendance;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 public class Attendance {
 	private int id;
-	private int userId;
-	private LocalDateTime onTime;
-	private LocalDateTime offTime;
-	private LocalDate date;
-	
-	public Attendance(int id, int userId, LocalDateTime onTime, LocalDateTime offTime, LocalDate date) {
+	private String name;
+	private String department;
+	private String position;
+	private String workType;
+	private LocalTime workStart;
+	private LocalTime workEnd;
+	private LocalTime workingTime;
+	private LocalDate workDate;
+	public Attendance(int id, String name, String department, String position, String workType, LocalTime workStart,
+			LocalTime workEnd, LocalTime workingTime, LocalDate workDate) {
 		super();
 		this.id = id;
-		this.userId = userId;
-		this.onTime = onTime;
-		this.offTime = offTime;
-		this.date = date;
+		this.name = name;
+		this.department = department;
+		this.position = position;
+		this.workType = workType;
+		this.workStart = workStart;
+		this.workEnd = workEnd;
+		this.workingTime = workingTime;
+		this.workDate = workDate;
 	}
 	public Attendance() {
 		super();
@@ -28,36 +37,60 @@ public class Attendance {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public int getUserId() {
-		return userId;
+	public String getName() {
+		return name;
 	}
-	public void setUserId(int userId) {
-		this.userId = userId;
+	public void setName(String name) {
+		this.name = name;
 	}
-	public LocalDateTime getOnTime() {
-		return onTime;
+	public String getDepartment() {
+		return department;
 	}
-	public void setOnTime(LocalDateTime onTime) {
-		this.onTime = onTime;
+	public void setDepartment(String department) {
+		this.department = department;
 	}
-	public LocalDateTime getOffTime() {
-		return offTime;
+	public String getPosition() {
+		return position;
 	}
-	public void setOffTime(LocalDateTime offTime) {
-		this.offTime = offTime;
+	public void setPosition(String position) {
+		this.position = position;
 	}
-	public LocalDate getDate() {
-		return date;
+	public String getWorkType() {
+		return workType;
 	}
-	public void setDate(LocalDate date) {
-		this.date = date;
+	public void setWorkType(String workType) {
+		this.workType = workType;
+	}
+	public LocalTime getWorkStart() {
+		return workStart;
+	}
+	public void setWorkStart(LocalTime workStart) {
+		this.workStart = workStart;
+	}
+	public LocalTime getWorkEnd() {
+		return workEnd;
+	}
+	public void setWorkEnd(LocalTime workEnd) {
+		this.workEnd = workEnd;
+	}
+	public LocalTime getWorkingTime() {
+		return workingTime;
+	}
+	public void setWorkingTime(LocalTime workingTime) {
+		this.workingTime = workingTime;
+	}
+	public LocalDate getWorkDate() {
+		return workDate;
+	}
+	public void setWorkDate(LocalDate workDate) {
+		this.workDate = workDate;
 	}
 	@Override
 	public String toString() {
-		return "Attendance [id=" + id + ", userId=" + userId + ", onTime=" + onTime + ", offTime=" + offTime + ", date="
-				+ date + "]";
+		return "Attendance [id=" + id + ", name=" + name + ", department=" + department + ", position=" + position
+				+ ", workType=" + workType + ", workStart=" + workStart + ", workEnd=" + workEnd + ", workingTime="
+				+ workingTime + ", workDate=" + workDate + "]";
 	}
-
 	
 	
 }

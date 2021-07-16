@@ -55,7 +55,7 @@
 				alert("인사 등록이 완료되었습니다.")
 			</script>
 		</c:if>
-		<c:if test="${result }">
+		<c:if test="${!result }">
 			<script>
 				alert("데이터 전송에 실패하였습니다.")
 			</script>
@@ -117,14 +117,14 @@
                 <td width="15%">주민등록번호</td>
                 <td width="10%"> <input type="text" pattern="[0-9]{6}" name="birthDate1"
                  size=6 maxlength=6 
-                id="sample6_postcode" placeholder="앞자리 6자리"
+                id="birthDate1" placeholder="앞자리 6자리"
                 style="width: 150px;">
 			
 			     ㅡ
 			
                  <input type="password" 
                  name="birthDate2" pattern="[0-9]{7}"  size=7
-                 id="sample6_postcode" maxlength=7 placeholder="뒷자리 7자리"
+                 id="birthDate2" maxlength=7 placeholder="뒷자리 7자리"
                  style="width: 150px;">
             </td>
             </tr>
@@ -296,7 +296,7 @@
       <br />
       <table>
           <tr height="40">
-              <td><input class="button" type="submit" value="전송"/>&nbsp;<a href="index.php"></a></td>
+              <td><input class="button" type="submit" value="전송"/>&nbsp;</td>
           </tr>
       </table>
   </form>

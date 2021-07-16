@@ -64,7 +64,7 @@
 						<c:if test="${!empty file}">
 							<c:forEach var="file" items="${file }" varStatus="i">
 								<li class="file-li delete delete${i.index }">
-								<input style="width: 250px" type="text" name="filename" readonly="readonly" >
+								<input style="width: 250px" type="text" name="filename" readonly="readonly" value="${file }" >
 								<button onclick="del1(${i.index})" type="button">삭제</button> 
 								</li>
 							</c:forEach>

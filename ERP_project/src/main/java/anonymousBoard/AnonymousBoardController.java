@@ -4,6 +4,9 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +15,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.multipart.MultipartFile;
 
 import noticeBoard.NoticeBoard;
+import noticeBoard.NoticeComment;
+import suggestionBoard.SuggestionComment;
 
 @Controller
 public class AnonymousBoardController {
@@ -29,23 +34,11 @@ public class AnonymousBoardController {
 		 return "anonymous/anonymous";
 	 }
 	 @GetMapping("/anonymousSearch")
-		public String anonymousContent(Model model,int id) {
-		 AnonymousBoard result=as.showContent(id);
-		 if(result.getFilename()!=null) {
-				
-				String[] fileStr=result.getFilename().split(",");
-				
-				List<String> file= new ArrayList<String>();
-				for(String str: fileStr) {
-					file.add(str);
-				}
-				model.addAttribute("file", file);
-			}
-			model.addAttribute("beforeIndex", as.getIndexInfo(id).get("beforeIndex"));
-			model.addAttribute("nextIndex", as.getIndexInfo(id).get("nextIndex"));
-			model.addAttribute("result", result);
-			model.addAttribute("writer", result.getNickName());
-			return "anonymous/anonymousSearch";
+		public String anonymousContent(Model model, AnonymousComment comment, int id, String deleteNo,String updateCommentId,String updateComment , HttpServletRequest req,
+				HttpSession session) {
+		 
+		 as.anonymousSearchService(model,comment,id,deleteNo,updateCommentId,updateComment,req,session);
+		 	return "anonymous/anonymousSearch";
 		}
 	 
 	 @GetMapping("/anonymousWriter")

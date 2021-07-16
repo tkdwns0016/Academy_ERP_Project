@@ -247,35 +247,172 @@ h3 {
 					})
 
 	/* date_div 내부 값 */
-		var today = new Date();
-	if(today.getMonth()+1<10){
-		$(".date_div").html(today.getFullYear()+"-0"+(today.getMonth()+1)+"-"+today.getDate()+" 근태 리스트");
-	}else{
-		$(".date_div").html(today.getFullYear()+"-"+(today.getMonth()+1)+"-"+today.getDate()+" 근태 리스트");
+	var today = new Date();
+	if (today.getMonth() + 1 < 10 || today.getDate() < 10) {
+		console.log("ㅎㅇ")
+		if (today.getMonth() + 1 < 10 && today.getDate() < 10) {
+			$(".date_div").html(
+					today.getFullYear() + "-0" + (today.getMonth() + 1) + "-0"
+							+ today.getDate() + " 근태 리스트");
+		} else if (today.getDate() < 10) {
+			$(".date_div").html(
+					today.getFullYear() + "-" + (today.getMonth() + 1) + "-0"
+							+ today.getDate() + " 근태 리스트");
+		} else {
+			$(".date_div").html(
+					today.getFullYear() + "-0" + (today.getMonth() + 1) + "-"
+							+ today.getDate() + " 근태 리스트");
+		}
+	} else {
+		$(".date_div").html(
+				today.getFullYear() + "-" + (today.getMonth() + 1) + "-"
+						+ today.getDate() + " 근태 리스트");
 	}
-	
+
 	/* click for date move (left-arrow) */
-	$(".arrow_img1").on("click", function() {
-		let adjust = today.getDate()-1;
-		today.setDate(adjust)
-		console.log(today.getDate)
-		if(today.getMonth()+1<10){
-			$(".date_div").html(today.getFullYear()+"-0"+(today.getMonth()+1)+"-"+today.getDate()+" 근태 리스트");
-		}else{
-			$(".date_div").html(today.getFullYear()+"-"+(today.getMonth()+1)+"-"+today.getDate()+" 근태 리스트");
-		}
-	})
-	
+	$(".arrow_img1").on(
+			"click",
+			function() {
+				let adjust = today.getDate() - 1;
+				today.setDate(adjust)
+				if (today.getMonth() + 1 < 10 || today.getDate() < 10) {
+					if (today.getMonth() + 1 < 10 && today.getDate() < 10) {
+						$(".date_div").html(
+								today.getFullYear() + "-0"
+										+ (today.getMonth() + 1) + "-0"
+										+ today.getDate() + " 근태 리스트");
+					} else if (today.getDate() < 10) {
+						$(".date_div").html(
+								today.getFullYear() + "-"
+										+ (today.getMonth() + 1) + "-0"
+										+ today.getDate() + " 근태 리스트");
+					} else {
+						$(".date_div").html(
+								today.getFullYear() + "-0"
+										+ (today.getMonth() + 1) + "-"
+										+ today.getDate() + " 근태 리스트");
+					}
+				} else {
+					$(".date_div").html(
+							today.getFullYear() + "-" + (today.getMonth() + 1)
+									+ "-" + today.getDate() + " 근태 리스트");
+				}
+			})
+
 	/* click for date move (right-arrow) */
-	$(".arrow_img2").on("click", function() {
-		let adjust = today.getDate()+1;
-		today.setDate(adjust)
-		console.log(today.getDate)
-		if(today.getMonth()+1<10){
-			$(".date_div").html(today.getFullYear()+"-0"+(today.getMonth()+1)+"-"+today.getDate()+" 근태 리스트");
-		}else{
-			$(".date_div").html(today.getFullYear()+"-"+(today.getMonth()+1)+"-"+today.getDate()+" 근태 리스트");
-		}
-	})
+	$(".arrow_img2").on(
+			"click",
+			function() {
+				let adjust = today.getDate() + 1;
+				today.setDate(adjust)
+				if (today.getMonth() + 1 < 10 || today.getDate() < 10) {
+					console.log("ㅎㅇ")
+					if (today.getMonth() + 1 < 10 && today.getDate() < 10) {
+						$(".date_div").html(
+								today.getFullYear() + "-0"
+										+ (today.getMonth() + 1) + "-0"
+										+ today.getDate() + " 근태 리스트");
+					} else if (today.getDate() < 10) {
+						$(".date_div").html(
+								today.getFullYear() + "-"
+										+ (today.getMonth() + 1) + "-0"
+										+ today.getDate() + " 근태 리스트");
+					} else {
+						$(".date_div").html(
+								today.getFullYear() + "-0"
+										+ (today.getMonth() + 1) + "-"
+										+ today.getDate() + " 근태 리스트");
+					}
+				} else {
+					$(".date_div").html(
+							today.getFullYear() + "-" + (today.getMonth() + 1)
+									+ "-" + today.getDate() + " 근태 리스트");
+				}
+			})
+			
+			/* date_div 내부 값 */
+    var today = new Date();
+    if (today.getMonth() + 1 < 10 || today.getDate() < 10) {
+        console.log("ㅎㅇ")
+        if (today.getMonth() + 1 < 10 && today.getDate() < 10) {
+            $(".date_div").html(
+                    today.getFullYear() + "-0" + (today.getMonth() + 1) + "-0"
+                            + today.getDate() + " 근태 리스트");
+        } else if (today.getDate() < 10) {
+            $(".date_div").html(
+                    today.getFullYear() + "-" + (today.getMonth() + 1) + "-0"
+                            + today.getDate() + " 근태 리스트");
+        } else {
+            $(".date_div").html(
+                    today.getFullYear() + "-0" + (today.getMonth() + 1) + "-"
+                            + today.getDate() + " 근태 리스트");
+        }
+    } else {
+        $(".date_div").html(
+                today.getFullYear() + "-" + (today.getMonth() + 1) + "-"
+                        + today.getDate() + " 근태 리스트");
+    }
+
+    /* click for date move (left-arrow) */
+    $(".arrow_img1").on(
+            "click",
+            function() {
+                let adjust = today.getDate() - 1;
+                today.setDate(adjust)
+                if (today.getMonth() + 1 < 10 || today.getDate() < 10) {
+                    console.log("ㅎㅇ")
+                    if (today.getMonth() + 1 < 10 && today.getDate() < 10) {
+                        $(".date_div").html(
+                                today.getFullYear() + "-0"
+                                        + (today.getMonth() + 1) + "-0"
+                                        + today.getDate() + " 근태 리스트");
+                    } else if (today.getDate() < 10) {
+                        $(".date_div").html(
+                                today.getFullYear() + "-"
+                                        + (today.getMonth() + 1) + "-0"
+                                        + today.getDate() + " 근태 리스트");
+                    } else {
+                        $(".date_div").html(
+                                today.getFullYear() + "-0"
+                                        + (today.getMonth() + 1) + "-"
+                                        + today.getDate() + " 근태 리스트");
+                    }
+                } else {
+                    $(".date_div").html(
+                            today.getFullYear() + "-" + (today.getMonth() + 1)
+                                    + "-" + today.getDate() + " 근태 리스트");
+                }
+            })
+
+    /* click for date move (right-arrow) */
+    $(".arrow_img2").on(
+            "click",
+            function() {
+                let adjust = today.getDate() + 1;
+                today.setDate(adjust)
+                if (today.getMonth() + 1 < 10 || today.getDate() < 10) {
+                    console.log("ㅎㅇ")
+                    if (today.getMonth() + 1 < 10 && today.getDate() < 10) {
+                        $(".date_div").html(
+                                today.getFullYear() + "-0"
+                                        + (today.getMonth() + 1) + "-0"
+                                        + today.getDate() + " 근태 리스트");
+                    } else if (today.getDate() < 10) {
+                        $(".date_div").html(
+                                today.getFullYear() + "-"
+                                        + (today.getMonth() + 1) + "-0"
+                                        + today.getDate() + " 근태 리스트");
+                    } else {
+                        $(".date_div").html(
+                                today.getFullYear() + "-0"
+                                        + (today.getMonth() + 1) + "-"
+                                        + today.getDate() + " 근태 리스트");
+                    }
+                } else {
+                    $(".date_div").html(
+                            today.getFullYear() + "-" + (today.getMonth() + 1)
+                                    + "-" + today.getDate() + " 근태 리스트");
+                }
+            })
 </script>
 </html>

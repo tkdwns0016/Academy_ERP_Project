@@ -11,6 +11,11 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import noticeBoard.NoticeComment;
+import noticeBoard.NoticeView;
+import service.EmplClass;
+import service.Employee;
+
 @Mapper
 public interface AnonymousBoardMapper {
 	@Select("select * from anonymous_board order by id desc limit #{firstRow},#{pagePerCount}")
@@ -42,5 +47,47 @@ public interface AnonymousBoardMapper {
 	public int getNextIndex(int id);
 	@Select("select id from anonymous_board where id=(select max(id) from anonymous_board where id<#{id})")
 	public int getBeforeIndex(int id);
+
+	@Select("select count(*) from anonymous_view where board_id=#{boardId} and viewer_ip=#{viewerIp}")
+	public String getOverlapCount(AnonymousView av);
+
+	@Select("select count(viewer_ip) from anonymous_view where board_id=#{boardId}")
+	public int getViewCount(int boardId);
+
+	@Insert("insert anonymous_view values(0,#{boardId},#{viewerIp})")
+	public void setAnonymousViewer(AnonymousView anonymousView);
+
+	@Update("update anonymous_board set count = #{count} where id = #{boardId};")
+	public void setAnonumousBoardCount(@Param("count") int count,@Param("boardId") int boardId);
+	
+
+	@Delete("delete from anonymous_comment where id=#{deleteNo}")
+	public void deleteComment(String deleteNo);
+
+	@Update("update anonymous_comment set comment=#{updateComment} where id=#{updateCommentId}")
+	public void updateComment(@Param("updateComment") String updateComment,@Param("updateCommentId") String updateCommentId);
+
+	@Select("select count(*) from anonymous_comment where board_id=#{boardId}")
+	public int getCommentCount(int boardId);
+
+	@Select("select * from anonymous_comment where board_id = #{boardId}")
+	public List<AnonymousComment> getCommentList(int boardId);
+
+
+
+	@Insert("insert into anonymous_comment values(0,#{boardId},#{comment},#{writerId},#{writerName},#{writerDepartmentName},#{writeDate})")
+	public void setComment(AnonymousComment ac);
+
+	@Select("select name,department_id from employee where user_id=#{writer}")
+	public Employee getWriter(int writer);
+	
+	@Select("select name from employee where user_id=#{writer}")
+	public EmplClass getECWriter(int writer);
+	
+	@Select("select department_name from department where department_id=#{departmentId}")
+	public String getDepartment(int departmentId);
+	
+
+
 	
 }

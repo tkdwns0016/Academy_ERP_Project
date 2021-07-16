@@ -37,7 +37,7 @@ public interface NoticeBoardMapper {
 	
 	@Update("update notice_board set writer=#{writer}, title=#{title}, content=#{content},password=#{password},filename=#{filename}"
 			+ " where id=#{id}")
-	public int update(NoticeBoard noticeboard);
+	public boolean update(NoticeBoard noticeboard);
 	
 	@Update("update notice_board set count=#{count} where id=#{id}")
 	public int countPlus(@Param("count")int count,@Param("id")int id);
@@ -45,9 +45,9 @@ public interface NoticeBoardMapper {
 	@Delete("delete from notice_board where id=#{id}")
 	public boolean delete(int id);
 	@Select("select name,department_id from employee where user_id=#{writer}")
-	public Employee getWriter(String writer);
+	public Employee getWriter(int writer);
 	@Select("select name from employee where user_id=#{writer}")
-	public EmplClass getECWriter(String writer);
+	public EmplClass getECWriter(int writer);
 	@Select("select department_name from department where department_id=#{departmentId}")
 	public String getDepartment(int departmentId);
 	@Select("select id from notice_board order by id desc limit 1")
@@ -60,17 +60,17 @@ public interface NoticeBoardMapper {
 	public int getBeforeIndex(int id);
 	
 	@Insert("insert into notice_comment values(0,#{boardId},#{comment},#{writerId},#{writerName},#{writerDepartmentName},#{writeDate})")
-	public void setComment(NoticeComment noticeComment);
+	public boolean setComment(NoticeComment noticeComment);
 	/* comment show */
 	@Select("select * from notice_comment where board_id = #{boardId}")
 	public List<NoticeComment> getCommentList(int boardId);
 	@Select("select count(*) from notice_comment where board_id = #{boardId}")
 	public int getCommentCount(int boardId);
 	@Delete("delete from notice_comment where id=#{deleteNo}")
-	public void deleteComment(String deleteNo);
+	public boolean deleteComment(String deleteNo);
 	
 	@Update("update notice_comment set comment=#{updateComment} where id=#{updateCommentId}")
-	public void updateComment(@Param("updateComment") String updateComment,@Param("updateCommentId") String updateCommentId);
+	public boolean updateComment(@Param("updateComment") String updateComment,@Param("updateCommentId") String updateCommentId);
 
 	@Select("select count(viewer_ip) from notice_view where board_id=#{boardId}")
 	public int getViewCount(int boardId);

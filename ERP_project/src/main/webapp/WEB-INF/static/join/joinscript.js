@@ -4,7 +4,7 @@
  	console.dir(button);
 	button[0].onclick=function(){
 
-        var frontValue=$("#exampleInputEmail3").val();
+        var frontValue=$("#birthDate1").val();
 		var iden1=frontValue.substring(0,1)*2;
         var iden2=frontValue.substring(1,2)*3;
         var iden3=frontValue.substring(2,3)*4;
@@ -12,7 +12,7 @@
         var iden5=frontValue.substring(4,5)*6;
         var iden6=frontValue.substring(5,6)*7;
 
-		var afteridenvalue= $("#exampleInputPassword3").val();
+		var afteridenvalue= $("#birthDate2").val();
         var iden7=afteridenvalue.substring(0,1)*8;
         var iden8=afteridenvalue.substring(1,2)*9;
         var iden9=afteridenvalue.substring(2,3)*2;
