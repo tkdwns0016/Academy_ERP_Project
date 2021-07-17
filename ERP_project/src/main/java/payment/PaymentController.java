@@ -1,6 +1,7 @@
 package payment;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,14 +22,22 @@ import service.Employee;
 public class PaymentController {
 	@Autowired
 	PaymentService ps;
+	@Autowired
+	PaymentMapper pm;
+	
 
 	@GetMapping("/paymentWriter")
 	public String payment(Model model) {
+	
+		
 		return "payment/paymentWriter";
 	}
 
 	@GetMapping("/paymentPopup")
 	public String paymentPopup(Model model) {
+		
+		
+		
 		model.addAttribute("Operation", ps.department10());
 		model.addAttribute("Development", ps.department20());
 		model.addAttribute("HumanResources", ps.department30());
@@ -49,7 +58,7 @@ public class PaymentController {
 	}
 
 	@PostMapping("/paymentResult")
-	public String paymentResult(Model model, MultipartFile receipt, Payment payment,HttpSession session) {
+	public String paymentResult(Model model, MultipartFile receipt, Paymentboardlist paymentboardlist,Payment payment,HttpSession session, int userId) {
 		Employee em = (Employee)session.getAttribute("empl");
 		/*
 		if(!receipt.getOriginalFilename().equals("")) {
@@ -59,27 +68,39 @@ public class PaymentController {
 			model.addAttribute("result",ps.insertPayment(payment,em.getUserId()+""));
 		}
 		*/
-		if(!receipt.getOriginalFilename().equals("")) {
-			payment.setReceipt(receipt.getOriginalFilename());
-			model.addAttribute("result",ps.insertPayment(payment,"21050607")); 
+		
+		System.out.println(userId);
+		if(!(receipt.getOriginalFilename().equals(""))) {
+			paymentboardlist.setReceipt(receipt.getOriginalFilename());
+			
+			model.addAttribute("result",ps.insertPayment(paymentboardlist,userId)); 
+			System.out.println(model.getAttribute("result"));
 		}else {
-			model.addAttribute("result",ps.insertPayment(payment,"21050607"));
+			model.addAttribute("result",ps.insertPayment(paymentboardlist,userId));
+			System.out.println(userId);
 		}
 		
 		return "payment/paymentWriterResult";
 	}
 	
 	@GetMapping("/payment")
-	public String paymentList(Model model, String name) {
+	public String paymentList(Model model,HttpSession session) {			
+		Employee emp=(Employee)session.getAttribute("empl");
 		
-		System.out.println(ps.getpaymentListBoard());
-		model.addAttribute("paymentList", ps.getpaymentListBoard());
+	
+		model.addAttribute("paymentList",  ps.getPaymentBoardList(emp.getUserId()));
+		
 		
 		return "payment/paymentBoard";
 	}
 	
 	@GetMapping("/paymentView")
-	public String paymentView(Model model) {
+	public String paymentView(Model model, int id) {
+		
+		
+		System.out.println(pm.getPaymentBoardListSelectId(id));
+		model.addAttribute("selectlist", pm.getPaymentBoardListSelectId(id));
+		
 		
 		return "payment/paymentListView";
 	}

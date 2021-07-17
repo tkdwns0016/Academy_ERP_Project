@@ -11,7 +11,6 @@
 
         .cotainer-payment-height{
             width: 1150px;
-            height: 10px;
             left: 2%;
             position: relative;
         }
@@ -31,7 +30,7 @@
         .container-paymentlistview-mid{
             border: 1px solid black;
             border-radius: 10px;
-            height: 500px;
+            height: 630px;
             width: 1200px;
             position: relative;
             left: 7%;
@@ -42,7 +41,6 @@
             width: 1150px;
             position: relative;
             left: 2%;
-
         }
 
         .container-paymentlistview-search{
@@ -216,8 +214,8 @@
         <tr height="40px" style="background-color: #58bfd045;">
             <th width="5%"><input type="checkbox"></th>
             <th width="10%">기안일자</th>
-            <th width="35%">제목</th>
-            <th width="10%">구분</th>
+            <th width="32%">제목</th>
+            <th width="13%">구분</th>
             <th width="10%">기안자</th>
             <th width="10%">결제자</th>
             <th width="10%">결제</th>
@@ -232,10 +230,10 @@
                 ${pay.writeDate}
             </td>
             <td>
-                ${pay.detail }
+                ${pay.title }
             </td>
             <td>
-                ${pay.division }
+                지출결의서
             </td>
             <td>
                 ${pay.writer }
@@ -244,7 +242,7 @@
                 ${pay.approver}
             </td>
             <td>
-                <a href="/paymentView?id=${pay.id }">보기</a>
+                <a href="/paymentView?id=${pay.paymentBoardId }">보기</a>
             </td>
             <td>
                 ${pay.paymentStatus}

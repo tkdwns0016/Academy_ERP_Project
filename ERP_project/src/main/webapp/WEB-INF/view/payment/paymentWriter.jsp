@@ -1,7 +1,8 @@
-<%@page import="payment.Payment"%>
+<%@page import="payment.Paymentboardlist"%>
 <%@page import="javax.swing.text.Document"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -60,34 +61,41 @@
     </div>
     <table  style="border-collapse: collapse;" class="payment-table">
         <tr>
+        	<input type="hidden" name="userId" value="${empl.userId}" >
             <td class="back" >기준일</td>
-            <td class="back" colspan="8">  <input type="date" name="startDate" class="star"/>
+            <td class="back" colspan="8">  <input type="date" name="startDate" class="star" required="required"/>
                 &nbsp;~&nbsp;
-                <input type="date" name="endDate">
+                <input type="date" name="endDate" required="required">
             </td>
         </tr>
         <tr>
             <td class="back">거래처</td>
             <td class="back" colspan="8">
-                <button type="button" onclick="account()"><img src="image/돋보기.png" width="10px"></button><input type="text" name="accountCompany" class="payment-account noread" readonly="readonly" >
+                <button type="button" onclick="account()"><img src="image/돋보기.png" width="10px"></button><input type="text" name="accountCompany" class="payment-account noread" required="required" readonly="readonly">
             </td>
         </tr>
         <tr>
             <td class="back">작성자</td>
             <td class="back" colspan="8">
-                <input type="text" name="writer" readonly="readonly" class="noread" value="김상준">
+                <input type="text" name="writer" readonly="readonly" class="noread" value="${empl.name }">
             </td>
         </tr>
         <tr>
             <td class="back">부서</td>
-            <td  class="back" colspan="8">
-                <input type="text" name="writerDepartment" readonly="readonly" class="noread" value="개발">
+            <td class="back" colspan="8">
+                <input type="text" name="writerDepartment" readonly="readonly" class="noread" value="${department }">
             </td>
         </tr>
         <tr>
-            <td class="back" style="border-bottom: 2px solid black ;">결제라인</td>
-            <td class="back" colspan="8" style="border-bottom: 2px solid black ;">
+            <td class="back" >결제라인</td>
+            <td class="back" colspan="8"">
                 <button type="button" onclick="paymentline()"><img src="image/돋보기.png" width="10px"></button><input type="text" name="approver" class="payment-paymentLine noread" readonly="readonly" > 
+            </td>
+        </tr>
+         <tr>
+            <td class="back" style="border-bottom: 2px solid black ;">제목</td>
+            <td class="back" colspan="8" style="border-bottom: 2px solid black ;">
+             <input type="text" name="title" size="90" required="required"> 
             </td>
         </tr>
         <tr height="20px">
@@ -138,7 +146,7 @@
                     <td><input type="text" size="10" name="supplyPrice"></td>
                     <td><input type="text" size="10" name="VAT"></td>
                     <td><input type="text" size="10" name="ammountPrice"></td>
-                    <td><input type="file" name="receipt" class="receipt"></td>
+                    <td><input type="file" name="receipt" class="receipt" mu></td>
                     <td><input type="text" name="remark"></td>
                 </tr>
     </table>

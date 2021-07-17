@@ -38,25 +38,23 @@ public class PaymentService {
 		return pm.accountSearch(search);
 	}
 
-	public boolean insertPayment(Payment payment, String userId) {
+	public boolean insertPayment(Paymentboardlist Paymentboardlist, int userId) {
 		int paypmentBoadrdId=pm.Lastindex()+1;
-
-		//String[] fileList = payment.getReceipt().split(",");
-		String[] division = payment.getDivision().split(",");
-		String[] detail = payment.getDetail().split(",");
-		String[] type = payment.getType().split(",");
-		String[] supplyPrice = payment.getSupplyPrice().split(",");
-		String[] VAT = payment.getVAT().split(",");
-		String[] ammountPrice = payment.getAmmountPrice().split(",");
-		String[] remark = payment.getRemark().split(",");
-		System.out.println("디테일:"+detail.length);
-		System.out.println("타입:"+type.length);
-		System.out.println("서플라이프라이스:"+supplyPrice.length);
-		System.out.println("브이에이티:"+VAT.length);
-		System.out.println("어마운트프라이스:"+ammountPrice.length);
-		System.out.println("디비전:"+division.length);
-		//System.out.println("파일:"+fileList.length);
-		System.out.println(payment.getReceipt());
+		String title=Paymentboardlist.getTitle();
+		String Approver=Paymentboardlist.getApprover();
+		LocalDate now=LocalDate.now();
+		//String[] fileList = Paymentboardlist.getReceipt().split(",");
+		String[] division = Paymentboardlist.getDivision().split(",");
+		String[] detail = Paymentboardlist.getDetail().split(",");
+		String[] type = Paymentboardlist.getType().split(",");
+		String[] supplyPrice = Paymentboardlist.getSupplyPrice().split(",");
+		String[] VAT = Paymentboardlist.getVAT().split(",");
+		String[] ammountPrice = Paymentboardlist.getAmmountPrice().split(",");
+		String[] remark = Paymentboardlist.getRemark().split(",");
+	
+		
+		
+		System.out.println(Paymentboardlist.getReceipt());
 		for(int i=0; i<division.length; i++) { 
 			String division1=division[i];
 			String detail1=detail[i];
@@ -65,39 +63,70 @@ public class PaymentService {
 			String VAT1=VAT[i];
 			String ammountPrice1=ammountPrice[i];
 			String remark1=remark[i];
-			LocalDate now=LocalDate.now();
+			for(int j=0; j<ammountPrice1.length(); j++) {
+				int allPrice=Integer.parseInt(ammountPrice1);
+				int allPriceSum+=allPrice;
+				총액계산하는거부터해야함;
+			}
 			
-			pm.insertPayment(new Payment(0,
+			
+			
+			
+			pm.insertPaymentboardlist(new Paymentboardlist(
+					0,
 					paypmentBoadrdId,
-					payment.getStartDate(),
-					payment.getEndDate(),
-					payment.getAccountCompany(),
-					payment.getWriter(),
-					payment.getWriterDepartment(),
-					payment.getApprover(),
+					Paymentboardlist.getStartDate(),
+					Paymentboardlist.getEndDate(),
+					Paymentboardlist.getAccountCompany(),
+					Paymentboardlist.getWriter(),
+					Paymentboardlist.getWriterDepartment(),
+					Approver,
 					division1, 
 					detail1, 
 					type1, 
 					supplyPrice1, 
 					VAT1, 
 					ammountPrice1, 
-					payment.getReceipt(),
+					Paymentboardlist.getReceipt(),
 					remark1,
 					"결제대기",
 					userId,
-					now));
+					now,
+					title));
 		}
+		pm.insertPayment(new Payment(
+				paypmentBoadrdId, 
+				title, 
+				Paymentboardlist.getWriter(),
+				Approver,
+				"지출결의서",
+				"결제대기",
+				userId,
+				now
+				));
+		
 		return true;
+	}
+	
+	/* 조회 */
+	public List<Payment> getPaymentBoardList(int userId){
+		
+		return pm.paymentBoardList(userId);
+	}
+	
+	public List<Paymentboardlist> getPaymentBoardListSelectId(int id){
+		
+		return pm.getPaymentBoardListSelectId(id);
 	}
 	
 	/* 결제게시판 */
 	
-	public List<Payment> getpaymentListBoard(){
+	public List<Paymentboardlist> getpaymentListBoard(){
 		return pm.getPaymentListBoard();
 	}
 	
 	public ServiceClass paymentList(String page){
-		ServiceClass sc = new ServiceClass(Integer.parseInt(page),  15, pm.paymentCount());
+		ServiceClass sc = new ServiceClass(Integer.parseInt(page),  15, pm.PaymentboardlistCount());
 		sc.setTablelist(pm.selectList(sc.getFirstRow(),15));
 		return sc;
 		
@@ -105,7 +134,7 @@ public class PaymentService {
 	}
 	
 	public ServiceClass getListWithProgress(String paymentStatus, String page) {
-		ServiceClass sc = new ServiceClass(Integer.parseInt(page),  15, pm.paymentCount());
+		ServiceClass sc = new ServiceClass(Integer.parseInt(page),  15, pm.PaymentboardlistCount());
 		sc.setTablelist(pm.selectWithPaymentStatus(sc.getFirstRow(),15,paymentStatus));
 		return sc;
 	}

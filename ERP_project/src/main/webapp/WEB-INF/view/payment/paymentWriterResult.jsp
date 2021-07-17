@@ -12,6 +12,7 @@ if(${result}==true){
 	alert("입력이 완료되었습니다.")
 	location.href=("/payment");
 }
+
 </script>
 </head>
 <body>

@@ -5,50 +5,25 @@ import java.time.LocalDate;
 import org.springframework.format.annotation.DateTimeFormat;
 
 public class Payment {
-	private int id;
+
 	private int paymentBoardId;
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private LocalDate startDate;
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private LocalDate endDate;
-	private String accountCompany;
+	private String title;
 	private String writer;
-	private String writerDepartment;
 	private String approver;
-	private String division;
-	private String detail;
-	private String type;
-	private String supplyPrice;
-	private String VAT;
-	private String ammountPrice;
-	private String receipt;
-	private String remark;
+	private String payment;
 	private String paymentStatus;
-	private String userId;
+	private int userId;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate writeDate;
 
-	public Payment(int id, int paymentBoardId, LocalDate startDate, LocalDate endDate, String accountCompany,
-			String writer, String writerDepartment, String approver, String division, String detail, String type,
-			String supplyPrice, String vAT, String ammountPrice, String receipt, String remark, String paymentStatus,
-			String userId, LocalDate writeDate) {
+	public Payment(int paymentBoardId, String title, String writer, String approver, String payment,
+			String paymentStatus, int userId, LocalDate writeDate) {
 		super();
-		this.id = id;
 		this.paymentBoardId = paymentBoardId;
-		this.startDate = startDate;
-		this.endDate = endDate;
-		this.accountCompany = accountCompany;
+		this.title = title;
 		this.writer = writer;
-		this.writerDepartment = writerDepartment;
 		this.approver = approver;
-		this.division = division;
-		this.detail = detail;
-		this.type = type;
-		this.supplyPrice = supplyPrice;
-		VAT = vAT;
-		this.ammountPrice = ammountPrice;
-		this.receipt = receipt;
-		this.remark = remark;
+		this.payment = payment;
 		this.paymentStatus = paymentStatus;
 		this.userId = userId;
 		this.writeDate = writeDate;
@@ -56,24 +31,6 @@ public class Payment {
 
 	public Payment() {
 		super();
-	}
-
-	@Override
-	public String toString() {
-		return "Payment [id=" + id + ", paymentBoardId=" + paymentBoardId + ", startDate=" + startDate + ", endDate="
-				+ endDate + ", accountCompany=" + accountCompany + ", writer=" + writer + ", writerDepartment="
-				+ writerDepartment + ", approver=" + approver + ", division=" + division + ", detail=" + detail
-				+ ", type=" + type + ", supplyPrice=" + supplyPrice + ", VAT=" + VAT + ", ammountPrice=" + ammountPrice
-				+ ", receipt=" + receipt + ", remark=" + remark + ", paymentStatus=" + paymentStatus + ", userId="
-				+ userId + ", writeDate=" + writeDate + "]";
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	public int getPaymentBoardId() {
@@ -84,28 +41,12 @@ public class Payment {
 		this.paymentBoardId = paymentBoardId;
 	}
 
-	public LocalDate getStartDate() {
-		return startDate;
+	public String getTitle() {
+		return title;
 	}
 
-	public void setStartDate(LocalDate startDate) {
-		this.startDate = startDate;
-	}
-
-	public LocalDate getEndDate() {
-		return endDate;
-	}
-
-	public void setEndDate(LocalDate endDate) {
-		this.endDate = endDate;
-	}
-
-	public String getAccountCompany() {
-		return accountCompany;
-	}
-
-	public void setAccountCompany(String accountCompany) {
-		this.accountCompany = accountCompany;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	public String getWriter() {
@@ -116,14 +57,6 @@ public class Payment {
 		this.writer = writer;
 	}
 
-	public String getWriterDepartment() {
-		return writerDepartment;
-	}
-
-	public void setWriterDepartment(String writerDepartment) {
-		this.writerDepartment = writerDepartment;
-	}
-
 	public String getApprover() {
 		return approver;
 	}
@@ -132,68 +65,12 @@ public class Payment {
 		this.approver = approver;
 	}
 
-	public String getDivision() {
-		return division;
+	public String getPayment() {
+		return payment;
 	}
 
-	public void setDivision(String division) {
-		this.division = division;
-	}
-
-	public String getDetail() {
-		return detail;
-	}
-
-	public void setDetail(String detail) {
-		this.detail = detail;
-	}
-
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
-
-	public String getSupplyPrice() {
-		return supplyPrice;
-	}
-
-	public void setSupplyPrice(String supplyPrice) {
-		this.supplyPrice = supplyPrice;
-	}
-
-	public String getVAT() {
-		return VAT;
-	}
-
-	public void setVAT(String vAT) {
-		VAT = vAT;
-	}
-
-	public String getAmmountPrice() {
-		return ammountPrice;
-	}
-
-	public void setAmmountPrice(String ammountPrice) {
-		this.ammountPrice = ammountPrice;
-	}
-
-	public String getReceipt() {
-		return receipt;
-	}
-
-	public void setReceipt(String receipt) {
-		this.receipt = receipt;
-	}
-
-	public String getRemark() {
-		return remark;
-	}
-
-	public void setRemark(String remark) {
-		this.remark = remark;
+	public void setPayment(String payment) {
+		this.payment = payment;
 	}
 
 	public String getPaymentStatus() {
@@ -204,11 +81,11 @@ public class Payment {
 		this.paymentStatus = paymentStatus;
 	}
 
-	public String getUserId() {
+	public int getUserId() {
 		return userId;
 	}
 
-	public void setUserId(String userId) {
+	public void setUserId(int userId) {
 		this.userId = userId;
 	}
 
@@ -218,6 +95,13 @@ public class Payment {
 
 	public void setWriteDate(LocalDate writeDate) {
 		this.writeDate = writeDate;
+	}
+
+	@Override
+	public String toString() {
+		return "Payment [paymentBoardId=" + paymentBoardId + ", title=" + title + ", writer=" + writer + ", approver="
+				+ approver + ", payment=" + payment + ", paymentStatus=" + paymentStatus + ", userId=" + userId
+				+ ", writeDate=" + writeDate + "]";
 	}
 
 }

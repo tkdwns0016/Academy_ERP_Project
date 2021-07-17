@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -193,27 +194,34 @@
               
                 <table class="payment-View-history-table" border="1px solid black" >
                     <tr>
-                        <th width="15%">구분</th>
-                        <th>금액</th>
-                        <th>증비유형</th>
-                        <th>상세내용</th>
+                        <th width="10%">구분</th>
+                        <th width="12%">금액</th>
+                        <th width="%">증빙유형</th>
+                        <th >상세내용</th>
                         <th>비고</th>
                         <th>첨부파일</th>
                     </tr>
+                    
+                    <c:forEach var="sl" items="${selectlist}"> 
                     <tr style="text-align: center;">
-                        <td>야근식대</td>
-                        <td>20,000</td>
-                        <td>법인카드</td>
-                        <td>야근식대</td>
-                        <td></td>
+                        <td>${sl.division }</td>
+                        <td class="ammountPrice">${sl.ammountPrice }</td>
+                        <td>${sl.type }</td>
+                        <td>${sl.detail }</td>
+                        <td>${sl.remark }</td>
                         <td>영수증.jpg</td>
                     </tr>
+                    <script>
+             
+                
+                    </script>
                     <tr>
+                    </c:forEach>
                         <td style="text-align: center; height: 10%;">
                             합계
                         </td>
-                        <td colspan="5">
-                            20000원
+                        <td colspan="5" class="sumif">
+                            
                         </td>
                     </tr>
                     <tr>

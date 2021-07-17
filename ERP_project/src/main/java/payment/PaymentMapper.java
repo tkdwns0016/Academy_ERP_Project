@@ -11,22 +11,37 @@ import service.Employee;
 
 @Mapper
 public interface PaymentMapper {
-	/* payment insert */
-	@Insert("insert into payment values(0,#{paymentBoardId},#{startDate},#{endDate},#{accountCompany},"
-			+ "#{writer},#{writerDepartment},#{approver},#{division},#{detail},#{type},"
-			+ "#{supplyPrice},#{VAT},#{ammountPrice},#{receipt},#{remark},#{paymentStatus},#{userId},#{writeDate})")
+	
+	/* payment */
+	@Insert("insert into payment values(#{paymentBoardId},#{title},#{writer},#{approver},"
+			+ "#{payment},#{paymentStatus},#{userId},#{writeDate})")
 	public boolean insertPayment(Payment payment);
-	@Select("select count(*) from payment")
-	public int paymentCount();
+	
+	@Select("select * from payment where user_id=#{userId}")
+	public List<Payment> paymentBoardList(int userId);
+	
+	@Select("select * from paymentboardlist where payment_board_id=#{id}")
+	public List<Paymentboardlist> getPaymentBoardListSelectId(int id);
+	
+
+	
+	/* Paymentboardlist insert */
+	@Insert("insert into Paymentboardlist values(0,#{paymentBoardId},#{startDate},#{endDate},#{accountCompany},"
+			+ "#{writer},#{writerDepartment},#{approver},#{division},#{detail},#{type},"
+			+ "#{supplyPrice},#{VAT},#{ammountPrice},#{receipt},#{remark},#{paymentStatus},#{userId},#{writeDate},#{title})")
+	public boolean insertPaymentboardlist(Paymentboardlist Paymentboardlist);
+	
+	@Select("select count(*) from Paymentboardlist")
+	public int PaymentboardlistCount();
 	/* select all & get List */
-	@Select("select * from payment order by id desc limit #{firstRow},#{pagePerCount}")
-	public List<Payment> selectList(@Param("firstRow")int firstRow, @Param("pagePerCount")int pagePerCount);
-	@Select("select * from payment")
-	public List<Payment> getPaymentList();
+	@Select("select * from Paymentboardlist order by id desc limit #{firstRow},#{pagePerCount}")
+	public List<Paymentboardlist> selectList(@Param("firstRow")int firstRow, @Param("pagePerCount")int pagePerCount);
+	@Select("select * from Paymentboardlist")
+	public List<Paymentboardlist> getPaymentboardlist();
 	
 	/* my paymentList */
-	@Select("select * from payment where approver=#{approver}")
-	public List<Payment> getMyPaymentList();
+	@Select("select * from Paymentboardlist where approver=#{approver}")
+	public List<Paymentboardlist> getMyPaymentboardlist();
 	
 	/*payment*/
 	@Select("select * from employee where department_id=10")
@@ -41,11 +56,11 @@ public interface PaymentMapper {
 	@Select("select * from employee where department_id=40")
 	public List<Employee> department40();
 	
-	@Select("select * from payment order by id desc limit 1")
+	@Select("select * from Paymentboardlist order by id desc limit 1")
 	public int Lastindex();
 	
-	@Select("select * from payment")
-	public List<Payment> getPaymentListBoard();
+	@Select("select * from Paymentboardlist")
+	public List<Paymentboardlist> getPaymentListBoard();
 	
 	
 	/*account*/
