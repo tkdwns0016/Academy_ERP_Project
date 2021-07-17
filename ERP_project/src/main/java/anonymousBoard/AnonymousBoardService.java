@@ -84,7 +84,7 @@ public class AnonymousBoardService {
 			try {
 				folder.mkdir();
 			}catch(Exception e) {
-				System.out.println("폴더 못만들어 이바보야");
+				System.out.println("폴더 생성 불가 ");
 			}
 		}
 		
@@ -144,31 +144,40 @@ public class AnonymousBoardService {
 		}else {
 			index.put("nextIndex", am.getNextIndex(id));
 		}
-		Employee empl=am.getWriter(result.getWriter());
-		EmplClass ec=am.getECWriter(result.getWriter());
-		Department dp =new Department(empl.getDepartmentId(),am.getDepartment(empl.getDepartmentId()));
-		ec.setDepartment(dp);
 		model.addAttribute("beforeIndex", index.get("beforeIndex"));
 		model.addAttribute("nextIndex", index.get("nextIndex"));
 		model.addAttribute("result", result);
-		model.addAttribute("writer", ec);
 		if(comment.getComment()!=null) {
 			Employee employee = (Employee) session.getAttribute("empl");
 			
 			AnonymousComment ac = new AnonymousComment(0,comment.getBoardId(), comment.getComment(), employee.getUserId() , employee.getName(),am.getDepartment(employee.getDepartmentId()),LocalDateTime.parse(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss"))));
-			am.setComment(ac);
+			 model.addAttribute("comment", am.setComment(ac));
+			 model.addAttribute("resultType", "작성");
+			 model.addAttribute("id",id);
 			}
 		if(deleteNo!=null) {
-			am.deleteComment(deleteNo);
+			 model.addAttribute("comment", am.deleteComment(deleteNo));
+			 model.addAttribute("resultType", "삭제");
+			 model.addAttribute("id",id);
 			}
 		if(updateCommentId!=null) {
-			am.updateComment(updateComment,updateCommentId);
+			 model.addAttribute("comment", am.updateComment(updateComment,updateCommentId));
+			 model.addAttribute("resultType", "수정");
+			 model.addAttribute("id",id);
 		}
 		
 		model.addAttribute("commentCount", am.getCommentCount(id));
-		model.addAttribute("noticeComment", am.getCommentList(id));	
+		model.addAttribute("anonymousComment", am.getCommentList(id));	
 		model.addAttribute("result", result);
 		model.addAttribute("writer", result.getNickName());
+	}
+	public boolean deleteAnonymous(int id) {
+		
+		return am.delete(id);
+	}
+	public boolean update(AnonymousBoard board) {
+	
+		return am.update(board);
 	}
 		
 }

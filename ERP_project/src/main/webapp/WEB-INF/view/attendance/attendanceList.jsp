@@ -18,7 +18,14 @@
 section {
 	text-align: center;
 	position: relative;
-	top: 10%
+	top: 10%;
+	width: 100%;
+}
+
+.attendance_container {
+	position: relative;
+	width: auto;
+	min-width: 1200px;
 }
 
 .section_table {
@@ -59,12 +66,16 @@ h3 {
 	background-color: gainsboro;
 }
 
+.date_div::selection {
+	background: white;
+}
+
 .select_date {
-	position: absolute;
-	width: auto;
+	position: relative;
+	width: 335px;
 	height: auto;
-	top: 25%;
-	left: 40%
+	margin: 0 auto;
+	top: 10%;
 }
 
 .arrow_img {
@@ -81,6 +92,11 @@ h3 {
 	text-decoration: none;
 	margin: 0 5px
 }
+
+.font_size {
+	font-size: 30px;
+	font-weight: bold;
+}
 </style>
 </head>
 
@@ -92,114 +108,75 @@ h3 {
 		<tiles:insertAttribute name="empl_side" />
 	</c:if>
 	<section>
-		<div class="select_date">
-			<svg class="arrow_img1 float_left" xmlns="http://www.w3.org/2000/svg"
-				width="36" height="36" fill="currentColor" class="bi bi-caret-left"
-				viewBox="0 0 16 16">
-			<path class="arrow1"
-					d="M10 12.796V3.204L4.519 8 10 12.796zm-.659.753-5.48-4.796a1 1 0 0 1 0-1.506l5.48-4.796A1 1 0 0 1 11 3.204v9.592a1 1 0 0 1-1.659.753z" /></svg>
-			<div class="date_div"><%=LocalDate.now()%>
-				근태 리스트
-			</div>
-			<svg class="arrow_img2 float_left" xmlns="http://www.w3.org/2000/svg"
-				width="36" height="36" fill="currentColor" class="bi bi-caret-right"
-				viewBox="0 0 16 16">
-  <path class="arrow2"
-					d="M6 12.796V3.204L11.481 8 6 12.796zm.659.753 5.48-4.796a1 1 0 0 0 0-1.506L6.66 2.451C6.011 1.885 5 2.345 5 3.204v9.592a1 1 0 0 0 1.659.753z" /></svg>
-		</div>
+		<div class="attendance_container">
+			<div class="select_date">
 
-		<table class="section_table">
-			<tr>
-				<td colspan="4" style="border: none">
-					<div style="text-align: left;">
-						<h3>🚩근태리스트</h3>
-					</div>
-				</td>
-				<td colspan="5" style="border: none">
-					<div style="text-align: right;">🔴Not
-						Perpect&nbsp;&nbsp;&nbsp;&nbsp;🟤Perpect</div>
-				</td>
-			</tr>
-			<tr class="thLine_back_color">
-				<th>처리상태</th>
-				<th>ID</th>
-				<th>이름</th>
-				<th>부서</th>
-				<th>직급</th>
-				<th>근로유형</th>
-				<th>근무시작시간</th>
-				<th>근무종료시간</th>
-				<th>소정근무시간</th>
-			</tr>
-			<tr>
-				<td>
-					<div class="attendance"></div>
-				</td>
-				<td>21100001</td>
-				<td>송만현</td>
-				<td>경영팀</td>
-				<td>회장</td>
-				<td>정규</td>
-				<td class="on_time">09:10</td>
-				<td>18:00</td>
-				<td>8 시간 50분</td>
-			</tr>
-			<tr>
-				<td>
-					<div class="attendance"></div>
-				</td>
-				<td>21100002</td>
-				<td>송문현</td>
-				<td>경영팀</td>
-				<td>사원</td>
-				<td>정규</td>
-				<td class="on_time">09:01</td>
-				<td>18:10</td>
-				<td>9 시간 20분</td>
-			</tr>
-			<tr>
-				<td>
-					<div class="attendance"></div>
-				</td>
-				<td>21100002</td>
-				<td>송문현</td>
-				<td>경영팀</td>
-				<td>사원</td>
-				<td>정규</td>
-				<td class="on_time">09:00</td>
-				<td>18:10</td>
-				<td>9 시간 20분</td>
-			</tr>
-			<tr>
-				<td>
-					<div class="attendance"></div>
-				</td>
-				<td>21100002</td>
-				<td>송문현</td>
-				<td>경영팀</td>
-				<td>사원</td>
-				<td>정규</td>
-				<td class="on_time">08:59</td>
-				<td>18:10</td>
-				<td>9 시간 20분</td>
-			</tr>
-			<tr>
-				<td>
-					<div class="attendance"></div>
-				</td>
-				<td>21100002</td>
-				<td>송문현</td>
-				<td>경영팀</td>
-				<td>사원</td>
-				<td>정규</td>
-				<td class="on_time">08:12</td>
-				<td>18:10</td>
-				<td>9 시간 20분</td>
-			</tr>
-		</table>
-		<div class="pagenation">
-			[ <a href="#">1</a><a href="#">2</a><a href="#">3</a><a href="#">4</a><a
-				href="#">5</a> ]
+				<svg class="arrow_img1 float_left"
+					xmlns="http://www.w3.org/2000/svg" width="36" height="36"
+					fill="currentColor" class="bi bi-caret-left" viewBox="0 0 16 16">
+			<path class="arrow1"
+						d="M10 12.796V3.204L4.519 8 10 12.796zm-.659.753-5.48-4.796a1 1 0 0 1 0-1.506l5.48-4.796A1 1 0 0 1 11 3.204v9.592a1 1 0 0 1-1.659.753z" /></svg>
+				<div class="date_div">${today } 근태리스트</div>
+				<svg class="arrow_img2 float_left"
+					xmlns="http://www.w3.org/2000/svg" width="36" height="36"
+					fill="currentColor" class="bi bi-caret-right" viewBox="0 0 16 16">
+  <path class="arrow2"
+						d="M6 12.796V3.204L11.481 8 6 12.796zm.659.753 5.48-4.796a1 1 0 0 0 0-1.506L6.66 2.451C6.011 1.885 5 2.345 5 3.204v9.592a1 1 0 0 0 1.659.753z" /></svg>
+			</div>
+
+			<table class="section_table">
+				<tr>
+					<td colspan="4" style="border: none">
+						<div style="text-align: left;">
+							<span class="font_size">🚩근태리스트</span>&nbsp;&nbsp; <select
+								class="dep_select" onchange="dep_select()" style="height: 28px">
+								<option selected="selected">--부서별 검색--</option>
+								<option value="경영팀">경영팀</option>
+								<option value="개발팀">개발팀</option>
+								<option value="영업팀">영업팀</option>
+								<option value="인사팀">인사팀</option>
+							</select> &nbsp;&nbsp; <input type="date" onchange="selectDate()" class="selectDate" max="<%=LocalDate.now()%>">
+						</div>
+
+					</td>
+					<td colspan="5" style="border: none">
+						<div style="text-align: right;">🔴Not
+							Perpect&nbsp;&nbsp;&nbsp;&nbsp;🟤Perpect</div>
+					</td>
+				</tr>
+				<tr class="thLine_back_color">
+					<th>처리상태</th>
+					<th>이름</th>
+					<th>부서</th>
+					<th>직급</th>
+					<th>근로유형</th>
+					<th>근무시작시간</th>
+					<th>근무종료시간</th>
+					<th>소정근무시간</th>
+				</tr>
+				<c:forEach var="attendance" items="${attendanceList }">
+					<tr
+						onclick="choice_empl('${attendance.name}','${attendance.workType}','${attendance.workStart}')">
+						<td>
+							<div class="attendance"></div>
+						</td>
+						<td>${attendance.name }</td>
+						<td>${attendance.department }</td>
+						<td>${attendance.position }</td>
+						<td>${attendance.workType }</td>
+						<td class="on_time">${attendance.workStart }</td>
+						<td>${attendance.workEnd }</td>
+						<td>${attendance.workingTime }</td>
+					</tr>
+				</c:forEach>
+			</table>
+			<div class="pagenation">
+				<c:forEach var="page" begin="1" end="${paging.totPage }">
+				<span style="cursor: pointer;" onclick="pagenation(${page})">
+				[<a>${page}</a>]
+				</span>
+					</c:forEach>
+			</div>
 		</div>
 	</section>
 </body>
@@ -215,7 +192,9 @@ h3 {
 			attendance[i].style.background = "green"
 		}
 	}
-
+	if ("${select}" != "") {
+		$(".dep_select").val('${select}');
+	}
 	/*arrow - hover Event*/
 	$(".arrow_img1")
 			.hover(
@@ -247,172 +226,112 @@ h3 {
 					})
 
 	/* date_div 내부 값 */
-	var today = new Date();
-	if (today.getMonth() + 1 < 10 || today.getDate() < 10) {
-		console.log("ㅎㅇ")
-		if (today.getMonth() + 1 < 10 && today.getDate() < 10) {
-			$(".date_div").html(
-					today.getFullYear() + "-0" + (today.getMonth() + 1) + "-0"
-							+ today.getDate() + " 근태 리스트");
-		} else if (today.getDate() < 10) {
-			$(".date_div").html(
-					today.getFullYear() + "-" + (today.getMonth() + 1) + "-0"
-							+ today.getDate() + " 근태 리스트");
-		} else {
-			$(".date_div").html(
-					today.getFullYear() + "-0" + (today.getMonth() + 1) + "-"
-							+ today.getDate() + " 근태 리스트");
-		}
-	} else {
-		$(".date_div").html(
-				today.getFullYear() + "-" + (today.getMonth() + 1) + "-"
-						+ today.getDate() + " 근태 리스트");
-	}
-
+	var getDate = '${today}';
+	var today = new Date(getDate);
 	/* click for date move (left-arrow) */
 	$(".arrow_img1").on(
 			"click",
 			function() {
 				let adjust = today.getDate() - 1;
 				today.setDate(adjust)
+				let result;
 				if (today.getMonth() + 1 < 10 || today.getDate() < 10) {
 					if (today.getMonth() + 1 < 10 && today.getDate() < 10) {
-						$(".date_div").html(
-								today.getFullYear() + "-0"
-										+ (today.getMonth() + 1) + "-0"
-										+ today.getDate() + " 근태 리스트");
+						result = (today.getFullYear() + "-0"
+								+ (today.getMonth() + 1) + "-0" + today
+								.getDate());
 					} else if (today.getDate() < 10) {
-						$(".date_div").html(
-								today.getFullYear() + "-"
-										+ (today.getMonth() + 1) + "-0"
-										+ today.getDate() + " 근태 리스트");
-					} else {
-						$(".date_div").html(
-								today.getFullYear() + "-0"
-										+ (today.getMonth() + 1) + "-"
-										+ today.getDate() + " 근태 리스트");
+						result = (today.getFullYear() + "-"
+								+ (today.getMonth() + 1) + "-0" + today
+								.getDate());
+					} else if (today.getMonth() + 1 < 10) {
+						result = (today.getFullYear() + "-0"
+								+ (today.getMonth() + 1) + "-" + today
+								.getDate());
 					}
 				} else {
-					$(".date_div").html(
-							today.getFullYear() + "-" + (today.getMonth() + 1)
-									+ "-" + today.getDate() + " 근태 리스트");
+					result = (today.getFullYear() + "-" + (today.getMonth())
+							+ "-" + today.getDate());
 				}
+				location.href = "/attendance?today=" + result + "&dep_choice="
+						+ $('.dep_select').val()
+
 			})
 
 	/* click for date move (right-arrow) */
 	$(".arrow_img2").on(
 			"click",
 			function() {
-				let adjust = today.getDate() + 1;
-				today.setDate(adjust)
-				if (today.getMonth() + 1 < 10 || today.getDate() < 10) {
-					console.log("ㅎㅇ")
-					if (today.getMonth() + 1 < 10 && today.getDate() < 10) {
-						$(".date_div").html(
-								today.getFullYear() + "-0"
-										+ (today.getMonth() + 1) + "-0"
-										+ today.getDate() + " 근태 리스트");
-					} else if (today.getDate() < 10) {
-						$(".date_div").html(
-								today.getFullYear() + "-"
-										+ (today.getMonth() + 1) + "-0"
-										+ today.getDate() + " 근태 리스트");
+				if (getDate < nowDate) {
+					let adjust = today.getDate() + 1;
+					today.setDate(adjust)
+					var result;
+					if (today.getMonth() + 1 < 10 || today.getDate() < 10) {
+						if (today.getMonth() + 1 < 10 && today.getDate() < 10) {
+							result = (today.getFullYear() + "-0"
+									+ (today.getMonth() + 1) + "-0" + today
+									.getDate());
+						} else if (today.getDate() < 10) {
+							result = (today.getFullYear() + "-"
+									+ (today.getMonth() + 1) + "-0" + today
+									.getDate());
+						} else if (today.getMonth() + 1 < 10) {
+							result = (today.getFullYear() + "-0"
+									+ (today.getMonth() + 1) + "-" + today
+									.getDate());
+						}
 					} else {
-						$(".date_div").html(
-								today.getFullYear() + "-0"
-										+ (today.getMonth() + 1) + "-"
-										+ today.getDate() + " 근태 리스트");
+						result = (today.getFullYear() + "-"
+								+ (today.getMonth()) + "-" + today.getDate());
 					}
-				} else {
-					$(".date_div").html(
-							today.getFullYear() + "-" + (today.getMonth() + 1)
-									+ "-" + today.getDate() + " 근태 리스트");
+					location.href = "/attendance?today=" + result
+							+ "&dep_choice=" + $('.dep_select').val()
 				}
 			})
-			
-			/* date_div 내부 값 */
-    var today = new Date();
-    if (today.getMonth() + 1 < 10 || today.getDate() < 10) {
-        console.log("ㅎㅇ")
-        if (today.getMonth() + 1 < 10 && today.getDate() < 10) {
-            $(".date_div").html(
-                    today.getFullYear() + "-0" + (today.getMonth() + 1) + "-0"
-                            + today.getDate() + " 근태 리스트");
-        } else if (today.getDate() < 10) {
-            $(".date_div").html(
-                    today.getFullYear() + "-" + (today.getMonth() + 1) + "-0"
-                            + today.getDate() + " 근태 리스트");
-        } else {
-            $(".date_div").html(
-                    today.getFullYear() + "-0" + (today.getMonth() + 1) + "-"
-                            + today.getDate() + " 근태 리스트");
-        }
-    } else {
-        $(".date_div").html(
-                today.getFullYear() + "-" + (today.getMonth() + 1) + "-"
-                        + today.getDate() + " 근태 리스트");
-    }
 
-    /* click for date move (left-arrow) */
-    $(".arrow_img1").on(
-            "click",
-            function() {
-                let adjust = today.getDate() - 1;
-                today.setDate(adjust)
-                if (today.getMonth() + 1 < 10 || today.getDate() < 10) {
-                    console.log("ㅎㅇ")
-                    if (today.getMonth() + 1 < 10 && today.getDate() < 10) {
-                        $(".date_div").html(
-                                today.getFullYear() + "-0"
-                                        + (today.getMonth() + 1) + "-0"
-                                        + today.getDate() + " 근태 리스트");
-                    } else if (today.getDate() < 10) {
-                        $(".date_div").html(
-                                today.getFullYear() + "-"
-                                        + (today.getMonth() + 1) + "-0"
-                                        + today.getDate() + " 근태 리스트");
-                    } else {
-                        $(".date_div").html(
-                                today.getFullYear() + "-0"
-                                        + (today.getMonth() + 1) + "-"
-                                        + today.getDate() + " 근태 리스트");
-                    }
-                } else {
-                    $(".date_div").html(
-                            today.getFullYear() + "-" + (today.getMonth() + 1)
-                                    + "-" + today.getDate() + " 근태 리스트");
-                }
-            })
+	/* now date (compare right-arrow side) */
+	var newDate = new Date();
+	var nowDate = "";
+	if (newDate.getMonth() + 1 < 10 || newDate.getDate() < 10) {
+		if (newDate.getMonth() + 1 < 10 && newDate.getDate() < 10) {
+			nowDate = (newDate.getFullYear() + "-0" + (newDate.getMonth() + 1)
+					+ "-0" + newDate.getDate());
+		} else if (newDate.getDate() < 10) {
+			nowDate = (newDate.getFullYear() + "-" + (newDate.getMonth() + 1)
+					+ "-0" + newDate.getDate());
+		} else if (newDate.getMonth() + 1 < 10) {
+			nowDate = (newDate.getFullYear() + "-0" + (newDate.getMonth() + 1)
+					+ "-" + newDate.getDate());
+		}
+	} else {
+		nowDate = (newDate.getFullYear() + "-" + (newDate.getMonth()) + "-" + newDate
+				.getDate());
+	}
 
-    /* click for date move (right-arrow) */
-    $(".arrow_img2").on(
-            "click",
-            function() {
-                let adjust = today.getDate() + 1;
-                today.setDate(adjust)
-                if (today.getMonth() + 1 < 10 || today.getDate() < 10) {
-                    console.log("ㅎㅇ")
-                    if (today.getMonth() + 1 < 10 && today.getDate() < 10) {
-                        $(".date_div").html(
-                                today.getFullYear() + "-0"
-                                        + (today.getMonth() + 1) + "-0"
-                                        + today.getDate() + " 근태 리스트");
-                    } else if (today.getDate() < 10) {
-                        $(".date_div").html(
-                                today.getFullYear() + "-"
-                                        + (today.getMonth() + 1) + "-0"
-                                        + today.getDate() + " 근태 리스트");
-                    } else {
-                        $(".date_div").html(
-                                today.getFullYear() + "-0"
-                                        + (today.getMonth() + 1) + "-"
-                                        + today.getDate() + " 근태 리스트");
-                    }
-                } else {
-                    $(".date_div").html(
-                            today.getFullYear() + "-" + (today.getMonth() + 1)
-                                    + "-" + today.getDate() + " 근태 리스트");
-                }
-            })
+	/* use department select box function */
+	function dep_select() {
+		let dep_choice = $(".dep_select").val();
+		location.href = "/attendance?today=${today}&dep_choice=" + dep_choice;
+	}
+	
+	/* click employee */
+	function choice_empl(name, workType, workStart) {
+		location.href = "/select_atten_Empl?name=" + name + "&workType="
+				+ workType;
+	}
+	
+	/* select date input */
+	function selectDate(){
+		let selectDate = $(".selectDate").val();
+		let dep_choice = $(".dep_select").val();
+		location.href = "/attendance?today="+selectDate+"&dep_choice="+dep_choice;
+		selectDate
+	}
+	
+	/* pagenation href */
+	function pagenation(page){
+		let dep_choice = $(".dep_select").val();
+		location.href = "/attendance?today=${today}&page="+page+"&dep_choice="+dep_choice;
+	}
 </script>
 </html>

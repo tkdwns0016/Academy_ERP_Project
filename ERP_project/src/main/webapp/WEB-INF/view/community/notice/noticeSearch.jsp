@@ -315,7 +315,10 @@ position:relative;
 		$(".comment_form")[0].submit()
 	}
 	function comment_del(boardId,commentId){
+		if(confirm("댓글을 삭제하시겠습니까?")){
+			
 		location.href="/noticeSearch?id="+boardId+"&deleteNo="+commentId;
+		}
 	}
 	function comment_modi(id){
 		var comment_td = $(".comment_td"+id);

@@ -297,6 +297,9 @@ $('.jumin').val(front+"-"+end+"******");
         window.close();
     }
     
+    var manager = "${resultEmpl.manager}"
+    $(".manager").val(manager).prop("selected",true);
+    
     <!-- selected 로직 -->
     var lunarCalendar="${resultEmpl.lunarCalendar}"; 
     $(".lunarCalendar").val(lunarCalendar).prop("selected", true);

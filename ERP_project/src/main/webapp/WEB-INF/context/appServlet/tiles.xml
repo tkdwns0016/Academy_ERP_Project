@@ -36,6 +36,10 @@
         <put-attribute name="root_side" value="/WEB-INF/view/sidebar/root_sidebar.jsp" />
         <put-attribute name="empl_side" value="/WEB-INF/view/sidebar/empl_sidebar.jsp" />
     </definition>
+	 <definition name="anonymous/anonymousModify" template="/WEB-INF/view/anonymous/anonymousModify.jsp">
+        <put-attribute name="root_side" value="/WEB-INF/view/sidebar/root_sidebar.jsp" />
+        <put-attribute name="empl_side" value="/WEB-INF/view/sidebar/empl_sidebar.jsp" />
+    </definition>
 	 <definition name="community/notice/notice" template="/WEB-INF/view/community/notice/notice.jsp">
         <put-attribute name="root_side" value="/WEB-INF/view/sidebar/root_sidebar.jsp" />
         <put-attribute name="empl_side" value="/WEB-INF/view/sidebar/empl_sidebar.jsp" />
@@ -81,6 +85,14 @@
         <put-attribute name="empl_side" value="/WEB-INF/view/sidebar/empl_sidebar.jsp" />
     </definition>
     <definition name="attendance/attendanceList" template="/WEB-INF/view/attendance/attendanceList.jsp">
+        <put-attribute name="root_side" value="/WEB-INF/view/sidebar/root_sidebar.jsp" />
+        <put-attribute name="empl_side" value="/WEB-INF/view/sidebar/empl_sidebar.jsp" />
+    </definition>
+    <definition name="attendance/attendanceList" template="/WEB-INF/view/attendance/attendanceList.jsp">
+        <put-attribute name="root_side" value="/WEB-INF/view/sidebar/root_sidebar.jsp" />
+        <put-attribute name="empl_side" value="/WEB-INF/view/sidebar/empl_sidebar.jsp" />
+    </definition>
+     <definition name="attendance/attendance" template="/WEB-INF/view/attendance/attendance.jsp">
         <put-attribute name="root_side" value="/WEB-INF/view/sidebar/root_sidebar.jsp" />
         <put-attribute name="empl_side" value="/WEB-INF/view/sidebar/empl_sidebar.jsp" />
     </definition>

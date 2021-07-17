@@ -1,35 +1,38 @@
 package attendance;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
 
 
 @Mapper
 public interface AttendanceMapper {
-	@Select("select * from attendance")
-	public List<Attendance> selectList();
+	/* select AttendanceList by date */
+	@Select("select * from attendance where work_date = #{workDate} limit #{first},#{pagePerCount}")
+	public List<Attendance> selectList(@Param("workDate") LocalDate workDate,@Param("first") int first,@Param("pagePerCount")int pagePerCount);
 	
-	@Select("select count(*) from attendance")
-	public int count();
+	/* count for pagenation by date */
+	@Select("select count(*) from attendance where work_date = #{workDate}")
+	public int getDayByCount(LocalDate workDate);
 	
-	@Select("select * from attendance where id=#{id}")
-	public Attendance select(int id);
 	
-	@Insert("insert into attendance(user_id,on_time,off_time,date) "
-			+ "values(#{userId},#{onTime},#{offTime},#{date})")
-	public Attendance insert(Attendance attendance);
+	/* select AttendanceList by date & department */
+	@Select("select * from attendance where work_date = #{workDate} and department = #{department} limit #{first},#{pagePerCount}")
+	public List<Attendance> dep_selectList(@Param("workDate") LocalDate workDate,@Param("department") String department,@Param("first") int first,@Param("pagePerCount")int pagePerCount);
 	
-	@Update("update attendance set user_id=#{userId},"
-			+ "on_time=#{onTime},off_time=#{offTime},date=#{date} where id=#{id}")
-	public int update(Attendance attendance);
+	/* count for pagenation by date & department */
+	@Select("select count(*) from attendance where work_date = #{workDate} and department = #{dep_choice}")
+	public int getDepByCount(@Param("workDate") LocalDate workDate,@Param("dep_choice") String dep_choice);
 	
-	@Delete("delete from attendance where id=#{id}")
-	public int delete(int id);
+	
+	/* attendanceList for one man */
+	@Select("select * from attendance where name=#{name} and work_type=#{workType} limit #{first},#{pagePerCount}")
+	public List<Attendance> select_Atten_Empl(@Param("name") String name,@Param("workType") String workType,@Param("first") int first,@Param("pagePerCount")int pagePerCount);
+
+	/* count for pagenation of attendanceList by name & workType */
+	@Select("select count(*) from attendance where name=#{name} and work_type=#{workType}")
+	public int getCount_Atten_Empl(@Param("name") String name,@Param("workType") String workType);
 }

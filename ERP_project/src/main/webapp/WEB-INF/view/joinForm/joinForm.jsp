@@ -73,7 +73,7 @@
           <tr class="register" height="30">
               <td width="5%" align="center">*</td>
               <td width="15%">이 름</td>
-              <td ><input type="text"  name="name" id="userId"  placeholder="이름"/></td>
+              <td ><input type="text"  name="name" id="userId"  placeholder="이름" required="required"/></td>
             <td></td><td></td>
               <td rowspan="5" style="text-align: center; width: 200px;" class="filebox">
                 <img src="/image/normalImg.jpg" width="150px" class="img-circle" height="150px">
@@ -89,7 +89,7 @@
           <tr class="register" height="30">
               <td width="5%" align="center">*</td>
               <td width="15%">영문이름</td>
-              <td><input type="text"  name="englishName" id="phone" placeholder="영문이름"  pattern="^[a-zA-Z]{.}" />&nbsp;&nbsp;<span id="same"></span> </td>
+              <td><input type="text"  name="englishName" id="phone" placeholder="영문이름"  pattern="^[a-zA-Z]+$" required="required" />&nbsp;&nbsp; </td>
           </tr>
           <tr height="7">
               <td colspan="3"><hr /></td>
@@ -97,7 +97,7 @@
           <tr class="register" height="30">
               <td width="5%" align="center">*</td>
               <td width="15%">휴대전화</td>
-              <td><input  type="tel"  name="phone" id="phone" placeholder="010-0000-0000"  pattern="[01]{3}-[0-9]{4}-[0-9]{4}" />&nbsp;&nbsp;<span id="same"></span></td>
+              <td><input  type="tel"  name="phone" id="phone" placeholder="010-0000-0000"  pattern="[01]{3}-[0-9]{4}-[0-9]{4}" required="required"/>&nbsp;&nbsp;<span id="same"></span></td>
           </tr>
           <tr height="7">
               <td colspan="3"><hr /></td>
@@ -107,7 +107,7 @@
               <td width="15%">이메일</td>
               <td><input type="text"   id="email"
                 name="email"
-                placeholder="abcd1234@example.com" />&nbsp;&nbsp;<span id="same"></span></td>
+                placeholder="abcd1234@example.com"  required="required"/>&nbsp;&nbsp;<span id="same"></span></td>
           </tr>
           <tr height="7">
               <td colspan="7"><hr /></td>
@@ -118,7 +118,7 @@
                 <td width="10%"> <input type="text" pattern="[0-9]{6}" name="birthDate1"
                  size=6 maxlength=6 
                 id="birthDate1" placeholder="앞자리 6자리"
-                style="width: 150px;">
+                style="width: 150px;" required="required">
 			
 			     ㅡ
 			
@@ -135,7 +135,7 @@
               <td width="5%" align="center">*</td>
               <td width="15%">내/외국인</td>
               <td>
-                  내국인&nbsp;&nbsp;<input type="radio" name="koreanForeigner"  id="koreanForeigner"  value="내국인" checked />&nbsp;&nbsp;&nbsp;외국인&nbsp;&nbsp;<input type="radio" name="lunarCalendar" id="lunarCalendar" value="외국인"/>
+                  내국인&nbsp;&nbsp;<input type="radio" name="koreanForeigner"  id="koreanForeigner"  value="내국인" checked="checked"/>&nbsp;&nbsp;&nbsp;외국인&nbsp;&nbsp;<input type="radio" name="koreanForeigner" id="koreanForeigner" value="외국인"/>
               </td>
               </tr>
           <tr height="7">
@@ -145,7 +145,7 @@
               <td width="5%" align="center">*</td>
               <td width="15%">양력/음력</td>
               <td>
-                  양력&nbsp;&nbsp;<input type="radio" name="lunarCalendar"  id="lunarCalendar"  value="양력" checked />&nbsp;&nbsp;&nbsp;음력&nbsp;&nbsp;<input type="radio" name="koreanForeigner" id="koreanForeigner" value="음력"/>
+                  양력&nbsp;&nbsp;<input type="radio" name="lunarCalendar"  id="lunarCalendar"  value="양력" checked="checked" />&nbsp;&nbsp;&nbsp;음력&nbsp;&nbsp;<input type="radio" name="lunarCalendar" id="lunarCalendar" value="음력"/>
               </td>
               </tr>
           <tr height="7">
@@ -155,7 +155,7 @@
               <td width="5%" align="center">*</td>
               <td width="15%">성 별</td>
               <td>
-                  남성&nbsp;&nbsp;<input type="radio" name="sex"  id="sex"  value="남성" checked />&nbsp;&nbsp;&nbsp;여성&nbsp;&nbsp;<input type="radio" name="sex" id="sex" value="여성"/>
+                  남성&nbsp;&nbsp;<input type="radio" name="sex"  id="sex"  value="남성" checked="checked" />&nbsp;&nbsp;&nbsp;여성&nbsp;&nbsp;<input type="radio" name="sex" id="sex" value="여성"/>
               </td>
           </tr>
           <tr height="7">
