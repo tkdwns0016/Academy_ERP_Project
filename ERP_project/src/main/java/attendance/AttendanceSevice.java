@@ -81,13 +81,34 @@ public class AttendanceSevice {
 			LocalTime workStart=am.isEmpty(empl.getUserId(),LocalDate.now()).getWorkStart();
 			LocalTime nowTime=LocalTime.now();
 			LocalTime workingTime;
+			String hour="";
+			String mn="";
+			String sc="";
 			if( workStart.getHour()>13||nowTime.getHour()<13) {
 				
 				long seconds= workStart.until(nowTime, ChronoUnit.SECONDS);
-				workingTime=LocalTime.parse("0"+seconds/3600+":"+seconds%3600/60+":"+seconds%3600%60);
+				if(seconds/3600<10) {
+					hour="0"+seconds/3600;
+				}
+				if(seconds%3600/60<10) {
+					mn ="0"+seconds%3600/60;
+				}
+				if(seconds%3600%60<10) {
+					sc="0"+seconds%3600%60;
+				}
+				workingTime=LocalTime.parse(hour+":"+mn+":"+sc);
 			}else {
 				long seconds= workStart.until(nowTime, ChronoUnit.SECONDS);
-				workingTime=LocalTime.parse("0"+((seconds/3600)-1)+":"+seconds%3600/60+":"+seconds%3600%60);
+				if(seconds/3600<10) {
+					hour="0"+seconds/3600;
+				}
+				if(seconds%3600/60<10) {
+					mn ="0"+seconds%3600/60;
+				}
+				if(seconds%3600%60<10) {
+					sc="0"+seconds%3600%60;
+				}
+				workingTime=LocalTime.parse(hour+":"+mn+":"+sc);
 			}
 			
 			System.out.println(workingTime);
