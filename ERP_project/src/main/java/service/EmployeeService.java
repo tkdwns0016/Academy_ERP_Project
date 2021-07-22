@@ -62,6 +62,8 @@ public class EmployeeService {
 				Employee empls=is.saveUploadedFile(uploadFile, employee);
 				model.addAttribute("result", em.updateMyInfo(empls));
 			}
+			empl=em.selectWithUserId(employee.getUserId());
+			session.setAttribute("empl", empl);
 	}
 	
 	public boolean update(Employee employee) {

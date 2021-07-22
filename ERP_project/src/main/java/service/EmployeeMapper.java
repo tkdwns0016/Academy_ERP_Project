@@ -26,7 +26,8 @@ public interface EmployeeMapper {
 	public Department getSearchDep(String search);
 	@Select("select * from position where position_id=#{positionId}")
 	public Position getPosition(int positionId);
-	
+	@Select("select * from employee where user_id=#{userId}")
+	public Employee selectWithUserId(int userId);
 	@Select("select count(*) from employee")
 	public int EmpleCount();
 	
