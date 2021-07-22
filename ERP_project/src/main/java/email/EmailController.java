@@ -34,6 +34,7 @@ public class EmailController {
 	 
 	 @PostMapping("/password")
 	    public String sendMail(Model model,int userId,String name,String birthDate) {
+		 
 		 if(es.select(userId,name,birthDate)!=null) {
 			 Employee emp=es.select(userId,name,birthDate); 
 			 emp.setPassword(emp.getUserId()+"");

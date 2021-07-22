@@ -88,11 +88,20 @@
         <put-attribute name="root_side" value="/WEB-INF/view/sidebar/root_sidebar.jsp" />
         <put-attribute name="empl_side" value="/WEB-INF/view/sidebar/empl_sidebar.jsp" />
     </definition>
-    <definition name="attendance/attendanceList" template="/WEB-INF/view/attendance/attendanceList.jsp">
+  
+     <definition name="attendance/attendance" template="/WEB-INF/view/attendance/attendance.jsp">
         <put-attribute name="root_side" value="/WEB-INF/view/sidebar/root_sidebar.jsp" />
         <put-attribute name="empl_side" value="/WEB-INF/view/sidebar/empl_sidebar.jsp" />
     </definition>
-     <definition name="attendance/attendance" template="/WEB-INF/view/attendance/attendance.jsp">
+     <definition name="payment/paymentBoard" template="/WEB-INF/view/payment/paymentBoard.jsp">
+        <put-attribute name="root_side" value="/WEB-INF/view/sidebar/root_sidebar.jsp" />
+        <put-attribute name="empl_side" value="/WEB-INF/view/sidebar/empl_sidebar.jsp" />
+    </definition>
+     <definition name="payment/paymentWriter" template="/WEB-INF/view/payment/paymentWriter.jsp">
+        <put-attribute name="root_side" value="/WEB-INF/view/sidebar/root_sidebar.jsp" />
+        <put-attribute name="empl_side" value="/WEB-INF/view/sidebar/empl_sidebar.jsp" />
+    </definition>
+     <definition name="welfare" template="/WEB-INF/view/welfare.jsp">
         <put-attribute name="root_side" value="/WEB-INF/view/sidebar/root_sidebar.jsp" />
         <put-attribute name="empl_side" value="/WEB-INF/view/sidebar/empl_sidebar.jsp" />
     </definition>

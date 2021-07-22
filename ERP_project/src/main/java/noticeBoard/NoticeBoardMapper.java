@@ -14,6 +14,7 @@ import org.apache.ibatis.annotations.Update;
 import org.junit.runners.Parameterized.Parameters;
 
 import anonymousBoard.AnonymousBoard;
+import department.Department;
 import service.EmplClass;
 import service.Employee;
 
@@ -25,17 +26,21 @@ public interface NoticeBoardMapper {
 	
 	@Select("select count(*) from notice_board")
 	public int count();
-	@Select("select * from notice_board order by id desc limit 5")
+	@Select("select * from notice_board order by id desc limit 10")
 	public List<NoticeBoard> mainList();
 	@Select("select * from notice_board where id=#{id}")
 	public NoticeBoard select(int id);
+	@Select("select * from department where department_id=#{departmentId}")
+	public Department noticeDepart(int departmentId);
+	@Select("select name,department_id from employee where user_id=#{userId}")
+	public Employee noticeName(int userId);
 	
 	@Insert("insert into notice_board(writer,title,content,password,write_date,filename) "
 			+ " values(#{writer},#{title},#{content},#{password},#{writeDate},#{filename})")
 	@Options(useGeneratedKeys = true, keyProperty = "id")
 	public boolean insert(NoticeBoard noticeBoard);
 	
-	@Update("update notice_board set writer=#{writer}, title=#{title}, content=#{content},password=#{password},filename=#{filename}"
+	@Update("update notice_board set title=#{title}, content=#{content}, filename=#{filename}"
 			+ " where id=#{id}")
 	public boolean update(NoticeBoard noticeboard);
 	
@@ -44,7 +49,7 @@ public interface NoticeBoardMapper {
 	
 	@Delete("delete from notice_board where id=#{id}")
 	public boolean delete(int id);
-	@Select("select name,department_id from employee where user_id=#{writer}")
+	@Select("select * from employee where user_id=#{writer}")
 	public Employee getWriter(int writer);
 	@Select("select name from employee where user_id=#{writer}")
 	public EmplClass getECWriter(int writer);
@@ -82,6 +87,12 @@ public interface NoticeBoardMapper {
 	/*to Notice-count*/
 	@Update("update notice_board set count = #{count} where id = #{boardId};")
 	public void setNoticeBoardCount(@Param("count") int count,@Param("boardId") int boardId);
+
+	@Delete("delete from notice_comment where board_id=#{id}")
+	public void deleteViewAll(int id);
+
+	@Delete("delete from notice_view where board_id=#{id}")
+	public void deleteAllComment(int id);
 
 
 }

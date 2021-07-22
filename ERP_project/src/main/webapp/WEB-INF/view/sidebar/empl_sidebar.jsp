@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" >
 <title>Document</title>
 <!-- Bootstrap core CSS -->
 <link href="/static/bootstrap/assets/dist/css/bootstrap.min.css"
@@ -20,22 +21,29 @@
 
 * {
 	margin: 0;
+
+}
+section{
+	position: absolute;
+	top: 10%;
+	width: 100%;
+	height: 90%;
 }
 
 html, body {
 	height: 100%;
+	
 }
 
 header {
 	width: 100%;
 	height: 10%;
-	position: relative;
 	float: right;
+	background-color: white;
+	position: fixed;
+	z-index: 5;
 }
 
-header {
-	background-color: white;
-}
 
 .headerdiv {
 	height: 100%;
@@ -49,13 +57,17 @@ header {
       background-color: darkmagenta;
       width: 15%;
       height: 90%;
-      position: absolute;
       float: left;
       top: 10%;
       z-index: 3;
       left: -20%;
+      position: fixed;
+	z-index: 3;
     }
-
+.rounded{
+min-width: 130px;
+min-height: 30px;
+}
 .hover:hover {
 	opacity: 50%
 }
@@ -124,7 +136,10 @@ nav::after {
 	margin-top: -15px;
 }
 
-
+window{
+width:100%;
+min-width: 1500px;	
+}
     @media screen and (max-width:1470px){
     	
     .mb-1{width: 20px; height: 20px;
@@ -159,6 +174,12 @@ nav::after {
    		 }
     }
 	li{list-style: none;}
+	.no-underLine{
+		text-decoration: none;
+	}
+	.rootSidebarfont-white{
+	color: white!important;
+	}
 </style>
 </head>
 <body class="body">
@@ -225,9 +246,9 @@ nav::after {
 									class="bi d-block mx-auto mb-1" width="24" height="24">
                     <use xlink:href="#table" /></svg> Calendar
 						</a></li>
-						<li class="emplLi"><a id="font" href="/main" class="nav-link text-white hover"> <svg
+						<li class="emplLi"><a id="font" href="/payment" class="nav-link text-white hover"> <svg
 									class="bi d-block mx-auto mb-1" width="24" height="24">
-                    <use xlink:href="#grid" /></svg> Products
+                    <use xlink:href="#grid" /></svg> Payment
 						</a></li>
 						<li class="emplLi"><a id="font" href="/myInfo" class="nav-link text-white hover"> <svg
 									class="bi d-block mx-auto mb-1" width="24" height="24">
@@ -236,7 +257,8 @@ nav::after {
 					</ul>
 				</div>
 			</div>
-			<form action="http://www.naver.com" name="search_form"
+			
+			<form action="" name="search_form"
 				class="search_form">
 				<input type="search" class="form-control" placeholder="Search..."
 					aria-label="Search">
@@ -299,13 +321,13 @@ nav::after {
 			
 			<div class="d-flex flex-column flex-shrink-0 p-3 bg-light"
 				style="position: absolute; width: 100%; height: 100%;">
-				<div class="dropdown" style="top:;">
+				<div class="dropdown" style="margin: 0 auto;">
 				<img src="/image/${empl.imgName }" alt="" width="100px"
 						height="120px" class="me-2">
 					<a href="#"
 						class="d-flex align-items-center text-black text-decoration-none dropdown-toggle"
-						id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-						 <table style="border-collapse: collapse;">
+						id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false" style="color: black;">
+						 <table style="border-collapse: collapse;text-align: center;">
 						 	<tr><td class="font1">&nbsp;직급</td><td class="font2">&nbsp; ${department }</td></tr>
 						 	<tr><td class="font1">&nbsp;부서</td><td class="font2">${position }</td></tr>
 						 	<tr><td class="font1" colspan="2">${empl.name }님</td></tr>
@@ -314,19 +336,23 @@ nav::after {
 					</a>
 						<ul class="dropdown-menu dropdown-menu-dark text-small shadow"
 						aria-labelledby="dropdownUser1">
-				<li class="emplLi"><a class="dropdown-item" href="/myInfo">Profile</a></li>
-						<li class="emplLi">
-							<hr class="dropdown-divider">
-						</li>
-						<li class="emplLi"><a class="dropdown-item" href="/logout">Sign out</a></li>
+						<li class="rootemplLi"><a class="dropdown-item rootSidebarfont-white"
+							href="/myInfo" style="border-bottom: 1px solid white;">Profile</a></li>
+					
+						<li class="rootemplLi"><a style="color: white;" class="dropdown-item rootSidebarfont-white"
+							href="/logout">Sign out</a></li>
 					</ul>
 				</div>
 				<hr>
-				<a href="/"
+			
+				<ul>
+					<li style="list-style: none; margin: 0 12%;"><button type="button" onclick="onTime()" style="width: 50px">출근</button>&nbsp;&nbsp;&nbsp;<button type="button" onclick="offTime()" style="width: 50px">퇴근</button></li>
+				</ul>
+				<hr>
+				<a href="/main"
 					class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
-					<svg class="bi me-2" width="30" height="24">
-            <use xlink:href="#bootstrap" /></svg> 
-            <span class="fs-5 fw-semibold">인사관리프로젝트</span>
+					
+            <span class="fs-5 fw-semibold">Company</span>
 				</a>
 				
 					<li class="mb-1">
@@ -344,30 +370,19 @@ nav::after {
 						</div>
 					</li>
 
+			
 					<li class="mb-1">
-						<button
-							class="btn btn-toggle align-items-center rounded collapsed"
-							data-bs-toggle="collapse" data-bs-target="#check-collapse"
-							aria-expanded="false">근태관리</button>
-						<div class="collapse" id="check-collapse">
-							<ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-								<li class="emplLi"><a href="#" class="link-dark rounded">출/퇴근 체크</a></li>
-							</ul>
-						</div>
-					</li>
-
-					<li class="mb-1">
-						<button
+					<a class="no-underLine" href="/welfare"><button
 							class="btn btn-toggle align-items-center rounded collapsed"
 							data-bs-toggle="collapse" data-bs-target="#benefits-collapse"
-							aria-expanded="false">복리후생</button>
+							aria-expanded="false">복리후생</button></a>
 					</li>
 
 					<li class="mb-1">
-						<button
+						<a class="no-underLine" href="/payment"><button
 							class="btn btn-toggle align-items-center rounded collapsed"
 							data-bs-toggle="collapse" data-bs-target="#Payment-collapse"
-							aria-expanded="false">결제</button>
+							aria-expanded="false">결제</button></a>
 					</li>
 					<li class="mb-1">
 						<button
@@ -392,7 +407,49 @@ nav::after {
 
 	<script src="/static/bootstrap/sidebars/sidebars.js"></script>
 
-
+<script>
+ var notice = "공지사항";
+ var noticeBoard="공지게시판";
+ var anonymous ="익명게시판";
+ var suggestion="건의사항";
+ var suggestionBoard="건의게시판";
+ var payment ="결제"
+ 
+$(".form-control").keydown(function(key){
+	if(key.keyCode == 13){
+		if(notice.indexOf($('.form-control').val())>-1||noticeBoard.indexOf($('.form-control').val())>-1){
+			
+			$(".search_form").attr('action','/notice');
+			$(".search_form").submit();
+		}
+		else if(anonymous.indexOf($('.form-control').val())>-1){
+		
+		$(".search_form").attr('action','/anonymous');
+		$(".search_form").submit();
+		}
+		else if(suggestion.indexOf($('.form-control').val())>-1||suggestionBoard.indexOf($('.form-control').val())>-1){
+			
+			$(".search_form").attr('action','/suggestion');
+			$(".search_form").submit();
+		}else if(payment.indexOf($('.form-control').val())>-1){
+			$(".search_form").attr('action','/payment');
+			$(".search_form").submit();
+		}else{
+			alert("검색 결과를 찾을 수 없습니다.")
+		}
+}
+})
+function onTime(){
+	if(confirm("출근처리 하시겠습니까?")){
+		location.href=('/attendanceOnTime')
+	}
+}
+function offTime(){
+	if(confirm("퇴근처리 하시겠습니까?")){
+		location.href=('/attendanceOffTime')
+	}
+}
+</script>
 
 
 

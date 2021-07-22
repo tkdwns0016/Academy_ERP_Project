@@ -2,10 +2,16 @@
    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
+
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+<meta http-equiv="Cache-Control" content="no-cache"/>
+<meta http-equiv="Expires" content="0"/>
+<meta http-equiv="Pragma" content="no-cache"/>
+
 <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
 <title>Insert title here</title>
 
@@ -18,7 +24,9 @@
     section {
       width: 100%;
       height: 100%;
-      max-width: 100%
+      max-width: 100%;
+      position: absolute;
+      top: 10%;
     }
 
 
@@ -69,15 +77,12 @@
     }
 
     .main_box2 {
-      width: 58%;
+      width: 50%;
       height: 15%;
       background-color: white;
       text-align: center;
       position: relative;
-    }
-    th,
-    td {
-      width: 1%;
+      left:7%
     }
 
    #calendar{
@@ -92,16 +97,40 @@
   .fc-daygrid-day-number:hover {
    color:black;
 }
-
+.boardTd{
+	border: 1px solid #eeeeee;
+}
+.boardTr{
+	border: 1px solid #eeeeee;
+}
+.boardTh{
+	border: 1px solid #eeeeee;
+}
+.boardTable{
+	border-collapse: collapse;
+	text-align: center;
+}
+.boardId{
+	width: 100px;
+}
+.boardTitle{
+	width: 400px;
+}
+.boardWriter{
+	width: 200px;
+}
+.boardCount{
+	width: 175px;
+}
   </style>
   </head>
   <link href='/static/main.css' rel='stylesheet' />
 <script src='/static/main.js'></script>
 <!-- 추가 -->
 
- <link rel="stylesheet" href="https://www.suu.kr/css/default.css?ver=200723">
+ <link rel="stylesheet" href="/static/mainboard.css">
     <link rel="stylesheet" href="https://www.suu.kr/skin/latest/carway_online/style.css?ver=200723">
-    <link rel="stylesheet" href="https://www.suu.kr/css/carway.css">
+    <link rel="stylesheet" href="/static/carWay.css">
     <!--[if lte IE 8]>
     <script src="https://www.suu.kr/js/html5.js"></script>
     <![endif]-->
@@ -117,7 +146,6 @@
     var g5_editor    = "";
     var g5_cookie_domain = "";
     </script>
-    <script src="https://www.suu.kr/js/jquery-1.8.3.min.js"></script>
     <script src="https://www.suu.kr/js/jquery.menu.js?ver=200723"></script>
     <script src="https://www.suu.kr/js/common.js?ver=200723"></script>
     <script src="https://www.suu.kr/js/rumi.js"></script>
@@ -132,6 +160,12 @@
     <meta http-equiv="origin-trial" content="A88otRz1Fd3Nt567e2IYshC18LL3KGVXpVJW9oTCId4RYaygt23pbb4JqrbdIO/bwZPWEmRjBIRBu/bZbDR7Pg4AAABueyJvcmlnaW4iOiJodHRwczovL2ltYXNkay5nb29nbGVhcGlzLmNvbTo0NDMiLCJmZWF0dXJlIjoiVHJ1c3RUb2tlbnMiLCJleHBpcnkiOjE2MzQwODMxOTksImlzVGhpcmRQYXJ0eSI6dHJ1ZX0="><meta http-equiv="origin-trial" content="A0gCLbXCcL0R1Oc8tFPDs0G4Elz17w3zHp+Zst66+D17veE2o7fUcPsA114QtSTRqfVJLMeTSdeWOom0CcyCsgYAAAB7eyJvcmlnaW4iOiJodHRwczovL2RvdWJsZWNsaWNrLm5ldDo0NDMiLCJmZWF0dXJlIjoiVHJ1c3RUb2tlbnMiLCJleHBpcnkiOjE2MzQwODMxOTksImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><meta http-equiv="origin-trial" content="A9RQ+LxFazAousxUwSCzaihJjHLO1UyjQp0teZKHl7WdbVjPDfHSKMd6D/ZI5MTjqClFycbl70EFd7cBJWXqKQEAAACBeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXRhZ3NlcnZpY2VzLmNvbTo0NDMiLCJmZWF0dXJlIjoiVHJ1c3RUb2tlbnMiLCJleHBpcnkiOjE2MzQwODMxOTksImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><meta http-equiv="origin-trial" content="A6WKeWsdn1Ct+ZPqS9NCxxaiBoQ7wdTkK2/gE69Yu0gfBKJfo1gOvgkGmf5/xaIajT/RUb9AbnF1FsSZ47cCcQcAAACBeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXN5bmRpY2F0aW9uLmNvbTo0NDMiLCJmZWF0dXJlIjoiVHJ1c3RUb2tlbnMiLCJleHBpcnkiOjE2MzQwODMxOTksImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><meta http-equiv="origin-trial" content="A04ZCu7yjrHgwQJK5ISHhH1DSg0qqowEay3n70KO6wV3D2Mj+OX3Kw20aSMitzgdG1xfrN7sOJV/dZIk+RvCzA4AAAB2eyJvcmlnaW4iOiJodHRwczovL2dvb2dsZS5jb206NDQzIiwiZmVhdHVyZSI6IlRydXN0VG9rZW5zIiwiZXhwaXJ5IjoxNjM0MDgzMTk5LCJpc1N1YmRvbWFpbiI6dHJ1ZSwiaXNUaGlyZFBhcnR5Ijp0cnVlfQ=="><meta http-equiv="origin-trial" content="A3HucHUo1oW9s+9kIKz8mLkbcmdaj5lxt3eiIMp1Nh49dkkBlg1Fhg4Fd/r0vL69mRRA36YutI9P/lJUfL8csQoAAACFeyJvcmlnaW4iOiJodHRwczovL2RvdWJsZWNsaWNrLm5ldDo0NDMiLCJmZWF0dXJlIjoiQ29udmVyc2lvbk1lYXN1cmVtZW50IiwiZXhwaXJ5IjoxNjI2MjIwNzk5LCJpc1N1YmRvbWFpbiI6dHJ1ZSwiaXNUaGlyZFBhcnR5Ijp0cnVlfQ=="><meta http-equiv="origin-trial" content="A0OysezhLoCRYomumeYlubLurZTCmsjTb087OvtCy95jNM65cfEsbajrJnhaGwiTxhz38ZZbm+UhUwQuXfVPTg0AAACLeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXN5bmRpY2F0aW9uLmNvbTo0NDMiLCJmZWF0dXJlIjoiQ29udmVyc2lvbk1lYXN1cmVtZW50IiwiZXhwaXJ5IjoxNjI2MjIwNzk5LCJpc1N1YmRvbWFpbiI6dHJ1ZSwiaXNUaGlyZFBhcnR5Ijp0cnVlfQ=="><meta http-equiv="origin-trial" content="AxoOxdZQmIoA1WeAPDixRAeWDdgs7ZtVFfH2y19ziTgD1iaHE5ZGz2UdSjubkWvob9C5PrjUfkWi4ZSLgWk3Xg8AAACLeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXRhZ3NlcnZpY2VzLmNvbTo0NDMiLCJmZWF0dXJlIjoiQ29udmVyc2lvbk1lYXN1cmVtZW50IiwiZXhwaXJ5IjoxNjI2MjIwNzk5LCJpc1N1YmRvbWFpbiI6dHJ1ZSwiaXNUaGlyZFBhcnR5Ijp0cnVlfQ=="><meta http-equiv="origin-trial" content="AwfG8hAcHnPa/kJ1Co0EvG/K0F9l1s2JZGiDLt2mhC3QI5Fh4qmsmSwrWObZFbRC9ieDaSLU6lHRxhGUF/i9sgoAAACBeyJvcmlnaW4iOiJodHRwczovL2RvdWJsZWNsaWNrLm5ldDo0NDMiLCJmZWF0dXJlIjoiSW50ZXJlc3RDb2hvcnRBUEkiLCJleHBpcnkiOjE2MjYyMjA3OTksImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><meta http-equiv="origin-trial" content="AwQ7dCmHkvR6FuOFxAuNnktYSQrGbL4dF+eBkrwNLALc69Wr//PnO1yzns3pjUoCaYbKHtVcnng2hU+8OUm0PAYAAACHeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXN5bmRpY2F0aW9uLmNvbTo0NDMiLCJmZWF0dXJlIjoiSW50ZXJlc3RDb2hvcnRBUEkiLCJleHBpcnkiOjE2MjYyMjA3OTksImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><meta http-equiv="origin-trial" content="AysVDPGQTLD/Scn78x4mLwB1tMfje5jwUpAAzGRpWsr1NzoN7MTFhT3ClmImi2svDZA7V6nWGIV8YTPsSRTe0wYAAACHeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXRhZ3NlcnZpY2VzLmNvbTo0NDMiLCJmZWF0dXJlIjoiSW50ZXJlc3RDb2hvcnRBUEkiLCJleHBpcnkiOjE2MjYyMjA3OTksImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><link rel="preload" href="https://adservice.google.co.kr/adsid/integrator.js?domain=www.suu.kr" as="script"><script type="text/javascript" src="https://adservice.google.co.kr/adsid/integrator.js?domain=www.suu.kr"></script><link rel="preload" href="https://adservice.google.com/adsid/integrator.js?domain=www.suu.kr" as="script"><script type="text/javascript" src="https://adservice.google.com/adsid/integrator.js?domain=www.suu.kr"></script></head>
     <!-- 스크립트 추가끝 -->
 <body class="body" onload="showImage()">
+<c:if test="${empty empl }">
+		<script>
+		alert("로그인 정보가 없습니다.")
+		location.href="/login";
+	</script>
+	</c:if>
    <c:if test="${empl.manager=='권한' }">
 
       <tiles:insertAttribute name="root_side" />
@@ -180,7 +214,7 @@
     * @param s : 시작탭번호
     * @param t : 반복시간 (1000 = 1초)
     */
-    function start_auto_tab(id, s, t) {
+/*     function start_auto_tab(id, s, t) {
         var max_idx = $("#"+id+" ul.rumi_tabs li").length;
         tabTimer = setInterval(function() {
             
@@ -196,7 +230,7 @@
                 s++;
             }
         },t);
-    }
+    } */
     
     /**
     * 최신글 탭메뉴 (최신글로 사용)
@@ -284,44 +318,39 @@
             <li rel="A_tab1" class="" style="color: rgb(51, 51, 51);">공지사항</li>
             <li rel="A_tab2" class="" style="color: rgb(51, 51, 51);">건의 게시판</li>
             <li rel="A_tab3" class="" style="color: rgb(51, 51, 51);">익명 게시판</li>
-            <li rel="A_tab4" class="" style="color: rgb(51, 51, 51);">A-네번째</li>
-            <li rel="A_tab5" class="" style="color: rgb(51, 51, 51);">A-다섯번째</li>
-            <li rel="A_tab6" class="" style="color: rgb(51, 51, 51);">A-여섯번째</li>
+          
          
         </ul>
         <div class="rumi_tab_container">
             <div id="A_tab1" class="rumi_tab_content" style="display: none;">
-    <div id="cw">
-            <ul>
-                <c:forEach var="i" begin="0" end="4">
-                <li class="l_sub">
-                <a href="/noticeSearch?id=${notice[i].id }">${notice[i].title } - ${notice[i].writer }</a>  <i class="fa fa-heart" aria-hidden="true"></i>           </li>
-                </c:forEach>
-            </ul>
-    
-      
-    </div>
-    <!-- } 공지사항 최신글 끝 --></div>
+   			 	<div id="cw">
+                	<table class="boardTable">
+                		<tr class="boardTr"><th class="boardId boardTr">No.</th><th class="boardTitle boardTh">게시글</th><th class="boardWriter boardTh">작성자</th><th class="suggestionCount">조회수</th></tr>
+                    		<c:forEach var="i" begin="0" end="9">
+                        		<tr class="boardTr" onclick="location.href=('/noticeSearch?id=${notice[i].id }')"><td class="boardTd">${notice[i].id}</td><td class="boardTd"> ${notice[i].title }</td><td class="boardTd">${noticeWriter[i] }</td><td class="boardTd">${notice[i].count }</td></tr>
+                    		</c:forEach>
+                	</table>
+   			 	</div>
+    		</div>
             <div id="A_tab2" class="rumi_tab_content" style="display: none;">
-                <ul>
-                    <c:forEach var="i" begin="0" end="4">
-                        <li class="l_sub">
-                        <a href="/suggestionSearch?id=${suggestion[i].id }">${suggestion[i].title } - ${suggestion[i].writer }</a>  <i class="fa fa-heart" aria-hidden="true"></i>           </li>
+                <table class="boardTable">
+                	<tr class="boardTr"><th class="boardId boardTh">No.</th><th class="boardTitle boardTh">게시글</th><th class="boardWriter boardTh">작성자</th><th class="boardCount">조회수</th></tr>
+                    <c:forEach var="i" begin="0" end="9">
+                        <tr class="boardTr" onclick="location.href=('/suggestionSearch?id=${suggestion[i].id }')"><td class="boardTd">${suggestion[i].id}</td><td class="boardTd"> ${suggestion[i].title }</td><td class="boardTd">${suggestionWriter[i] }</td><td class="boardTd">${suggestion[i].count }</td></tr>
                     </c:forEach>
-                </ul>
+                </table>
             </div>
 
             <div id="A_tab3" class="rumi_tab_content" style="display: none;">
-                <ul>
-                    
-                </ul>
+                <table class="boardTable">
+                	<tr class="boardTr"><th class="boardId boardTh">No.</th><th class="boardTitle boardTh">게시글</th><th class="boardWriter boardTh">작성자</th><th class="boardCount">조회수</th></tr>
+                    <c:forEach var="i" begin="0" end="9">
+                        <tr class="boardTr" onclick="location.href=('/anonymousSearch?id=${anonymous[i].id }')"><td class="boardTd">${anonymous[i].id}</td><td class="boardTd"> ${anonymous[i].title }</td><td class="boardTd">${anonymous[i].nickName }</td><td class="boardTd">${anonymous[i].count }</td></tr>
+                    </c:forEach>
+                </table>
             </div>
 
-
-            <div id="A_tab4" class="rumi_tab_content" style="display: none;"><ul><li><a href="#">A그룹 네번째 탭</a></li></ul></div>
-            <div id="A_tab5" class="rumi_tab_content" style="display: none;"><ul><li><a href="#">A그룹 다섯번째 탭</a></li></ul></div>
-            <div id="A_tab6" class="rumi_tab_content" style="display: none;"><ul><li><a href="#">A그룹 여섯번째 탭</a></li></ul></div>
-            <div id="A_tab7" class="rumi_tab_content" style="display: block;"><ul><li><a href="#">A그룹 일곱번째 탭</a></li></ul></div>
+            
         </div>
     </div>
     

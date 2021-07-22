@@ -8,6 +8,11 @@
 <title>Insert title here</title>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
+<style>
+.payment-OrganizationChart{
+ overflow-y:auto; 
+}
+</style>
 <body>
     <div style="width: 550px; height: 300px; border: 1px solid #000000; background-color: whitesmoke;">
         <div style="width: 200px; border: 1px solid black; float: left; margin-right: 10px; margin-left: 20px; margin-top: 20px; height: 250px; background-color: white;">

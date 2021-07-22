@@ -13,25 +13,9 @@ public class Payment {
 	private String payment;
 	private String paymentStatus;
 	private int userId;
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private LocalDate writeDate;
-
-	public Payment(int paymentBoardId, String title, String writer, String approver, String payment,
-			String paymentStatus, int userId, LocalDate writeDate) {
-		super();
-		this.paymentBoardId = paymentBoardId;
-		this.title = title;
-		this.writer = writer;
-		this.approver = approver;
-		this.payment = payment;
-		this.paymentStatus = paymentStatus;
-		this.userId = userId;
-		this.writeDate = writeDate;
-	}
-
-	public Payment() {
-		super();
-	}
+	private String writeDate;
+	private String startDate;
+	private String endDate;
 
 	public int getPaymentBoardId() {
 		return paymentBoardId;
@@ -89,19 +73,54 @@ public class Payment {
 		this.userId = userId;
 	}
 
-	public LocalDate getWriteDate() {
+	public String getWriteDate() {
 		return writeDate;
 	}
 
-	public void setWriteDate(LocalDate writeDate) {
+	public void setWriteDate(String writeDate) {
 		this.writeDate = writeDate;
+	}
+
+	public String getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(String startDate) {
+		this.startDate = startDate;
+	}
+
+	public String getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(String endDate) {
+		this.endDate = endDate;
+	}
+
+	public Payment(int paymentBoardId, String title, String writer, String approver, String payment,
+			String paymentStatus, int userId, String writeDate, String startDate, String endDate) {
+		super();
+		this.paymentBoardId = paymentBoardId;
+		this.title = title;
+		this.writer = writer;
+		this.approver = approver;
+		this.payment = payment;
+		this.paymentStatus = paymentStatus;
+		this.userId = userId;
+		this.writeDate = writeDate;
+		this.startDate = startDate;
+		this.endDate = endDate;
+	}
+
+	public Payment() {
+		super();
 	}
 
 	@Override
 	public String toString() {
 		return "Payment [paymentBoardId=" + paymentBoardId + ", title=" + title + ", writer=" + writer + ", approver="
 				+ approver + ", payment=" + payment + ", paymentStatus=" + paymentStatus + ", userId=" + userId
-				+ ", writeDate=" + writeDate + "]";
+				+ ", writeDate=" + writeDate + ", startDate=" + startDate + ", endDate=" + endDate + "]";
 	}
 
 }

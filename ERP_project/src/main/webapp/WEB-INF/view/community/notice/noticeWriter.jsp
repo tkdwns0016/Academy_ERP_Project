@@ -7,6 +7,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<c:if test="${empty empl }">
+		<script>
+		alert("로그인 정보가 없습니다.")
+		location.href="/login";
+	</script>
+	</c:if>
 	<c:if test="${empl.manager=='권한' }">
 
 		<tiles:insertAttribute name="root_side" />
@@ -21,21 +27,12 @@
     <link href="/static/community/notice/noticeWriter.css" rel="stylesheet">
     
     </head>
-     <style>
-    	section{
-    	position: relative;
-    	height: 100%;
-    	width: 100%;
-    	top: 10%;
-	
-	}
-    </style>
   <body>
 
 <section>
 
     <form method="post" style="width:65%" action="/noticeWriter?writer=${empl.userId }" enctype="multipart/form-data" >  
-      <table style="position: relative; top: -50px" class="notiTable">
+      <table style="position: relative;" class="notiTable">
         <tr><td style="font-size: 2em" colspan="3">글 작성</td></tr>
         <tr><td colspan="3">&nbsp;</td></tr>
         <tr>

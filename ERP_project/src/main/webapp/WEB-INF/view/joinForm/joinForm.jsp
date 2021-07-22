@@ -41,6 +41,12 @@
 </head>
 
 <body>
+<c:if test="${empty empl }">
+		<script>
+		alert("로그인 정보가 없습니다.")
+		location.href="/login";
+	</script>
+	</c:if>
 	<c:if test="${empl.manager=='권한' }">
 
 		<tiles:insertAttribute name="root_side" />
@@ -49,18 +55,7 @@
 		<tiles:insertAttribute name="empl_side" />
 
 	</c:if>
-	<c:if test="${not empty result }">
-		<c:if test="${result }">
-			<script>
-				alert("인사 등록이 완료되었습니다.")
-			</script>
-		</c:if>
-		<c:if test="${!result }">
-			<script>
-				alert("데이터 전송에 실패하였습니다.")
-			</script>
-		</c:if>
-	</c:if>
+	
     <div id="divContainer" >
     
   <div class="input-form-backgroud row"></div>
@@ -245,8 +240,8 @@
 								<option value="5">팀장</option>
 								<option value="6">부장</option>
 								<option value="7">상무</option>
-								<option value="8">회장</option>
-								<option value="9">비정규직</option>
+								<option value="8">이사</option>
+								<option value="9">회장</option>
 							</select>
             </td>
           </tr>

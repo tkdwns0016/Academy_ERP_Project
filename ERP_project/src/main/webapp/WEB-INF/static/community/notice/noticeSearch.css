@@ -7,7 +7,7 @@
 .container2{
 	font-family: MaplestoryOTFLight;
 	position:absolute;
-	top: 16%;
+	top: 5%;
 	left: 16%;
     width: 100%;
     z-index:3;
@@ -78,8 +78,7 @@ input[type=submit]{
 
 
 
-
-table{
+.board-table{
     width: 800px;
 }
 

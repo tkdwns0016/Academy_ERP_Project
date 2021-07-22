@@ -12,7 +12,7 @@
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 
-	<context:component-scan base-package="anonymousBoard, attendance, department, educationBoard, noticeBoard, position, suggestionBoard, welfare,service, email, attendance, payment">
+	<context:component-scan base-package="anonymousBoard, attendance, department, educationBoard, noticeBoard, position, suggestionBoard, service, email, attendance, payment">
 		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
 	</context:component-scan>	
 
@@ -32,7 +32,7 @@
 	<property name="configLocation" value="/WEB-INF/config/mybatis_config.xml"/>
 	</bean>
 	
-	<mybatis-spring:scan base-package="anonymousBoard, attendance, department, educationBoard, noticeBoard, position, suggestionBoard, welfare,service, email, payment"/>
+	<mybatis-spring:scan base-package="anonymousBoard, attendance, department, educationBoard, noticeBoard, position, suggestionBoard, service, email, payment"/>
 	
 	
 

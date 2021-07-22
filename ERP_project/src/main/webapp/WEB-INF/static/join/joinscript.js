@@ -38,6 +38,7 @@
       var img=document.querySelectorAll(".img-circle")[0];
      
       input.onchange=function(){
+     	 $(".cancelVal").val("");
     	  var fileList=input.files;
     	  var reader = new FileReader();
     	  reader.readAsDataURL(fileList[0]);

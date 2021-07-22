@@ -43,6 +43,8 @@ public class PaymentService {
 		String title=Paymentboardlist.getTitle();
 		String Approver=Paymentboardlist.getApprover();
 		LocalDate now=LocalDate.now();
+		LocalDate startDate =Paymentboardlist.getStartDate();
+		LocalDate endDate =Paymentboardlist.getEndDate();
 		//String[] fileList = Paymentboardlist.getReceipt().split(",");
 		String[] division = Paymentboardlist.getDivision().split(",");
 		String[] detail = Paymentboardlist.getDetail().split(",");
@@ -51,10 +53,12 @@ public class PaymentService {
 		String[] VAT = Paymentboardlist.getVAT().split(",");
 		String[] ammountPrice = Paymentboardlist.getAmmountPrice().split(",");
 		String[] remark = Paymentboardlist.getRemark().split(",");
+		long allPriceSum=0;
 	
 		
 		
-		System.out.println(Paymentboardlist.getReceipt());
+		
+		//System.out.println(Paymentboardlist.getReceipt());
 		for(int i=0; i<division.length; i++) { 
 			String division1=division[i];
 			String detail1=detail[i];
@@ -63,24 +67,25 @@ public class PaymentService {
 			String VAT1=VAT[i];
 			String ammountPrice1=ammountPrice[i];
 			String remark1=remark[i];
-			for(int j=0; j<ammountPrice1.length(); j++) {
-				int allPrice=Integer.parseInt(ammountPrice1);
-				int allPriceSum+=allPrice;
-				총액계산하는거부터해야함;
+			
+			for(int j=0; j<division.length; j++) {
+			int allPrice=Integer.parseInt(ammountPrice1);
+			allPriceSum+=allPrice;
+
 			}
-			
-			
 			
 			
 			pm.insertPaymentboardlist(new Paymentboardlist(
 					0,
 					paypmentBoadrdId,
-					Paymentboardlist.getStartDate(),
-					Paymentboardlist.getEndDate(),
+					startDate,
+					endDate,
 					Paymentboardlist.getAccountCompany(),
 					Paymentboardlist.getWriter(),
 					Paymentboardlist.getWriterDepartment(),
 					Approver,
+					//aprroverUserId,
+					101010,
 					division1, 
 					detail1, 
 					type1, 
@@ -92,8 +97,11 @@ public class PaymentService {
 					"결제대기",
 					userId,
 					now,
-					title));
+					title,
+					allPriceSum,
+					null));
 		}
+		
 		pm.insertPayment(new Payment(
 				paypmentBoadrdId, 
 				title, 
@@ -102,21 +110,36 @@ public class PaymentService {
 				"지출결의서",
 				"결제대기",
 				userId,
-				now
+				now+"",
+				startDate+"",
+				endDate+""
 				));
 		
 		return true;
 	}
 	
 	/* 조회 */
-	public List<Payment> getPaymentBoardList(int userId){
+	public List<Payment> getPaymentBoardList(int userId,String paymentStatus){
 		
-		return pm.paymentBoardList(userId);
+		if(paymentStatus==null) {
+			return pm.paymentBoardListAll(userId);
+		}else if(paymentStatus.equals("전체")){
+			return pm.paymentBoardListAll(userId);
+		}else {
+		return pm.paymentBoardList(userId,paymentStatus);
+		}
 	}
+	
+	
 	
 	public List<Paymentboardlist> getPaymentBoardListSelectId(int id){
 		
 		return pm.getPaymentBoardListSelectId(id);
+	}
+	
+	/* 날짜조회 */
+	public List<Payment> getPaymentBoardDaySearch(String startDate, String endDate, int userId){
+		return pm.getPaymentBoardDaySearch(startDate, endDate, userId);
 	}
 	
 	/* 결제게시판 */
@@ -137,6 +160,19 @@ public class PaymentService {
 		ServiceClass sc = new ServiceClass(Integer.parseInt(page),  15, pm.PaymentboardlistCount());
 		sc.setTablelist(pm.selectWithPaymentStatus(sc.getFirstRow(),15,paymentStatus));
 		return sc;
+	}
+	
+	/* 결제 */
+	public boolean paymentApproveBoard(int paymentBoardId) {
+		
+		
+		return pm.paymentApproveBoard(paymentBoardId);
+	}
+	
+	public boolean paymentboardlistApproveBoard(int paymentBoardId) {
+		
+		
+		return pm.paymentboardlsitApproveBoard(paymentBoardId);
 	}
 	
 }

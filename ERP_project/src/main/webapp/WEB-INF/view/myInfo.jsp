@@ -42,7 +42,12 @@
 </head>
 
 <body>
-
+<c:if test="${empty empl }">
+		<script>
+		alert("로그인 정보가 없습니다.")
+		location.href="/login";
+	</script>
+	</c:if>
 	<c:if test="${empl.manager=='권한' }">
 
 		<tiles:insertAttribute name="root_side" />
@@ -68,7 +73,7 @@
     
   <div class="input-form-backgroud row"></div>
 		<div class="input-form row-nw d-flex flex-wrap">
-    <form class="submit" action="/myInfo" method="post" enctype="multipart/form-data">
+    <form class="submit" action="/myInfo?userId=${empl.userId }" method="post" enctype="multipart/form-data">
       <table id="table1">
           <h4><strong>개인 정보 수정</strong></h4><br>
       </table>    
@@ -79,11 +84,12 @@
               <td ><input type="text" name="name" id="name" value="${empl.name }"/></td>
             <td></td><td></td>
               <td rowspan="5" style="text-align: center; width: 200px;" class="filebox">
-                <img src="/image/${empl.imgName }?<%=new Date() %>" width="150px" name="imgName" class="img-circle" height="150px">
+                <img src="/image/${empl.imgName }" width="150px" name="imgName" class="img-circle myInfoImg" height="150px">
                     
                     <label for="ex_filename" class="filebox" style="margin-top: 5px;">업로드</label> <input type="file"
                         id="ex_filename" name="uploadFile" value=${empl.imgName } multiple="multiple"
-                        class="upload-hidden file_input">
+                        class="upload-hidden file_input"><label class="filebox" for="cancel" style="margin-top: 5px;">취소</label><input id="cancel" onclick="imgChange()" hidden="hidden" type="button">
+                <input type="text" name="fileName" hidden="hidden" class="cancelVal">
                 </td>
           </tr>
           <tr height="7">
@@ -121,14 +127,14 @@
                 <td width="15%">주민등록번호</td>
                 <td width="10%"> <input type="text" pattern="[0-9]{6}" name="birthDate1"
                  size=6 maxlength=6 
-                id="exampleInputEmail3" value="${empl.birthDate.substring(0,6)}" placeholder="앞자리 6자리"
+                id="birthDate1" value="${empl.birthDate.substring(0,6)}" placeholder="앞자리 6자리"
                 style="width: 150px;">
 			
 			     ㅡ
 			
                  <input type="password" 
                  name="birthDate2" pattern="[0-9]{7}"  size=7
-                 id="exampleInputPassword3" maxlength=7 placeholder="뒷자리 7자리" value="${empl.birthDate.substring(6,13)}"
+                 id="birthDate2" maxlength=7 placeholder="뒷자리 7자리" value="${empl.birthDate.substring(6,13)}"
                  style="width: 150px;">
             </td>
             </tr>
@@ -291,4 +297,11 @@
 
 
 </body>
+<script>
+function imgChange(){
+	$(".cancelVal").val("normalImg.jpg")
+	$(".myInfoImg").prop("src","/image/normalImg.jpg");
+	
+	}
+</script>
 </html>

@@ -10,7 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class ImageService {
 
 	public Employee saveUploadedFile(MultipartFile imgName, Employee employee) {
-		String uploadFolder = "/";
+		String uploadFolder = "C:/Users/JungGil/git/Project_ERP/ERP_project/src/main/webapp/WEB-INF/image/";
 		if(imgName.getOriginalFilename().equals("")) {
 			employee.setImgName("normalImg.jpg");
 			return employee;
@@ -34,6 +34,7 @@ public class ImageService {
 			e.printStackTrace();
 			return null;
 		}
-	}
+		
+	} 
 
 }

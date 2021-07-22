@@ -1,10 +1,12 @@
 package payment;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,39 @@ public class PaymentController {
 	@Autowired
 	PaymentMapper pm;
 	
+	
+
+	
+	@GetMapping("/payment")
+	public String paymentList(Model model, HttpServletResponse response,HttpSession session, String paymentStatus) {			
+		Employee emp=new Employee();
+		if(session.getAttribute("empl")==null) {
+			try {
+				response.sendRedirect("/login");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}else {
+			
+			emp=(Employee)session.getAttribute("empl");
+		}
+		
+		model.addAttribute("paymentList",  ps.getPaymentBoardList(emp.getUserId(),paymentStatus));
+		
+		
+		return "payment/paymentBoard";
+	}
+	
+	
+	@PostMapping("/payment")
+	public String paymentBoardSearch(Model model, String startDate, String endDate, HttpSession session) {
+		Employee em = (Employee)session.getAttribute("empl");
+	
+		
+		model.addAttribute("paymentList", ps.getPaymentBoardDaySearch(startDate, endDate, em.getUserId()));
+		
+		return "payment/paymentBoard";
+	}
 
 	@GetMapping("/paymentWriter")
 	public String payment(Model model) {
@@ -69,56 +104,37 @@ public class PaymentController {
 		}
 		*/
 		
-		System.out.println(userId);
+		
 		if(!(receipt.getOriginalFilename().equals(""))) {
 			paymentboardlist.setReceipt(receipt.getOriginalFilename());
 			
 			model.addAttribute("result",ps.insertPayment(paymentboardlist,userId)); 
-			System.out.println(model.getAttribute("result"));
 		}else {
 			model.addAttribute("result",ps.insertPayment(paymentboardlist,userId));
-			System.out.println(userId);
 		}
 		
 		return "payment/paymentWriterResult";
 	}
 	
-	@GetMapping("/payment")
-	public String paymentList(Model model,HttpSession session) {			
-		Employee emp=(Employee)session.getAttribute("empl");
-		
-	
-		model.addAttribute("paymentList",  ps.getPaymentBoardList(emp.getUserId()));
-		
-		
-		return "payment/paymentBoard";
-	}
+
 	
 	@GetMapping("/paymentView")
 	public String paymentView(Model model, int id) {
 		
-		
-		System.out.println(pm.getPaymentBoardListSelectId(id));
 		model.addAttribute("selectlist", pm.getPaymentBoardListSelectId(id));
 		
 		
 		return "payment/paymentListView";
 	}
-
-	@GetMapping("/paymentlist")
-	public String payment(Model model, String page) {
-		if (page != null) {
-			model.addAttribute("list", ps.paymentList(page));
-			model.addAttribute("theList", ps.getListWithProgress("결제", page));
-			model.addAttribute("returnList", ps.getListWithProgress("반려", page));
-			model.addAttribute("waitList", ps.getListWithProgress("승인대기", page));
-		} else {
-			model.addAttribute("list", ps.paymentList("1"));
-			model.addAttribute("theList", ps.getListWithProgress("결제", "1"));
-			model.addAttribute("returnList", ps.getListWithProgress("반려", "1"));
-			model.addAttribute("waitList", ps.getListWithProgress("승인대기", "1"));
-		}
-		return "payment/paymentlist";
-	}
 	
+	
+	@GetMapping("/paymentApprove")
+	public String paymentApprove(int id) {
+		
+		ps.paymentApproveBoard(id);
+		ps.paymentboardlistApproveBoard(id);
+		
+		return "payment/paymentApproveResult";
+	}
+
 }

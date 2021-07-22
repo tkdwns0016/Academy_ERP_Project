@@ -45,6 +45,12 @@ input[type=search] {
 
 </head>
 <body>
+<c:if test="${empty empl }">
+		<script>
+		alert("로그인 정보가 없습니다.")
+		location.href="/login";
+	</script>
+	</c:if>
 	<c:if test="${empl.manager=='권한' }">
 
 		<tiles:insertAttribute name="root_side" />

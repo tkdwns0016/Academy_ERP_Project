@@ -243,8 +243,8 @@ input:focus {
 							<option value="5">팀장</option>
 							<option value="6">부장</option>
 							<option value="7">상무</option>
-							<option value="8">회장</option>
-							<option value="9">비정규직</option>
+							<option value="8">이사</option>
+							<option value="9">회장</option>
 					</select></td>
 					<td class="searchPopup-td">재직구분</td>
 					<td><select name="status" class="status">
@@ -320,7 +320,7 @@ $('.jumin').val(front+"-"+end+"******");
     $(".sex").val(sex).prop("selected", true);
     
     var department = "${resultEmpl.departmentId}"
-    $(".department").val(department).propt("selected", true);
+    $(".department").val(department).prop("selected", true);
 
     var position= "${resultEmpl.positionId}"
     $(".position").val(position).prop("selected", true);

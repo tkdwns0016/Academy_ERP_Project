@@ -11,8 +11,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 <link href="/static/community/notice/noticeSearch.css" rel="stylesheet">
 <style>
 @font-face {
@@ -92,10 +91,11 @@ position:relative;
 		<tiles:insertAttribute name="empl_side" />
 
 	</c:if>
+	<section>
 	
 	<div class="container2">
 
-		<table class="table-border" style="border-collapse: collapse;">
+		<table class="table-border board-table" style="border-collapse: collapse;">
 			<th colspan="6" style="text-align: left; border: none;">
 				<h2>
 					<img src="image/community/notice/borderIcon.png" width="20px">&nbsp;게시글
@@ -127,7 +127,7 @@ position:relative;
 				<td class="borderS-td-color" style="height: 50px;">첨부파일</td>
 				<td colspan="5" class="borderS-td-padding">
 					<ul>
-						<c:if test="${empty file }">
+						<c:if test="${empty file}">
 						저장된 파일이 없습니다.
 					</c:if>
 						<c:if test="${not empty file }">
@@ -153,9 +153,10 @@ position:relative;
 						<button onclick="location.href=('/noticeSearch?id=${nextIndex}')"
 							style="float: left; width: 60px; height: 30px; margin-left: 5px">다음</button>
 					</c:if>
-
+					<c:if test="${empl.manager=='권한' }">
 					<button onclick="modifyOn()" style="width: 60px; height: 30px;">수정</button>
 					<button onclick="deleteOn()" style="width: 60px; height: 30px;">삭제</button>
+					</c:if>
 					<button class="listButton" style="width: 60px; height: 30px;"
 						onclick="location.href=('/notice')">목록</button>
 				</td>
@@ -185,6 +186,7 @@ position:relative;
 					</td>
 				</tr>
 			</table>
+			
 			<table class="comment_table">
 			<c:forEach var="comment" items="${noticeComment }">
 			
@@ -192,7 +194,7 @@ position:relative;
 					<td class="width_auto">[${comment.writerDepartmentName }]${comment.writerName}<br>(${comment.writeDate })</td>
 					<td class="comment_content comment_td${comment.id }">${comment.comment }</td>
 					<td>
-					<c:if test="${empl.userId==comment.writerId }">
+					<c:if test="${empl.userId==comment.writerId||empl.manager=='권한' }">
 						<input type="button" onclick="comment_modi(${comment.id})" value="수정">						
 						<input type="button" onclick="comment_del(${result.id },${comment.id})" value="삭제">
 					</c:if>
@@ -216,19 +218,19 @@ position:relative;
 							src="image/community/notice/delete.png"></td>
 					</tr>
 					<tr height="10%">
-						<td id="modal_td"><font size="6"><font color="blue">비밀번호</font>확인</font></td>
+						<td id="modal_Td"><font size="6"><font color="blue">비밀번호</font>확인</font></td>
 					</tr>
 					<tr height="20%">
 
-						<td id="modal_td">작성할 때 입력하신 비밀번호를 입력해주세요</td>
+						<td id="modal_Td">작성할 때 입력하신 비밀번호를 입력해주세요</td>
 					</tr>
 					<tr height="10%">
-						<td id="modal_td"><input type="password" id="modifyPassword"
+						<td id="modal_Td"><input type="password" id="modifyPassword"
 							name="modifyPassword" maxlength="4"> &nbsp; <input
 							type="button" onclick="modifyCheck()" value="확인"></td>
 					</tr>
 					<tr>
-						<td id="modal_td"><input type="button" onclick="modal_out()"
+						<td id="modal_Td"><input type="button" onclick="modal_out()"
 							value="취소하기"></td>
 					</tr>
 				</table>
@@ -247,18 +249,18 @@ position:relative;
 							src="image/community/notice/delete.png"></td>
 					</tr>
 					<tr height="10%">
-						<td id="modal_td"><font size="6"><font color="blue">비밀번호</font>확인</font></td>
+						<td id="modal_Td"><font size="6"><font color="blue">비밀번호</font>확인</font></td>
 					</tr>
 					<tr height="20%">
-						<td id="modal_td">작성할 때 입력하신 비밀번호를 입력해주세요</td>
+						<td id="modal_Td">작성할 때 입력하신 비밀번호를 입력해주세요</td>
 					</tr>
 					<tr height="10%">
-						<td id="modal_td"><input type="password" id="deletePassword"
+						<td id="modal_Td"><input type="password" id="deletePassword"
 							name="deletePassword" maxlength="4"> &nbsp; <input
 							type="button" onclick="deleteCheck()" value="확인"></td>
 					</tr>
 					<tr>
-						<td id="modal_td"><input type="button" onclick="modal_out2()"
+						<td id="modal_Td"><input type="button" onclick="modal_out2()"
 							value="취소하기"></td>
 					</tr>
 				</table>
@@ -267,6 +269,7 @@ position:relative;
 		</div>
 
 	</div>
+	</section>
 
 </body>
 <script type="text/javascript">

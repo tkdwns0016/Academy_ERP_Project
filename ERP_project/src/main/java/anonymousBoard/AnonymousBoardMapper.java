@@ -33,7 +33,7 @@ public interface AnonymousBoardMapper {
 	public boolean insert(AnonymousBoard anonimouseBoard);
 	
 	@Update("update anonymous_board set title=#{title},content=#{content},"
-			+ "password=#{password},filename=#{filename} where id=#{id}")
+			+ "filename=#{filename} where id=#{id}")
 	public boolean update(AnonymousBoard anonymouseBoard);
 	@Update("update anonymous_board set count=#{count} where id=#{id}")
 	public int countPlus(@Param("count")int count,@Param("id")int id);
@@ -75,7 +75,7 @@ public interface AnonymousBoardMapper {
 
 
 
-	@Insert("insert into anonymous_comment values(0,#{boardId},#{comment},#{writerId},#{writerName},#{writerDepartmentName},#{writeDate})")
+	@Insert("insert into anonymous_comment values(0,#{boardId},#{comment},#{writerId},#{nickName},#{writeDate})")
 	public boolean setComment(AnonymousComment ac);
 
 	@Select("select name,department_id from employee where user_id=#{writer}")
@@ -86,6 +86,14 @@ public interface AnonymousBoardMapper {
 	
 	@Select("select department_name from department where department_id=#{departmentId}")
 	public String getDepartment(int departmentId);
+	
+	@Delete("delete from anonymous_comment where board_id=#{id}")
+	public void deleteAllComment(int id);
+
+	@Delete("delete from anonymous_view where board_id=#{id}")
+	public void deleteAllView(int id);
+	@Select("select * from anonymous_board order by id desc limit 10")
+	public List<AnonymousBoard> getMainList();
 	
 
 

@@ -7,7 +7,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-    
+    <c:if test="${empty empl }">
+		<script>
+		alert("로그인 정보가 없습니다.")
+		location.href="/login";
+	</script>
+	</c:if>
 	<c:if test="${empl.manager=='권한' }">
 
 		<tiles:insertAttribute name="root_side" />
@@ -45,14 +50,12 @@
 <section>
 
     <form style="width:65%" method="post" action="/anonymousModify1?id=${anonymous.id}" enctype="multipart/form-data" >  
-      <table style="position: relative; top: -50px" class="notiTable" >
+      <table  class="notiTable" >
    		 <tr><td style="font-size: 2em" colspan="3">글 작성</td></tr>
         <tr><td colspan="3">&nbsp;</td></tr>
         <tr>
           <td class="fchild ntd">작성자</td>
-          <td class="ntd" style="width: 60%;">&nbsp;<input type="text" id="writer"  style="width: 90%; " placeholder="작성자"  readonly value="${anonymous.nickName }"/><br></td>
-          <td class="fchild ntd">비밀번호</td>
-          <td class="ntd"><input type="password" name="password" maxlength="4" size="30" required></td>
+          <td class="ntd" style="width: 60%;" colspan="3">&nbsp;<input type="text" id="writer"  style="width: 90%; " placeholder="작성자"  readonly value="${anonymous.nickName }"/><br></td>
         </tr>
         <tr>
           <td class="fchild ntd">제목</td>
@@ -92,12 +95,11 @@
              </td>
 			</tr>
           </table>
-          
-          
-          <input id="subBtn" type="submit" value="작성" />
+          <input id="subBtn" type="submit" value="수정" />
           <input id="subBtn" type="button" value="취소"  onclick="history.go(-1);"/>
         </form>
-          
+          <br>
+          <br>
        
 
 

@@ -15,6 +15,7 @@ public class Paymentboardlist {
 	private String writer;
 	private String writerDepartment;
 	private String approver;
+	private int approverUserId;
 	private String division;
 	private String detail;
 	private String type;
@@ -29,38 +30,8 @@ public class Paymentboardlist {
 	private LocalDate writeDate;
 	private String title;
 	private Long allAmmountPrice;
-
-	public Paymentboardlist(int id, int paymentBoardId, LocalDate startDate, LocalDate endDate, String accountCompany,
-			String writer, String writerDepartment, String approver, String division, String detail, String type,
-			String supplyPrice, String vAT, String ammountPrice, String receipt, String remark, String paymentStatus,
-			int userId, LocalDate writeDate, String title, Long allAmmountPrice) {
-		super();
-		this.id = id;
-		this.paymentBoardId = paymentBoardId;
-		this.startDate = startDate;
-		this.endDate = endDate;
-		this.accountCompany = accountCompany;
-		this.writer = writer;
-		this.writerDepartment = writerDepartment;
-		this.approver = approver;
-		this.division = division;
-		this.detail = detail;
-		this.type = type;
-		this.supplyPrice = supplyPrice;
-		VAT = vAT;
-		this.ammountPrice = ammountPrice;
-		this.receipt = receipt;
-		this.remark = remark;
-		this.paymentStatus = paymentStatus;
-		this.userId = userId;
-		this.writeDate = writeDate;
-		this.title = title;
-		this.allAmmountPrice = allAmmountPrice;
-	}
-
-	public Paymentboardlist() {
-		super();
-	}
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private LocalDate approverDate;
 
 	public int getId() {
 		return id;
@@ -124,6 +95,14 @@ public class Paymentboardlist {
 
 	public void setApprover(String approver) {
 		this.approver = approver;
+	}
+
+	public int getApproverUserId() {
+		return approverUserId;
+	}
+
+	public void setApproverUserId(int approverUserId) {
+		this.approverUserId = approverUserId;
 	}
 
 	public String getDivision() {
@@ -230,15 +209,61 @@ public class Paymentboardlist {
 		this.allAmmountPrice = allAmmountPrice;
 	}
 
+	public LocalDate getApproverDate() {
+		return approverDate;
+	}
+
+	public void setApproverDate(LocalDate approverDate) {
+		this.approverDate = approverDate;
+	}
+
+	
+
+	public Paymentboardlist(int id, int paymentBoardId, LocalDate startDate, LocalDate endDate, String accountCompany,
+			String writer, String writerDepartment, String approver, int approverUserId, String division, String detail,
+			String type, String supplyPrice, String vAT, String ammountPrice, String receipt, String remark,
+			String paymentStatus, int userId, LocalDate writeDate, String title, Long allAmmountPrice,
+			LocalDate approverDate) {
+		super();
+		this.id = id;
+		this.paymentBoardId = paymentBoardId;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.accountCompany = accountCompany;
+		this.writer = writer;
+		this.writerDepartment = writerDepartment;
+		this.approver = approver;
+		this.approverUserId = approverUserId;
+		this.division = division;
+		this.detail = detail;
+		this.type = type;
+		this.supplyPrice = supplyPrice;
+		VAT = vAT;
+		this.ammountPrice = ammountPrice;
+		this.receipt = receipt;
+		this.remark = remark;
+		this.paymentStatus = paymentStatus;
+		this.userId = userId;
+		this.writeDate = writeDate;
+		this.title = title;
+		this.allAmmountPrice = allAmmountPrice;
+		this.approverDate = approverDate;
+	}
+
+	
+	public Paymentboardlist() {
+		super();
+	}
+
 	@Override
 	public String toString() {
 		return "Paymentboardlist [id=" + id + ", paymentBoardId=" + paymentBoardId + ", startDate=" + startDate
 				+ ", endDate=" + endDate + ", accountCompany=" + accountCompany + ", writer=" + writer
-				+ ", writerDepartment=" + writerDepartment + ", approver=" + approver + ", division=" + division
-				+ ", detail=" + detail + ", type=" + type + ", supplyPrice=" + supplyPrice + ", VAT=" + VAT
-				+ ", ammountPrice=" + ammountPrice + ", receipt=" + receipt + ", remark=" + remark + ", paymentStatus="
-				+ paymentStatus + ", userId=" + userId + ", writeDate=" + writeDate + ", title=" + title
-				+ ", allAmmountPrice=" + allAmmountPrice + "]";
+				+ ", writerDepartment=" + writerDepartment + ", approver=" + approver + ", approverUserId="
+				+ approverUserId + ", division=" + division + ", detail=" + detail + ", type=" + type + ", supplyPrice="
+				+ supplyPrice + ", VAT=" + VAT + ", ammountPrice=" + ammountPrice + ", receipt=" + receipt + ", remark="
+				+ remark + ", paymentStatus=" + paymentStatus + ", userId=" + userId + ", writeDate=" + writeDate
+				+ ", title=" + title + ", allAmmountPrice=" + allAmmountPrice + ", approverDate=" + approverDate + "]";
 	}
 
 }

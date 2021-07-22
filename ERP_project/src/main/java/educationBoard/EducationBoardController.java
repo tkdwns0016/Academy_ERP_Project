@@ -23,31 +23,47 @@ public class EducationBoardController {
 	@GetMapping("/educationBoard")
 	public String educationBoard(Model model, int departmentId) {
 		model.addAttribute("departmentId",departmentId);
-		
+		if(departmentId==10) {
+			model.addAttribute("edu", "경영팀 교육 일정");
+		}
+		if(departmentId==20) {
+			model.addAttribute("edu", "개발팀 교육 일정");
+		}
+		if(departmentId==30) {
+			model.addAttribute("edu", "인사팀 교육 일정");
+		}
+		if(departmentId==40) {
+			model.addAttribute("edu", "영업팀 교육 일정");
+		}
 		return "education/educationBoard";
 	}
+	
 	@GetMapping("/mainlist")
 	public @ResponseBody List<EducationBoard> getMainList() {
 		
 		return eds.getList();
 	}
+	
 	@GetMapping("/list")
 	public @ResponseBody List<EducationBoard> getList(int departmentId) {
 		
 		return eds.getBoardWithDepatmentId(departmentId);
+	
 	}
+	
 	@PostMapping("/educationBoard")
 	public String CRUD(Model model, EducationBoard educationBoard,String button,HttpSession session) {
-		boolean result=eds.getCRUDEdu(educationBoard, button,(Employee)session.getAttribute("empl") );
-		model.addAttribute("departmentId",educationBoard.getDepartmentId());
-		model.addAttribute("result", result);
-		model.addAttribute("button", button);
-		return "education/educationBoard";
+		
+		eds.getCRUDEdu(educationBoard, button,(Employee)session.getAttribute("empl"),model);
+		
+		return "education/result";
 	}
 	
 	@GetMapping("/test")
 	public String test() {
+	
 		return "test";
+	
 	}
 	
 	

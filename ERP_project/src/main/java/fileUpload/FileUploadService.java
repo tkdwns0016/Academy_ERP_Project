@@ -18,7 +18,7 @@ public class FileUploadService {
 		
 		//파일을 저장하기 위해 file자료형 사용
 		//업로드할 폴더
-		String uploadFolder = "/file";
+		String uploadFolder = "/image";
 		
 		File file = new File(uploadFolder, filename.getOriginalFilename());
 		

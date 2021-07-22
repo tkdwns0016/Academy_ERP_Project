@@ -44,6 +44,12 @@ input[type=button]{
 
 </head>
 <body>
+<c:if test="${empty empl }">
+		<script>
+		alert("로그인 정보가 없습니다.")
+		location.href="/login";
+	</script>
+	</c:if>
 	<c:if test="${empl.manager=='권한' }">
 
 		<tiles:insertAttribute name="root_side" />
@@ -52,10 +58,10 @@ input[type=button]{
 		<tiles:insertAttribute name="empl_side" />
 
 	</c:if>
-	
+<section>
 	<div class="container2">
 
-		<table class="table-border" style="border-collapse: collapse;">
+		<table class="table-border board-table" style="border-collapse: collapse;">
 			<th colspan="6" style="text-align: left; border: none;">
 				<h2>
 					<img src="image/community/notice/borderIcon.png" width="20px">&nbsp;게시글
@@ -74,7 +80,7 @@ input[type=button]{
 				<td class="borderS-td-color" style="width: 10%;">등록일</td>
 				<td class="borderS-td-padding">${result.writeDate }</td>
 				<td class="borderS-td-color" style="width: 10%;">조회수</td>
-				<td style="text-align: center; width: 10%;">4</td>
+				<td style="text-align: center; width: 10%;">${result.count }</td>
 			</tr>
 			<tr>
 				<td class="borderS-td-color">내용</td>
@@ -92,7 +98,7 @@ input[type=button]{
 					</c:if>
 					<c:if test="${not empty file }">
 					<c:forEach var="file" items="${file }" >
-						 <li class="file-li delete"><a class="file-link delete" href="/filedownload?id=${result.id }&filename=${file}">${file}</a></li>
+						 <li class="file-li delete"><a class="file-link delete" href="/suggestionFiledownload?id=${result.id }&filename=${file}">${file}</a></li>
 					</c:forEach>
 					</c:if>
 					</ul>
@@ -118,7 +124,7 @@ input[type=button]{
 			</tr>
 		</table>
 		<div style="width: 800px; margin-top: auto;">
-			댓글 0개
+			댓글 ${commentCount }개
 			<hr>
 		</div>
 		<div>
@@ -127,14 +133,35 @@ input[type=button]{
 				<tr>
 
 					<td style="width: 15%;" class="borderS-td-color">댓글내용</td>
-					<td style="width: 60%; padding: 10px; border-bottom: none;"><textarea
-							style="resize: none;" cols="60" rows="6"></textarea></td>
-					<td style="width: 12%; text-align: center; border-bottom: none;"><button
+					<td style="width: 60%; padding: 10px; border-bottom: none;">
+						<form action="/suggestionSearch" class="comment_form" method="get">
+						<textarea name="comment" style="resize: none;" cols="60" rows="6"></textarea>
+							<input type="hidden" name="boardId" value="${result.id}">
+							<input type="hidden" name="id" value="${result.id}">
+						</form>
+					</td>
+					<td style="width: 12%; text-align: center; border-bottom: none;">
+					<button onclick="comment_send()"
 							style="width: 100px; height: 100px;">댓글등록</button></td>
 
 				</tr>
 			</table>
-
+				<table class="comment_table">
+			
+				<c:forEach var="comment" items="${suggestionComment }">
+			
+					<tr class="comment_tr_border">
+						<td class="width_auto">[${comment.writerDepartmentName }]${comment.writerName}<br>(${comment.writeDate })</td>
+						<td class="comment_content comment_td${comment.id }">${comment.comment }</td>
+						<td>
+					<c:if test="${empl.userId==comment.writerId||empl.manager=='권한' }">
+						<input type="button" onclick="comment_modi(${comment.id})" value="수정">						
+						<input type="button" onclick="comment_del(${result.id },${comment.id})" value="삭제">
+					</c:if>
+					</td>
+				</tr>
+				</c:forEach>
+			</table>
 		</div>
 
 	</div>
@@ -173,7 +200,7 @@ input[type=button]{
 	<!-- 삭제 모달 폼 -->
 	<div class="full_modal2 hidden">
 	<div id="modal-div2">
-	<form action="/deleteNotice" method="post" class="deleForm">
+	<form action="/deleteSuggestion" method="post" class="deleForm">
 			<input type="hidden" name="id" value="${result.id}">
 			<table class="modal-table">
 				<tr height="20%">
@@ -201,6 +228,7 @@ input[type=button]{
 
 </div>
 
+</section>	
 
 </body>
 <script type="text/javascript">
@@ -243,6 +271,29 @@ input[type=button]{
 			document.getElementById("modifyPassword").value="";
 			alert("비밀번호가 틀립니다.");
 		}
+	}
+	function comment_send(){
+		$(".comment_form")[0].submit()
+	}
+	function comment_del(boardId,commentId){
+		if(confirm("댓글을 삭제하시겠습니까?")){
+			
+		location.href="/suggestionSearch?id="+boardId+"&deleteNo="+commentId;
+		}
+	}
+	function comment_modi(id){
+		var comment_td = $(".comment_td"+id);
+		var comment = comment_td.html();
+		comment_td.html("<form action='/suggestionSearch' class='suggestionComment_modi_form'><input type='hidden' name='id' value='"+${result.id}+"'><input type='hidden' name='updateCommentId' value='"+id+"'><textarea class='modi_textarea' name='updateComment' placeholder='"+comment+"' >"+comment+"</textarea>");
+		comment_td.append("<button type='button' class='modi_button' onclick='comment_modi_ok("+id+")'>수정하기</button")
+		comment_td.append("<button type='button' class='modi_button' onclick='comment_modi_cancel("+id+")'>취소하기</button></form>")
+	}
+	function comment_modi_ok(id){
+		$(".suggestionComment_modi_form").submit();
+		}
+	function comment_modi_cancel(id){
+		var comment_td = $(".comment_td"+id);
+		comment_td.html($(".modi_textarea").prop("placeholder"));
 	}
 </script>
 </html>

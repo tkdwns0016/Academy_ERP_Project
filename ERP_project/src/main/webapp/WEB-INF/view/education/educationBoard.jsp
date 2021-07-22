@@ -22,19 +22,19 @@
 			var hh =time.getHours();
 			var MM = time.getMinutes();
 			if(dd<10){
-			  dd='0'+dd
+			 	 dd='0'+dd
 			}else{
-				dd=dd;
+			     dd=dd;
 			} 
 			if(mm<10){
-			  mm='0'+mm
+			 	 mm='0'+mm
 			}else{
-				mm=mm;
+				 mm=mm;
 			} 
 			if(hh<10){
-				hh='0'+hh
+				 hh='0'+hh
 			}else{
-				hh=hh;
+				 hh=hh;
 			}
 			
 			if(MM<10){
@@ -167,7 +167,7 @@
 			},
 			eventClick : function(event) {
 				$(".mo")[0].classList.remove('hidden');
-				$(".title").val(event.event.title);
+				$(".title").val(event.event.title.substring(0,event.event.title.lastIndexOf(" ")));
 				var start=event.event.start;
 				var startYY=start.getFullYear();
 				var startMM=start.getMonth()+1;
@@ -237,7 +237,7 @@
 				$(".st-date")[0].onchange=function(){
 					$(".ed-date")[0].setAttribute("min",$(".st-date")[0].value );
 				}
-				if(event.event.id==${empl.userId}){
+				if(event.event.id==${empl.userId}||${empl.manager=='권한'}){
 					$(".title")[0].removeAttribute("readonly");
 					$(".st-date")[0].removeAttribute("readonly");
 					$(".ed-date")[0].removeAttribute("readonly");
@@ -358,7 +358,7 @@ body {
 .teduri {
 	position: relative;
 	top: 15%;
-	height: 110%;
+	min-height: 750px;
 }
 
 #calendar {
@@ -426,6 +426,12 @@ tr td {
 
 </head>
 <body>
+<c:if test="${empty empl }">
+		<script>
+		alert("로그인 정보가 없습니다.")
+		location.href="/login";
+	</script>
+	</c:if>
 	<c:if test="${empl.manager=='권한' }">
 
 		<tiles:insertAttribute name="root_side" />
@@ -434,19 +440,9 @@ tr td {
 		<tiles:insertAttribute name="empl_side" />
 
 	</c:if>
-	<c:if test="${not empty result}">
-		<script>
-		if(${result}){
-			
-			alert("1개의 게시물이 정상적으로 ${button} 되었습니다.");
-		}
-		if(${!result}){
-			alert("정상적으로 처리되지 않았습니다.");
-		}
-		</script>
-
-	</c:if>
+	
 	<div class='teduri'>
+		<div style="font-weight: bold;font-size: 2em">${edu }</div>
 		<div id='calendar'></div>
 		<br>
 		<br>
@@ -455,11 +451,11 @@ tr td {
 	<div class="mo hidden">
 		<div class="mo-content">
 			<div class="title"
-				style="text-align: center; font-size: 20px; width: 90%; font-weight: bold;">
+				style="text-align: center; font-size: 20px; width:100%; font-weight: bold;">
 				교육 일정</div>
 			<input class="cancle cancel-position" type="button" value="X">
 			<br>
-			<form action="/educationBoard" method="POST">
+			<form action="/educationBoard?departmentId=${departmentId}" method="POST">
 				<table class="modal-table">
 					<tr>
 						<td class="edu_name">타이틀</td>

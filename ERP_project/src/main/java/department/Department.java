@@ -10,7 +10,6 @@ public class Department {
 	}
 	public Department() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	public int getDepartmentId() {
 		return departmentId;

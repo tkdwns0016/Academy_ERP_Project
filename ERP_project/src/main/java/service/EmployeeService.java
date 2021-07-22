@@ -3,9 +3,13 @@ package service;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
 import department.Department;
@@ -18,45 +22,48 @@ public class EmployeeService {
 	@Autowired
 	ImageService is;
 
-	public ServiceClass employeeService(String page) {
-		ServiceClass serviceClass=new ServiceClass(Integer.parseInt(page),15, em.EmpleCount());
-		List<EmplClass> emplList= em.selectECList(serviceClass.getFirstRow(),15);
-		List<Employee> list = em.selectList(serviceClass.getFirstRow(),15);
+	public void employeeService(Model model,String page) {
+		ServiceClass serviceClass;
+		
+		List<Employee> list;
+		
+		List<EmplClass> emplList;
+		
+		if(page!=null) {
+			serviceClass=new ServiceClass(Integer.parseInt(page),15, em.EmpleCount());
+			emplList= em.selectECList(serviceClass.getFirstRow(),serviceClass.getPagePerCount());
+			list = em.selectList(serviceClass.getFirstRow(),serviceClass.getPagePerCount());
+		}else {
+			serviceClass=new ServiceClass(1,15, em.EmpleCount());
+			emplList= em.selectECList(serviceClass.getFirstRow(),serviceClass.getPagePerCount());
+			list = em.selectList(serviceClass.getFirstRow(),serviceClass.getPagePerCount());
+		}
+		
 		for(int i=0; i<list.size();i++) {
 			emplList.get(i).setDepartment(em.getDepartment(list.get(i).getDepartmentId()));
 			emplList.get(i).setPosition(em.getPosition(list.get(i).getPositionId()));
 		}
 		serviceClass.setTablelist(emplList);
-		return serviceClass;
+		model.addAttribute("emplList",serviceClass);
 	}
 	
 	public Employee select(int userId,String name,String birthDate) { 
 		return em.changePassword(userId,name,birthDate);
 	}
-	public boolean noImgUpdateEmpl(Employee employee,String birthDate1,String birthDate2) {
-		employee.setBirthDate(birthDate1+birthDate2);
-		boolean result;
-		int affectedRow=em.update(employee);
-		if(affectedRow>=1) {
-			result=true;
-		}else {
-			result=false;
-		}
-		return result;
 	
+	public void updateEmpl(Model model, Employee employee,MultipartFile uploadFile,String birthDate1,String birthDate2,HttpSession session,String fileName) {
+			Employee empl=(Employee)session.getAttribute("empl");
+			employee.setBirthDate(birthDate1+birthDate2);
+			employee.setUserId(empl.getUserId());
+			if(!(fileName==null||fileName.equals(""))) {
+				employee.setImgName(fileName);
+				model.addAttribute("result", em.updateMyInfo(employee));
+			}else {
+				Employee empls=is.saveUploadedFile(uploadFile, employee);
+				model.addAttribute("result", em.updateMyInfo(empls));
+			}
 	}
-	public boolean updateEmpl(Employee employee,String birthDate1,String birthDate2,MultipartFile uploadFile) {
-		employee.setBirthDate(birthDate1+birthDate2);
-		Employee empl=is.saveUploadedFile(uploadFile, employee);
-		boolean result;
-		int affectedRow=em.update(empl);
-		if(affectedRow>=1) {
-			result=true;
-		}else {
-			result=false;
-		}
-		return result;
-	}
+	
 	public boolean update(Employee employee) {
 		int affectedRow=em.updateEmplInfo(employee);
 		boolean result=true;
@@ -75,7 +82,7 @@ public class EmployeeService {
 		return em.getUserId(departmentId);
 	}
 	
-	public boolean insertEmployee(Employee employee,String birthDate1,String birthDate2,MultipartFile imgName) {
+	public void insertEmployee(Model model,Employee employee,String birthDate1,String birthDate2,MultipartFile imgName) {
 		String userId = "";
 		LocalDate now = LocalDate.now();
 		String str=now.getYear()+"";
@@ -85,20 +92,19 @@ public class EmployeeService {
 		IdCount+=1;
 		int userId2= Integer.parseInt(userId)+IdCount;
 		employee.setUserId(userId2);
-		
 		employee.setBirthDate(birthDate1+birthDate2);
 		employee.setBirth(birthDate1.substring(2,4)+"월"+birthDate1.substring(4,6)+"일");
 		employee.setPassword(userId2+"");
 		employee.setHireDate(now);
 		employee.setCompanyAddress("오주원 상사");
 		employee.setCompanyPhone("010-0000-0000");
-		
 		employee.setManager("비권한");
-		employee.setStatus("근무");
+		employee.setStatus("재직");
 		Employee empl=is.saveUploadedFile(imgName, employee);
-		System.out.println(employee);
-		return em.insert(employee);
+		model.addAttribute("join", em.insert(employee));
+		model.addAttribute("resultType", "인사 등록이 완료되었습니다.");
 	}
+
 	public ServiceClass searchInfo(String name, String userId,String page) {
 		List<EmplClass> list = new ArrayList<EmplClass>();
 		List<Employee> emplList;

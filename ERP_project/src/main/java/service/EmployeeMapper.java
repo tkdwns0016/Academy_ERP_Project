@@ -55,10 +55,10 @@ public interface EmployeeMapper {
 			+ "english_name=#{englishName},"
 			+ "lunar_calendar=#{lunarCalendar},birth=#{birth},korean_foreigner=#{koreanForeigner},"
 			+ "marriage=#{marriage} "
-			+ "where id=#{id}")
-	public int update(Employee employee);
+			+ "where user_id=#{userId}")
+	public boolean updateMyInfo(Employee employee);
 	
-	@Update("update employee set name=#{name},user_id=#{userId},"
+	@Update("update employee set name=#{name},"
 			+ "phone=#{phone},"
 			+ "email=#{email},hire_date=#{hireDate},"
 			+ "sex=#{sex},department_id=#{departmentId},"

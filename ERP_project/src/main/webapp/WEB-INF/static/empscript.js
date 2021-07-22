@@ -40,6 +40,7 @@
       var img=document.querySelectorAll(".img-circle")[0];
      
       input.onchange=function(){
+      	$("#cancel").val("");
     	  var fileList=input.files;
     	  var reader = new FileReader();
     	  reader.readAsDataURL(fileList[0]);

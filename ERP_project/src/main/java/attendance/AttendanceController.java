@@ -3,6 +3,8 @@ package attendance;
 import java.time.LocalDate;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,5 +39,15 @@ public class AttendanceController {
 		model.addAttribute("emplOneList",as.select_Atten_Empl(model,name,workType,page));
 		
 		return "attendance/attendance";
+	}
+	@GetMapping("/attendanceOnTime")
+	public String OnTime(Model model,HttpSession session) {
+		as.onTimeService(model,session);
+		return "main/result";
+	}
+	@GetMapping("/attendanceOffTime")
+	public String OffTime(Model model,HttpSession session) {
+		as.offTimeService(model,session);
+		return "main/result";
 	}
 }

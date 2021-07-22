@@ -1,6 +1,7 @@
 package noticeBoard;
 
 import java.io.File;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -30,10 +31,26 @@ public class NoticeService {
 	@Autowired
 	NoticeBoardMapper nm;
 
-	public ServiceClass getService(String page) {
-		ServiceClass sc = new ServiceClass(Integer.parseInt(page), 15, nm.count());
-		sc.setTablelist(nm.selectList(sc.getFirstRow(),15));
-		return sc;
+	public ServiceClass getService(String page,Model model) {
+		ServiceClass sc;
+		if (page != null) {
+			sc = new ServiceClass(Integer.parseInt(page), 15, nm.count());
+			model.addAttribute("list", sc);
+		} else {
+			sc = new ServiceClass(1, 15, nm.count());
+			sc.setTablelist(nm.selectList(sc.getFirstRow(),15)); 
+			model.addAttribute("list", sc);
+		}
+		List<String> writer= new ArrayList<String>();
+		List<NoticeBoard> nList = (List <NoticeBoard>)sc.getTablelist();
+		for(int i=0;i<nList.size();i++) {
+			Employee employee=nm.getWriter(nList.get(i).getWriter());
+			writer.add("["+nm.getDepartment(employee.getDepartmentId())+"] "+employee.getName());
+		}
+		
+		model.addAttribute("writer", writer);
+	
+		return sc; 
 	}
 
 	public NoticeBoard showContent(int id) {
@@ -42,13 +59,21 @@ public class NoticeService {
 		return nb;
 	}
 
-	public List<NoticeBoard> mainList() {
-		return nm.mainList();
+	public List<NoticeBoard> mainList(HttpSession session) {
+		List<NoticeBoard> list=nm.mainList();
+		List<String> writer= new ArrayList<String>();
+		for(NoticeBoard n:list) {
+			Employee empl=nm.noticeName(n.getWriter());
+			Department dp=nm.noticeDepart(empl.getDepartmentId());
+			writer.add("["+dp.getDepartmentName()+"] "+empl.getName());
+		}
+		session.setAttribute("noticeWriter", writer);
+		return list;
 	}
 
-	public NoticeBoard selectOne(int id) {
+	public void selectOne(int id,Model model) {
 		NoticeBoard result = nm.select(id);
-		return result;
+		model.addAttribute("result", result);
 	}
 	
 	public int noticeWriter(NoticeBoard noticeBoard) {
@@ -58,22 +83,42 @@ public class NoticeService {
 		return noticeBoard.getId();
 	}
 
-	public boolean deleteNotice(int id) {
-		return nm.delete(id);
+	public void deleteNotice(int id,Model model) {
+		
+		boolean result;
+		
+		if(nm.getCommentCount(id)!=0) {
+
+			nm.deleteAllComment(id);
+		
+		}
+		if(nm.getViewCount(id)!=0) {
+			nm.deleteViewAll(id);
+		}
+		result = nm.delete(id);
+	
+		
+		String deleteFolder = "D:/files/noticeBoard/"+id;
+	
+		File file = new File(deleteFolder);
+	
+		if(file.exists()) {
+			File[] fileList=file.listFiles();
+		for(int i = 0; i<fileList.length;i++) {
+			fileList[i].delete();
+		}
+			file.delete();
+			
+	}
+	
+		model.addAttribute("resultBoolean", result);
+		model.addAttribute("resultType", "삭제");
 	}
 
 	public boolean updateNotice(NoticeBoard board) {
 		return nm.update(board);
 	}
 
-	public EmplClass getWriter(int writer) {
-        Employee empl=nm.getWriter(writer);
-        EmplClass ec=nm.getECWriter(writer);
-        Department dp =new Department(empl.getDepartmentId(),nm.getDepartment(empl.getDepartmentId()));
-        ec.setDepartment(dp);
-
-        return ec;
-    }
 
 	public int getLastIndex() {
 		return nm.getLastIndex()+1;
@@ -101,26 +146,33 @@ public class NoticeService {
 		return index;
 	}
 
-	public boolean noticeWriteService(Model model, NoticeBoard noticeBoard, List<MultipartFile> filename) {
+	public void noticeWriteService(Model model, NoticeBoard noticeBoard, List<MultipartFile> filename) {
 		String imgName= "";
+	
 		boolean result;
+		
 		if(!filename.get(0).getOriginalFilename().equals("")) {
 			
 			for(MultipartFile fileList : filename) {
 				
 				imgName+=fileList.getOriginalFilename()+",";
 			}
+		
 		noticeBoard.setFilename(imgName);
+		
 		noticeBoard.setWriteDate(LocalDate.now());
+		
 		result= nm.insert(noticeBoard);
+		
 		String uploadFolder = "D:/files/noticeBoard/"+noticeBoard.getId();
+		
 		File folder = new File(uploadFolder);
 		
 		if(!folder.exists()) {
 			try {
 				folder.mkdir();
 			}catch(Exception e) {
-				System.out.println("폴더 못만들어 이바보야");
+				System.out.println("폴더 생성 실패");
 			}
 		}
 		
@@ -131,7 +183,9 @@ public class NoticeService {
 			
 		try {
 			fileList.transferTo(uploadFile);
+		
 		}catch (Exception e){
+		
 			e.printStackTrace();
 		}
 		
@@ -140,9 +194,11 @@ public class NoticeService {
 			noticeBoard.setWriteDate(LocalDate.now());
 			result= nm.insert(noticeBoard);
 		}
-		return result;
+		model.addAttribute("resultBoolean", result);
+		model.addAttribute("resultType", "작성");
 		
 	}
+	
 	public void NoticeComment(HttpSession session, NoticeComment noticeComment) {
 		
 	}
@@ -181,7 +237,7 @@ public class NoticeService {
 			nm.setNoticeBoardCount(nm.getViewCount(id), id);
 		}
 		NoticeBoard result = nm.select(id);
-		if(result.getFilename()!=null) {
+		if(!(result.getFilename()==null || result.getFilename().equals(""))) {
 			
 		String[] fileStr=result.getFilename().split(",");
 		
@@ -236,6 +292,106 @@ public class NoticeService {
 		
 		model.addAttribute("commentCount", nm.getCommentCount(id));
 		model.addAttribute("noticeComment", nm.getCommentList(id));
+		
+	}
+
+	public void selectNoticeModifyService(int id, Model model) {
+		NoticeBoard result = nm.select(id);
+			if(!(result.getFilename()==null||result.getFilename().equals(""))) {
+						
+				String[] fileStr=result.getFilename().split(",");
+					
+				List<String> file= new ArrayList<String>();
+				
+				for(String str: fileStr) {
+						file.add(str);
+				}
+					
+				model.addAttribute("file", file);
+			
+			}
+			
+			model.addAttribute("notice", result);
+					
+	}
+
+	public void updateNoticeService(NoticeBoard board, Model model, int id, List<MultipartFile> filename1) {
+		String fileName="";
+		
+		String uploadFolder="D:/files/noticeBoard/"+board.getId();
+		System.out.println(uploadFolder);
+		File folder = new File(uploadFolder);
+		
+		if(!filename1.get(0).getOriginalFilename().equals("")) {
+		
+			if(!folder.exists()) {
+				folder.mkdir();
+			System.out.println("test");
+			}
+			
+				for(MultipartFile m:filename1) {
+						File fileList= new File(uploadFolder,m.getOriginalFilename());
+						try {
+							m.transferTo(fileList);
+						} catch (IllegalStateException | IOException e) {
+							e.printStackTrace();
+						}
+				}
+		
+			
+			for( MultipartFile m:filename1) {
+			
+				fileName+=m.getOriginalFilename()+",";
+			}
+		}
+		
+		if(board.getFilename()!=null) {
+		
+			board.setFilename(board.getFilename()+","+fileName);
+			
+		}else {
+			board.setFilename(fileName);
+		}
+	
+		
+		if(folder.exists()) {
+			if(!(board.getFilename()==null||board.getFilename().equals(""))) {
+		
+				String[] str=board.getFilename().split(",");
+				
+				File[] fileList=folder.listFiles();
+				
+				List<String> list= new ArrayList<String>();
+			
+				for(int i =0; i<str.length;i++) {
+					list.add(str[i]);
+				}
+				
+				for(int i=0; i<fileList.length;i++) {
+				
+					if(!list.contains(fileList[i].getName())) {
+					
+						fileList[i].delete();
+					}
+				}
+
+			}else {
+			
+					File[] fileList=folder.listFiles();
+			
+					for(int i=0; i<fileList.length;i++) {
+					
+						fileList[i].delete();
+					
+					}
+
+					folder.delete();
+						
+			}
+		}
+			
+		model.addAttribute("resultBoolean", nm.update(board));
+		model.addAttribute("resultType", "수정");
 		
 	}
 

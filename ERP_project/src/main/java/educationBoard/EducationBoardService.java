@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import service.Employee;
 
@@ -16,9 +17,10 @@ EducationBoardMepper em;
 		return em.selectList();
 	}
 	public List<EducationBoard> getBoardWithDepatmentId(int departmentId) {
+	
 		return em.selectEducation(departmentId);
 	}
-	public boolean getCRUDEdu(EducationBoard educationBoard,String button,Employee employee) {
+	public void getCRUDEdu(EducationBoard educationBoard,String button,Employee employee,Model model) {
 		boolean result=false;
 		if(button.equals("작성")) {
 			int affectedRow=em.insert(educationBoard);
@@ -39,6 +41,10 @@ EducationBoardMepper em;
 				result =true;
 			}
 		}
-		return result;
+	
+		model.addAttribute("departmentId",educationBoard.getDepartmentId());
+		model.addAttribute("result", result);
+		model.addAttribute("button", button);
+	
 	}
 }

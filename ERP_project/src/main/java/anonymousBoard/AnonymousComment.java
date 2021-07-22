@@ -7,19 +7,17 @@ public class AnonymousComment {
 	private int boardId;
 	private String comment;
 	private int writerId;
-	private String writerName;
-	private String writerDepartmentName;
+	private String nickName;
 	private LocalDateTime writeDate;
 
-	public AnonymousComment(int id, int boardId, String comment, int writerId, String writerName,
-			String writerDepartmentName, LocalDateTime writeDate) {
+	public AnonymousComment(int id, int boardId, String comment, int writerId, String nickName,
+			 LocalDateTime writeDate) {
 		super();
 		this.id = id;
 		this.boardId = boardId;
 		this.comment = comment;
 		this.writerId = writerId;
-		this.writerName = writerName;
-		this.writerDepartmentName = writerDepartmentName;
+		this.nickName = nickName;
 		this.writeDate = writeDate;
 	}
 
@@ -60,21 +58,15 @@ public class AnonymousComment {
 		this.writerId = writerId;
 	}
 
-	public String getWriterName() {
-		return writerName;
+	public String getNickName() {
+		return nickName;
 	}
 
-	public void setWriterName(String writerName) {
-		this.writerName = writerName;
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
 	}
 
-	public String getWriterDepartmentName() {
-		return writerDepartmentName;
-	}
 
-	public void setWriterDepartmentName(String writerDepartmentName) {
-		this.writerDepartmentName = writerDepartmentName;
-	}
 
 	public LocalDateTime getWriteDate() {
 		return writeDate;
@@ -87,7 +79,7 @@ public class AnonymousComment {
 	@Override
 	public String toString() {
 		return "AnonymousComment [id=" + id + ", boardId=" + boardId + ", comment=" + comment + ", writerId=" + writerId
-				+ ", writerName=" + writerName + ", writerDepartmentName=" + writerDepartmentName + ", writeDate="
+				+ ", nickName=" + nickName + ", writeDate="
 				+ writeDate + "]";
 	}
 

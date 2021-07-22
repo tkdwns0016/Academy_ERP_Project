@@ -78,6 +78,7 @@ position:relative;
 </style>
 </head>
 <body>
+
 	<c:if test="${empty empl }">
 		<script>
 		alert("로그인 정보가 없습니다.")
@@ -92,10 +93,10 @@ position:relative;
 		<tiles:insertAttribute name="empl_side" />
 
 	</c:if>
-	
+	<section>
 	<div class="container2">
 
-		<table class="table-border" style="border-collapse: collapse;">
+		<table class="table-border board-table" style="border-collapse: collapse;">
 			<th colspan="6" style="text-align: left; border: none;">
 				<h2>
 					<img src="image/community/notice/borderIcon.png" width="20px">&nbsp;게시글
@@ -153,9 +154,10 @@ position:relative;
 						<button onclick="location.href=('/anonymousSearch?id=${nextIndex}')"
 							style="float: left; width: 60px; height: 30px; margin-left: 5px">다음</button>
 					</c:if>
-
-					<button onclick="modifyOn()" style="width: 60px; height: 30px;">수정</button>
-					<button onclick="deleteOn()" style="width: 60px; height: 30px;">삭제</button>
+					<c:if test="${empl.manager=='권한' }">
+						<button onclick="modifyOn()" style="width: 60px; height: 30px;">수정</button>
+						<button onclick="deleteOn()" style="width: 60px; height: 30px;">삭제</button>
+					</c:if>
 					<button class="listButton" style="width: 60px; height: 30px;"
 						onclick="location.href=('/anonymous')">목록</button>
 				</td>
@@ -167,17 +169,17 @@ position:relative;
 		</div>
 		<div>
 
+			<form action="/anonymousSearch" class="comment_form" method="get">
 			<table style="border-bottom: 1px solid gainsboro;">
 				<tr>
-
+					
 					<td style="width: 15%;" class="borderS-td-color">댓글내용</td>
 					<td style="width: 60%; padding: 10px; border-bottom: none;">
-						<form action="/anonymousSearch" class="comment_form" method="get">
-							<textarea name="comment" style="resize: none;" cols="60" rows="6"></textarea>
+							닉네임: <input class="nick-name" type="text" name="nickName" placeholder="닉네임을 입력해주세요" required="required"><hr>
+							<textarea class="comment-content" name="comment" style="resize: none;" cols="60" rows="6" required="required"></textarea>
+					</td>
 							<input type="hidden" name="boardId" value="${result.id}">
 							<input type="hidden" name="id" value="${result.id}">
-						</form>
-					</td>
 
 					<td style="width: 12%; text-align: center; border-bottom: none;">
 						<button onclick="comment_send()"
@@ -185,14 +187,15 @@ position:relative;
 					</td>
 				</tr>
 			</table>
+		</form>
 			<table class="comment_table">
 			<c:forEach var="comment" items="${anonymousComment }">
 			
 				<tr class="comment_tr_border">
-					<td class="width_auto">[${comment.writerDepartmentName }]${comment.writerName}<br>(${comment.writeDate })</td>
+					<td class="width_auto">${comment.nickName }<br>(${comment.writeDate })</td>
 					<td class="comment_content comment_td${comment.id }">${comment.comment }</td>
 					<td>
-					<c:if test="${empl.userId==comment.writerId }">
+					<c:if test="${empl.manager=='권한' or empl.userId==comment.writerId }">
 						<input type="button" onclick="comment_modi(${comment.id})" value="수정">						
 						<input type="button" onclick="comment_del(${result.id },${comment.id})" value="삭제">
 					</c:if>
@@ -267,7 +270,7 @@ position:relative;
 		</div>
 
 	</div>
-
+</section>
 </body>
 <script type="text/javascript">
 	$(".content").html("${result.content}");
@@ -312,7 +315,15 @@ position:relative;
 	}
 	
 	function comment_send(){
-		$(".comment_form")[0].submit()
+		if($(".nick-name")[0].value==""){
+			alert("닉네임을 입력해주세요")
+			$(".nick-name").focus();
+		}else if($(".comment-content")[0].value==""){
+			alert("댓글 내용이 없습니다.")
+			$(".comment-content").focus();
+		}else{
+			$(".comment_form")[0].submit()
+		}
 	}
 	function comment_del(boardId,commentId){
 		if(confirm("댓글을 삭제하시겠습니까?")){
@@ -323,13 +334,13 @@ position:relative;
 	function comment_modi(id){
 		var comment_td = $(".comment_td"+id);
 		var comment = comment_td.html();
-		comment_td.html("<form action='/anonymousSearch' class='noticeComment_modi_form'><input type='hidden' name='id' value='"+${result.id}+"'><input type='hidden' name='updateCommentId' value='"+id+"'><textarea class='modi_textarea' name='updateComment' placeholder='"+comment+"' >"+comment+"</textarea>");
+		comment_td.html("<form action='/anonymousSearch' class='anonymousComment_modi_form'><input type='hidden' name='id' value='"+${result.id}+"'><input type='hidden' name='updateCommentId' value='"+id+"'><textarea class='modi_textarea' name='updateComment' placeholder='"+comment+"' >"+comment+"</textarea>");
 		if("${anonymousComment}")
 		comment_td.append("<button type='button' class='modi_button' onclick='comment_modi_ok("+id+")'>수정하기</button")
 		comment_td.append("<button type='button' class='modi_button' onclick='comment_modi_cancel("+id+")'>취소하기</button></form>")
 	}
 	function comment_modi_ok(id){
-		$(".noticeComment_modi_form").submit();
+		$(".anonymousComment_modi_form").submit();
 		}
 	function comment_modi_cancel(id){
 		var comment_td = $(".comment_td"+id);

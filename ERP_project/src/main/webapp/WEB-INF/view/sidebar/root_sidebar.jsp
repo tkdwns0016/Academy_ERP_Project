@@ -15,9 +15,9 @@
 <!-- Custom styles for this template -->
 <link href="/static/bootstrap/sidebars/sidebars.css" rel="stylesheet">
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <style type="text/css">
-
 * {
 	margin: 0;
 }
@@ -29,11 +29,9 @@ html, body {
 header {
 	width: 100%;
 	height: 10%;
-	position: relative;
 	float: right;
-}
-
-header {
+	position: fixed;
+	z-index: 5;
 	background-color: white;
 }
 
@@ -41,29 +39,33 @@ header {
 	height: 100%;
 }
 
-
 #home:hover {
 	color: blue;
 }
-    nav {
-      background-color: darkmagenta;
-      width: 15%;
-      height: 90%;
-      position: absolute;
-      float: left;
-      top: 10%;
-      z-index: 3;
-      left: -20%;
-    }
+
+nav {
+	position: fixed;
+	z-index: 3;
+	background-color: darkmagenta;
+	width: 15%;
+	height: 90%;
+	float: left;
+	top: 10%;
+	left: -20%;
+}
 
 .hover:hover {
 	opacity: 50%
 }
 
-.set{
-position: absolute;
-top: 20%;
-left: 5%;
+.rounded {
+	min-width: 130px;
+}
+
+.set {
+	position: absolute;
+	top: 20%;
+	left: 5%;
 }
 
 nav::after {
@@ -123,51 +125,71 @@ nav::after {
 	left: 3%;
 	margin-top: -15px;
 }
-.font1{
+
+.font1 {
 	font-size: 15px;
-	text-align: center;	
+	text-align: center;
 	border: 1px solid white;
 }
-.font2{
-border:1px solid white;
-font-size: 15px;
+
+.font2 {
+	border: 1px solid white;
+	font-size: 15px;
 	text-align: center;
 	width: 40px;
 }
+section{
+	position: absolute;
+	top: 10%;
+	width: 100%;
+	height: 90%;
+}
+@media screen and (max-width:1470px) {
+	.top-bar {
+		width: 20px;
+		height: 20px;
+	}
+}
 
-    @media screen and (max-width:1470px){
-    	
-    .top-bar{width: 20px; height: 20px;
-    	} 
-    }
-      @media screen and (max-width:860px){
-    	
-    .top-bar{width: 0px; height: 0px;
+@media screen and (max-width:860px) {
+	.top-bar {
+		width: 0px;
+		height: 0px;
+	}
+	#font {
+		font-size: 0px;
+	}
+}
 
-    	} 
-  	 #font{
-    		font-size: 0px;
-   		 }    	
- 
-    }
-           
-    @media screen and (max-height:1024px){
-    	.nav-link{
-    		font-size: 15px;
-   		 }
-    }
-       @media screen and (max-height:600px){
-    	.nav-link{
-    		font-size: 0px;
-   		 }
-    }
-       @media screen and (max-height:400px){
-    	.top-bar{width: 0; height: 0;
-    	}
-    	.nav-link{
-    		font-size: 0px;
-   		 }
-    }
+@media screen and (max-height:1024px) {
+	.nav-link {
+		font-size: 15px;
+	}
+}
+
+@media screen and (max-height:600px) {
+	.nav-link {
+		font-size: 0px;
+	}
+}
+
+@media screen and (max-height:400px) {
+	.top-bar {
+		width: 0;
+		height: 0;
+	}
+	.nav-link {
+		font-size: 0px;
+	}
+}
+.no-underLine{
+	text-decoration: none;
+}
+
+.rootSidebarfont-white{
+color: white!important;
+}
+
 
 </style>
 </head>
@@ -186,7 +208,7 @@ font-size: 15px;
 			height="24" fill="currentColor" class="bi bi-house-door"
 			viewBox="0 0 16 16">
   <path
-   d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4H2.5z" />
+				d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4H2.5z" />
 	</svg>
       <symbol id="speedometer2" viewBox="0 0 16 16">
         <path
@@ -214,9 +236,8 @@ font-size: 15px;
 			<div class="container">
 				<div
 					class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-					<svg class="three_line slide" 
-						xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-						viewBox="0 0 16 16">
+					<svg class="three_line slide" xmlns="http://www.w3.org/2000/svg"
+						fill="currentColor" viewBox="0 0 16 16">
               <path fill-rule="evenodd"
 							d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
             </svg>
@@ -228,26 +249,31 @@ font-size: 15px;
 									class="bi d-block mx-auto mb-1 top-bar" width="24" height="24">
                     <use xlink:href="#home" /></svg> Home
 						</a></li>
-						<li class="rootemplLi"><a id="font" href="/notice" class="nav-link text-white hover"> <svg
+						<li class="rootemplLi"><a id="font" href="/notice"
+							class="nav-link text-white hover"> <svg
 									class="bi d-block mx-auto mb-1 top-bar" width="24" height="24">
                     <use xlink:href="#speedometer2" /></svg> NoticeBoard
 						</a></li>
-						<li class="rootemplLi"><a id="font" href="/educationBoard?departmentId=${empl.departmentId }" class="nav-link text-white hover"> <svg
+						<li class="rootemplLi"><a id="font"
+							href="/educationBoard?departmentId=${empl.departmentId }"
+							class="nav-link text-white hover"> <svg
 									class="bi d-block mx-auto mb-1 top-bar" width="24" height="24">
                     <use xlink:href="#table" /></svg> Calendar
 						</a></li>
-						<li class="rootemplLi"><a id="font" href="/main" class="nav-link text-white hover"> <svg
+						<li class="rootemplLi"><a id="font" href="/payment"
+							class="nav-link text-white hover"> <svg
 									class="bi d-block mx-auto mb-1 top-bar" width="24" height="24">
-                    <use xlink:href="#grid" /></svg> Products
+                    <use xlink:href="#grid" /></svg> Payment
 						</a></li>
-						<li class="rootemplLi"><a id="font" href="/myInfo" class="nav-link text-white hover"> <svg
+						<li class="rootemplLi"><a id="font" href="/myInfo"
+							class="nav-link text-white hover"> <svg
 									class="bi d-block mx-auto mb-1 top-bar" width="24" height="24">
                     <use xlink:href="#people-circle" /></svg> MyInfo
 						</a></li>
 					</ul>
 				</div>
 			</div>
-			<form action="http://www.naver.com" name="search_form"
+			<form action="" name="search_form"
 				class="search_form">
 				<input type="search" class="form-control" placeholder="Search..."
 					aria-label="Search">
@@ -306,39 +332,51 @@ font-size: 15px;
 
 		<main class="main">
 			</div>
-			
-			
+
+
 			<div class="d-flex flex-column flex-shrink-0 p-3 bg-light"
 				style="position: absolute; width: 100%; height: 100%;">
-				<div class="dropdown" style="top:;">
+				<div class="dropdown" style="margin: 0 auto;">
 					<img src="/image/${empl.imgName }" alt="" width="100px"
-						height="120px" class="me-2">
-					<a href="#"
+						height="120px" class="me-2"> <a href="#"
 						class="d-flex align-items-center text-black text-decoration-none dropdown-toggle"
-						id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-						 <table style="border-collapse: collapse;">
-						 	<tr><td class="font1">&nbsp;직급</td><td class="font2">&nbsp; ${department }</td></tr>
-						 	<tr><td class="font1">&nbsp;부서</td><td class="font2">${position }</td></tr>
-						 	<tr><td class="font1" colspan="2">${empl.name }님</td></tr>
-						 </table>
-						  
+						id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false"
+						style="color: black;">
+						<table style="border-collapse: collapse; text-align: center;">
+							<tr>
+								<td class="font1">&nbsp;직급</td>
+								<td class="font2">&nbsp; ${department }</td>
+							</tr>
+							<tr>
+								<td class="font1">&nbsp;부서</td>
+								<td class="font2">${position }</td>
+							</tr>
+							<tr>
+								<td class="font1" colspan="2">${empl.name }님</td>
+							</tr>
+							
+						</table>
+
 					</a>
 					<ul class="dropdown-menu dropdown-menu-dark text-small shadow"
 						aria-labelledby="dropdownUser1">
-						<li class="rootemplLi"><a class="dropdown-item" href="/myInfo">Profile</a></li>
-						<li class="rootemplLi">
-							<hr class="dropdown-divider">
-						</li>
-						<li class="rootemplLi"><a class="dropdown-item" href="/logout">Sign out</a></li>
+						<li class="rootemplLi"><a class="dropdown-item rootSidebarfont-white"
+							href="/myInfo" style="border-bottom: 1px solid white;">Profile</a></li>
+					
+						<li class="rootemplLi"><a style="color: white;" class="dropdown-item rootSidebarfont-white"
+							href="/logout">Sign out</a></li>
 					</ul>
 				</div>
 				<hr>
+				<ul>
+					<li style="list-style: none; margin: 0 12%;"><button type="button" onclick="onTime()" style="width: 50px">출근</button>&nbsp;&nbsp;&nbsp;<button type="button" onclick="offTime()" style="width: 50px">퇴근</button></li>
+				</ul>
+				<hr>
 				<a href="/main"
 					class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
-					<svg class="bi me-2" width="30" height="24">
-            <use xlink:href="#bootstrap" /></svg> 
-            <span class="fs-7 fw-semibold">인사관리프로젝트</span>
+					<span class="fs-7 fw-semibold">Company</span>
 				</a>
+	
 				<ul class="list-unstyled ps-0">
 					<li class="mb-1">
 						<button
@@ -347,8 +385,10 @@ font-size: 15px;
 							aria-expanded="false">인사관리</button>
 						<div class="collapse" id="home-collapse">
 							<ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-								<li class="rootemplLi"><a href="/join" class="link-dark rounded">신규 등록</a></li>
-								<li class="rootemplLi"><a href="/emplList" class="link-dark rounded">인사 정보 리스트</a></li>
+								<li class="rootemplLi"><a href="/join"
+									class="link-dark rounded">신규 등록</a></li>
+								<li class="rootemplLi"><a href="/emplList"
+									class="link-dark rounded">인사 정보 리스트</a></li>
 							</ul>
 						</div>
 					</li>
@@ -358,12 +398,20 @@ font-size: 15px;
 							class="btn btn-toggle align-items-center rounded collapsed"
 							data-bs-toggle="collapse" data-bs-target="#dashboard-collapse"
 							aria-expanded="false">교육관리</button>
-									<div class="collapse" id="dashboard-collapse">
+						<div class="collapse" id="dashboard-collapse">
 							<ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-								<li class="rootemplLi"><a href="/educationBoard?departmentId=10" class="link-dark rounded">경영팀 교육 일정</a></li>
-								<li class="rootemplLi"><a href="/educationBoard?departmentId=20" class="link-dark rounded">개발팀 교육 일정</a></li>
-								<li class="rootemplLi"><a href="/educationBoard?departmentId=30" class="link-dark rounded">인사팀 교육 일정</a></li>
-								<li class="rootemplLi"><a href="/educationBoard?departmentId=40" class="link-dark rounded">영업팀 교육 일정 </a></li>
+								<li class="rootemplLi"><a
+									href="/educationBoard?departmentId=10"
+									class="link-dark rounded">경영팀 교육 일정</a></li>
+								<li class="rootemplLi"><a
+									href="/educationBoard?departmentId=20"
+									class="link-dark rounded">개발팀 교육 일정</a></li>
+								<li class="rootemplLi"><a
+									href="/educationBoard?departmentId=30"
+									class="link-dark rounded">인사팀 교육 일정</a></li>
+								<li class="rootemplLi"><a
+									href="/educationBoard?departmentId=40"
+									class="link-dark rounded">영업팀 교육 일정 </a></li>
 							</ul>
 						</div>
 					</li>
@@ -375,24 +423,27 @@ font-size: 15px;
 							aria-expanded="false">근태관리</button>
 						<div class="collapse" id="check-collapse">
 							<ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-								<li class="rootemplLi"><a href="#" class="link-dark rounded">출/퇴근 체크</a></li>
-								<li class="rootemplLi"><a href="/attendance" class="link-dark rounded">근태리스트</a></li>
+								<li class="rootemplLi"><a href="/attendance"
+									class="link-dark rounded">근태리스트</a></li>
 							</ul>
 						</div>
 					</li>
 
 					<li class="mb-1">
-						<button
+						<a class="no-underLine" href="/welfare"><button
 							class="btn btn-toggle align-items-center rounded collapsed"
 							data-bs-toggle="collapse" data-bs-target="#benefits-collapse"
-							aria-expanded="false">복리후생</button>
+							aria-expanded="false">복리후생</button></a>
 					</li>
 
 					<li class="mb-1">
+						<a class="no-underLine" href="/payment">
 						<button
 							class="btn btn-toggle align-items-center rounded collapsed"
 							data-bs-toggle="collapse" data-bs-target="#Payment-collapse"
 							aria-expanded="false">결제</button>
+						</a>
+							
 					</li>
 					<li class="mb-1">
 						<button
@@ -401,9 +452,12 @@ font-size: 15px;
 							aria-expanded="false">커뮤니티</button>
 						<div class="collapse" id="community-collapse">
 							<ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-								<li class="rootemplLi"><a href="/notice" class="link-dark rounded">공지사항</a></li>
-								<li class="rootemplLi"><a href="/suggestion" class="link-dark rounded">건의 게시판</a></li>
-								<li class="rootemplLi"><a href="/anonymous" class="link-dark rounded">익명 게시판</a></li>
+								<li class="rootemplLi"><a href="/notice"
+									class="link-dark rounded">공지사항</a></li>
+								<li class="rootemplLi"><a href="/suggestion"
+									class="link-dark rounded">건의 게시판</a></li>
+								<li class="rootemplLi"><a href="/anonymous"
+									class="link-dark rounded">익명 게시판</a></li>
 							</ul>
 						</div>
 					</li>
@@ -415,8 +469,57 @@ font-size: 15px;
 	<!-- 사람클릭 시 나오는 것 -->
 	<script src="/static/bootstrap/assets/dist/js/bootstrap.bundle.min.js"></script>
 
-	<script src="/static/bootstrap/sidebars/sidebars.js"></script> 
-
+	<script src="/static/bootstrap/sidebars/sidebars.js"></script>
+<script>
+ var notice = "공지사항";
+ var noticeBoard="공지게시판";
+ var anonymous ="익명게시판";
+ var suggestion="건의사항";
+ var suggestionBoard="건의게시판";
+ var payment = "결제";
+ var empl="인사관리";
+ var join="신규등록";
+$(".form-control").keydown(function(key){
+	if(key.keyCode == 13){
+		if(notice.indexOf($('.form-control').val())>-1||noticeBoard.indexOf($('.form-control').val())>-1){
+			
+			$(".search_form").attr('action','/notice');
+			$(".search_form").submit();
+		}
+		else if(anonymous.indexOf($('.form-control').val())>-1){
+		
+		$(".search_form").attr('action','/anonymous');
+		$(".search_form").submit();
+		}
+		else if(suggestion.indexOf($('.form-control').val())>-1||suggestionBoard.indexOf($('.form-control').val())>-1){
+			
+			$(".search_form").attr('action','/suggestion');
+			$(".search_form").submit();
+		}else if(payment.indexOf($('.form-control').val())>-1){
+			$(".search_form").attr('action','/payment');
+			$(".search_form").submit();
+		}else if(empl.indexOf($('.form-control').val())>-1){
+			$(".search_form").attr('action','/emplList');
+			$(".search_form").submit();
+		}else if(join.indexOf($('.form-control').val())>-1){
+			$(".search_form").attr('action','/join');
+			$(".search_form").submit();
+		}else{
+			alert("검색 결과를 찾을 수 없습니다.")
+		}
+}
+})
+function onTime(){
+	if(confirm("출근처리 하시겠습니까?")){
+		location.href=('/attendanceOnTime')
+	}
+}
+function offTime(){
+	if(confirm("퇴근처리 하시겠습니까?")){
+		location.href=('/attendanceOffTime')
+	}
+}
+</script>
 
 
 

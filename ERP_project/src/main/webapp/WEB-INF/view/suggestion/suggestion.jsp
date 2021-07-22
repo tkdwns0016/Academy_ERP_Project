@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
     <title>Document</title>
     <style>
-        table{border-collapse: collapse; text-align: center; margin: 50px 50px 0 0; width: 50%;}
+        .table{border-collapse: collapse; text-align: center; width: 50%;}
         .temp-box{
             width: 100%;
             height: 100%;
@@ -26,12 +26,16 @@
     </style>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <link rel="canonical" href="https://getbootstrap.kr/docs/5.0/content/tables/">
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js" type="text/javascript"></script> 
 
-    <script src="/static/bootstrap/assets/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 
 <body>
+<c:if test="${empty empl }">
+		<script>
+		alert("로그인 정보가 없습니다.")
+		location.href="/login";
+	</script>
+	</c:if>
 	<c:if test="${empl.manager=='권한' }"> 
 		<tiles:insertAttribute name="root_side" />
 	</c:if>
@@ -39,12 +43,12 @@
 		<tiles:insertAttribute name="empl_side" />
 	</c:if>
 	
-	<section style="float: right; width: 100%; height: 100%; top:100px">
+	<section>
 	<div style="width: 80%; margin:40px auto;">
 	<div style="text-align: center;">
    		<H2>건의게시판</H2>
 	</div>
-	<table class="table table-sm table-hover"  >
+	<table class="table table-sm table-hover main-container"  >
     <thead class="table-light">
     	<tr>
 				<th colspan="5" style="background: white; border: none">
@@ -120,7 +124,7 @@
 			</c:otherwise>	
 			</c:choose>
 
-
+	</div>
 </div>
 	<div class="temp-box" box-three></div>
 

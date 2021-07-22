@@ -4,18 +4,26 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class Attendance {
 	private int id;
 	private String name;
 	private String department;
 	private String position;
 	private String workType;
+	@DateTimeFormat(pattern = "HH:mm:dd")
 	private LocalTime workStart;
+	@DateTimeFormat(pattern = "HH:mm:dd")
 	private LocalTime workEnd;
+	@DateTimeFormat(pattern = "HH:mm:dd")
 	private LocalTime workingTime;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate workDate;
+	private int userId;
+	
 	public Attendance(int id, String name, String department, String position, String workType, LocalTime workStart,
-			LocalTime workEnd, LocalTime workingTime, LocalDate workDate) {
+			LocalTime workEnd, LocalTime workingTime, LocalDate workDate,int userId) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -26,6 +34,7 @@ public class Attendance {
 		this.workEnd = workEnd;
 		this.workingTime = workingTime;
 		this.workDate = workDate;
+		this.userId = userId;
 	}
 	public Attendance() {
 		super();
@@ -89,8 +98,9 @@ public class Attendance {
 	public String toString() {
 		return "Attendance [id=" + id + ", name=" + name + ", department=" + department + ", position=" + position
 				+ ", workType=" + workType + ", workStart=" + workStart + ", workEnd=" + workEnd + ", workingTime="
-				+ workingTime + ", workDate=" + workDate + "]";
+				+ workingTime + ", workDate=" + workDate + ", userId=" + userId + "]";
 	}
+	
 	
 	
 		

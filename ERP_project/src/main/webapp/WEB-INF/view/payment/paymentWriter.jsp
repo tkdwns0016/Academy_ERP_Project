@@ -3,13 +3,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <style>
   
 
@@ -19,6 +20,9 @@
   }
 
   .container-payment-writer{
+     position: absolute;
+     top: 5%;
+     left: 7%;
       width: 1400px;
       height: 500px;
       background: #fff;
@@ -62,7 +66,7 @@
     <table  style="border-collapse: collapse;" class="payment-table">
         <tr>
         	<input type="hidden" name="userId" value="${empl.userId}" >
-            <td class="back" >기준일</td>
+            <td class="back" style="text-align: center;" >기준일</td>
             <td class="back" colspan="8">  <input type="date" name="startDate" class="star" required="required"/>
                 &nbsp;~&nbsp;
                 <input type="date" name="endDate" required="required">
@@ -162,8 +166,8 @@ var month = ("0" + (1 + date.getMonth())).slice(-2);
 var day = ("0" + date.getDate()).slice(-2);
 
 
-$("input").eq(1).prop("min",year+"-"+month+"-"+day);
-
+$("input").eq(1).prop("value",year+"-"+month+"-"+day);
+$("input").eq(2).prop("value",year+"-"+month+"-"+day);
 
 function addon(){
         var trCnt =$(".payment-table2 tr").length;
