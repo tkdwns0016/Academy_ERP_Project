@@ -1,0 +1,192 @@
+@charset "utf-8";
+
+#hd { border-top:0px !important; }
+#wrapper {
+    width:792px !important;
+    min-height:800px;
+    margin:0 auto !important;
+}
+#container {
+    width:792px !important;
+    padding:0px 20px 20px 0px !important;
+    background:#fff;
+	min-height:600px !important;
+}
+
+#container_wide {
+		width:792px !important;
+		padding:20px 0px 20px 0px !important;
+		background:#fff;
+		min-height:600px !important;
+		margin-top:1px;
+}	
+
+#aside { 
+    float:right !important;
+    width:300px !important;
+    padding:0px 0px 20px 0px !important;
+    margin:20px 0px 0px 0px !important;
+    min-height:600px;
+    border:0px !important;
+    background:#fff; }
+
+#menu_bg {
+	height:50px;
+	width:100%;
+	-webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.4);
+	-moz-box-shadow:  0 1px 3px rgba(0,0,0,0.3);
+}
+
+/* head 최상단 */
+#menu_bg_top {
+	height:36px;
+	width:100%;
+    border-top:2px solid #DD6666;
+    border-bottom:1px solid #ccc;
+}
+
+/* 메인메뉴 배경색 */
+.mm_bg { background:#DD6666 !important; } 
+
+#gnb_1dul {
+	-webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.0) !important;
+	-moz-box-shadow:  0 1px 3px rgba(0,0,0,0.0) !important;
+}
+
+/* 메인화면 배너 크기*/
+#main_top { width:100%; height:250px; background:#bcbcbc; border:0px; margin-bottom:18px; }
+#main_banner { height:150px; border:1px solid #cccccc; width:100%; padding:20px 0 0 0; margin:15px 0 15px 0; background:#ffffff;}
+
+/* index - gallery 최신글 박스 */
+#gallery { width:100%; height:auto; margin-bottom:20px; border:0px solid #cccccc; }
+
+/* 구글 광고 */
+#google_ad { width:900px; height:100px; margin:0px auto; padding:15px 0px 20px 0px; }
+#google_ad .ad_01 { float:left; width:430px; color:#fff; text-align:center; }
+#google_ad .ad_02 { float:right; width:430px; color:#fff; text-align:center; }
+#google_ad :after {content:""; display:block; clear:both;}
+
+/* 버튼 */
+#carinfo_login {
+	width:261px; margin:0 auto 20px;
+	padding:12px 0px 0px 10px;
+	height:50px;
+	font-size:20px;
+	cursor:pointer;
+	text-align:center;
+	background: linear-gradient( to bottom, #FE8911, #FE6447);
+	color:#ffffff;
+	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+	-moz-box-shadow:  0 1px 2px rgba(0,0,0,0.2);
+}
+#carinfo_login:hover { background:linear-gradient( to bottom, #FE8911, #e33913); }
+
+/* 다음맵소개 버튼 */
+#daumMap { width:300px; height:50px; line-height:50px; cursor:pointer; font-size:1.7em; text-align:center; color:#fff; background:#485A76; margin:0 auto; margin-bottom:0px;}
+#daumMap:hover { background:#dd6666; }
+
+/* 상단이동, 하단이동 화살표 */
+#topM_btn { cursor:pointer; position:fixed;bottom:90px;right:20px;line-height:20px;color:#333;font-size:18px;z-index:90; }
+#topM_btn:hover{border-color:#3059c7;_background:#3059c7;color:#dd6666; }
+#bottom_btn { cursor:pointer; position:fixed;bottom:50px;right:20px;line-height:20px;color:#333;font-size:18px;z-index:90; }
+#bottom_btn:hover{border-color:#3059c7;_background:#3059c7;color:#dd6666; }
+
+
+/* 관리프로그램 메인 탭안쪽 테이블 속성 */
+#carinfo_basic { width:100%; margin:auto; min-height:250px; }
+#carinfo_basic table { width:100%; border-spacing:0; border-collapse:collapse; }
+#carinfo_basic th { font-size:11px; height:40px; text-align:center; background:#eeeeee; border-bottom:1px solid #cccccc; }
+#carinfo_basic td { font-size:11px; height:36px; text-align:center; background:#ffffff; border-bottom:1px solid #cccccc; }
+
+
+/* 페이지 상단 조건검색 기본 - 조건 검색 박스 및 테이블 - 두번째 디자인 */
+#fm_search2 {
+	width:100%;
+	border:2px solid #5675ab;
+	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+	-moz-box-sizing: border-box;    /* Firefox, other Gecko */
+	box-sizing: border-box;         /* Opera/IE 8+ */
+}
+#fm_search2 table { width:100%; border-spacing:0px; border-collapse:collapse; border:5px solid #eeeeee; }
+#fm_search2 th { font-size:11px; height:0px; text-align:right; background:#eeeeee; border:0px; padding:2px 5px }
+#fm_search2 td { font-size:11px; height:0px; text-align:left; background:#eeeeee; border:0px; padding:2px 5px;}
+#fm_search2 .btn_submit { padding:6px 8px; border:0px; background:#ff3061; color:#fff; letter-spacing:0em; cursor:pointer }
+#fm_search2 .excel { border:1px solid #8080FF; background:#8080FF; color:#ffffff; }
+#fm_search2 select { max-width:90%; }
+#fm_search2 .td_left	{ text-align:left; }
+#fm_search2 .td_center	{ text-align:center; }
+#fm_search2 .td_right	{ text-align:right; }
+
+/* 버튼 - 전체목록 */
+#fm_search2 .all_list { background:#cccccc; }
+
+/* 버튼 - 엑셀저장 */
+#fm_search2 .excel { background:#7B7BFF; border:1px solid #7B7BFF; color:#ffffff; }
+
+/* 버튼 - 인쇄 */
+#fm_search2 .print { background:#DD5555; border:1px solid #DD5555; color:#ffffff; }
+
+/* DISCORD */
+#discord {  
+	width:261px; margin:0 auto 20px;
+	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+	-moz-box-shadow:  0 1px 2px rgba(0,0,0,0.1);
+}
+
+
+/* 루미탭 기본 CSS 시작 */
+ul.rumi_tabs { margin: 0; padding: 0; list-style: none; height: 40px; border-bottom: 1px solid #ccc; background:#fafafa; border-left: 1px solid #ccc; border-right: 1px solid #ccc; border-top: 1px solid #ccc; width: 100%; font-size:12px; }
+ul.rumi_tabs li { display:inline-block; text-align:center; cursor: pointer; min-width:80px; height: 40px; left:-1px; line-height: 40px; border: 0px solid #ccc; border-left: none; font-weight: bold; overflow: hidden; position: relative; }/* 탭 - 메뉴 */
+ul.rumi_tabs li:hover { color:red;} 
+ul.rumi_tabs li.active { background: #FFFFFF; color:#dd6666; border:1px solid #ccc; border-top:3px solid #dd6666; border-bottom: 1px solid #FFFFFF; line-height:35px; } /* 선택된 탭 스타일 */
+ul.rumi_tabs li.active a { color:#dd6666; }
+.rumi_tab_container { border: 1px solid #ccc; padding:10px 8px 8px 8px; border-top: none; clear: both; float: left; width: 100%; background: #FFFFFF; min-height:240px; }/* 탭 내용 박스 */
+.rumi_tab_content { padding: 5px; font-size: 12px; display: none; text-align:left; }
+.rumi_tab_container .rumi_tab_content ul { width:100%; margin:0px; padding:0px; }
+.rumi_tab_container .rumi_tab_content ul li { padding:5px; list-style:none; height:auto; overflow:hidden; }
+.rumi_tab_box { width: 100%; min-height:150px; -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.1); -moz-box-shadow:  0 1px 3px rgba(0,0,0,0.1); overflow:hidden}/* 탭 전체 크기 */
+/* 루미탭 기본 CSS 끝 */
+
+/* 루미탭 : 스타일 */
+#rumi_tab_box { width:100%; height:270px; }
+#rumi_tab_box .tab_left { float:left; width:50%; padding-right:5px; }
+#rumi_tab_box .tab_right { float:right; width:50%; padding-left:5px; }
+
+#tabs_aside_A { width:261px; height:270px; margin:0 auto 20px; }/* aside 첫번째 탭 */
+#tabs_aside_B { width:261px; height:270px; margin:0 auto 20px; } /* aside 두번째 탭 */
+
+.main_latest { height:220px; } /* 탭 최신글 높이 */
+
+/* 팝업 경고 메세지 */
+#popup_msg {
+	color:#ffffff;
+	font-weight:normal;
+	display:none;
+	z-index:10000;
+	padding:20px 30px;
+	font-size:30px;
+	width:auto;
+	height:80px;
+	border:0px;
+	text-align:center;
+	background:#FF5A48;
+	margin-top:-35px;
+	border-radius:10px;
+	-webkit-box-shadow: 0px 3px 10px rgba(0,0,0,0.7);
+	-moz-box-shadow:  0x 3px 10px rgba(0,0,0,0.7);
+}
+
+.hand { cursor:pointer; }
+.txt_blue	{ color:blue; }
+.txt_red	{ color:red; }
+.txt_green	{ color:#009900; }
+.txt_orange { color:#FFA244; }
+.txt_black	{ color:#000000; }
+.txt_gray	{ color:#888888; }
+.txt_white	{ color:#ffffff; }
+.txt_bora	{ color:#8000FF; }
+.txt_darkgreen { color:#006A6A; }
+
+#main_bbs_list { width:100%; padding:20px 0px 20px 0px}
+#main_bbs_list ul { font-size:1.3em; }
+#main_bbs_list li { padding-bottom:5px; }

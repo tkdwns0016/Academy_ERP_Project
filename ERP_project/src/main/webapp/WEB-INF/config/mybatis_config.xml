@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+  
+  <configuration>
+  	<settings>
+  		<setting name="mapUnderscoreToCamelCase" value="true"/>
+  		<setting name="useGeneratedKeys" value="true"/>
+  	</settings>
+  	
+  	<typeAliases>
+  		<typeAlias type="service.Employee" alias="Employee"/>
+  		<typeAlias type="anonymousBoard.AnonymousBoard" alias="AnonymousBoard"/>
+  		<typeAlias type="attendance.Attendance" alias="Attendance"/>
+  		<typeAlias type="department.Department" alias="Department"/>
+  		<typeAlias type="educationBoard.EducationBoard" alias="EducationBoard"/>
+  		<typeAlias type="noticeBoard.NoticeBoard" alias="NoticeBoard"/>
+  		<typeAlias type="position.Position" alias="Position"/>
+  		<typeAlias type="suggestionBoard.SuggestionBoard" alias="SuggestionBoard"/>
+  		<typeAlias type="payment.Payment" alias="Payment"/>
+  		<typeAlias type="payment.Paymentboardlist" alias="Paymentboardlist"/>    
+  		<typeAlias type="payment.Account" alias="Account"/>  
+  	</typeAliases>
+  </configuration>

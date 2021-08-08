@@ -1,0 +1,56 @@
+@font-face {
+    font-family: 'MaplestoryOTFLight';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/MaplestoryOTFLight.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+
+form {
+	font-family: 'MaplestoryOTFLight';
+	position: relative;
+	left: 15%;
+	top: 2%;
+}
+
+h2 {
+	position: relative;
+	left: 15%;
+	top: 2%
+}
+
+.notiTable {
+	width: 900px;
+}
+
+.ntd {
+	border-bottom: 1px solid lightgray;
+	height: 40px;
+}
+
+.fchild {
+	text-align: center;
+	background-color: gray;
+	color: aliceblue;
+	width: 10%;
+	border: none;
+}
+
+input[type=text] {
+	border: none;
+	height: 70%;
+}
+
+input[type=password] {
+	border: none;
+	height: 70%;
+}
+
+#writer:focus {
+	outline: none;
+}
+
+.notiLi {
+	list-style: decimal;
+}

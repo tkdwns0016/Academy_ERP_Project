@@ -1,0 +1,97 @@
+@charset "UTF-8";
+     
+    #divContainer{
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        top:15%;
+        
+    }
+
+    .form-control{
+     
+        font-size: 0.8rem;
+     
+    }
+
+    #table1{
+        width: 1000px;
+    }
+
+    #table2{
+        width: 800px;
+        height: 600px;
+        border-collapse: collapse;
+        font-size: 9pt;
+    }
+
+    #userId, #password, #password2, #name{
+        width: 200px;
+        height: 30px;
+
+    }
+
+    img{
+        text-align: center;
+    }
+    #phone{
+        width: 200px;
+        height: 30px;
+    }
+
+    #email{
+        width: 250px;
+        height: 30px;
+
+    }
+	#exampleInputPassword3{
+	}
+
+    #root{
+        width: 150px;
+        height: 30px;
+    }
+    #sample6_postcode{
+        size: 10;
+        width: 150px;
+        height: 30px;
+        position: relative;
+    }
+
+    #sample6_execDaumPostcode{
+       margin-left: 155px;
+       margin-top: 3px;
+    }
+
+    #sample6_address,  #sample6_detailAddress{
+        width: 450px;
+        height: 30px;
+
+    }
+
+    #sample6_extraAddress{
+        width: 450px;
+        height: 30px;
+        margin-top: 5px;
+    }
+
+
+
+    .input-form {
+      max-width: 880px;
+     
+      
+      padding: 32px;
+
+      background: #fff;
+      -webkit-border-radius: 10px;
+      -moz-border-radius: 10px;
+      border-radius: 10px;
+      -webkit-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
+      -moz-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
+      box-shadow: 8 8px 20px 0 rgba(0, 0, 0, 0.15)
+    }
+
+    .filebox label { display: inline-block; padding: .5em .75em; color: #999; font-size: inherit; line-height: normal; vertical-align: middle; background-color: #fdfdfd; cursor: pointer; border: 1px solid #ebebeb; border-bottom-color: #e2e2e2; border-radius: .25em; } 
+    .filebox input[type="file"] { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip:rect(0,0,0,0); border: 0; }
+   
