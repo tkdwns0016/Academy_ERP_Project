@@ -35,6 +35,7 @@ public class NoticeService {
 		ServiceClass sc;
 		if (page != null) {
 			sc = new ServiceClass(Integer.parseInt(page), 15, nm.count());
+			sc.setTablelist(nm.selectList(sc.getFirstRow(), 15));
 			model.addAttribute("list", sc);
 		} else {
 			sc = new ServiceClass(1, 15, nm.count());

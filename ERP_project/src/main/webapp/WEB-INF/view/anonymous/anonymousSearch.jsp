@@ -154,7 +154,7 @@ position:relative;
 						<button onclick="location.href=('/anonymousSearch?id=${nextIndex}')"
 							style="float: left; width: 60px; height: 30px; margin-left: 5px">다음</button>
 					</c:if>
-					<c:if test="${empl.manager=='권한' }">
+					<c:if test="${empl.userId==result.writer||empl.manager=='권한' }">
 						<button onclick="modifyOn()" style="width: 60px; height: 30px;">수정</button>
 						<button onclick="deleteOn()" style="width: 60px; height: 30px;">삭제</button>
 					</c:if>
@@ -190,7 +190,7 @@ position:relative;
 		</form>
 			<table class="comment_table">
 			<c:forEach var="comment" items="${anonymousComment }">
-			
+			z
 				<tr class="comment_tr_border">
 					<td class="width_auto">${comment.nickName }<br>(${comment.writeDate })</td>
 					<td class="comment_content comment_td${comment.id }">${comment.comment }</td>

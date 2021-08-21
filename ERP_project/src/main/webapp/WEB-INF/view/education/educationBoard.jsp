@@ -107,12 +107,14 @@
 		}
 		;
 		list()
-		
+			var select = true;
+			if(${empl.manager=='비권한'}){
+				select = false;
+			}
 		var calendar = new FullCalendar.Calendar(calendarEl, {
-
 			initialDate : today,
 			navLinks : false, // can click day/week names to navigate views
-			selectable : true,
+			selectable : select,
 			selectMirror : true,
 			selectHelper: false,
 			select : function(start) {

@@ -80,7 +80,6 @@ public class AttendanceSevice {
 		}else {
 			LocalTime workStart=am.isEmpty(empl.getUserId(),LocalDate.now()).getWorkStart();
 			LocalTime nowTime=LocalTime.now();
-			System.out.println("나우타임 테스트"+nowTime);
 			LocalTime workingTime = null;
 			int hour=0;
 			int mn=0;
@@ -88,7 +87,6 @@ public class AttendanceSevice {
 			if( workStart.getHour()>13||nowTime.getHour()<13) {
 				
 				int seconds= (int) workStart.until(nowTime, ChronoUnit.SECONDS);
-				System.out.println(seconds);
 				hour = seconds/3600;
 				if(hour>0) {
 					seconds-=hour*3600;
@@ -103,7 +101,6 @@ public class AttendanceSevice {
 				workingTime=LocalTime.of(hour,mn,sc);
 			}
 			
-			System.out.println("워킹타임"+workingTime);
 			result=am.setOffTime(empl.getUserId(),LocalDate.now(),nowTime,workingTime);
 			model.addAttribute("TimeResult",result);
 			model.addAttribute("ResultType", "퇴근");

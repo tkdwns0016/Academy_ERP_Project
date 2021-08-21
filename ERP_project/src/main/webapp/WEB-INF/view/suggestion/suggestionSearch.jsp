@@ -116,8 +116,10 @@ input[type=button]{
 					<c:if test="${nextIndex ne result.id }">
 					<button onclick="location.href=('/suggestionSearch?id=${nextIndex}')" style="float:left; width: 60px; height: 30px; margin-left: 5px">다음</button>
 					</c:if>
+					<c:if test="${empl.userId==result.writer||empl.manager=='권한' }">
 					<button onclick="modifyOn()" style="width: 60px; height: 30px;">수정</button>
 					<button onclick="deleteOn()" style="width: 60px; height: 30px;">삭제</button>
+					</c:if>
 					<button class="listButton" style="width: 60px; height: 30px;"
 						onclick="location.href=('/suggestion')">목록</button>
 				</td>
